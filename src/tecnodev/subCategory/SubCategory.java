@@ -1,6 +1,7 @@
 package tecnodev.subCategory;
 
 import tecnodev.category.Category;
+import validator.Validator;
 
 public class SubCategory {
 
@@ -9,7 +10,7 @@ public class SubCategory {
     private String description;
     private String studyGuide;
     private boolean active;
-    private Integer orderInSystem;      /*checar*/
+    private Integer orderInSystem;
     private Category category;
 
     public SubCategory(String name, String code, Category category) {
@@ -24,6 +25,7 @@ public class SubCategory {
         this.studyGuide = studyGuide;
         this.active = active;
         this.orderInSystem = orderInSystem;
+        Validator.isNotNull(name, "O nome não pode ser vazio ou nulo");
     }
 
     public String getName() {

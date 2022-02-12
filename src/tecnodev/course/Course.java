@@ -1,5 +1,7 @@
 package tecnodev.course;
 
+import validator.Validator;
+
 public class Course {
 
     private String name;
@@ -12,6 +14,8 @@ public class Course {
     private String developedAbility;
 
     public Course(String name, String code, int hours, String teacher) {
+        Validator.isNotNull(name, "O Nome não pode ser vazio ou nulo");
+        Validator.betweenOneAndTwenty(hours, "O número de horas deve ficar entre 1 e 20");
         this.name = name;
         this.code = code;
         this.hours = hours;

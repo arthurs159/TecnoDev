@@ -7,7 +7,7 @@ import tecnodev.section.Section;
 public class Question extends Activity {
 
     private String statement;
-    private QuestionType type;
+    private QuestionType type = QuestionType.ONLY_ANSWER;
 
     public Question(String title, String code, Section section, String statement, QuestionType type) {
         super(title, code, section);

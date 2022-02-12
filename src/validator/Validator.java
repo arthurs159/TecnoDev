@@ -18,6 +18,12 @@ public class Validator {
         }
     }
 
+    public static void betweenOneAndTwenty(int field, String error) {
+        if (field < 1 || field > 20){
+            throw new IllegalArgumentException(error);
+        }
+    }
+
     public static void isNotBlankAndNotSpecialCaracters(String field, String error){
         //CODEFORMAT.matcher(field).matches();
     }

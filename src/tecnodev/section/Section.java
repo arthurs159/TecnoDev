@@ -16,6 +16,7 @@ public class Section {
         this.name = name;
         this.code = code;
         this.course = course;
+        Validator.isNotNull(name, "O nome não pode ser vazio ou nulo");
     }
 
     public Section(String name, String code, Integer orderInSystem, boolean active, boolean IsExam, Course course) {

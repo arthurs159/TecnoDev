@@ -1,6 +1,7 @@
 package tecnodev.activity;
 
 import tecnodev.section.Section;
+import validator.Validator;
 
 public class Activity {
 
@@ -8,10 +9,11 @@ public class Activity {
     private String code;
     private boolean active;
     private Integer orderInSystem;
-    /*CHECAR O TIPO (Se é pra colocar ou não.*/
+    /*Colocar classe activity como abstrata, testar!!!*/
     private Section section;
 
     public Activity(String title, String code, Section section) {
+        Validator.isNotNull(title, "O Nome não pode ser vazio ou nulo!!");
         this.title = title;
         this.code = code;
         this.section = section;

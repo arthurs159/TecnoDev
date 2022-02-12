@@ -1,5 +1,7 @@
 package tecnodev.category;
 
+import validator.Validator;
+
 public class Category {
 
     private String name;
@@ -14,6 +16,7 @@ public class Category {
     public Category(String name, String code) {
         this.name = name;
         this.code = code;
+        Validator.isNotNull(name, "O Nome não pode ser nulo ou vazio");
     }
 
     public Category(String name, String code, String description, String studyGuide, boolean active, Integer orderInSystem, String imageUrl, String htmlCode) {

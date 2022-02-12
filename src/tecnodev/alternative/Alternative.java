@@ -1,12 +1,13 @@
 package tecnodev.alternative;
 
 import tecnodev.question.Question;
+import validator.Validator;
 
 public class Alternative {
 
     private String text;
     private Integer orderInSystem;
-    private Boolean indicative;
+    private Boolean indicative;  //???? checar nome melhor
     private String justification;
     private Question question;
 
@@ -14,6 +15,7 @@ public class Alternative {
         this.text = text;
         this.indicative = indicative;
         this.question = question;
+        Validator.isNotNull(text, "O texto não pode ser não pode ser vazio ou nulo");
     }
 
     public Alternative(String text, Integer orderInSystem, Boolean indicative, String justification, Question question) {

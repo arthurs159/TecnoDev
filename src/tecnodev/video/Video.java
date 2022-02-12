@@ -2,6 +2,7 @@ package tecnodev.video;
 
 import tecnodev.activity.Activity;
 import tecnodev.section.Section;
+import validator.Validator;
 
 public class Video extends Activity {
 
@@ -12,6 +13,15 @@ public class Video extends Activity {
     public Video(String title, String code, Section section, String url) {
         super(title, code, section);
         this.url = url;
+        Validator.isNotNull(url, "A URL Não pode ser nula ou vazia");
+    }
+
+    public Video(String title, String code, boolean active, int orderInSystem, Section section, String url, int minutes, String transcription) {
+        super(title, code, active, orderInSystem, section);
+        this.url = url;
+        this.minutes = minutes;
+        this.transcription = transcription;
+        Validator.isNotNull(url, "A URL Não pode ser nula ou vazia");
     }
 
     public String getUrl() {
