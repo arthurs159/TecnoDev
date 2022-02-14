@@ -14,6 +14,9 @@ public class SubCategory {
     private Category category;
 
     public SubCategory(String name, String code, Category category) {
+        Validator.isNotNull(name, "The name must not be empty or null!!!");
+        Validator.isNotNull(code, "The code must not be empty or null!!!");
+        Validator.regexValidator(code, "The code must be lowercase letters or numbers");
         this.name = name;
         this.code = code;
         this.category = category;
@@ -25,7 +28,6 @@ public class SubCategory {
         this.studyGuide = studyGuide;
         this.active = active;
         this.orderInSystem = orderInSystem;
-        Validator.isNotNull(name, "O nome não pode ser vazio ou nulo");
     }
 
     public String getName() {

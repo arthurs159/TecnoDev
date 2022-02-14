@@ -14,9 +14,11 @@ public class Category {
     private String htmlCode;
 
     public Category(String name, String code) {
+        Validator.isNotNull(name, "The name must not be empty or null!!!");
+        Validator.isNotNull(code, "The code must not be empty or null!!!");
+        Validator.regexValidator(code, "The code must be lowercase letters or numbers");
         this.name = name;
         this.code = code;
-        Validator.isNotNull(name, "O Nome não pode ser nulo ou vazio");
     }
 
     public Category(String name, String code, String description, String studyGuide, boolean active, Integer orderInSystem, String imageUrl, String htmlCode) {

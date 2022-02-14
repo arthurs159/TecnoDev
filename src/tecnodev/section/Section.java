@@ -13,10 +13,12 @@ public class Section {
     private Course course;
 
     public Section(String name, String code, Course course) {
+        Validator.isNotNull(name, "The name must not be empty or null!!!");
+        Validator.isNotNull(code, "The code must not be empty or null!!!");
+        Validator.regexValidator(code, "The code must be lowercase letters or numbers");
         this.name = name;
         this.code = code;
         this.course = course;
-        Validator.isNotNull(name, "O nome não pode ser vazio ou nulo");
     }
 
     public Section(String name, String code, Integer orderInSystem, boolean active, boolean IsExam, Course course) {

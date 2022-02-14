@@ -8,14 +8,13 @@ public class Explication extends Activity {
 
     private String text;
 
-    public Explication(String title, String code, boolean active, int orderInSystem, Section section, String text) {
-        super(title, code, active, orderInSystem, section);
-        this.text = text;
-        Validator.isNotNull(text, "O Texto não pode ser vazio ou nulo");
-    }
-
     public Explication(String title, String code, Section section, String text) {
         super(title, code, section);
+        this.text = text;
+    }
+
+    public Explication(String title, String code, boolean active, int orderInSystem, Section section, String text) {
+        super(title, code, active, orderInSystem, section);
         this.text = text;
     }
 

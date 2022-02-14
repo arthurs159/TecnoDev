@@ -15,6 +15,12 @@ public class Question extends Activity {
         this.type = type;
     }
 
+    public Question(String title, String code, boolean active, int orderInSystem, Section section, String statement, QuestionType type) {
+        super(title, code, active, orderInSystem, section);
+        this.statement = statement;
+        this.type = type;
+    }
+
     public String getStatement() {
         return statement;
     }

@@ -1,19 +1,9 @@
 package validator;
 
-import java.util.regex.Pattern;
-
 public class Validator {
-
-    //public static final Pattern CODEFORMAT = Pattern.compile();
 
     public static void isNotNull(String field, String error) {
         if (field == null || field.equals("")) {
-            throw new IllegalArgumentException(error);
-        }
-    }
-
-    public static void isNotBlank(String field, String error) {
-        if (field.isBlank()) {
             throw new IllegalArgumentException(error);
         }
     }
@@ -24,7 +14,9 @@ public class Validator {
         }
     }
 
-    public static void isNotBlankAndNotSpecialCaracters(String field, String error){
-        //CODEFORMAT.matcher(field).matches();
+    public static void regexValidator (String field, String error){
+        if(!field.matches("[a-z0-9^-]+")) {
+            throw new IllegalArgumentException(error);
+        }
     }
 }

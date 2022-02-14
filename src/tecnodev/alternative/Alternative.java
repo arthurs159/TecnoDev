@@ -7,20 +7,20 @@ public class Alternative {
 
     private String text;
     private Integer orderInSystem;
-    private Boolean indicative;  //???? checar nome melhor
+    private Boolean isCorrect;
     private String justification;
     private Question question;
 
-    public Alternative(String text, Boolean indicative, Question question) {
+    public Alternative(String text, Boolean isCorrect, Question question) {
+        Validator.isNotNull(text, "The text must not be empty or null!!!");
         this.text = text;
-        this.indicative = indicative;
+        this.isCorrect = isCorrect;
         this.question = question;
-        Validator.isNotNull(text, "O texto não pode ser não pode ser vazio ou nulo");
     }
 
-    public Alternative(String text, Integer orderInSystem, Boolean indicative, String justification, Question question) {
-        this(text, indicative, question);
-        this.indicative = indicative;
+    public Alternative(String text, Integer orderInSystem, Boolean isCorrect, String justification, Question question) {
+        this(text, isCorrect, question);
+        this.isCorrect = isCorrect;
         this.justification = justification;
     }
 
@@ -40,12 +40,12 @@ public class Alternative {
         this.orderInSystem = orderInSystem;
     }
 
-    public Boolean getIndicative() {
-        return indicative;
+    public Boolean getIsCorrect() {
+        return isCorrect;
     }
 
-    public void setIndicative(Boolean indicative) {
-        this.indicative = indicative;
+    public void setIsCorrect(Boolean isCorrect) {
+        this.isCorrect = isCorrect;
     }
 
     public String getJustification() {
@@ -69,7 +69,7 @@ public class Alternative {
         return "Alternative{" +
                 "text='" + text + '\'' +
                 ", orderInSystem=" + orderInSystem +
-                ", indicative=" + indicative +
+                ", indicative=" + isCorrect +
                 ", justification='" + justification + '\'' +
                 ", question=" + question +
                 '}';

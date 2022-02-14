@@ -1,5 +1,6 @@
 package tecnodev.course;
 
+import tecnodev.subCategory.SubCategory;
 import validator.Validator;
 
 public class Course {
@@ -12,18 +13,23 @@ public class Course {
     private String teacher;
     private String description;
     private String developedAbility;
+    private SubCategory subCategory;
 
-    public Course(String name, String code, int hours, String teacher) {
-        Validator.isNotNull(name, "O Nome não pode ser vazio ou nulo");
-        Validator.betweenOneAndTwenty(hours, "O número de horas deve ficar entre 1 e 20");
+    public Course(String name, String code, int hours, String teacher, SubCategory subCategory) {
+        Validator.isNotNull(name, "The name must not be empty or null!!!");
+        Validator.isNotNull(code, "The code must not be empty or null!!!");
+        Validator.isNotNull(teacher, "The teacher must not be empty or null!!!");
+        Validator.betweenOneAndTwenty(hours, "The hours must be between 1 and 20");
+        Validator.regexValidator(code, "The code must be lowercase letters or numbers");
         this.name = name;
         this.code = code;
         this.hours = hours;
         this.teacher = teacher;
+        this.subCategory = subCategory;
     }
 
-    public Course(String name, String code, int hours, boolean isVisible, String targetAudience, String teacher, String description, String developedAbility) {
-        this(name, code, hours, teacher);
+    public Course(String name, String code, int hours, boolean isVisible, String targetAudience, String teacher, String description, String developedAbility, SubCategory subCategory) {
+        this(name, code, hours, teacher, subCategory);
         this.isVisible = isVisible;
         this.targetAudience = targetAudience;
         this.description = description;
@@ -98,6 +104,14 @@ public class Course {
         this.developedAbility = developedAbility;
     }
 
+    public SubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -109,6 +123,7 @@ public class Course {
                 ", teacher='" + teacher + '\'' +
                 ", description='" + description + '\'' +
                 ", developedAbility='" + developedAbility + '\'' +
+                ", subCategory=" + subCategory +
                 '}';
     }
 }
