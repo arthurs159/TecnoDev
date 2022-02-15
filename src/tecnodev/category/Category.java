@@ -23,6 +23,7 @@ public class Category {
 
     public Category(String name, String code, String description, String studyGuide, boolean active, Integer orderInSystem, String imageUrl, String htmlCode) {
         this(name, code);
+        Validator.hexadecimalValidator(htmlCode, "Htmlcode must be in hexadecimal standard");
         this.description = description;
         this.studyGuide = studyGuide;
         this.active = active;

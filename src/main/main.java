@@ -15,7 +15,7 @@ public class main {
     public static void main(String[] args) {
 
         Category categoria = new Category("teste", "1-teste");
-        Category categoria2 = new Category("teste", "1", "teste", "teste", true, 1, "teste", "teste");
+        Category categoria2 = new Category("teste", "1", "teste", "teste", true, 1, "teste", "#FF5733");
         System.out.println(categoria);
         System.out.println(categoria2);
         System.out.println("=================================");
@@ -38,7 +38,7 @@ public class main {
         System.out.println(secao2);
         System.out.println("=================================================================");
 
-        Explication explicacao = new Explication("titulo", "1", true, 2, secao, "teste");
+        Explication explicacao = new Explication("título", "1", true, 2, secao, "teste");
         Explication explicacao2 = new Explication("titulo", "1", secao, "teste");
         System.out.println(explicacao);
         System.out.println(explicacao2);
@@ -57,6 +57,5 @@ public class main {
         Alternative alternativa = new Alternative("teste", true, question);
         System.out.println("Alternativa ----------------->");
         System.out.println(alternativa);
-        System.out.println("*******************************");
     }
 }

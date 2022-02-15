@@ -19,4 +19,10 @@ public class Validator {
             throw new IllegalArgumentException(error);
         }
     }
+
+    public static void hexadecimalValidator(String field, String error) {
+        if(!field.matches("^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$")){
+            throw new IllegalArgumentException(error);
+        }
+    }
 }
