@@ -2,26 +2,38 @@ package validator;
 
 public class Validator {
 
-    public static void isNotNull(String field, String error) {
+    public static void isNotNullOrEmpty(String field, String error) {
         if (field == null || field.equals("")) {
             throw new IllegalArgumentException(error);
         }
     }
 
-    public static void betweenOneAndTwenty(int field, String error) {
-        if (field < 1 || field > 20){
+    public static void isNotEmpty(String field, String error) {
+        if (field.isEmpty()) {
+            throw new NullPointerException(error);
+        }
+    }
+
+    public static void isNotNull(Object field, String error) {
+        if (field == null) {
+            throw new NullPointerException(error);
+        }
+    }
+
+    public static void timeInterval(int field, int start, int end, String error) {
+        if (field < start || field > end) {
             throw new IllegalArgumentException(error);
         }
     }
 
-    public static void regexValidator (String field, String error){
-        if(!field.matches("[a-z0-9^-]+")) {
+    public static void regexValidatorAndNotEmpty(String field, String error) {
+        if (!field.matches("[a-z0-9-]+") || field.isEmpty()) {
             throw new IllegalArgumentException(error);
         }
     }
 
     public static void hexadecimalValidator(String field, String error) {
-        if(!field.matches("^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$")){
+        if (!field.matches("^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$")) {
             throw new IllegalArgumentException(error);
         }
     }

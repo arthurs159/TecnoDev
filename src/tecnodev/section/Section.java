@@ -1,7 +1,8 @@
 package tecnodev.section;
 
 import tecnodev.course.Course;
-import validator.Validator;
+
+import static validator.Validator.*;
 
 public class Section {
 
@@ -9,70 +10,15 @@ public class Section {
     private String code;
     private Integer orderInSystem;
     private boolean active;
-    private boolean isExam;
+    private boolean exam;
     private Course course;
 
     public Section(String name, String code, Course course) {
-        Validator.isNotNull(name, "The name must not be empty or null!!!");
-        Validator.isNotNull(code, "The code must not be empty or null!!!");
-        Validator.regexValidator(code, "The code must be lowercase letters or numbers");
+        isNotNullOrEmpty(name, "The name must not be empty or null");
+        regexValidatorAndNotEmpty(code, "The code must be lowercase letters or numbers and not be empty");
+        isNotNull(course, "Course must not be null");
         this.name = name;
         this.code = code;
-        this.course = course;
-    }
-
-    public Section(String name, String code, Integer orderInSystem, boolean active, boolean IsExam, Course course) {
-        this(name, code, course);
-        this.orderInSystem = orderInSystem;
-        this.active = active;
-        this.isExam = IsExam;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Integer getOrderInSystem() {
-        return orderInSystem;
-    }
-
-    public void setOrderInSystem(Integer orderInSystem) {
-        this.orderInSystem = orderInSystem;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public boolean isExam() {
-        return isExam;
-    }
-
-    public void setExam(boolean exam) {
-        this.isExam = exam;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
         this.course = course;
     }
 
@@ -83,7 +29,7 @@ public class Section {
                 ", code='" + code + '\'' +
                 ", orderInSystem='" + orderInSystem + '\'' +
                 ", active=" + active +
-                ", isExam=" + isExam +
+                ", isATest=" + exam +
                 ", course=" + course +
                 '}';
     }

@@ -1,7 +1,8 @@
 package tecnodev.activity;
 
 import tecnodev.section.Section;
-import validator.Validator;
+
+import static validator.Validator.*;
 
 public abstract class Activity {
 
@@ -12,17 +13,22 @@ public abstract class Activity {
     private Section section;
 
     public Activity(String title, String code, Section section) {
-        Validator.isNotNull(title, "The title must not be empty or null!!!");
-        Validator.regexValidator(code, "The code must be lowercase letters or numbers");
+        isNotEmpty(title, "The title must not be empty!");
+        regexValidatorAndNotEmpty(code, "The code must be lowercase letters or numbers and not be empty");
+        isNotNull(section, "Section must not be null!!");
         this.title = title;
         this.code = code;
         this.section = section;
     }
 
-    public Activity(String title, String code, boolean active, Integer orderInSystem, Section section) {
-        this(title, code, section);
-        this.orderInSystem = orderInSystem;
-        this.section = section;
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "title='" + title + '\'' +
+                ", code='" + code + '\'' +
+                ", active=" + active +
+                ", orderInSystem=" + orderInSystem +
+                ", section=" + section +
+                '}';
     }
-
 }

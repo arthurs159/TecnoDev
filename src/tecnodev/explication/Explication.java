@@ -2,7 +2,9 @@ package tecnodev.explication;
 
 import tecnodev.activity.Activity;
 import tecnodev.section.Section;
-import validator.Validator;
+
+import static validator.Validator.isNotEmpty;
+import static validator.Validator.isNotNullOrEmpty;
 
 public class Explication extends Activity {
 
@@ -10,19 +12,7 @@ public class Explication extends Activity {
 
     public Explication(String title, String code, Section section, String text) {
         super(title, code, section);
-        this.text = text;
-    }
-
-    public Explication(String title, String code, boolean active, int orderInSystem, Section section, String text) {
-        super(title, code, active, orderInSystem, section);
-        this.text = text;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
+        isNotNullOrEmpty(text, "Text should not be empty or null");
         this.text = text;
     }
 
@@ -30,7 +20,6 @@ public class Explication extends Activity {
     public String toString() {
         return "Explication{" +
                 "text='" + text + '\'' +
-                '}';
+                "} " + super.toString();
     }
-
 }

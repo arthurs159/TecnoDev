@@ -1,39 +1,20 @@
 package tecnodev.question;
 
-import tecnodev.ENUM.QuestionType;
 import tecnodev.activity.Activity;
 import tecnodev.section.Section;
+
+import static validator.Validator.isNotEmpty;
+import static validator.Validator.isNotNullOrEmpty;
 
 public class Question extends Activity {
 
     private String statement;
-    private QuestionType type = QuestionType.ONLY_ANSWER;
+    private QuestionType type = QuestionType.SINGLE_CHOICE;
 
     public Question(String title, String code, Section section, String statement, QuestionType type) {
         super(title, code, section);
+        isNotNullOrEmpty(statement, "Statement should not be empty or null");
         this.statement = statement;
-        this.type = type;
-    }
-
-    public Question(String title, String code, boolean active, int orderInSystem, Section section, String statement, QuestionType type) {
-        super(title, code, active, orderInSystem, section);
-        this.statement = statement;
-        this.type = type;
-    }
-
-    public String getStatement() {
-        return statement;
-    }
-
-    public void setStatement(String statement) {
-        this.statement = statement;
-    }
-
-    public QuestionType getType() {
-        return type;
-    }
-
-    public void setType(QuestionType type) {
         this.type = type;
     }
 
@@ -42,6 +23,6 @@ public class Question extends Activity {
         return "Question{" +
                 "statement='" + statement + '\'' +
                 ", type=" + type +
-                '}';
+                "} " + super.toString();
     }
 }

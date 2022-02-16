@@ -1,8 +1,8 @@
-package tecnodev.ENUM;
+package tecnodev.question;
 
 public enum QuestionType {
 
-    ONLY_ANSWER,
+    SINGLE_CHOICE,
     MULTIPLE_CHOICE,
     TRUE_FALSE;
 }
