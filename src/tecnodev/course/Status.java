@@ -1,6 +1,6 @@
 package tecnodev.course;
 
-public enum VisibleType {
+public enum Status {
 
     PRIVATE,
     PUBLIC

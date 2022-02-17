@@ -12,7 +12,7 @@ public class Course {
     private String name;
     private String code;
     private Integer estimatedTimeInHours;
-    private VisibleType visibility = VisibleType.PRIVATE;
+    private Status visibility = Status.PRIVATE;
     private String targetAudience;
     private String teacher;
     private String description;
