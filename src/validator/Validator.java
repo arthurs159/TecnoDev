@@ -37,4 +37,8 @@ public class Validator {
             throw new IllegalArgumentException(error);
         }
     }
+
+    public static boolean transformBoolean(String teste){
+        return teste.equals("ATIVA");
+    }
 }

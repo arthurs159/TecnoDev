@@ -20,6 +20,15 @@ public class Category {
         this.code = code;
     }
 
+    public Category(String name, String code, Integer orderInSystem, String description, boolean active, String imageUrl, String colorCode) {
+        this(name, code);
+        this.orderInSystem = orderInSystem;
+        this.description = description;
+        this.active = active;
+        this.imageUrl = imageUrl;
+        this.colorCode = colorCode;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
