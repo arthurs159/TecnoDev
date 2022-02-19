@@ -38,7 +38,7 @@ public class Validator {
         }
     }
 
-    public static boolean transformBoolean(String teste){
+    public static boolean transformToBoolean(String teste){
         return teste.equals("ATIVA");
     }
 }

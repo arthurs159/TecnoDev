@@ -23,6 +23,13 @@ public class SubCategory {
         this.category = category;
     }
 
+    public SubCategory(String name, String code, Integer orderInSystem, String description, boolean active, Category category) {
+        this(name, code, category);
+        this.orderInSystem = orderInSystem;
+        this.description = description;
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "SubCategory{" +
