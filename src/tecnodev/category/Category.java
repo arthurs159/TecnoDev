@@ -29,6 +29,14 @@ public class Category {
         this.colorCode = colorCode;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
     @Override
     public String toString() {
         return "Category{" +

@@ -1,5 +1,8 @@
 package validator;
 
+import tecnodev.category.Category;
+import tecnodev.course.Status;
+
 public class Validator {
 
     public static void isNotNullOrEmpty(String field, String error) {
@@ -38,7 +41,20 @@ public class Validator {
         }
     }
 
-    public static boolean transformToBoolean(String teste){
-        return teste.equals("ATIVA");
+    public static boolean transformToBoolean(String active){
+        return active.equals("ATIVA");
     }
+
+    public static Status transformEnumToString(String teste){
+        if(teste.equals("PRIVADA")){
+            return Status.PRIVATE;
+        }
+            return Status.PUBLIC;
+
+    }
+
+    public static String verifyDevelopedSkillsnEmpty(String skills) {
+        return skills.equals("") ? "Uninformed skills" : skills;
+    }
+
 }

@@ -30,6 +30,10 @@ public class SubCategory {
         this.active = active;
     }
 
+    public String getCode() {
+        return code;
+    }
+
     @Override
     public String toString() {
         return "SubCategory{" +
