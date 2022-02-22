@@ -1,8 +1,5 @@
 package validator;
 
-import tecnodev.category.Category;
-import tecnodev.course.Status;
-
 public class Validator {
 
     public static void isNotNullOrEmpty(String field, String error) {
@@ -39,22 +36,6 @@ public class Validator {
         if (!field.matches("^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$")) {
             throw new IllegalArgumentException(error);
         }
-    }
-
-    public static boolean transformToBoolean(String active){
-        return active.equals("ATIVA");
-    }
-
-    public static Status transformEnumToString(String teste){
-        if(teste.equals("PRIVADA")){
-            return Status.PRIVATE;
-        }
-            return Status.PUBLIC;
-
-    }
-
-    public static String verifyDevelopedSkillsnEmpty(String skills) {
-        return skills.equals("") ? "Uninformed skills" : skills;
     }
 
 }

@@ -37,6 +37,20 @@ public class Category {
         return code;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+
+
     @Override
     public String toString() {
         return "Category{" +
