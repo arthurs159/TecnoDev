@@ -23,6 +23,41 @@ public class SubCategory {
         this.category = category;
     }
 
+    public SubCategory(String name, String code, Integer orderInSystem, String description, boolean active, Category category) {
+        this(name, code, category);
+        this.orderInSystem = orderInSystem;
+        this.description = description;
+        this.active = active;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public Integer getOrderInSystem() {
+        return orderInSystem;
+    }
+
+    public String getCategoryCode(){
+        return this.getCategory().getCode();
+    }
+
     @Override
     public String toString() {
         return "SubCategory{" +

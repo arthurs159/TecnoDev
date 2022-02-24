@@ -1,6 +1,11 @@
 package tecnodev.category;
 
-import static validator.Validator.*;
+import tecnodev.course.Course;
+
+import java.util.List;
+
+import static validator.Validator.isNotNullOrEmpty;
+import static validator.Validator.regexValidatorAndNotEmpty;
 
 public class Category {
 
@@ -18,6 +23,46 @@ public class Category {
         regexValidatorAndNotEmpty(code, "The code must be lowercase letters or numbers and not be empty");
         this.name = name;
         this.code = code;
+    }
+
+    public Category(String name, String code, Integer orderInSystem, String description, boolean active, String imageUrl, String colorCode) {
+        this(name, code);
+        this.orderInSystem = orderInSystem;
+        this.description = description;
+        this.active = active;
+        this.imageUrl = imageUrl;
+        this.colorCode = colorCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+    public static int numbersOfCourseFromCategory(List<Course> courses, String codeCategory) {
+        return (int) courses.stream()
+                .filter(course -> course.getCategoryCode().equals(codeCategory)).count();
+    }
+
+    public static int quantityHoursFromCategory(List<Course> courses, String categoryCode) {
+        return courses.stream()
+                .filter(course -> course.getCategoryCode().equals(categoryCode))
+                .mapToInt(Course::getEstimatedTimeInHours).sum();
     }
 
     @Override
