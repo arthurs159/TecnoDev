@@ -2,7 +2,7 @@ package tecnodev.category;
 
 import tecnodev.course.Course;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static validator.Validator.isNotNullOrEmpty;
 import static validator.Validator.regexValidatorAndNotEmpty;
@@ -54,14 +54,14 @@ public class Category {
         return colorCode;
     }
 
-    public static int numbersOfCourses(ArrayList<Course> courses, String codeCategory) {
+    public static int numbersOfCourseFromCategory(List<Course> courses, String codeCategory) {
         return (int) courses.stream()
-                .filter(course -> course.getSubCategory().getCategory().getCode().equals(codeCategory)).count();
+                .filter(course -> course.getCategoryCode().equals(codeCategory)).count();
     }
 
-    public static int quantityHours(ArrayList<Course> courses, String categoryCode){
-        return (int) courses.stream()
-                .filter(course -> course.getSubCategory().getCategory().getCode().equals(categoryCode))
+    public static int quantityHoursFromCategory(List<Course> courses, String categoryCode) {
+        return courses.stream()
+                .filter(course -> course.getCategoryCode().equals(categoryCode))
                 .mapToInt(Course::getEstimatedTimeInHours).sum();
     }
 

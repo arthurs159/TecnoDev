@@ -4,8 +4,9 @@ import tecnodev.subCategory.SubCategory;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static tecnodev.course.Status.from;
@@ -13,38 +14,36 @@ import static utility.Filters.filterSubCategoryByCode;
 
 public class ReadCourse {
 
-    public ArrayList<Course> CourseReader(String pathname, ArrayList<SubCategory> subcategory) throws FileNotFoundException {
+    public List<Course> CourseReader(String pathname, List<SubCategory> subcategory) throws IOException {
         FileInputStream courseFile = new FileInputStream(
-                new File("/home/arthur/Alura/planilha-dados-escola - Curso.csv"));
+                new File(pathname));
 
         Scanner readCourseFile = new Scanner(courseFile);
-        ArrayList<Course> courseList = new ArrayList<>();
+        List<Course> courseList = new ArrayList<>();
 
         readCourseFile.nextLine();
         while (readCourseFile.hasNextLine()) {
 
-            String line3 = readCourseFile.nextLine();
-            String[] data3 = line3.split(",");
+            String courseHeader = readCourseFile.nextLine();
+            String[] courseData = courseHeader.split(",");
 
-            if (data3.length == 9) {
+            if (courseData.length == 9) {
                 Course course = new Course(
-                        data3[0],
-                        data3[1].trim(),
-                        data3[2].equals("") ? 0 : Integer.parseInt(data3[2]),
-                        from(data3[3]),
-                        data3[4],
-                        data3[5],
-                        data3[6],
-                        data3[7].equals("") ? "Empty field" : data3[7],
-                        filterSubCategoryByCode(subcategory, data3[8])
+                        courseData[0],
+                        courseData[1].trim(),
+                        courseData[2].equals("") ? 0 : Integer.parseInt(courseData[2]),
+                        from(courseData[3]),
+                        courseData[4],
+                        courseData[5],
+                        courseData[6],
+                        courseData[7].equals("") ? "Empty field" : courseData[7],
+                        filterSubCategoryByCode(subcategory, courseData[8])
                 );
                 courseList.add(course);
             }
         }
-        System.out.println("\nCourses : ");
-        courseList.forEach(System.out::println);
-
         readCourseFile.close();
+        courseFile.close();
 
         return courseList;
     }

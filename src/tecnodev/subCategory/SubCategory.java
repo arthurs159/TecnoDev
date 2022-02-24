@@ -54,6 +54,10 @@ public class SubCategory {
         return orderInSystem;
     }
 
+    public String getCategoryCode(){
+        return this.getCategory().getCode();
+    }
+
     @Override
     public String toString() {
         return "SubCategory{" +

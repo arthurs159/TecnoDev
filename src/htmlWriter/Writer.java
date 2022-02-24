@@ -7,12 +7,12 @@ import tecnodev.subCategory.SubCategory;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class Writer {
 
-    public void htmlWriter(ArrayList<Category> categories, ArrayList<SubCategory> subCategories, ArrayList<Course> courses) throws IOException {
+    public void htmlWriter(List<Category> categories, List<SubCategory> subCategories, List<Course> courses) throws IOException {
         subCategories.sort(Comparator.comparing(SubCategory::getOrderInSystem));
 
         File file = new File("/home/arthur/Alura/htmlPage.html");
@@ -41,8 +41,8 @@ public class Writer {
                     .append("<ul>\n")
                     .append("<li style=display:flex;align-items:center> Icone: <img src=" + category.getImageUrl() + " style=width:100px></li>\n ")
                     .append("<li style=background-color:" + category.getColorCode() + ">Código Hexadecimal : " + category.getColorCode() + "</li>\n")
-                    .append("<li> Quantidade de cursos: " + Category.numbersOfCourses(courses, category.getCode()) + "</li>\n")
-                    .append("<li> Quantidade de horas: " + Category.quantityHours(courses, category.getCode()) + "</li>\n")
+                    .append("<li> Quantidade de cursos: " + Category.numbersOfCourseFromCategory(courses, category.getCode()) + "</li>\n")
+                    .append("<li> Quantidade de horas: " + Category.quantityHoursFromCategory(courses, category.getCode()) + "</li>\n")
                     .append("</ul>\n")
                     .append("<h3 style=padding-left:5px> Subcategoria(s) : </h3>\n");
             for (SubCategory subCategory : subCategories) {

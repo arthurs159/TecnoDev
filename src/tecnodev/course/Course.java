@@ -32,10 +32,6 @@ public class Course {
         this.subCategory = subCategory;
     }
 
-    public SubCategory getSubCategory() {
-        return subCategory;
-    }
-
     public Course(String name, String code, Integer estimatedTimeInHours, Status visibility, String targetAudience, String teacher, String description, String developedSkills, SubCategory subCategory) {
         this(name, code, estimatedTimeInHours, teacher, subCategory);
         this.visibility = visibility;
@@ -44,8 +40,8 @@ public class Course {
         this.developedSkills = developedSkills;
     }
 
-    public String getDevelopedSkills() {
-        return developedSkills;
+    public SubCategory getSubCategory() {
+        return subCategory;
     }
 
     public String getName() {
@@ -54,6 +50,10 @@ public class Course {
 
     public Integer getEstimatedTimeInHours() {
         return estimatedTimeInHours;
+    }
+
+    public String getCategoryCode(){
+        return this.getSubCategory().getCategoryCode();
     }
 
     @Override
