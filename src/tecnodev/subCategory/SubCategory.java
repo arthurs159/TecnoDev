@@ -30,8 +30,28 @@ public class SubCategory {
         this.active = active;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public String getCode() {
         return code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public Integer getOrderInSystem() {
+        return orderInSystem;
     }
 
     @Override

@@ -8,8 +8,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static validator.Filters.filterSubCategoryByCode;
-import static validator.Parse.transformEnumToString;
+import static tecnodev.course.Status.from;
+import static utility.Filters.filterSubCategoryByCode;
 
 public class ReadCourse {
 
@@ -31,7 +31,7 @@ public class ReadCourse {
                         data3[0],
                         data3[1].trim(),
                         data3[2].equals("") ? 0 : Integer.parseInt(data3[2]),
-                        transformEnumToString(data3[3]),
+                        from(data3[3]),
                         data3[4],
                         data3[5],
                         data3[6],

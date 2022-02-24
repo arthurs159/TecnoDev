@@ -1,6 +1,11 @@
 package tecnodev.category;
 
-import static validator.Validator.*;
+import tecnodev.course.Course;
+
+import java.util.ArrayList;
+
+import static validator.Validator.isNotNullOrEmpty;
+import static validator.Validator.regexValidatorAndNotEmpty;
 
 public class Category {
 
@@ -49,7 +54,16 @@ public class Category {
         return colorCode;
     }
 
+    public static int numbersOfCourses(ArrayList<Course> courses, String codeCategory) {
+        return (int) courses.stream()
+                .filter(course -> course.getSubCategory().getCategory().getCode().equals(codeCategory)).count();
+    }
 
+    public static int quantityHours(ArrayList<Course> courses, String categoryCode){
+        return (int) courses.stream()
+                .filter(course -> course.getSubCategory().getCategory().getCode().equals(categoryCode))
+                .mapToInt(Course::getEstimatedTimeInHours).sum();
+    }
 
     @Override
     public String toString() {

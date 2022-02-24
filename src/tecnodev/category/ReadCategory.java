@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import static validator.Parse.transformToBoolean;
+import static utility.Parse.transformToBoolean;
 
 public class ReadCategory {
 
