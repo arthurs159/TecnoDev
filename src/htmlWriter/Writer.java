@@ -46,14 +46,14 @@ public class Writer {
                     .append("</ul>\n")
                     .append("<h3 style=padding-left:5px> Subcategoria(s) : </h3>\n");
             for (SubCategory subCategory : subCategories) {
-                String categoryCode = subCategory.getCategory().getCode();
+                String categoryCode = subCategory.getCategoryCode();
                 if (categoryCode.equalsIgnoreCase(category.getCode())) {
                     if (subCategory.isActive()) {
                         categoryBuilder.append("<h3 style=font-size:25px;padding-left:10px>" + subCategory.getName() + "</h3>\n")
                                 .append("<p style=padding-left:10px> Descrição : " + subCategory.getDescription() + "</p>\n");
                     }
                     for (Course course : courses) {
-                        String subCategoryCode = course.getSubCategory().getCode();
+                        String subCategoryCode = course.getSubCategoryCode();
                         if (subCategoryCode.equalsIgnoreCase(subCategory.getCode())) {
                             categoryBuilder.append("<p style=padding-left:10px>Cursos: " + course.getName() + "</p>\n");
                         }

@@ -52,8 +52,20 @@ public class Course {
         return estimatedTimeInHours;
     }
 
-    public String getCategoryCode(){
+    public String getCategoryCode() {
         return this.getSubCategory().getCategoryCode();
+    }
+
+    public Status getVisibility() {
+        return visibility;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public String getSubCategoryCode() {
+        return this.getSubCategory().getCode();
     }
 
     @Override

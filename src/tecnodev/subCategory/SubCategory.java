@@ -2,6 +2,9 @@ package tecnodev.subCategory;
 
 import tecnodev.category.Category;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static validator.Validator.*;
 
 public class SubCategory {
@@ -54,7 +57,7 @@ public class SubCategory {
         return orderInSystem;
     }
 
-    public String getCategoryCode(){
+    public String getCategoryCode() {
         return this.getCategory().getCode();
     }
 
