@@ -51,10 +51,10 @@ public class ReadSubCategory {
                 .forEach(subCategory -> System.out.println(subCategory));
     }
 
-    public static  void subcategoryActiveWithDescription(List<SubCategory> subCategories){
-        subCategories.stream().filter(SubCategory::isActive)
+    public static long subcategoryActiveWithDescription(List<SubCategory> subCategories){
+       return subCategories.stream()
+                .filter(SubCategory::isActive)
                 .filter(subCategory -> subCategory.getDescription() != "")
-                .collect(Collectors.toList())
-                .forEach(s -> System.out.println(s));
+                .count();
     }
 }

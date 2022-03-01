@@ -56,14 +56,22 @@ public class ReadCourse {
     }
 
     public static void instructors(List<Course> courses) {
-        courses.stream().map(Course::getTeacher)
+        courses.stream()
+                .map(Course::getTeacher)
                 .collect(Collectors.toSet())
                 .forEach(instructor -> System.out.println(instructor));
     }
 
-    public static int numbers(List<Course> courses, String teacher) {
-        return (int) courses.stream()
+    public static long numbersOfCourseFromInstructors(List<Course> courses, String teacher) {
+        return courses.stream()
                 .filter(course -> course.getTeacher().equals(teacher)).count();
+    }
+
+    public static void instructorsWithNumbersOfCourses(List<Course> courses){
+        courses.stream()
+                .map(course -> "O Instrutor(a): " + course.getTeacher()
+                        + " tem " + numbersOfCourseFromInstructors(courses, course.getTeacher()) + " cursos")
+                .distinct().toList().forEach(s -> System.out.println(s));
     }
 
 }
