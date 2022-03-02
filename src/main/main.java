@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static tecnodev.category.ReadCategory.activeCategory;
-import static tecnodev.course.ReadCourse.*;
-import static tecnodev.course.ReadCourse.instructors;
-import static tecnodev.subCategory.ReadSubCategory.*;
+import static utility.Filters.*;
 
 public class main {
     public static void main(String[] args) throws IOException {
@@ -36,10 +33,9 @@ public class main {
         instructors(courses).forEach(System.out::println);
 
         System.out.println("\nQuantidade de Subcategoria ativa que tem descrição");
-        System.out.println(subcategoryActiveWithDescription(subCategories));
-        System.out.println("\n");
+        System.out.println(subcategoryActiveWithDescription(subCategories) + "\n");
 
-        for (String instructor : instructors(courses)){
+        for (String instructor : instructors(courses)) {
             System.out.println("Instrutor: " + instructor + " tem " + numbersOfCourseFromInstructors(courses, instructor) + " Curso(s)");
         }
     }

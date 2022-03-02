@@ -39,11 +39,4 @@ public class ReadCategory {
 
         return categoryList;
     }
-
-    public static List<Category> activeCategory(List<Category> categories){
-        return categories.stream()
-                .filter(Category::isActive)
-                .toList();
-    }
-
 }

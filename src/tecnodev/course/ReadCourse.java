@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static tecnodev.course.Status.from;
 import static utility.Filters.filterSubCategoryByCode;
@@ -48,30 +46,6 @@ public class ReadCourse {
         courseFile.close();
 
         return courseList;
-    }
-
-    public static void privateCourses(List<Course> courses) {
-        courses.stream().filter(privateCourse -> privateCourse.getVisibility() == Status.PRIVATE)
-                .findAny()
-                .ifPresentOrElse(System.out::println, () -> System.out.println(" == Não há curso(s) privado(s) == "));
-    }
-
-    public static Set<String> instructors(List<Course> courses) {
-        return courses.stream()
-                .map(Course::getTeacher)
-                .collect(Collectors.toSet());
-    }
-
-    public static long numbersOfCourseFromInstructors(List<Course> courses, String teacher) {
-        return courses.stream()
-                .filter(course -> course.getTeacher().equals(teacher)).count();
-    }
-
-    public static void instructorsWithNumbersOfCourses(List<Course> courses){
-        courses.stream()
-                .map(course -> "O Instrutor(a): " + course.getTeacher()
-                        + " tem " + numbersOfCourseFromInstructors(courses, course.getTeacher()) + " cursos")
-                .distinct().toList().forEach(s -> System.out.println(s));
     }
 
 }
