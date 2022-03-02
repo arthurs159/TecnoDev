@@ -49,6 +49,10 @@ public class SubCategory {
         return description;
     }
 
+    public boolean hasDescription(){
+        return !description.isBlank();
+    }
+
     public boolean isActive() {
         return active;
     }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static tecnodev.course.Status.from;
@@ -52,14 +53,13 @@ public class ReadCourse {
     public static void privateCourses(List<Course> courses) {
         courses.stream().filter(privateCourse -> privateCourse.getVisibility() == Status.PRIVATE)
                 .findAny()
-                .ifPresentOrElse(course -> System.out.println(course), () -> System.out.println(" == Não há curso(s) privado(s) == "));
+                .ifPresentOrElse(System.out::println, () -> System.out.println(" == Não há curso(s) privado(s) == "));
     }
 
-    public static void instructors(List<Course> courses) {
-        courses.stream()
+    public static Set<String> instructors(List<Course> courses) {
+        return courses.stream()
                 .map(Course::getTeacher)
-                .collect(Collectors.toSet())
-                .forEach(instructor -> System.out.println(instructor));
+                .collect(Collectors.toSet());
     }
 
     public static long numbersOfCourseFromInstructors(List<Course> courses, String teacher) {

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import static utility.Parse.transformToBoolean;
 
@@ -41,10 +40,10 @@ public class ReadCategory {
         return categoryList;
     }
 
-    public static void activeCategory(List<Category> categories){
-        categories.stream().filter(Category::isActive)
-                .collect(Collectors.toList())
-                .forEach(active -> System.out.println(active));
+    public static List<Category> activeCategory(List<Category> categories){
+        return categories.stream()
+                .filter(Category::isActive)
+                .toList();
     }
 
 }

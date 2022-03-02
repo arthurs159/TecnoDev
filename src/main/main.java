@@ -13,6 +13,7 @@ import java.util.List;
 
 import static tecnodev.category.ReadCategory.activeCategory;
 import static tecnodev.course.ReadCourse.*;
+import static tecnodev.course.ReadCourse.instructors;
 import static tecnodev.subCategory.ReadSubCategory.*;
 
 public class main {
@@ -23,24 +24,23 @@ public class main {
         List<Course> courses = new ArrayList<>(new ReadCourse().CourseReader("/home/arthur/Alura/planilha-dados-escola - Curso.csv", subCategories));
 
         System.out.println("Categorias ativas: ");
-        activeCategory(categories);
+        activeCategory(categories).forEach(s -> System.out.println(s));
 
         System.out.println("\nSubCategorias que não possuem descrição: ");
-        subcategoryWithoutDescription(subCategories);
+        subcategoryWithoutDescription(subCategories).forEach(s -> System.out.println(s));
 
         System.out.println("\nSe há algum curso privado");
         privateCourses(courses);
 
         System.out.println("\nInstrutores: ");
-        instructors(courses);
+        instructors(courses).forEach(System.out::println);
 
         System.out.println("\nQuantidade de Subcategoria ativa que tem descrição");
         System.out.println(subcategoryActiveWithDescription(subCategories));
+        System.out.println("\n");
 
-        System.out.println("\nInstrutor e a quantidade de cursos");
-//        for (Course course : courses){
-//                    System.out.println("Instrutor: " + course.getTeacher() + " tem " + numbersOfCourseFromTeacher(courses, course.getTeacher()) + " Cursos");
-//        }
-        instructorsWithNumbersOfCourses(courses);
+        for (String instructor : instructors(courses)){
+            System.out.println("Instrutor: " + instructor + " tem " + numbersOfCourseFromInstructors(courses, instructor) + " Curso(s)");
+        }
     }
 }

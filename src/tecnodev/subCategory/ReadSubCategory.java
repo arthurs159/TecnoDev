@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static java.util.function.Predicate.*;
 import static utility.Filters.filterCategoriesByCode;
 import static utility.Parse.transformToBoolean;
 
@@ -45,16 +47,16 @@ public class ReadSubCategory {
         return subCategoryList;
     }
 
-    public static void subcategoryWithoutDescription(List<SubCategory> subCategories){
-        subCategories.stream().filter(description -> description.getDescription().isEmpty())
-                .collect(Collectors.toList())
-                .forEach(subCategory -> System.out.println(subCategory));
+    public static List<SubCategory> subcategoryWithoutDescription(List<SubCategory> subCategories){
+        return subCategories.stream()
+                .filter(not(SubCategory::hasDescription))
+                .toList();
     }
 
     public static long subcategoryActiveWithDescription(List<SubCategory> subCategories){
        return subCategories.stream()
                 .filter(SubCategory::isActive)
-                .filter(subCategory -> subCategory.getDescription() != "")
+                .filter(SubCategory::hasDescription)
                 .count();
     }
 }
