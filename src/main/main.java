@@ -21,21 +21,21 @@ public class main {
         List<Course> courses = new ArrayList<>(new ReadCourse().CourseReader("/home/arthur/Alura/planilha-dados-escola - Curso.csv", subCategories));
 
         System.out.println("Categorias ativas: ");
-        activeCategory(categories).forEach(s -> System.out.println(s));
+        findActiveCategories(categories).forEach(s -> System.out.println(s));
 
         System.out.println("\nSubCategorias que não possuem descrição: ");
-        subcategoryWithoutDescription(subCategories).forEach(s -> System.out.println(s));
+        findSubcategoriesWithoutDescription(subCategories).forEach(s -> System.out.println(s));
 
         System.out.println("\nSe há algum curso privado");
-        privateCourses(courses);
+        findPrivateCourses(courses);
 
         System.out.println("\nInstrutores: ");
-        instructors(courses).forEach(System.out::println);
+        findInstructors(courses).forEach(System.out::println);
 
         System.out.println("\nQuantidade de Subcategoria ativa que tem descrição");
-        System.out.println(subcategoryActiveWithDescription(subCategories) + "\n");
+        System.out.println(countActiveSubcategoriesWithDescription(subCategories) + "\n");
 
-        for (String instructor : instructors(courses)) {
+        for (String instructor : findInstructors(courses)) {
             System.out.println("Instrutor: " + instructor + " tem " + numbersOfCourseFromInstructors(courses, instructor) + " Curso(s)");
         }
     }
