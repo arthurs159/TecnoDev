@@ -1,4 +1,4 @@
-package main;
+package program;
 
 import tecnodev.category.Category;
 import tecnodev.category.ReadCategory;
