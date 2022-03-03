@@ -3,6 +3,7 @@ package tecnodev.category;
 import tecnodev.course.Course;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static validator.Validator.isNotNullOrEmpty;
 import static validator.Validator.regexValidatorAndNotEmpty;
@@ -52,6 +53,10 @@ public class Category {
 
     public String getColorCode() {
         return colorCode;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public static int numbersOfCourseFromCategory(List<Course> courses, String codeCategory) {
