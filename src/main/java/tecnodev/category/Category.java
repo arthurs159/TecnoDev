@@ -3,10 +3,8 @@ package tecnodev.category;
 import tecnodev.course.Course;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static validator.Validator.isNotNullOrEmpty;
-import static validator.Validator.regexValidatorAndNotEmpty;
+import static validator.Validator.*;
 
 public class Category {
 
@@ -28,6 +26,7 @@ public class Category {
 
     public Category(String name, String code, Integer orderInSystem, String description, boolean active, String imageUrl, String colorCode) {
         this(name, code);
+        hexadecimalValidator(colorCode, "The colorCode should be in Hexadecimal standard");
         this.orderInSystem = orderInSystem;
         this.description = description;
         this.active = active;
