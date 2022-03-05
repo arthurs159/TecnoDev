@@ -2,9 +2,6 @@ package tecnodev.subCategory;
 
 import tecnodev.category.Category;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static validator.Validator.*;
 
 public class SubCategory {
@@ -49,7 +46,7 @@ public class SubCategory {
         return description;
     }
 
-    public boolean hasDescription(){
+    public boolean hasDescription() {
         return description != null && !description.isBlank();
     }
 

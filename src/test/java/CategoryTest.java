@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static tecnodev.category.Category.*;
 
 public class CategoryTest {
-
-
+    // TODO     CHECAR SE É PARA ADICIONAR NO VALIDATOR O NULL DO CODE!!!!
     @Test
     void categoryShouldInstantiateWhenDataIsCorrect() {
         assertDoesNotThrow(
@@ -62,6 +62,18 @@ public class CategoryTest {
     }
 
     @Test
+    void categoryShouldThrowIllegalExceptionWhenCodeHasAccent() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Category("Programação", "prógrámáçãó"));
+    }
+
+    @Test
+    void categoryShouldNotThrowAnythingWhenCodeHasTrace() {
+        assertDoesNotThrow(
+                () -> new Category("Programação", "12-58z"));
+    }
+
+    @Test
     void categoryShouldThrowIllegalExceptionWhenColorCodeDoesNotHaveHexadecimalStandard() {
         assertThrows(IllegalArgumentException.class,
                 () -> new Category("Programação", "programacao", 1,
@@ -82,7 +94,7 @@ public class CategoryTest {
         Course course = new Course("java persistência", "java", 12, "Paulo",  subCat);
         List<Course> list = Arrays.asList(course);
 
-        assertEquals(1, Category.numbersOfCourseFromCategory(list, subCat.getCategoryCode()));
+        assertEquals(1, numbersOfCourseFromCategory(list, subCat.getCategoryCode()));
     }
 
     @Test
@@ -92,7 +104,7 @@ public class CategoryTest {
         Course course = new Course("java persistência", "java", 12, "Paulo",  subCat);
         List<Course> list = Arrays.asList(course);
 
-        assertEquals(12, Category.quantityHoursFromCategory(list, subCat.getCategoryCode()));
+        assertEquals(course.getEstimatedTimeInHours(), quantityHoursFromCategory(list, subCat.getCategoryCode()));
     }
 
 }

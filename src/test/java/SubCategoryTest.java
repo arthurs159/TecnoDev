@@ -38,6 +38,18 @@ public class SubCategoryTest {
     }
 
     @Test
+    void subCategoryShouldThrowIllegalExceptionWhenCodeHasAccent() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new SubCategory("Java", "jává", category));
+    }
+
+    @Test
+    void subCategoryShouldNotThrowAnythingWhenCodeHasATrace() {
+        assertDoesNotThrow(
+                () -> new SubCategory("Java", "12-58z", category));
+    }
+
+    @Test
     void subCategoryShouldThrowIllegalExceptionWhenCodeIsEmpty() {
         assertThrows(IllegalArgumentException.class,
                 () -> new SubCategory("Java", "", category));
@@ -50,7 +62,7 @@ public class SubCategoryTest {
     }
 
     @Test
-    void subCategoryShouldThrowIllegalExceptionWhenCodeHasSpacialCharacters() {
+    void subCategoryShouldThrowIllegalExceptionWhenCodeHasSpecialCharacters() {
         assertThrows(IllegalArgumentException.class,
                 () -> new SubCategory("Java", "j@a&v*", category));
     }
@@ -68,7 +80,7 @@ public class SubCategoryTest {
     }
 
     @Test
-    void hasDescriptionShouldReturnTrueIfDescriptionIsNotNullAndEmpty() {
+    void hasDescriptionShouldReturnTrueIfDescriptionIsNotNullAndNotEmpty() {
         SubCategory subcat = new SubCategory("Java", "java", 1, "Descrição não vazia", true, category);
         assertTrue(subcat.hasDescription());
     }
@@ -83,6 +95,12 @@ public class SubCategoryTest {
     void hasDescriptionShouldReturnFalseIfDescriptionIsEmpty() {
         SubCategory subcat = new SubCategory("Java", "java", 1, "", true, category);
         assertFalse(subcat.hasDescription());
+    }
+
+    @Test
+    void getCategoryCodeShouldReturnTheCodeFromCategory() {
+        SubCategory subcat = new SubCategory("Java", "java", 1, "descrição", true, category);
+        assertEquals(category.getCode(), subcat.getCategoryCode());
     }
 
 }
