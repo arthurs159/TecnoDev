@@ -1,5 +1,10 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import tecnodev.category.Category;
 import tecnodev.subCategory.SubCategory;
 
@@ -19,58 +24,38 @@ public class SubCategoryTest {
         assertDoesNotThrow(() -> new SubCategory("Java", "java", category));
     }
 
-    @Test
-    void subCategoryShouldThrowIllegalExceptionWhenNameIsEmpty() {
+    @ParameterizedTest
+    @EmptySource
+    void subCategoryShouldThrowIllegalExceptionWhenNameAndCodeAreEmpty(String input) {
         assertThrows(IllegalArgumentException.class,
-                () -> new SubCategory("", "java", category));
+                () -> new SubCategory(input, "java", category));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> new SubCategory("Java", input, category));
     }
 
-    @Test
-    void subCategoryShouldThrowIllegalExceptionWhenNameIsNull() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new SubCategory(null, "java", category));
+    @ParameterizedTest
+    @NullSource
+    void subCategoryShouldThrowNullPointerWhenNameCodeAndCategoryAreNull(String input) {
+        assertThrows(NullPointerException.class,
+                () -> new SubCategory(input, "java", category));
+
+        assertThrows(NullPointerException.class,
+                () -> new SubCategory("Programação", input, category));
     }
 
-    @Test
-    void subCategoryShouldInstantiateWhenCodeHasOnlyNumbers() {
+    @ParameterizedTest
+    @CsvSource({"1234", "12-58z", "codigo", "co-di-go"})
+    void subCategoryShouldInstantiateWhenCodeHasRegexStandard(String input) {
         assertDoesNotThrow(
-                () -> new SubCategory("Java", "1243", category));
+                () -> new SubCategory("Java", input, category));
     }
 
-    @Test
-    void subCategoryShouldThrowIllegalExceptionWhenCodeHasAccent() {
+    @ParameterizedTest
+    @CsvSource({"jává", "JAVA", "j@a&v*", "j a v a"})
+    void subCategoryShouldNotInstantiateWhenCodeDoesNotHaveRegexStandard(String input) {
         assertThrows(IllegalArgumentException.class,
-                () -> new SubCategory("Java", "jává", category));
-    }
-
-    @Test
-    void subCategoryShouldNotThrowAnythingWhenCodeHasATrace() {
-        assertDoesNotThrow(
-                () -> new SubCategory("Java", "12-58z", category));
-    }
-
-    @Test
-    void subCategoryShouldThrowIllegalExceptionWhenCodeIsEmpty() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new SubCategory("Java", "", category));
-    }
-
-    @Test
-    void subCategoryShouldThrowIllegalExceptionWhenCodeHasUpperCaseLetter() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new SubCategory("Java", "JAVA", category));
-    }
-
-    @Test
-    void subCategoryShouldThrowIllegalExceptionWhenCodeHasSpecialCharacters() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new SubCategory("Java", "j@a&v*", category));
-    }
-
-    @Test
-    void subCategoryShouldThrowIllegalExceptionWhenCodeHasSpace() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new SubCategory("Java", "j a v a", category));
+                () -> new SubCategory("Java", input, category));
     }
 
     @Test
@@ -85,15 +70,10 @@ public class SubCategoryTest {
         assertTrue(subcat.hasDescription());
     }
 
-    @Test
-    void hasDescriptionShouldReturnFalseIfDescriptionIsNull() {
-        SubCategory subcat = new SubCategory("Java", "java", 1, null, true, category);
-        assertFalse(subcat.hasDescription());
-    }
-
-    @Test
-    void hasDescriptionShouldReturnFalseIfDescriptionIsEmpty() {
-        SubCategory subcat = new SubCategory("Java", "java", 1, "", true, category);
+    @ParameterizedTest
+    @NullAndEmptySource
+    void hasDescriptionShouldReturnFalseIfDescriptionIsNullOrEmpty(String input) {
+        SubCategory subcat = new SubCategory("Java", "java", 1, input, true, category);
         assertFalse(subcat.hasDescription());
     }
 

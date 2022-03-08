@@ -1,108 +1,113 @@
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import tecnodev.category.Category;
 import tecnodev.course.Course;
 import tecnodev.subCategory.SubCategory;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static tecnodev.category.Category.*;
+import static tecnodev.category.Category.numbersOfCourseFromCategory;
+import static tecnodev.category.Category.quantityHoursFromCategory;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CategoryTest {
-    // TODO    CHECAR SE É PARA ADICIONAR NO VALIDATOR O NULL DO CODE!!!!
+
+    private Category programmingCategory;
+    private SubCategory javaSubcategory;
+    private Course jpaCourse;
+    private Course mavenCourse;
+
+    private Category mobileCategory;
+    private SubCategory androidSubcategory;
+    private Course beginningCourse;
+
+    private List<Course> courseList;
+
+    @BeforeAll
+    void setUp() {
+        programmingCategory = new Category("Programação", "programacao");
+        javaSubcategory = new SubCategory("Java", "java", programmingCategory);
+        jpaCourse = new Course("java persistência", "java", 12, "Paulo", javaSubcategory);
+        mavenCourse = new Course("Maven", "java", 12, "Rodrigo", javaSubcategory);
+
+        mobileCategory = new Category("Mobile", "mobile");
+        androidSubcategory = new SubCategory("Android", "android", mobileCategory);
+        beginningCourse = new Course("Iniciando com Mobile", "flutter", 10, "Caio", androidSubcategory);
+        courseList = List.of(jpaCourse, mavenCourse, beginningCourse);
+    }
+
     @Test
     void categoryShouldInstantiateWhenDataIsCorrect() {
         assertDoesNotThrow(
                 () -> new Category("Programação", "programacao"));
     }
 
-    @Test
-    void categoryShouldThrowIllegalExceptionWhenNameIsEmpty() {
+    @ParameterizedTest
+    @EmptySource
+    void categoryShouldThrowIllegalExceptionWhenNameAndCodeAreEmpty(String input) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Category("", "programacao"));
+                () -> new Category(input, "programacao"));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> new Category("Programação", input));
     }
 
-    @Test
-    void categoryShouldThrowIllegalExceptionWhenNameIsNull() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Category(null, "programacao"));
+    @ParameterizedTest
+    @NullSource
+    void categoryShouldThrowNullPointerWhenNameAndCodeAreNull(String input) {
+        assertThrows(NullPointerException.class,
+                () -> new Category(input, "programacao"));
+
+        assertThrows(NullPointerException.class,
+                () -> new Category("Programação", input));
     }
 
-    @Test
-    void categoryShouldThrowIllegalExceptionWhenCodeIsEmpty() {
+    @ParameterizedTest
+    @CsvSource({"ProGrAMaCaO", "pro grama cao", "pr*og&ra%ma#cao", "prógrámáçãó"})
+    void categoryShouldNotInstantiateWhenCodeDoesNotHaveRegexStandard(String input) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Category("Programação", ""));
+                () -> new Category("Programação", input));
     }
 
-    @Test
-    void categoryShouldInstantiateWhenCodeHasOnlyNumbers() {
+    @ParameterizedTest
+    @CsvSource({"1234", "12-58z", "codigo", "co-di-go"})
+    void categoryShouldInstantiateWhenCodeHasRegexStandard(String input) {
         assertDoesNotThrow(
-                () -> new Category("Java", "1243"));
+                () -> new Category("Java", input));
     }
 
-    @Test
-    void categoryShouldThrowIllegalExceptionWhenCodeHasUppercaseLetter() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Category("Programação", "ProGrAMaCaO"));
-    }
-
-    @Test
-    void categoryShouldThrowIllegalExceptionWhenCodeHasSpace() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Category("Programação", "pro grama cao"));
-    }
-
-    @Test
-    void categoryShouldThrowIllegalExceptionWhenCodeHasSpecialCharacters() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Category("Programação", "pr*og&ra%ma#cao"));
-    }
-
-    @Test
-    void categoryShouldThrowIllegalExceptionWhenCodeHasAccent() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Category("Programação", "prógrámáçãó"));
-    }
-
-    @Test
-    void categoryShouldNotThrowAnythingWhenCodeHasHyphen() {
-        assertDoesNotThrow(
-                () -> new Category("Programação", "12-58z"));
-    }
-
-    @Test
-    void categoryShouldThrowIllegalExceptionWhenColorCodeDoesNotHaveHexadecimalStandard() {
+    @ParameterizedTest
+    @CsvSource({"321", "frts", "f4g5", "FFF"})
+    void categoryShouldThrowIllegalExceptionWhenColorCodeDoesNotHaveHexadecimalStandard(String input) {
         assertThrows(IllegalArgumentException.class,
                 () -> new Category("Programação", "programacao", 1,
-                        "descrição", true, "google.com", "321"));
+                        "descrição", true, "google.com", input));
     }
 
-    @Test
-    void categoryShouldThrowNothingWhenColorCodeHasHexadecimalStandard() {
+    @ParameterizedTest
+    @CsvSource({"#527AB0", "#133E79", "#13F500", "#9AEA20"})
+    void categoryShouldThrowNothingWhenColorCodeHasHexadecimalStandard(String input) {
         assertDoesNotThrow(
                 () -> new Category("Programação", "programacao", 1,
-                "descrição", true, "google.com", "#0B499D"));
+                        "descrição", true, "google.com", input));
     }
 
     @Test
     void categoryShouldReturnTheNumberOfCourseFromCategory() {
-        Category cat = new Category("Programação", "programacao");
-        SubCategory subCat = new SubCategory("Java", "java", cat);
-        Course course = new Course("java persistência", "java", 12, "Paulo",  subCat);
-        List<Course> list = Arrays.asList(course);
-
-        assertEquals(1, numbersOfCourseFromCategory(list, subCat.getCategoryCode()));
+        assertEquals(2, numbersOfCourseFromCategory(courseList, javaSubcategory.getCategoryCode()));
+        assertEquals(1, numbersOfCourseFromCategory(courseList, androidSubcategory.getCategoryCode()));
     }
 
     @Test
     void categoryShouldReturnQuantityOfHoursFromCategory() {
-        Category cat = new Category("Programação", "programacao");
-        SubCategory subCat = new SubCategory("Java", "java", cat);
-        Course course = new Course("java persistência", "java", 12, "Paulo",  subCat);
-        List<Course> list = Arrays.asList(course);
-
-        assertEquals(course.getEstimatedTimeInHours(), quantityHoursFromCategory(list, subCat.getCategoryCode()));
+        assertEquals(24, quantityHoursFromCategory(courseList, javaSubcategory.getCategoryCode()));
+        assertEquals(10, quantityHoursFromCategory(courseList, androidSubcategory.getCategoryCode()));
     }
 
 }
