@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static tecnodev.category.Category.*;
 
 public class CategoryTest {
-    // TODO     CHECAR SE É PARA ADICIONAR NO VALIDATOR O NULL DO CODE!!!!
+    // TODO    CHECAR SE É PARA ADICIONAR NO VALIDATOR O NULL DO CODE!!!!
     @Test
     void categoryShouldInstantiateWhenDataIsCorrect() {
         assertDoesNotThrow(
@@ -47,8 +47,6 @@ public class CategoryTest {
                 () -> new Category("Programação", "ProGrAMaCaO"));
     }
 
-    //todo Checar validação, se é pra colocar codigo nulo!!!!!
-
     @Test
     void categoryShouldThrowIllegalExceptionWhenCodeHasSpace() {
         assertThrows(IllegalArgumentException.class,
@@ -68,7 +66,7 @@ public class CategoryTest {
     }
 
     @Test
-    void categoryShouldNotThrowAnythingWhenCodeHasTrace() {
+    void categoryShouldNotThrowAnythingWhenCodeHasHyphen() {
         assertDoesNotThrow(
                 () -> new Category("Programação", "12-58z"));
     }

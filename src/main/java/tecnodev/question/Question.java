@@ -3,7 +3,6 @@ package tecnodev.question;
 import tecnodev.activity.Activity;
 import tecnodev.section.Section;
 
-import static validator.Validator.isNotEmpty;
 import static validator.Validator.isNotNullOrEmpty;
 
 public class Question extends Activity {
