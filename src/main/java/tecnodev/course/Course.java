@@ -44,22 +44,6 @@ public class Course {
         return subCategory;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public String getTargetAudience() {
-        return targetAudience;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getDevelopedSkills() {
-        return developedSkills;
-    }
-
     public String getName() {
         return name;
     }
