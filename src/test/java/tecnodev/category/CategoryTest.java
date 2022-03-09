@@ -1,3 +1,5 @@
+package tecnodev.category;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -50,7 +52,7 @@ public class CategoryTest {
 
     @ParameterizedTest
     @EmptySource
-    void categoryShouldThrowIllegalExceptionWhenNameAndCodeAreEmpty(String input) {
+    void categoryShouldThrowIllegalExceptionWhenNameOrCodeAreEmpty(String input) {
         assertThrows(IllegalArgumentException.class,
                 () -> new Category(input, "programacao"));
 
@@ -60,7 +62,7 @@ public class CategoryTest {
 
     @ParameterizedTest
     @NullSource
-    void categoryShouldThrowNullPointerWhenNameAndCodeAreNull(String input) {
+    void categoryShouldThrowNullPointerWhenNameOrCodeAreNull(String input) {
         assertThrows(NullPointerException.class,
                 () -> new Category(input, "programacao"));
 
