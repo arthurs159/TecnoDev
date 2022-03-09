@@ -58,6 +58,10 @@ public class Category {
         return active;
     }
 
+    public Integer getOrderInSystem() {
+        return orderInSystem;
+    }
+
     public static int numbersOfCourseFromCategory(List<Course> courses, String codeCategory) {
         return (int) courses.stream()
                 .filter(course -> course.getCategoryCode().equals(codeCategory)).count();

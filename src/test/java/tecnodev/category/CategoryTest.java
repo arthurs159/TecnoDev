@@ -101,13 +101,13 @@ public class CategoryTest {
     }
 
     @Test
-    void categoryShouldReturnTheNumberOfCourseFromCategory() {
+    void numbersOfCourseFromCategory__should_return_the_number_of_course_from_category() {
         assertEquals(2, numbersOfCourseFromCategory(courseList, javaSubcategory.getCategoryCode()));
         assertEquals(1, numbersOfCourseFromCategory(courseList, androidSubcategory.getCategoryCode()));
     }
 
     @Test
-    void categoryShouldReturnQuantityOfHoursFromCategory() {
+    void quantityHoursFromCategory__should_return_quantity_of_hours_from_category() {
         assertEquals(24, quantityHoursFromCategory(courseList, javaSubcategory.getCategoryCode()));
         assertEquals(10, quantityHoursFromCategory(courseList, androidSubcategory.getCategoryCode()));
     }
