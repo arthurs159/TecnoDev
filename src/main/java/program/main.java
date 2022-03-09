@@ -1,6 +1,6 @@
 package program;
 
-import sqlWriter.Writer;
+import writer.SqlWriter;
 import tecnodev.category.Category;
 import tecnodev.category.ReadCategory;
 import tecnodev.course.Course;
@@ -18,6 +18,6 @@ public class main {
         List<SubCategory> subCategories = new ArrayList<>(new ReadSubCategory().SubCategoryReader("/home/arthur/Alura/planilha-dados-escola - Subcategoria.csv", categories));
         List<Course> courses = new ArrayList<>(new ReadCourse().CourseReader("/home/arthur/Alura/planilha-dados-escola - Curso.csv", subCategories));
 
-        Writer.script(categories, subCategories, courses);
+        SqlWriter.script(categories, subCategories, courses);
     }
 }

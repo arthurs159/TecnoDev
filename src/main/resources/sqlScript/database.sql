@@ -5,7 +5,7 @@ USE TecnoDev;
 CREATE TABLE Category
 (id BIGINT PRIMARY KEY AUTO_INCREMENT,
 `name` VARCHAR(100) NOT NULL,
-`code` VARCHAR(100) NOT NULL,
+`code` VARCHAR(100) UNIQUE NOT NULL,
 `description` TEXT,
 study_guide TEXT,
 `active` BOOLEAN,
@@ -16,7 +16,7 @@ color_code VARCHAR(10));
 CREATE TABLE Subcategory
 (id BIGINT PRIMARY KEY AUTO_INCREMENT,
 `name` VARCHAR(100) NOT NULL,
-`code` VARCHAR(100) NOT NULL,
+`code` VARCHAR(100) UNIQUE NOT NULL,
 `description` TEXT,
 study_guide TEXT,
 `active` BOOLEAN,
@@ -27,9 +27,9 @@ FOREIGN KEY (category_id) REFERENCES Category(id));
 CREATE TABLE Course
 (id BIGINT PRIMARY KEY AUTO_INCREMENT,
 `name` VARCHAR(100) NOT NULL,
-`code` VARCHAR(100) NOT NULL,
+`code` VARCHAR(100) UNIQUE NOT NULL,
 estimated_time_in_hours SMALLINT,
-visibility VARCHAR(10),
+visibility ENUM('PÚBLICA', 'PRIVADA'),
 target_audience TEXT,
 teacher VARCHAR(50),
 `description` TEXT,
@@ -40,7 +40,7 @@ FOREIGN KEY (subcategory_id) REFERENCES Subcategory (id));
 CREATE TABLE Section
 (id BIGINT PRIMARY KEY AUTO_INCREMENT,
 `name` VARCHAR(100) NOT NULL,
-`code` VARCHAR(100) NOT NULL,
+`code` VARCHAR(100) UNIQUE NOT NULL,
 order_in_system SMALLINT,
 `active` BOOLEAN,
 exam BOOLEAN,
@@ -50,7 +50,7 @@ FOREIGN KEY (`course_id`) REFERENCES Course(id));
 CREATE TABLE Activity
 (id BIGINT PRIMARY KEY AUTO_INCREMENT,
 title TEXT,
-`code` VARCHAR(100) NOT NULL,
+`code` VARCHAR(100) UNIQUE NOT NULL,
 `active` BOOLEAN,
 order_in_system SMALLINT,
 explication TEXT NOT NULL,

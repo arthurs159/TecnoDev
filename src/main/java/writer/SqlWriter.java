@@ -1,4 +1,4 @@
-package sqlWriter;
+package writer;
 
 import tecnodev.category.Category;
 import tecnodev.course.Course;
@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class Writer {
+public class SqlWriter {
 
     public static void script(List<Category> categories, List<SubCategory> subCategories, List<Course> courses) throws IOException {
         File file = new File("/home/arthur/WorkSpace/Projetos Java/TecnoDev/src/main/resources/sqlScript/insertClasses.sql");
