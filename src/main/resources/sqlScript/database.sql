@@ -29,7 +29,7 @@ CREATE TABLE Course
 `name` VARCHAR(100) NOT NULL,
 `code` VARCHAR(100) UNIQUE NOT NULL,
 estimated_time_in_hours SMALLINT,
-visibility ENUM('PÚBLICA', 'PRIVADA'),
+visibility ENUM('PUBLIC', 'PRIVATE'),
 target_audience TEXT,
 teacher VARCHAR(50),
 `description` TEXT,
