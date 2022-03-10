@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static tecnodev.course.Status.from;
+import static tecnodev.course.Status.enumCheckDescription;
 import static utility.Filters.filterSubCategoryByCode;
 
 public class ReadCourse {
@@ -32,7 +32,7 @@ public class ReadCourse {
                         courseData[0],
                         courseData[1].trim(),
                         courseData[2].equals("") ? 0 : Integer.parseInt(courseData[2]),
-                        from(courseData[3]),
+                        enumCheckDescription(courseData[3]),
                         courseData[4],
                         courseData[5],
                         courseData[6],

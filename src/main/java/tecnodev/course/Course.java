@@ -64,6 +64,22 @@ public class Course {
         return teacher;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public String getTargetAudience() {
+        return targetAudience;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDevelopedSkills() {
+        return developedSkills;
+    }
+
     public String getSubCategoryCode() {
         return this.getSubCategory().getCode();
     }

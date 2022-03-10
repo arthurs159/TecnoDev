@@ -3,7 +3,11 @@ package validator;
 public class Validator {
 
     public static void isNotNullOrEmpty(String field, String error) {
-        if (field == null || field.equals("")) {
+        if(field == null) {
+            throw new NullPointerException(error);
+        }
+
+        if (field.isEmpty()) {
             throw new IllegalArgumentException(error);
         }
     }
@@ -27,9 +31,11 @@ public class Validator {
     }
 
     public static void regexValidatorAndNotEmpty(String field, String error) {
+        isNotNull(field, error);
         if (!field.matches("[a-z0-9-]+") || field.isEmpty()) {
             throw new IllegalArgumentException(error);
         }
+
     }
 
     public static void hexadecimalValidator(String field, String error) {

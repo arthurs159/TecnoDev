@@ -1,4 +1,4 @@
-package htmlWriter;
+package writer;
 
 import tecnodev.category.Category;
 import tecnodev.course.Course;
@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
-public class Writer {
+public class HtmlWriter {
 
-    public void htmlWriter(List<Category> categories, List<SubCategory> subCategories, List<Course> courses) throws IOException {
+    public static void htmlWriter(List<Category> categories, List<SubCategory> subCategories, List<Course> courses) throws IOException {
         subCategories.sort(Comparator.comparing(SubCategory::getOrderInSystem));
 
         File file = new File("/home/arthur/Alura/htmlPage.html");

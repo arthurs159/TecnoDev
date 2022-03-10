@@ -16,7 +16,7 @@ public enum Status {
         return description;
     }
 
-    public static Status from(String value){
+    public static Status enumCheckDescription(String value){
         return Arrays.stream(Status.values())
                 .filter(status -> status.getDescription().equals(value))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("Status not found " + value));
