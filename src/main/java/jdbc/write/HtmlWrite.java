@@ -21,8 +21,7 @@ public class HtmlWrite {
         }
 
         FileWriter writeFile = new FileWriter(file);
-        String openHtml = "";
-        openHtml += String.format("""
+        StringBuilder html = new StringBuilder("""
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -33,46 +32,44 @@ public class HtmlWrite {
                 <h1>Cursos</h1>
                 """);
 
-        writeFile.write(openHtml);
-
-        String sql = "SELECT c.id, c.name, c.estimated_time_in_hours, c.subcategory_id, s.name\n" +
-                "FROM Course c\n" +
-                "INNER JOIN Subcategory s\n" +
-                "ON c.subcategory_id = s.id\n" +
-                "WHERE visibility = 'PUBLIC';";
+        String sql = """
+                SELECT c.id, c.name, c.estimated_time_in_hours, c.subcategory_id, s.name
+                FROM Course c
+                INNER JOIN Subcategory s
+                ON c.subcategory_id = s.id
+                WHERE visibility = ?;""";
 
         ConnectionFactory connectionFactory = new ConnectionFactory();
 
         try (Connection connection = connectionFactory.recuperarConexao()) {
             PreparedStatement pstm = connection.prepareStatement(sql);
+            pstm.setString(1, "PUBLIC");
             pstm.execute();
 
-            ResultSet rs = pstm.getResultSet();
+            try(ResultSet rs = pstm.getResultSet()){
+                while (rs.next()) {
+                    Integer id = rs.getInt(1);
+                    String nome = rs.getString(2);
+                    int estimatedTime = rs.getInt(3);
+                    Long subCategoryId = rs.getLong(4);
+                    String subCategoryName = rs.getString(5);
 
-            while (rs.next()) {
-                Integer id = rs.getInt(1);
-                String nome = rs.getString(2);
-                int estimatedTime = rs.getInt(3);
-                Long subCategoryId = rs.getLong(4);
-                String subCategoryName = rs.getString(5);
-
-                String html = "";
-                html += String.format("""
-                        <p>ID : %d</p>
-                        <p>Nome: %s </p>
-                        <p>Tempo Estimado: %d Horas <p/>
-                        <p> ID da Subcategoria: %d | Subcategoria : %s</p>
-                        <p> --------------------------------------------- </p>
-                        """.formatted(id, nome, estimatedTime, subCategoryId, subCategoryName));
-                writeFile.write(html);
+                    html.append("""
+                            <p>ID : %d</p>
+                            <p>Nome: %s </p>
+                            <p>Tempo Estimado: %d Horas <p/>
+                            <p> ID da Subcategoria: %d | Subcategoria : %s</p>
+                            <p> --------------------------------------------- </p>
+                            """.formatted(id, nome, estimatedTime, subCategoryId, subCategoryName));
+                }
             }
 
-            String closeHtml = """
+            html.append("""
                     </body>
                     </html>
-                    """;
+                    """);
 
-            writeFile.write(closeHtml);
+            writeFile.write(html.toString());
             writeFile.flush();
             writeFile.close();
             System.out.println("Arquivo criado!!");

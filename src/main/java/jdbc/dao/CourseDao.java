@@ -40,9 +40,14 @@ public class CourseDao {
     public void deleteCourse(String code) throws SQLException {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         try (Connection connection = connectionFactory.recuperarConexao()) {
-            PreparedStatement pst = connection.prepareStatement("DELETE FROM Course WHERE CODE = ?");
-            pst.setString(1, code);
-            pst.execute();
+            connection.setAutoCommit(false);
+
+            try(PreparedStatement pst = connection.prepareStatement("DELETE FROM Course WHERE CODE = ?")){
+                pst.setString(1, code);
+                pst.execute();
+                connection.commit();
+            };
+
             System.out.println("Objeto do banco de código: ( " + code + " ) deletado");
         }
     }
@@ -51,7 +56,7 @@ public class CourseDao {
         String sql = "UPDATE Course SET visibility = 'PUBLIC' WHERE visibility = 'PRIVATE'";
 
         try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-            pstm.execute();
+            pstm.executeUpdate();
             Integer modifiedLines = pstm.getUpdateCount();
 
             System.out.println("Cursos que foram modificados " + modifiedLines);

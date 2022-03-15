@@ -21,7 +21,7 @@ public class TesteBancoJDBC{
         try (Connection connection = new ConnectionFactory().recuperarConexao()) {
             CourseDao courseDao = new CourseDao(connection);
 //            courseDao.insertCourse();
-//            courseDao.deleteCourse("java-primeiros-passos");
+//            courseDao.deleteCourse("j-p-passo");
 //            courseDao.transformCourseToPublic();
 //            courseDao.insertCourse2(curso);
         }
