@@ -8,6 +8,7 @@ import static validator.Validator.*;
 
 public class Category {
 
+    private Long id;
     private String name;
     private String code;
     private String description;
@@ -32,6 +33,10 @@ public class Category {
         this.active = active;
         this.imageUrl = imageUrl;
         this.colorCode = colorCode;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

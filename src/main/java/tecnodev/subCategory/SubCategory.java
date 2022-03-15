@@ -6,6 +6,7 @@ import static validator.Validator.*;
 
 public class SubCategory {
 
+    private Long id;
     private String name;
     private String code;
     private String description;
@@ -28,6 +29,10 @@ public class SubCategory {
         this.orderInSystem = orderInSystem;
         this.description = description;
         this.active = active;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Category getCategory() {
