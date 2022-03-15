@@ -14,11 +14,16 @@ public class TesteBancoJDBC{
 
     public static void main(String[] args) throws SQLException {
 
+        Category categoria = new Category("Programação", "programacao");
+        SubCategory subcategoria = new SubCategory("Java", "java", categoria);
+        Course curso = new Course("Javacript primeiro pa", "j-p-pas", 7, "professor", subcategoria);
+
         try (Connection connection = new ConnectionFactory().recuperarConexao()) {
             CourseDao courseDao = new CourseDao(connection);
 //            courseDao.insertCourse();
 //            courseDao.deleteCourse("java-primeiros-passos");
-            courseDao.transformCourseToPublic();
+//            courseDao.transformCourseToPublic();
+//            courseDao.insertCourse2(curso);
         }
 
 

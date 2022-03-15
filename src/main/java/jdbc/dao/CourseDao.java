@@ -13,14 +13,7 @@ public class CourseDao {
         this.connection = new ConnectionFactory().recuperarConexao();
     }
 
-    public void insertCourse() throws SQLException {
-
-        String name = "Curso SQL";
-        String code = "curso-sql";
-        int estimatedTime = 10;
-        String teacher = "Professor";
-        Long subCategoryId = 1L;
-
+    public void insertCourse(Course course) throws SQLException {
         String sql = ("INSERT INTO Course " +
                 "(name, code, estimated_time_in_hours," +
                 "teacher, subcategory_id) " +
@@ -28,11 +21,11 @@ public class CourseDao {
 
         try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            pstm.setString(1, name);
-            pstm.setString(2, code);
-            pstm.setInt(3, estimatedTime);
-            pstm.setString(4, teacher);
-            pstm.setLong(5, subCategoryId);
+            pstm.setString(1, course.getName());
+            pstm.setString(2, course.getCode());
+            pstm.setInt(3, course.getEstimatedTimeInHours());
+            pstm.setString(4, course.getTeacher());
+            pstm.setLong(5, getSubCategoryId(course));
 
             pstm.execute();
 
@@ -66,8 +59,8 @@ public class CourseDao {
     }
 
     public Long getSubCategoryId(Course course) throws SQLException {
+        String sql = "SELECT `id` FROM Subcategory WHERE `code` = ?";
         Long subCategoryId = null;
-        String sql = "SELECT id from Subcategory where code = ?";
 
         try (PreparedStatement pstm = connection.prepareStatement(sql)) {
             pstm.setString(1, course.getSubCategoryCode());
@@ -78,35 +71,9 @@ public class CourseDao {
                     subCategoryId = rs.getLong(1);
                 }
             }
+            return subCategoryId;
         }
-        return subCategoryId;
     }
 
-
 }
-
-//    public void List<Course> transformToPublicAndListCourse() throws SQLException{
-//
-
-//    public List<Course> courseList() throws SQLException {
-//        List<Course> list = new ArrayList<>();
-//        String sql = "SELECT id, name, code, estimated_time_in_hours, teacher, subcategory_id FROM Course WHERE visibility = 'PUBLIC'";
-//
-//        PreparedStatement statement = connection.prepareStatement(sql);
-//        statement.execute();
-//        ResultSet result = statement.getResultSet();
-//
-//        while(result.next()) {
-//            Course course = new Course(
-//                    result.getLong("id"),
-//                    result.getString("name"),
-//                    result.getString("code"),
-//                    result.getInt("estimated_time_in_hours"),
-//                    result.getString("teacher"),
-//                    result.getLong("subcategory_id"));
-//
-//            courseList().add(course);
-//        }
-//        return list;
-//    }
 
