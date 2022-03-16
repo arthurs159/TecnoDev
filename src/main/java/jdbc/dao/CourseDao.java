@@ -1,9 +1,12 @@
 package jdbc.dao;
 
 import jdbc.connection.ConnectionFactory;
+import jdbc.dto.CourseDto;
 import tecnodev.course.Course;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CourseDao {
 
@@ -69,7 +72,7 @@ public class CourseDao {
         }
     }
 
-    public Long getSubCategoryId(Course course){
+    public Long getSubCategoryId(Course course) {
         String sql = "SELECT `id` FROM Subcategory WHERE `code` = ?";
         Long subCategoryId = null;
 
@@ -91,5 +94,37 @@ public class CourseDao {
         return subCategoryId;
     }
 
+    public List<CourseDto> listToPrint() throws SQLException {
+        String sql = """
+                SELECT c.id, c.name, c.estimated_time_in_hours, c.subcategory_id, s.name
+                FROM Course c
+                INNER JOIN Subcategory s
+                ON c.subcategory_id = s.id
+                WHERE visibility = ?;""";
+
+        List<CourseDto> listCourse = new ArrayList<>();
+        connection.setAutoCommit(false);
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, "PUBLIC");
+        pstm.execute();
+
+        try (ResultSet rs = pstm.getResultSet()) {
+            while (rs.next()) {
+                Integer id = rs.getInt(1);
+                String nome = rs.getString(2);
+                Integer estimatedTime = rs.getInt(3);
+                Integer subCategoryId = rs.getInt(4);
+                String subCategoryName = rs.getString(5);
+
+                CourseDto curso = new CourseDto(id, nome, estimatedTime, subCategoryId, subCategoryName);
+                listCourse.add(curso);
+            }
+            connection.commit();
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listCourse;
+    }
 }
 

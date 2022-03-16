@@ -20,7 +20,7 @@ public class DatabaseMainJDBC {
         try (Connection connection = new ConnectionFactory().recuperarConexao()) {
             CourseDao courseDao = new CourseDao(connection);
 //            courseDao.insertCourse(curso);
-            courseDao.deleteCourse("js-script");
+//            courseDao.deleteCourse("js-script");
 //            courseDao.transformCourseToPublic();
         }catch (SQLException e){
             e.printStackTrace();
