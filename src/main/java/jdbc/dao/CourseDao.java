@@ -12,11 +12,15 @@ public class CourseDao {
 
     private Connection connection;
 
-    public CourseDao(Connection connection) throws SQLException {
-        this.connection = new ConnectionFactory().recuperarConexao();
+    public CourseDao() {
+        try{
+            this.connection = new ConnectionFactory().recuperarConexao();
+        }catch (SQLException e){
+            throw new RuntimeException("Erro ao conectar");
+        }
     }
 
-    public void insertCourse(Course course) {
+    public void insertCourse(Course course) throws SQLException {
         String sql = ("INSERT INTO Course " +
                 "(name, code, estimated_time_in_hours," +
                 "teacher, subcategory_id) " +
@@ -41,10 +45,11 @@ public class CourseDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
     }
 
-    public void deleteCourse(String code) {
+    public void deleteCourse(String code) throws SQLException {
         try (PreparedStatement pst = connection.prepareStatement("DELETE FROM Course WHERE CODE = ?")) {
             connection.setAutoCommit(false);
             pst.setString(1, code);
@@ -52,27 +57,29 @@ public class CourseDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
 
         System.out.println("Curso do banco de código: ( " + code + " ) deletado");
     }
 
-    public void transformCourseToPublic() {
+    public void transformCourseToPublic() throws SQLException {
         String sql = "UPDATE Course SET visibility = 'PUBLIC' WHERE visibility = ?";
 
         try (PreparedStatement pstm = connection.prepareStatement(sql)) {
             connection.setAutoCommit(false);
             pstm.setString(1, "PRIVATE");
             pstm.executeUpdate();
-            Integer modifiedLines = pstm.getUpdateCount();
+            int modifiedLines = pstm.getUpdateCount();
             connection.commit();
             System.out.println("Cursos que foram modificados " + modifiedLines);
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
     }
 
-    public Long getSubCategoryId(Course course) {
+    public Long getSubCategoryId(Course course) throws SQLException {
         String sql = "SELECT `id` FROM Subcategory WHERE `code` = ?";
         Long subCategoryId = null;
 
@@ -90,11 +97,12 @@ public class CourseDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
         return subCategoryId;
     }
 
-    public List<CourseDto> listToPrint() throws SQLException {
+    public List<CourseDto> getPublicCourses() throws SQLException {
         String sql = """
                 SELECT c.id, c.name, c.estimated_time_in_hours, c.subcategory_id, s.name
                 FROM Course c
@@ -103,6 +111,7 @@ public class CourseDao {
                 WHERE visibility = ?;""";
 
         List<CourseDto> listCourse = new ArrayList<>();
+
         connection.setAutoCommit(false);
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, "PUBLIC");

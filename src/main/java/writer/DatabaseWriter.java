@@ -1,19 +1,17 @@
 package writer;
 
-import jdbc.connection.ConnectionFactory;
 import jdbc.dao.CourseDao;
 import jdbc.dto.CourseDto;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class DatabaseWriter {
 
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) throws IOException, SQLException {
 
         File file = new File("/home/arthur/WorkSpace/Projetos Java/TecnoDev/src/main/resources/htmlSQL.html");
 
@@ -42,23 +40,22 @@ public class DatabaseWriter {
                     </tr>
                 """);
 
-        try(Connection connection = new ConnectionFactory().recuperarConexao()){
-            CourseDao dao = new CourseDao(connection);
-            List<CourseDto> courseDtos = dao.listToPrint();
+        CourseDao dao = new CourseDao();
+        List<CourseDto> courseDtos = dao.getPublicCourses();
 
-            for (CourseDto course: courseDtos) {
-                html.append("""
-                <tr>
-                    <td> %d </td>
-                    <td> %s </td>
-                    <td> %d Horas</td>
-                    <td> %d </td>
-                    <td> %s </td>
-                </tr>
-                """.formatted(course.getId(), course.getName(), course.getEstimatedTimeinHours(),
-                        course.getSubCategoryId(), course.getSubCategoryName()));
-            }
+        for (CourseDto course : courseDtos) {
+            html.append("""
+                    <tr>
+                        <td> %d </td>
+                        <td> %s </td>
+                        <td> %d Horas</td>
+                        <td> %d </td>
+                        <td> %s </td>
+                    </tr>
+                    """.formatted(course.getId(), course.getName(), course.getEstimatedTimeinHours(),
+                    course.getSubCategoryId(), course.getSubCategoryName()));
         }
+
 
         html.append("""
                                     
