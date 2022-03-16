@@ -1,4 +1,4 @@
-package jdbc.write;
+package writer;
 
 import jdbc.connection.ConnectionFactory;
 
@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class HtmlWrite {
+public class DatabaseWriter {
 
     public static void main(String[] args) throws SQLException, IOException {
 

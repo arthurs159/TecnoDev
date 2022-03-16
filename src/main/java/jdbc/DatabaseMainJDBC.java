@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class DatabaseMainJDBC {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args){
 
         Category categoria = new Category("Programação", "programacao");
         SubCategory subcategoria = new SubCategory("Java", "java", categoria);
@@ -20,8 +20,10 @@ public class DatabaseMainJDBC {
         try (Connection connection = new ConnectionFactory().recuperarConexao()) {
             CourseDao courseDao = new CourseDao(connection);
 //            courseDao.insertCourse(curso);
-//            courseDao.deleteCourse("js-script");
+            courseDao.deleteCourse("js-script");
 //            courseDao.transformCourseToPublic();
+        }catch (SQLException e){
+            e.printStackTrace();
         }
 
     }

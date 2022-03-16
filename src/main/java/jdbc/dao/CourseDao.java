@@ -20,7 +20,7 @@ public class CourseDao {
                 "VALUES (?, ?, ?, ?, ?)");
 
         try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
+            connection.setAutoCommit(false);
             pstm.setString(1, course.getName());
             pstm.setString(2, course.getCode());
             pstm.setInt(3, course.getEstimatedTimeInHours());
@@ -35,7 +35,7 @@ public class CourseDao {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,8 +43,10 @@ public class CourseDao {
 
     public void deleteCourse(String code) {
         try (PreparedStatement pst = connection.prepareStatement("DELETE FROM Course WHERE CODE = ?")) {
+            connection.setAutoCommit(false);
             pst.setString(1, code);
             pst.execute();
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,10 +58,11 @@ public class CourseDao {
         String sql = "UPDATE Course SET visibility = 'PUBLIC' WHERE visibility = ?";
 
         try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            connection.setAutoCommit(false);
             pstm.setString(1, "PRIVATE");
             pstm.executeUpdate();
             Integer modifiedLines = pstm.getUpdateCount();
-
+            connection.commit();
             System.out.println("Cursos que foram modificados " + modifiedLines);
         } catch (SQLException e) {
             e.printStackTrace();
