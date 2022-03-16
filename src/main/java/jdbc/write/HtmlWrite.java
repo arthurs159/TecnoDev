@@ -14,7 +14,7 @@ public class HtmlWrite {
 
     public static void main(String[] args) throws SQLException, IOException {
 
-        File file = new File("/home/arthur/WorkSpace/Projetos Java/TecnoDev/src/main/resources/sqlScript/htmlSQL.html");
+        File file = new File("/home/arthur/WorkSpace/Projetos Java/TecnoDev/src/main/resources/htmlSQL.html");
 
         if (!file.exists()) {
             file.createNewFile();
@@ -24,12 +24,21 @@ public class HtmlWrite {
         StringBuilder html = new StringBuilder("""
                 <!DOCTYPE html>
                 <html>
-                <head>
-                <meta charset= UTF-8 />
-                <title>Cursos</title>
-                </head>
-                <body>
-                <h1>Cursos</h1>
+                    <style> table, th, td {border:1px solid black;} </style>
+                    <head>
+                        <meta charset= UTF-8 />
+                        <title>Cursos</title>
+                    </head>
+                    <body>
+                        <h1>Cursos</h1>
+                    <table style="width:100%">
+                    <tr>
+                        <th>ID</th>
+                        <th>NOME</th>
+                        <th>TEMPO DO CURSO</th>
+                        <th>ID SUBCATEGORIA</th>
+                        <th>NOME SUBCATEGORIA</th>
+                    </tr>
                 """);
 
         String sql = """
@@ -46,7 +55,7 @@ public class HtmlWrite {
             pstm.setString(1, "PUBLIC");
             pstm.execute();
 
-            try(ResultSet rs = pstm.getResultSet()){
+            try (ResultSet rs = pstm.getResultSet()) {
                 while (rs.next()) {
                     Integer id = rs.getInt(1);
                     String nome = rs.getString(2);
@@ -55,16 +64,22 @@ public class HtmlWrite {
                     String subCategoryName = rs.getString(5);
 
                     html.append("""
-                            <p>ID : %d</p>
-                            <p>Nome: %s </p>
-                            <p>Tempo Estimado: %d Horas <p/>
-                            <p> ID da Subcategoria: %d | Subcategoria : %s</p>
-                            <p> --------------------------------------------- </p>
+                            <tr>
+                                <td> %d </td>
+                                <td> %s </td>
+                                <td> %d Horas</td>
+                                <td> %d </td>
+                                <td> %s </td>
+                            </tr>
                             """.formatted(id, nome, estimatedTime, subCategoryId, subCategoryName));
                 }
+            }catch (Exception e){
+                e.printStackTrace();
             }
 
             html.append("""
+                    
+                    </table>
                     </body>
                     </html>
                     """);

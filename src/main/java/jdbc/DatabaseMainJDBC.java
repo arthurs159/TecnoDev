@@ -8,24 +8,21 @@ import tecnodev.subCategory.SubCategory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
-public class TesteBancoJDBC{
+public class DatabaseMainJDBC {
 
     public static void main(String[] args) throws SQLException {
 
         Category categoria = new Category("Programação", "programacao");
         SubCategory subcategoria = new SubCategory("Java", "java", categoria);
-        Course curso = new Course("Javacript primeiro pa", "j-p-pas", 7, "professor", subcategoria);
+        Course curso = new Course("Javacript", "js-script", 7, "professor", subcategoria);
 
         try (Connection connection = new ConnectionFactory().recuperarConexao()) {
             CourseDao courseDao = new CourseDao(connection);
-//            courseDao.insertCourse();
-//            courseDao.deleteCourse("j-p-passo");
+//            courseDao.insertCourse(curso);
+//            courseDao.deleteCourse("js-script");
 //            courseDao.transformCourseToPublic();
-//            courseDao.insertCourse2(curso);
         }
-
 
     }
 }

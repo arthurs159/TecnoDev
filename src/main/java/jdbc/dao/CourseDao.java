@@ -13,7 +13,7 @@ public class CourseDao {
         this.connection = new ConnectionFactory().recuperarConexao();
     }
 
-    public void insertCourse(Course course) throws SQLException {
+    public void insertCourse(Course course) {
         String sql = ("INSERT INTO Course " +
                 "(name, code, estimated_time_in_hours," +
                 "teacher, subcategory_id) " +
@@ -32,38 +32,41 @@ public class CourseDao {
             try (ResultSet rst = pstm.getGeneratedKeys()) {
                 rst.next();
                 System.out.println(rst.getLong(1));
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public void deleteCourse(String code) throws SQLException {
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        try (Connection connection = connectionFactory.recuperarConexao()) {
-            connection.setAutoCommit(false);
-
-            try(PreparedStatement pst = connection.prepareStatement("DELETE FROM Course WHERE CODE = ?")){
-                pst.setString(1, code);
-                pst.execute();
-                connection.commit();
-            };
-
-            System.out.println("Objeto do banco de código: ( " + code + " ) deletado");
+    public void deleteCourse(String code) {
+        try (PreparedStatement pst = connection.prepareStatement("DELETE FROM Course WHERE CODE = ?")) {
+            pst.setString(1, code);
+            pst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        System.out.println("Curso do banco de código: ( " + code + " ) deletado");
     }
 
-    public void transformCourseToPublic() throws SQLException {
-        String sql = "UPDATE Course SET visibility = 'PUBLIC' WHERE visibility = 'PRIVATE'";
+    public void transformCourseToPublic() {
+        String sql = "UPDATE Course SET visibility = 'PUBLIC' WHERE visibility = ?";
 
         try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.setString(1, "PRIVATE");
             pstm.executeUpdate();
             Integer modifiedLines = pstm.getUpdateCount();
 
             System.out.println("Cursos que foram modificados " + modifiedLines);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public Long getSubCategoryId(Course course) throws SQLException {
+    public Long getSubCategoryId(Course course){
         String sql = "SELECT `id` FROM Subcategory WHERE `code` = ?";
         Long subCategoryId = null;
 
@@ -75,9 +78,14 @@ public class CourseDao {
                 while (rs.next()) {
                     subCategoryId = rs.getLong(1);
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            return subCategoryId;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return subCategoryId;
     }
 
 }
