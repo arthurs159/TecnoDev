@@ -17,10 +17,8 @@ public class DatabaseMainJDBC {
         SubCategory subCategory = courseDao.getSubCategoryFromDatabase("java", category);
         Course curso = new Course("Javacript", "ja-front", 7, "professor", subCategory);
 
-
             courseDao.insertCourse(curso);
-//            courseDao.deleteCourse("js-script");
-//            courseDao.transformCourseToPublic();
-
+            courseDao.deleteCourse("ja-front");
+            courseDao.transformCourseToPublic();
     }
 }

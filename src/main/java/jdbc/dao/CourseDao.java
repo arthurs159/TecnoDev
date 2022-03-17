@@ -2,6 +2,7 @@ package jdbc.dao;
 
 import jdbc.connection.ConnectionFactory;
 import jdbc.dto.CourseDto;
+import jdbc.exception.ExceptionSql;
 import tecnodev.category.Category;
 import tecnodev.course.Course;
 import tecnodev.subCategory.SubCategory;
@@ -42,12 +43,12 @@ public class CourseDao {
                 rst.next();
                 System.out.println(rst.getLong(1));
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new ExceptionSql("Error, it was not possible to INSERT a course");
             }
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
-            throw new RuntimeException(e.getCause());
+            throw new ExceptionSql("Error, it was not possible to INSERT a course");
         }
     }
 
@@ -59,7 +60,7 @@ public class CourseDao {
             connection.commit();
         } catch (SQLException e) {
             connection.rollback();
-            throw new RuntimeException(e.getCause());
+            throw new ExceptionSql("Error, it was not possible to DELETE a course");
         }
 
         System.out.println("Curso do banco de código: ( " + code + " ) deletado");
@@ -77,7 +78,7 @@ public class CourseDao {
             System.out.println("Cursos que foram modificados " + modifiedLines);
         } catch (SQLException e) {
             connection.rollback();
-            throw new RuntimeException(e.getCause());
+            throw new ExceptionSql("Error, it was not possible to SET TO ALL TO PUBLIC");
         }
     }
 
@@ -95,12 +96,12 @@ public class CourseDao {
                     subCategoryId = rs.getLong(1);
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new ExceptionSql("Error, it was not possible to GET ID from Subcategory");
             }
 
         } catch (SQLException e) {
             connection.rollback();
-            throw new RuntimeException(e.getCause());
+            throw new ExceptionSql("Error, it was not possible to GET ID from Subcategory");
         }
         return subCategoryId;
     }
@@ -135,7 +136,7 @@ public class CourseDao {
 
         }catch (SQLException e) {
             connection.rollback();
-            throw new RuntimeException(e.getCause());
+            throw new ExceptionSql("Error, it was not possible to Get All Public courses");
         }
         return listCourse;
     }
@@ -145,6 +146,7 @@ public class CourseDao {
 
         Category category = null;
         try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            connection.setAutoCommit(false);
             pstm.setString(1, code);
             pstm.execute();
 
@@ -154,10 +156,14 @@ public class CourseDao {
                     String cod = rs.getString(3);
 
                     category = new Category(name, cod);
+                    connection.commit();
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e.getCause());
+                throw new ExceptionSql("Error, it was not possible to GET category");
             }
+        }catch (SQLException e){
+            connection.rollback();
+            throw new ExceptionSql("Error, it was not possible to GET category");
         }
 
         return category;
@@ -165,7 +171,7 @@ public class CourseDao {
 
     public SubCategory getSubCategoryFromDatabase(String code, Category category) throws SQLException {
         String sql = "SELECT * FROM Subcategory WHERE `code` = ?";
-
+        connection.setAutoCommit(false);
         SubCategory subCategory = null;
         try (PreparedStatement pstm = connection.prepareStatement(sql)) {
             pstm.setString(1, code);
@@ -176,10 +182,14 @@ public class CourseDao {
                     String name = rs.getString(2);
                     String cod = rs.getString(3);
                     subCategory = new SubCategory(name, cod, category);
+                    connection.commit();
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e.getCause());
+                throw new ExceptionSql("Error, it was not possible to GET a Subcategory");
             }
+        }catch (SQLException e){
+            connection.rollback();
+            throw new ExceptionSql("Error, it was not possible to GET a Subcategory");
         }
         return subCategory;
     }
