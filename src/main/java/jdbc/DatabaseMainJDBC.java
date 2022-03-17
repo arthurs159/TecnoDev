@@ -18,7 +18,7 @@ public class DatabaseMainJDBC {
         Course curso = new Course("Javacript", "ja-front", 7, "professor", subCategory);
 
 
-//            courseDao.insertCourse(curso);
+            courseDao.insertCourse(curso);
 //            courseDao.deleteCourse("js-script");
 //            courseDao.transformCourseToPublic();
 

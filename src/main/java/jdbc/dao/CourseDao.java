@@ -12,10 +12,14 @@ import java.util.List;
 
 public class CourseDao {
 
-    private final Connection connection;
+    private static Connection connection;
 
-    public CourseDao() throws SQLException {
-        this.connection = new ConnectionFactory().recoveryConnection();
+    static{
+        try {
+            connection = ConnectionFactory.recoveryConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void insertCourse(Course course) throws SQLException {
