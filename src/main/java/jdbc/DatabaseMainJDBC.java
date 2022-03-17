@@ -15,7 +15,7 @@ public class DatabaseMainJDBC {
 
         Category category = courseDao.getCategoryFromDatabase("programacao");
         SubCategory subCategory = courseDao.getSubCategoryFromDatabase("java", category);
-        Course curso = new Course("Javacript", "ja-front", 7, "professor", subCategory);
+        Course curso = new Course("Javacript", "ja-fro", 7, "professor", subCategory);
 
             courseDao.insertCourse(curso);
             courseDao.deleteCourse("ja-front");

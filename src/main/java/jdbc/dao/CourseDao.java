@@ -11,16 +11,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jdbc.connection.ConnectionFactory.*;
+
 public class CourseDao {
 
     private static Connection connection;
 
-    static{
-        try {
-            connection = ConnectionFactory.recoveryConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public CourseDao() throws SQLException {
+        connection = recoveryConnection();
     }
 
     public void insertCourse(Course course) throws SQLException {
