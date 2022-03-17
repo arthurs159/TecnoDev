@@ -9,6 +9,7 @@ public class Course {
     private static final int MINIMUM_TIME = 1;
     private static final int MAXIMUM_TIME = 20;
 
+    private Long id;
     private String name;
     private String code;
     private Integer estimatedTimeInHours;
@@ -38,6 +39,14 @@ public class Course {
         this.targetAudience = targetAudience;
         this.description = description;
         this.developedSkills = developedSkills;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public SubCategory getSubCategory() {
