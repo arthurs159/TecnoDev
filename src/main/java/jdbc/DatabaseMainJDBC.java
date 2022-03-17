@@ -11,11 +11,13 @@ public class DatabaseMainJDBC {
 
     public static void main(String[] args) throws SQLException {
 
-        Category categoria = new Category("Programação", "programacao");
-        SubCategory subcategoria = new SubCategory("Java", "java", categoria);
-        Course curso = new Course("Javacript", "js-script", 7, "professor", subcategoria);
-
         CourseDao courseDao = new CourseDao();
+
+        Category category = courseDao.getCategoryFromDatabase("programacao");
+        SubCategory subCategory = courseDao.getSubCategoryFromDatabase("java", category);
+        Course curso = new Course("Javacript", "ja-front", 7, "professor", subCategory);
+
+
 //            courseDao.insertCourse(curso);
 //            courseDao.deleteCourse("js-script");
 //            courseDao.transformCourseToPublic();

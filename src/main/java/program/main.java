@@ -5,7 +5,6 @@ import writer.SqlWriter;
 import tecnodev.category.Category;
 import tecnodev.category.ReadCategory;
 import tecnodev.course.Course;
-//import tecnodev.course.ReadCourse;
 import tecnodev.subCategory.ReadSubCategory;
 import tecnodev.subCategory.SubCategory;
 

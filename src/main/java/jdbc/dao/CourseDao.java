@@ -2,7 +2,9 @@ package jdbc.dao;
 
 import jdbc.connection.ConnectionFactory;
 import jdbc.dto.CourseDto;
+import tecnodev.category.Category;
 import tecnodev.course.Course;
+import tecnodev.subCategory.SubCategory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,14 +12,10 @@ import java.util.List;
 
 public class CourseDao {
 
-    private Connection connection;
+    private final Connection connection;
 
-    public CourseDao() {
-        try{
-            this.connection = new ConnectionFactory().recuperarConexao();
-        }catch (SQLException e){
-            throw new RuntimeException("Erro ao conectar");
-        }
+    public CourseDao() throws SQLException {
+        this.connection = new ConnectionFactory().recoveryConnection();
     }
 
     public void insertCourse(Course course) throws SQLException {
@@ -44,8 +42,8 @@ public class CourseDao {
             }
             connection.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
             connection.rollback();
+            throw new RuntimeException(e.getCause());
         }
     }
 
@@ -56,8 +54,8 @@ public class CourseDao {
             pst.execute();
             connection.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
             connection.rollback();
+            throw new RuntimeException(e.getCause());
         }
 
         System.out.println("Curso do banco de código: ( " + code + " ) deletado");
@@ -74,8 +72,8 @@ public class CourseDao {
             connection.commit();
             System.out.println("Cursos que foram modificados " + modifiedLines);
         } catch (SQLException e) {
-            e.printStackTrace();
             connection.rollback();
+            throw new RuntimeException(e.getCause());
         }
     }
 
@@ -84,9 +82,10 @@ public class CourseDao {
         Long subCategoryId = null;
 
         try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            connection.setAutoCommit(false);
             pstm.setString(1, course.getSubCategoryCode());
             pstm.execute();
-
+            connection.commit();
             try (ResultSet rs = pstm.getResultSet()) {
                 while (rs.next()) {
                     subCategoryId = rs.getLong(1);
@@ -96,8 +95,8 @@ public class CourseDao {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
             connection.rollback();
+            throw new RuntimeException(e.getCause());
         }
         return subCategoryId;
     }
@@ -131,9 +130,54 @@ public class CourseDao {
             connection.commit();
 
         }catch (SQLException e) {
-            e.printStackTrace();
+            connection.rollback();
+            throw new RuntimeException(e.getCause());
         }
         return listCourse;
+    }
+
+    public Category getCategoryFromDatabase(String code) throws SQLException {
+        String sql = "SELECT * FROM Category WHERE `code` = ?";
+
+        Category category = null;
+        try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.setString(1, code);
+            pstm.execute();
+
+            try (ResultSet rs = pstm.getResultSet()) {
+                while (rs.next()) {
+                    String name = rs.getString(2);
+                    String cod = rs.getString(3);
+
+                    category = new Category(name, cod);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e.getCause());
+            }
+        }
+
+        return category;
+    }
+
+    public SubCategory getSubCategoryFromDatabase(String code, Category category) throws SQLException {
+        String sql = "SELECT * FROM Subcategory WHERE `code` = ?";
+
+        SubCategory subCategory = null;
+        try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.setString(1, code);
+            pstm.execute();
+
+            try (ResultSet rs = pstm.getResultSet()) {
+                while (rs.next()) {
+                    String name = rs.getString(2);
+                    String cod = rs.getString(3);
+                    subCategory = new SubCategory(name, cod, category);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e.getCause());
+            }
+        }
+        return subCategory;
     }
 }
 
