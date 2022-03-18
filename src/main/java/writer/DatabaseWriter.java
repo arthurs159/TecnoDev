@@ -40,21 +40,21 @@ public class DatabaseWriter {
                     </tr>
                 """);
 
-        CourseDao dao = new CourseDao();
-        List<CourseDto> courseDtos = dao.getPublicCourses();
+//        CourseDao dao = new CourseDao();
+//        List<CourseDto> courseDtos = dao.getPublicCourses();
 
-        for (CourseDto course : courseDtos) {
-            html.append("""
-                    <tr>
-                        <td> %d </td>
-                        <td> %s </td>
-                        <td> %d Horas</td>
-                        <td> %d </td>
-                        <td> %s </td>
-                    </tr>
-                    """.formatted(course.getId(), course.getName(), course.getEstimatedTimeinHours(),
-                    course.getSubCategoryId(), course.getSubCategoryName()));
-        }
+//        for (CourseDto course : courseDtos) {
+//            html.append("""
+//                    <tr>
+//                        <td> %d </td>
+//                        <td> %s </td>
+//                        <td> %d Horas</td>
+//                        <td> %d </td>
+//                        <td> %s </td>
+//                    </tr>
+//                    """.formatted(course.getId(), course.getName(), course.getEstimatedTimeinHours(),
+//                    course.getSubCategoryId(), course.getSubCategoryName()));
+//        }
 
 
         html.append("""

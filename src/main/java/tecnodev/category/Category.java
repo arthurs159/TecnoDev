@@ -29,6 +29,7 @@ public class Category {
     @Column(name = "color_code")
     private String colorCode;
 
+    public Category() {}
 
     public Category(String name, String code) {
         isNotNullOrEmpty(name, "The name must not be empty or null");

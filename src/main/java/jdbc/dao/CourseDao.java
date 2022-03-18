@@ -1,54 +1,83 @@
 package jdbc.dao;
 
-import jdbc.connection.ConnectionFactory;
 import jdbc.dto.CourseDto;
 import jdbc.exception.ExceptionSql;
 import tecnodev.category.Category;
 import tecnodev.course.Course;
 import tecnodev.subCategory.SubCategory;
 
+import javax.persistence.EntityManager;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static jdbc.connection.ConnectionFactory.*;
 
 public class CourseDao {
 
     private static Connection connection;
 
-    public CourseDao() throws SQLException {
-        connection = recoveryConnection();
+    private EntityManager em;
+
+    public CourseDao(EntityManager em){
+        this.em = em;
     }
 
-    public void insertCourse(Course course) throws SQLException {
-        String sql = ("INSERT INTO Course " +
-                "(name, code, estimated_time_in_hours," +
-                "teacher, subcategory_id) " +
-                "VALUES (?, ?, ?, ?, ?)");
+//    public CourseDao() throws SQLException {
+//        connection = recoveryConnection();
+//    } //JDBC
 
-        try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            connection.setAutoCommit(false);
-            pstm.setString(1, course.getName());
-            pstm.setString(2, course.getCode());
-            pstm.setInt(3, course.getEstimatedTimeInHours());
-            pstm.setString(4, course.getTeacher());
-            pstm.setLong(5, getSubCategoryId(course));
+//    public void insertCourse(Course course) throws SQLException {
+//        String sql = ("INSERT INTO Course " +
+//                "(name, code, estimated_time_in_hours," +
+//                "teacher, subcategory_id) " +
+//                "VALUES (?, ?, ?, ?, ?)");
+//
+//        try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//            connection.setAutoCommit(false);
+//            pstm.setString(1, course.getName());
+//            pstm.setString(2, course.getCode());
+//            pstm.setInt(3, course.getEstimatedTimeInHours());
+//            pstm.setString(4, course.getTeacher());
+//            pstm.setLong(5, getSubCategoryId(course));
+//
+//            pstm.execute();
+//
+//            try (ResultSet rst = pstm.getGeneratedKeys()) {
+//                rst.next();
+//                System.out.println(rst.getLong(1));
+//            } catch (SQLException e) {
+//                throw new ExceptionSql("Error, it was not possible to INSERT a course");
+//            }
+//            connection.commit();
+//        } catch (SQLException e) {
+//            connection.rollback();
+//            throw new ExceptionSql("Error, it was not possible to INSERT a course");
+//        }
+//    } //JDBC
 
-            pstm.execute();
-
-            try (ResultSet rst = pstm.getGeneratedKeys()) {
-                rst.next();
-                System.out.println(rst.getLong(1));
-            } catch (SQLException e) {
-                throw new ExceptionSql("Error, it was not possible to INSERT a course");
-            }
-            connection.commit();
-        } catch (SQLException e) {
-            connection.rollback();
-            throw new ExceptionSql("Error, it was not possible to INSERT a course");
-        }
+    public void insertCourseJPA(Course course){
+        this.em.persist(course);
+        System.out.println("Generated id: " + course.getId());
     }
+
+    public void deleteCourseJPA(String code){
+        String jpql = "DELETE FROM Course c WHERE c.code = :code";
+
+        em.createQuery(jpql)
+                .setParameter("code", code)
+                        .executeUpdate();
+
+        System.out.println("O curso de código: ( " + code + " ) foi deletado com sucesso!!" );
+    }
+
+    public void makeAllCoursesPublicJPA(){
+        String jpql = "UPDATE FROM Course c SET c.visibility = 'PUBLIC' WHERE c.visibility = 'PRIVATE'";
+
+        em.createQuery(jpql)
+                .executeUpdate();
+
+        System.out.println("Todos os cursos estão publicos!!");
+    }
+
 
     public void deleteCourse(String code) throws SQLException {
         try (PreparedStatement pst = connection.prepareStatement("DELETE FROM Course WHERE CODE = ?")) {
@@ -62,7 +91,7 @@ public class CourseDao {
         }
 
         System.out.println("Curso do banco de código: ( " + code + " ) deletado");
-    }
+    } //JDBC
 
     public void transformCourseToPublic() throws SQLException {
         String sql = "UPDATE Course SET visibility = 'PUBLIC' WHERE visibility = ?";
@@ -78,7 +107,7 @@ public class CourseDao {
             connection.rollback();
             throw new ExceptionSql("Error, it was not possible to SET TO ALL TO PUBLIC");
         }
-    }
+    } //JDBC
 
     public Long getSubCategoryId(Course course) throws SQLException {
         String sql = "SELECT `id` FROM Subcategory WHERE `code` = ?";
@@ -102,7 +131,7 @@ public class CourseDao {
             throw new ExceptionSql("Error, it was not possible to GET ID from Subcategory");
         }
         return subCategoryId;
-    }
+    } //JDBC
 
     public List<CourseDto> getPublicCourses() throws SQLException {
         String sql = """
@@ -137,7 +166,7 @@ public class CourseDao {
             throw new ExceptionSql("Error, it was not possible to Get All Public courses");
         }
         return listCourse;
-    }
+    } //JDBC
 
     public Category getCategoryFromDatabase(String code) throws SQLException {
         String sql = "SELECT * FROM Category WHERE `code` = ?";
@@ -165,7 +194,7 @@ public class CourseDao {
         }
 
         return category;
-    }
+    } //JDBC
 
     public SubCategory getSubCategoryFromDatabase(String code, Category category) throws SQLException {
         String sql = "SELECT * FROM Subcategory WHERE `code` = ?";
@@ -190,6 +219,6 @@ public class CourseDao {
             throw new ExceptionSql("Error, it was not possible to GET a Subcategory");
         }
         return subCategory;
-    }
+    } //JDBC
 }
 
