@@ -78,6 +78,13 @@ public class CourseDao {
         System.out.println("Todos os cursos estão publicos!!");
     }
 
+    public List<Course> listAllPublicCourses(){
+        String jpql = "SELECT c FROM Course c WHERE c.visibility = 1";
+
+        return em.createQuery(jpql, Course.class)
+                .getResultList();
+    }
+
 
     public void deleteCourse(String code) throws SQLException {
         try (PreparedStatement pst = connection.prepareStatement("DELETE FROM Course WHERE CODE = ?")) {

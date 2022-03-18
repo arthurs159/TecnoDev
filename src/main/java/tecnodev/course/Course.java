@@ -34,6 +34,9 @@ public class Course {
     @ManyToOne
     private SubCategory subCategory;
 
+    public Course() {
+    }
+
     public Course(String name, String code, int estimatedTimeInHours, String teacher, SubCategory subCategory) {
         isNotNullOrEmpty(name, "The name must not be empty or null!!!");
         isNotNullOrEmpty(teacher, "The teacher must not be empty or null!!");
