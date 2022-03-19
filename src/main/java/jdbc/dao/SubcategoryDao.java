@@ -33,11 +33,23 @@ public class SubcategoryDao {
                 .getResultList();
     }
 
-    public List<SubCategory> listAllSubcategoryWithoutDescription(){
-        String jpql = "SELECT s FROM SubCategory s WHERE s.description = ''";
+    public List<String> listAllSubcategoryWithoutDescription(){
+        String jpql = "SELECT s.name FROM SubCategory s WHERE s.description = ''";
 
-        return em.createQuery(jpql, SubCategory.class)
+        return em.createQuery(jpql, String.class)
                 .getResultList();
+    }
+
+    public Long getCategoryId(String code){
+        String jpql = "SELECT s.category.id FROM SubCategory s " +
+                "INNER JOIN Category c " +
+                "ON c.id = s.category.id " +
+                "WHERE c.code = :code " +
+                "GROUP BY c.id";
+
+        return em.createQuery(jpql, Long.class)
+                .setParameter("code", code)
+                .getSingleResult();
     }
 
 }

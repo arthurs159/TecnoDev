@@ -24,7 +24,7 @@ public class CourseDao {
 //    public CourseDao() throws SQLException {
 //        connection = recoveryConnection();
 //    } //JDBC
-
+//
 //    public void insertCourse(Course course) throws SQLException {
 //        String sql = ("INSERT INTO Course " +
 //                "(name, code, estimated_time_in_hours," +
@@ -85,6 +85,17 @@ public class CourseDao {
                 .getResultList();
     }
 
+    public Long getSubcategoryIdByCode(String code){
+        String jpql = "SELECT c.subCategory.id FROM Course c " +
+                "INNER JOIN SubCategory s " +
+                "ON s.id = c.subCategory.id " +
+                "WHERE s.code = :code " +
+                "GROUP BY s.id";
+
+        return em.createQuery(jpql, Long.class)
+                .setParameter("code", code)
+                .getSingleResult();
+    }
 
     public void deleteCourse(String code) throws SQLException {
         try (PreparedStatement pst = connection.prepareStatement("DELETE FROM Course WHERE CODE = ?")) {
