@@ -26,13 +26,24 @@ public class JPAWriter {
         StringBuilder html = new StringBuilder("""
                 <!DOCTYPE html>
                 <html>
-                    <style> table, th, td {border:1px solid black;} </style>
+                    <style> table, th, td {border:1px solid black;} 
+                    div {
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                    }
+                    
+                    div:hover {
+                      overflow: visible;
+                    }
+                    </style>
                     <head>
                         <meta charset= UTF-8 />
                         <title>Cursos</title>
                     </head>
                     <body>
-                        <h1>Categorias Ativas</h1>
+                        <h1>RELATÓRIO TECNODEV <br></h1>
+                        <h2>Categorias Ativas</h2>
                     <table style="width:100%">
                     <tr>
                         <th>ID</th>
@@ -68,7 +79,7 @@ public class JPAWriter {
         html.append("""
                 </table>
                                 
-                <h1>Subcategorias Ativas</h1>
+                <h2>Subcategorias Ativas</h2>
                                 
                 <table style="width:100%">
                 <tr>
@@ -103,7 +114,7 @@ public class JPAWriter {
         html.append("""
                 </table>
                                 
-                <h1>Cursos Públicos</h1>
+                <h2>Cursos Públicos</h2>
                                 
                 <table style="width:100%">
                 <tr>
@@ -115,7 +126,7 @@ public class JPAWriter {
                         <th>PÚBLICO ALVO</th>
                         <th>INSTRUTOR</th>
                         <th>DESCRIÇÃO</th>
-                        <th>HABILIDADES DESENVOLOVIDAS</th>
+                        <th>HABILIDADES DESENVOLVIDAS</th>
                         <th>ID DA SUBCATEGORIA</th>
                 </tr>
                 """);
@@ -142,6 +153,12 @@ public class JPAWriter {
                     course.getVisibility(), course.getTargetAudience(), course.getTeacher(), course.getDescription(),
                     course.getDevelopedSkills(), courseDao.getSubcategoryIdByCode(course.getSubCategoryCode())));
         }
+
+        html.append("""
+                </table>
+                </body>
+                </html>
+                """);
 
 
         fileWriter.write(html.toString());

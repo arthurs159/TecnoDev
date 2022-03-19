@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <style> table, th, td {border:1px solid black;} </style>
+    <style> table, th, td {border:1px solid black;}
+    div {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    div:hover {
+      overflow: visible;
+    }
+    </style>
     <head>
         <meta charset= UTF-8 />
         <title>Cursos</title>
     </head>
     <body>
-        <h1>Categorias Ativas</h1>
+        <h1>RELATÓRIO TECNODEV <br></h1>
+        <h2>Categorias Ativas</h2>
     <table style="width:100%">
     <tr>
         <th>ID</th>
@@ -40,7 +51,7 @@
 </tr>
 </table>
 
-<h1>Subcategorias Ativas</h1>
+<h2>Subcategorias Ativas</h2>
 
 <table style="width:100%">
 <tr>
@@ -90,7 +101,7 @@
 </tr>
 </table>
 
-<h1>Cursos Públicos</h1>
+<h2>Cursos Públicos</h2>
 
 <table style="width:100%">
 <tr>
@@ -100,12 +111,12 @@
         <th>TEMPO DE CURSO</th>
         <th>VISIBILIDADE</th>
         <th>PÚBLICO ALVO</th>
-        <th>iNSTRUTOR</th>
+        <th>INSTRUTOR</th>
         <th>DESCRIÇÃO</th>
-        <th>HABILIDADES DESENVOLOVIDAS</th>
+        <th>HABILIDADES DESENVOLVIDAS</th>
         <th>ID DA SUBCATEGORIA</th>
 </tr>
-<tr>
+<div><tr>
     <td> 2 </td>
     <td> Java e JPA: Consultas avançadas performance e modelos complexos </td>
     <td> java-jpa-consultas-avancadas-performance-modelos-complexos </td>
@@ -117,8 +128,8 @@
     <td> Saiba como modelar corretamente relacionamentos bidirecionais <br> Aprenda a utilizar o recurso de select new para realizar consultas avançadas <br> Entenda a diferença entre relacionamentos EAGER e LAZY <br> Conheça o recurso de join fetch para planejar queries <br> Conheça a API de Criteria da JPA <br> Saiba como mapear entidades que utilizam herança e chave composta </td>
     <td style=text-align:center;> 2 </td>
 
-</tr>
-<tr>
+</tr></div>
+<div><tr>
     <td> 3 </td>
     <td> Java OO: Introdução à Orientação a Objetos </td>
     <td> java-introducao-orientacao-objetos </td>
@@ -130,8 +141,8 @@
     <td> Domine o paradigma de programação mais usado no mercado de trabalho <br> Entenda o que são referências e objetos <br> Use atributos métodos da instancia e da classe <br> Define objetos através de construtores <br> Aprenda sobre encapsulamento </td>
     <td style=text-align:center;> 1 </td>
 
-</tr>
-<tr>
+</tr></div>
+<div><tr>
     <td> 4 </td>
     <td> Java JRE e JDK: Escreva o seu primeiro código com Eclipse </td>
     <td> java-primeiros-passos </td>
@@ -143,4 +154,7 @@
     <td> JVM? JDK? JRE? Aprenda o que são essas siglas? <br> Compile e execute código java <br> Aprenda a usar Eclipse <br> Veja como usar variáveis e controle de fluxo <br> Conheça os principais tipos do Java </td>
     <td style=text-align:center;> 1 </td>
 
-</tr>
+</tr></div>
+</table>
+</body>
+</html>
