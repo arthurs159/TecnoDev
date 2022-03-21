@@ -1,4 +1,4 @@
-package jdbc.dao;
+package jpa.dao;
 
 import tecnodev.subCategory.SubCategory;
 

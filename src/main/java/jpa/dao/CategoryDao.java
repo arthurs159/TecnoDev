@@ -1,4 +1,4 @@
-package jdbc.dao;
+package jpa.dao;
 
 import tecnodev.category.Category;
 
@@ -13,7 +13,7 @@ public class CategoryDao {
         this.em = em;
     }
 
-    public List<Category> listAllActive(){
+    public List<Category> listAllActive() {
         String jpql = "SELECT c FROM Category c WHERE c.active = 1 ORDER BY c.name";
         return em.createQuery(jpql, Category.class)
                 .getResultList();

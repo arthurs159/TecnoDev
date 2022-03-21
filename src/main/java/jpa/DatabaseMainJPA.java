@@ -1,14 +1,17 @@
-package jdbc;
+package jpa;
 
-import jdbc.dao.CategoryDao;
-import jdbc.dao.CourseDao;
-import jdbc.dao.SubcategoryDao;
-import jdbc.util.JPAUtil;
+
+import jpa.dao.CategoryDao;
+import jpa.dao.CourseDao;
+import jpa.dao.SubcategoryDao;
+import jpa.util.JPAUtil;
+import tecnodev.category.Category;
 
 import javax.persistence.EntityManager;
 import java.sql.SQLException;
+import java.util.List;
 
-public class DatabaseMainJDBC {
+public class DatabaseMainJPA {
 
     public static void main(String[] args) throws SQLException {
 
@@ -21,8 +24,8 @@ public class DatabaseMainJDBC {
         CourseDao courseDao = new CourseDao(em);
         CategoryDao categoryDao = new CategoryDao(em);
 
-//        List<Category> list = categoryDao.listAllActive();
-//        list.forEach(System.out::println);
+        List<Category> list = categoryDao.listAllActive();
+        list.forEach(System.out::println);
 
 //        List<SubCategory> subList = subcategoryDao.listAllActive();
 //        List<String> subList2 = subcategoryDao.listAllSubcategoryWithoutDescription();
@@ -30,9 +33,9 @@ public class DatabaseMainJDBC {
 //        subList2.forEach(System.out::println);
 
 //        Long id = subcategoryDao.getCategoryId("programacao");
-        Long subcatId = courseDao.getSubcategoryIdByCode("java");
-
-        System.out.println(subcatId);
+//        Long subcatId = courseDao.getSubcategoryIdByCode("java");
+//
+//        System.out.println(subcatId);
 
 //        System.out.println(id);
 //        List<Course> courseList = courseDao.listAllPublicCourses();

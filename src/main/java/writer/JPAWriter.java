@@ -1,9 +1,10 @@
 package writer;
 
-import jdbc.dao.CategoryDao;
-import jdbc.dao.CourseDao;
-import jdbc.dao.SubcategoryDao;
-import jdbc.util.JPAUtil;
+
+import jpa.dao.CategoryDao;
+import jpa.dao.CourseDao;
+import jpa.dao.SubcategoryDao;
+import jpa.util.JPAUtil;
 import tecnodev.category.Category;
 import tecnodev.course.Course;
 import tecnodev.subCategory.SubCategory;
@@ -26,17 +27,7 @@ public class JPAWriter {
         StringBuilder html = new StringBuilder("""
                 <!DOCTYPE html>
                 <html>
-                    <style> table, th, td {border:1px solid black;} 
-                    div {
-                      white-space: nowrap;
-                      overflow: hidden;
-                      text-overflow: ellipsis;
-                    }
-                    
-                    div:hover {
-                      overflow: visible;
-                    }
-                    </style>
+                    <style> table, th, td {border:1px solid black;}</style>
                     <head>
                         <meta charset= UTF-8 />
                         <title>Cursos</title>
