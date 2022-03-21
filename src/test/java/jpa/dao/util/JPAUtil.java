@@ -1,4 +1,4 @@
-package jdbc.dao.util;
+package jpa.dao.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

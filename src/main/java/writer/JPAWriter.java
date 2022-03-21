@@ -145,6 +145,27 @@ public class JPAWriter {
                     course.getDevelopedSkills(), courseDao.getSubcategoryIdByCode(course.getSubCategoryCode())));
         }
 
+        List<String> names = subcategoryDao.listAllSubcategoryWithoutDescription();
+
+        html.append("""
+                </table>
+                                
+                <h2>Nomes das Subcategorias sem descrição</h2>
+                                
+                <table style="width:100%">
+                <tr>
+                        <th>NOME</th>
+                </tr>
+                """);
+
+        for (String string:names) {
+            html.append("""
+                    <tr>
+                        <td> %s </td>
+                    </tr>
+                    """.formatted(string));
+        }
+
         html.append("""
                 </table>
                 </body>

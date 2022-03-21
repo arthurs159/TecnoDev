@@ -6,6 +6,7 @@ import jpa.dao.CourseDao;
 import jpa.dao.SubcategoryDao;
 import jpa.util.JPAUtil;
 import tecnodev.category.Category;
+import tecnodev.subCategory.SubCategory;
 
 import javax.persistence.EntityManager;
 import java.sql.SQLException;
@@ -24,13 +25,17 @@ public class DatabaseMainJPA {
         CourseDao courseDao = new CourseDao(em);
         CategoryDao categoryDao = new CategoryDao(em);
 
-        List<Category> list = categoryDao.listAllActive();
-        list.forEach(System.out::println);
+//        List<Category> list = categoryDao.listAllActive();
+//        list.forEach(System.out::println);
 
-//        List<SubCategory> subList = subcategoryDao.listAllActive();
+        List<SubCategory> subList = subcategoryDao.listAllActive();
 //        List<String> subList2 = subcategoryDao.listAllSubcategoryWithoutDescription();
-//        subList.forEach(System.out::println);
+        subList.forEach(System.out::println);
 //        subList2.forEach(System.out::println);
+
+//        for (String string: subList2) {
+//            System.out.println(string);
+//        }
 
 //        Long id = subcategoryDao.getCategoryId("programacao");
 //        Long subcatId = courseDao.getSubcategoryIdByCode("java");
