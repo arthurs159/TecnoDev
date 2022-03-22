@@ -1,4 +1,4 @@
-package jpa;
+package jpa.main;
 
 
 import jpa.dao.CategoryDao;
@@ -6,6 +6,7 @@ import jpa.dao.CourseDao;
 import jpa.dao.SubcategoryDao;
 import jpa.util.JPAUtil;
 import tecnodev.category.Category;
+import tecnodev.course.Course;
 import tecnodev.subCategory.SubCategory;
 
 import javax.persistence.EntityManager;
@@ -28,9 +29,11 @@ public class DatabaseMainJPA {
 //        List<Category> list = categoryDao.listAllActive();
 //        list.forEach(System.out::println);
 
-        List<SubCategory> subList = subcategoryDao.listAllActive();
+//        List<SubCategory> subList = subcategoryDao.listAllActive();
+//        subList.forEach(System.out::println);
+
+
 //        List<String> subList2 = subcategoryDao.listAllSubcategoryWithoutDescription();
-        subList.forEach(System.out::println);
 //        subList2.forEach(System.out::println);
 
 //        for (String string: subList2) {
@@ -43,15 +46,9 @@ public class DatabaseMainJPA {
 //        System.out.println(subcatId);
 
 //        System.out.println(id);
-//        List<Course> courseList = courseDao.listAllPublicCourses();
-//        courseList.forEach(System.out::println);
+        List<Course> courseList = courseDao.listAllPublicCourses();
+        courseList.forEach(System.out::println);
 
-//        em.getTransaction().begin();
-//        courseDao.insertCourseJPA(curso);
-//        courseDao.deleteCourseJPA("ja-fro");
-//        courseDao.makeAllCoursesPublicJPA();
-//        em.getTransaction().commit();
-//        em.close();
 
     }
 }

@@ -24,7 +24,7 @@ public class SubCategory {
     @Column(columnDefinition = "SMALLINT", name = "order_in_system")
     private Integer orderInSystem;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     public SubCategory() {

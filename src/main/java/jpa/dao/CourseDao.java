@@ -29,7 +29,11 @@ public class CourseDao {
     }
 
     public void makeAllCoursesPublicJPA() {
-        String jpql = "UPDATE FROM Course c SET c.visibility = 'PUBLIC' WHERE c.visibility = 'PRIVATE'";
+        String jpql = """
+                UPDATE FROM Course c 
+                SET c.visibility = 'PUBLIC' 
+                WHERE c.visibility = 'PRIVATE'
+                """;
 
         em.createQuery(jpql)
                 .executeUpdate();
@@ -38,22 +42,15 @@ public class CourseDao {
     }
 
     public List<Course> listAllPublicCourses() {
-        String jpql = "SELECT c FROM Course c WHERE c.visibility = 1";
+        String jpql = """
+                SELECT c FROM Course c
+                JOIN FETCH c.subCategory
+                WHERE
+                c.visibility = 1
+                """;
 
         return em.createQuery(jpql, Course.class)
                 .getResultList();
-    }
-
-    public Long getSubcategoryIdByCode(String code) {
-        String jpql = "SELECT c.subCategory.id FROM Course c " +
-                "INNER JOIN SubCategory s " +
-                "ON s.id = c.subCategory.id " +
-                "WHERE s.code = :code " +
-                "GROUP BY s.id";
-
-        return em.createQuery(jpql, Long.class)
-                .setParameter("code", code)
-                .getSingleResult();
     }
 
 }

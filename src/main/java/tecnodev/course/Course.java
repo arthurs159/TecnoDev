@@ -31,7 +31,7 @@ public class Course {
     @Column(name = "developed_skills", columnDefinition = "TEXT")
     private String developedSkills;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private SubCategory subCategory;
 
     public Course() {

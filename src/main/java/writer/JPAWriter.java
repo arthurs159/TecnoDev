@@ -27,7 +27,12 @@ public class JPAWriter {
         StringBuilder html = new StringBuilder("""
                 <!DOCTYPE html>
                 <html>
-                    <style> table, th, td {border:1px solid black;}</style>
+                    <style>
+                    table, th, td {
+                    border:1px solid black;
+                    border-collapse: collapse;
+                    }
+                    </style>
                     <head>
                         <meta charset= UTF-8 />
                         <title>Cursos</title>
@@ -60,8 +65,8 @@ public class JPAWriter {
                         <td> %s </td>
                         <td> %s </td>
                         <td> %d </td>
-                        <td> %s </td>
-                        <td> %s </td>
+                        <td> <img src="%s" alt="icone" width="150px"> </td>
+                        <td style="background-color: %s"></td>
                     </tr>
                     """.formatted(category.getId(), category.getName(), category.getCode(), category.getDescription(),
                     category.isActive(), category.getOrderInSystem(), category.getImageUrl(), category.getColorCode()));
@@ -98,8 +103,8 @@ public class JPAWriter {
                         <td> %d </td>
                         <td> %d </td>
                     </tr>
-                    """.formatted(subCategory.getId(), subCategory.getName(), subCategory.getCode(), subCategory.getDescription(),
-                    subCategory.isActive(), subCategory.getOrderInSystem(), subcategoryDao.getCategoryId(subCategory.getCategoryCode())));
+                    """.formatted(subCategory.getId() ,subCategory.getName(), subCategory.getCode(), subCategory.getDescription(),
+                    subCategory.isActive(), subCategory.getOrderInSystem(), subCategory.getCategory().getId()));
         }
 
         html.append("""
@@ -142,7 +147,7 @@ public class JPAWriter {
                     </tr>
                     """.formatted(course.getId(), course.getName(), course.getCode(), course.getEstimatedTimeInHours(),
                     course.getVisibility(), course.getTargetAudience(), course.getTeacher(), course.getDescription(),
-                    course.getDevelopedSkills(), courseDao.getSubcategoryIdByCode(course.getSubCategoryCode())));
+                    course.getDevelopedSkills(), course.getSubCategory().getId()));
         }
 
         List<String> names = subcategoryDao.listAllSubcategoryWithoutDescription();
@@ -152,7 +157,7 @@ public class JPAWriter {
                                 
                 <h2>Nomes das Subcategorias sem descrição</h2>
                                 
-                <table style="width:100%">
+                <table style="width:50%">
                 <tr>
                         <th>NOME</th>
                 </tr>
