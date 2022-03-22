@@ -16,6 +16,9 @@ import tecnodev.subCategory.SubCategory;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class CourseDaoTest {
 
     private CategoryDao catDao;
@@ -75,6 +78,8 @@ public class CourseDaoTest {
 
         List<Course> courseList = dao.listAllPublicCourses();
 
+        assertNotNull(courseList);
         Assertions.assertEquals(2, courseList.size());
+        assertEquals("javasintax", courseList.get(0).getCode());
     }
 }

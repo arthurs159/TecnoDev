@@ -3,13 +3,15 @@ package jpa.dao;
 import jpa.dao.util.JPAUtil;
 import jpa.dao.util.builder.CategoryBuilder;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tecnodev.category.Category;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class CategoryDaoTest {
 
@@ -29,23 +31,23 @@ class CategoryDaoTest {
     }
 
     @Test
-    void listAllActiveShouldReturnAllActiveCategoriesFromDatabase() {
+    void listAllActiveShouldReturnAllActiveCategoriesInOrderFromDatabase() {
         Category category1 = new CategoryBuilder()
-                .name("Back-End")
-                .code("backend")
-                .description("curso back-end")
+                .name("Front-End")
+                .code("frontend")
+                .description("Curso front-end")
                 .active(true)
-                .orderInSystem(4)
+                .orderInSystem(5)
                 .imageUrl("www.google.com.br")
                 .colorCode("#9AEA20")
                 .create();
 
         Category category2 = new CategoryBuilder()
-                .name("Front-End")
-                .code("frontend")
-                .description("curso front-end")
+                .name("Back-End")
+                .code("backend")
+                .description("Curso back-end")
                 .active(true)
-                .orderInSystem(5)
+                .orderInSystem(4)
                 .imageUrl("www.google.com.br")
                 .colorCode("#9AEA20")
                 .create();
@@ -53,7 +55,7 @@ class CategoryDaoTest {
         Category category3 = new CategoryBuilder()
                 .name("DevOps")
                 .code("devops")
-                .description("curso Devops")
+                .description("Curso Devops")
                 .active(false)
                 .orderInSystem(5)
                 .imageUrl("www.google.com.br")
@@ -65,7 +67,10 @@ class CategoryDaoTest {
         em.persist(category3);
 
         List<Category> categories = dao.listAllActive();
-        Assertions.assertEquals(2, categories.size());
+
+        assertNotNull(categories);
+        assertEquals(2, categories.size());
+        assertEquals("backend", categories.get(0).getCode());
     }
 
 }

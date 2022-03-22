@@ -13,6 +13,9 @@ import tecnodev.subCategory.SubCategory;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class SubCategoryDaoTest {
 
     private CategoryDao catDao;
@@ -33,7 +36,7 @@ public class SubCategoryDaoTest {
     }
 
     @Test
-    void listAllActiveShouldReturnAllActiveSubcategoryFromDatabase() {
+    void listAllActiveShouldReturnAllActiveSubcategoryInOrderFromDatabase() {
         Category category = new CategoryBuilder()
                 .name("Back-End")
                 .code("backend")
@@ -45,21 +48,21 @@ public class SubCategoryDaoTest {
                 .create();
         em.persist(category);
 
-        SubCategory java = new SubCategoryBuilder()
-                .name("Java")
-                .code("java")
-                .description("Projetos em java")
-                .active(true)
-                .orderInSystem(1)
-                .category(category)
-                .create();
-
         SubCategory javaScript = new SubCategoryBuilder()
                 .name("JavaScript")
                 .code("javascript")
                 .description("Projetos em JavaScript")
                 .active(true)
                 .orderInSystem(2)
+                .category(category)
+                .create();
+
+        SubCategory java = new SubCategoryBuilder()
+                .name("Java")
+                .code("java")
+                .description("Projetos em java")
+                .active(true)
+                .orderInSystem(1)
                 .category(category)
                 .create();
 
@@ -73,12 +76,14 @@ public class SubCategoryDaoTest {
                 .create();
 
 
-        em.persist(java);
         em.persist(javaScript);
         em.persist(python);
+        em.persist(java);
 
         List<SubCategory> subCategoryList = dao.listAllActive();
 
+        assertNotNull(subCategoryList);
         Assertions.assertEquals(2, subCategoryList.size());
+        assertEquals("java", subCategoryList.get(0).getCode());
     }
 }
