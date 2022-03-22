@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SubcategoryDao {
 
-    private final EntityManager em;
+    private EntityManager em;
 
     public SubcategoryDao(EntityManager em) {
         this.em = em;
@@ -41,7 +41,7 @@ public class SubcategoryDao {
                 .getResultList();
     }
 
-    public List<String> listAllSubcategoryWithoutDescription() {
+    public List<String> listAllSubcategoryNameWithoutDescription() {
         String jpql = """
                 SELECT s.name FROM SubCategory s 
                 WHERE s.description = ''

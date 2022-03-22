@@ -2,8 +2,6 @@ package jpa.dao.util.builder;
 
 import tecnodev.category.Category;
 
-import javax.persistence.Column;
-
 public class CategoryBuilder {
 
     private String name;
@@ -14,44 +12,49 @@ public class CategoryBuilder {
     private String imageUrl;
     private String colorCode;
 
-    public CategoryBuilder name(String name) {
+    public CategoryBuilder withName(String name) {
         this.name = name;
         return this;
     }
 
-    public CategoryBuilder code(String code) {
+    public CategoryBuilder withCode(String code) {
         this.code = code;
         return this;
     }
 
-    public CategoryBuilder description(String description) {
+    public CategoryBuilder withDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public CategoryBuilder active(boolean active) {
+    public CategoryBuilder withActive(boolean active) {
         this.active = active;
         return this;
     }
 
-    public CategoryBuilder orderInSystem(Integer orderInSystem) {
+    public CategoryBuilder withOrderInSystem(Integer orderInSystem) {
         this.orderInSystem = orderInSystem;
         return this;
     }
 
-    public CategoryBuilder imageUrl(String imageUrl) {
+    public CategoryBuilder withImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }
 
-    public CategoryBuilder colorCode(String colorCode) {
+    public CategoryBuilder withColorCode(String colorCode) {
         this.colorCode = colorCode;
         return this;
     }
 
     public Category create() {
-        return new Category(name, code, orderInSystem,
-                description, active, imageUrl, colorCode);
+        return new Category(name,
+                code,
+                orderInSystem,
+                description,
+                active,
+                imageUrl,
+                colorCode);
     }
 
 }

@@ -4,10 +4,6 @@ import tecnodev.course.Course;
 import tecnodev.course.Status;
 import tecnodev.subCategory.SubCategory;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
 public class CourseBuilder {
 
     private Long id;
@@ -21,47 +17,47 @@ public class CourseBuilder {
     private String developedSkills;
     private SubCategory subCategory;
 
-    public CourseBuilder name(String name) {
+    public CourseBuilder withName(String name) {
         this.name = name;
         return this;
     }
 
-    public CourseBuilder code(String code) {
+    public CourseBuilder withCode(String code) {
         this.code = code;
         return this;
     }
 
-    public CourseBuilder estimatedTimeInHours(Integer estimatedTimeInHours) {
+    public CourseBuilder withEstimatedTimeInHours(Integer estimatedTimeInHours) {
         this.estimatedTimeInHours = estimatedTimeInHours;
         return this;
     }
 
-    public CourseBuilder visibility(Status visibility) {
+    public CourseBuilder withVisibility(Status visibility) {
         this.visibility = visibility;
         return this;
     }
 
-    public CourseBuilder targetAudience(String targetAudience) {
+    public CourseBuilder withTargetAudience(String targetAudience) {
         this.targetAudience = targetAudience;
         return this;
     }
 
-    public CourseBuilder teacher(String teacher) {
+    public CourseBuilder withTeacher(String teacher) {
         this.teacher = teacher;
         return this;
     }
 
-    public CourseBuilder description(String description) {
+    public CourseBuilder withDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public CourseBuilder developedSkills(String developedSkills) {
+    public CourseBuilder withDevelopedSkills(String developedSkills) {
         this.developedSkills = developedSkills;
         return this;
     }
 
-    public CourseBuilder subCategory(SubCategory subCategory) {
+    public CourseBuilder withSubCategory(SubCategory subCategory) {
         this.subCategory = subCategory;
         return this;
     }

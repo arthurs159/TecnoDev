@@ -2,15 +2,25 @@ package tecnodev.alternative;
 
 import tecnodev.question.Question;
 
+import javax.persistence.*;
+
 import static validator.Validator.*;
 
 public class Alternative {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String alternativeText;
     private Integer orderInSystem;
     private boolean correct;
     private String justification;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "activity_id")
     private Question question;
+
+    public Alternative() {}
 
     public Alternative(String alternativeText, boolean correct, Question question) {
         isNotNullOrEmpty(alternativeText, "The text must not be empty or null");

@@ -1,6 +1,5 @@
 package jpa.main;
 
-import jpa.dao.CategoryDao;
 import jpa.dao.CourseDao;
 import jpa.dao.SubcategoryDao;
 import jpa.util.JPAUtil;

@@ -17,6 +17,5 @@ public class DeleteCourseJPA {
 
         em.getTransaction().commit();
         em.close();
-
     }
 }

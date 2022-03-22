@@ -27,8 +27,7 @@ public class SubCategory {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    public SubCategory() {
-    }
+    public SubCategory() {}
 
     public SubCategory(String name, String code, Category category) {
         isNotNullOrEmpty(name, "The name must not be empty or null");

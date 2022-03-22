@@ -33,39 +33,38 @@ class CategoryDaoTest {
     @Test
     void listAllActiveShouldReturnAllActiveCategoriesInOrderFromDatabase() {
         Category category1 = new CategoryBuilder()
-                .name("Front-End")
-                .code("frontend")
-                .description("Curso front-end")
-                .active(true)
-                .orderInSystem(5)
-                .imageUrl("www.google.com.br")
-                .colorCode("#9AEA20")
+                .withName("Front-End")
+                .withCode("frontend")
+                .withDescription("Curso front-end")
+                .withActive(true)
+                .withOrderInSystem(5)
+                .withImageUrl("www.google.com.br")
+                .withColorCode("#9AEA20")
                 .create();
 
         Category category2 = new CategoryBuilder()
-                .name("Back-End")
-                .code("backend")
-                .description("Curso back-end")
-                .active(true)
-                .orderInSystem(4)
-                .imageUrl("www.google.com.br")
-                .colorCode("#9AEA20")
+                .withName("Back-End")
+                .withCode("backend")
+                .withDescription("Curso back-end")
+                .withActive(true)
+                .withOrderInSystem(4)
+                .withImageUrl("www.google.com.br")
+                .withColorCode("#9AEA20")
                 .create();
 
         Category category3 = new CategoryBuilder()
-                .name("DevOps")
-                .code("devops")
-                .description("Curso Devops")
-                .active(false)
-                .orderInSystem(5)
-                .imageUrl("www.google.com.br")
-                .colorCode("#9AEA20")
+                .withName("DevOps")
+                .withCode("devops")
+                .withDescription("Curso Devops")
+                .withActive(false)
+                .withOrderInSystem(5)
+                .withImageUrl("www.google.com.br")
+                .withColorCode("#9AEA20")
                 .create();
 
         em.persist(category1);
         em.persist(category2);
         em.persist(category3);
-
         List<Category> categories = dao.listAllActive();
 
         assertNotNull(categories);

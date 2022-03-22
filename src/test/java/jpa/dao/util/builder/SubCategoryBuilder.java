@@ -12,32 +12,32 @@ public class SubCategoryBuilder {
     private Integer orderInSystem;
     private Category category;
 
-    public SubCategoryBuilder name(String name) {
+    public SubCategoryBuilder withName(String name) {
         this.name = name;
         return this;
     }
 
-    public SubCategoryBuilder code(String code) {
+    public SubCategoryBuilder withCode(String code) {
         this.code = code;
         return this;
     }
 
-    public SubCategoryBuilder description(String description) {
+    public SubCategoryBuilder withDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public SubCategoryBuilder active(boolean active) {
+    public SubCategoryBuilder withActive(boolean active) {
         this.active = active;
         return this;
     }
 
-    public SubCategoryBuilder orderInSystem(Integer orderInSystem) {
+    public SubCategoryBuilder withOrderInSystem(Integer orderInSystem) {
         this.orderInSystem = orderInSystem;
         return this;
     }
 
-    public SubCategoryBuilder category(Category category) {
+    public SubCategoryBuilder withCategory(Category category) {
         this.category = category;
         return this;
     }

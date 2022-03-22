@@ -150,7 +150,7 @@ public class JPAWriter {
                     course.getDevelopedSkills(), course.getSubCategory().getId()));
         }
 
-        List<String> names = subcategoryDao.listAllSubcategoryWithoutDescription();
+        List<String> names = subcategoryDao.listAllSubcategoryNameWithoutDescription();
 
         html.append("""
                 </table>
@@ -176,7 +176,6 @@ public class JPAWriter {
                 </body>
                 </html>
                 """);
-
 
         fileWriter.write(html.toString());
         fileWriter.flush();

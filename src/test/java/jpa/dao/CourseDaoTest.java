@@ -41,35 +41,40 @@ public class CourseDaoTest {
     }
 
     @Test
-    void listAllPublicCoursesShouldReturnAllPublicCourses(){
+    void listAllPublicCoursesShouldReturnAllPublicCourses() {
         Category backend = new CategoryBuilder()
-                .name("Back-End").code("backend").description("curso back-end").active(true)
-                .orderInSystem(4).imageUrl("www.google.com.br").colorCode("#9AEA20")
+                .withName("Back-End").withCode("backend").withDescription("curso back-end").withActive(true)
+                .withOrderInSystem(4).withImageUrl("www.google.com.br").withColorCode("#9AEA20")
                 .create();
         em.persist(backend);
 
         SubCategory java = new SubCategoryBuilder()
-                .name("Java").code("java").description("Projetos em java")
-                .active(true).orderInSystem(1).category(backend)
+                .withName("Java").withCode("java").withDescription("Projetos em java")
+                .withActive(true).withOrderInSystem(1).withCategory(backend)
                 .create();
         em.persist(java);
 
         Course javaSintax = new CourseBuilder()
-                .name("Java e Sintaxe").code("javasintax").estimatedTimeInHours(5)
-                .visibility(Status.PUBLIC).targetAudience("Pessoas que gostam de Java").teacher("Cleb Paulo")
-                .developedSkills("Aprenda a sintaxe de java").subCategory(java)
+                .withName("Java e Sintaxe")
+                .withCode("javasintax")
+                .withEstimatedTimeInHours(5)
+                .withVisibility(Status.PUBLIC)
+                .withTargetAudience("Pessoas que gostam de Java")
+                .withTeacher("Cleb Paulo")
+                .withDevelopedSkills("Aprenda a sintaxe de java")
+                .withSubCategory(java)
                 .create();
 
         Course jpa = new CourseBuilder()
-                .name("JPA").code("jpa").estimatedTimeInHours(5)
-                .visibility(Status.PUBLIC).targetAudience("Pessoas que gostam de Java")
-                .teacher("Cleb Paulo").developedSkills("Aprenda JPA").subCategory(java)
+                .withName("JPA").withCode("jpa").withEstimatedTimeInHours(5)
+                .withVisibility(Status.PUBLIC).withTargetAudience("Pessoas que gostam de Java")
+                .withTeacher("Cleb Paulo").withDevelopedSkills("Aprenda JPA").withSubCategory(java)
                 .create();
 
         Course python = new CourseBuilder()
-                .name("Python").code("py").estimatedTimeInHours(5)
-                .visibility(Status.PRIVATE).targetAudience("Pessoas que gostam de Python")
-                .teacher("Cleb Paulo").developedSkills("Aprenda uma nova linguagem").subCategory(java)
+                .withName("Python").withCode("py").withEstimatedTimeInHours(5)
+                .withVisibility(Status.PRIVATE).withTargetAudience("Pessoas que gostam de Python")
+                .withTeacher("Cleb Paulo").withDevelopedSkills("Aprenda uma nova linguagem").withSubCategory(java)
                 .create();
 
         em.persist(javaSintax);
