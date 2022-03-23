@@ -6,7 +6,6 @@ import tecnodev.subCategory.SubCategory;
 
 public class CourseBuilder {
 
-    private Long id;
     private String name;
     private String code;
     private Integer estimatedTimeInHours;

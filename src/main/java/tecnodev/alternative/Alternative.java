@@ -6,14 +6,19 @@ import javax.persistence.*;
 
 import static validator.Validator.*;
 
+@Entity
 public class Alternative {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(columnDefinition = "TEXT", name = "alternative_text")
     private String alternativeText;
+    @Column(columnDefinition = "SMALLINT", name = "order_in_system")
     private Integer orderInSystem;
     private boolean correct;
+    @Column(columnDefinition = "TEXT")
     private String justification;
 
     @ManyToOne(fetch = FetchType.LAZY)

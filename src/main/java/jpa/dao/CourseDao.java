@@ -30,8 +30,8 @@ public class CourseDao {
 
     public void makeAllCoursesPublicJPA() {
         String jpql = """
-                UPDATE FROM Course c 
-                SET c.visibility = 'PUBLIC' 
+                UPDATE FROM Course c
+                SET c.visibility = 'PUBLIC'
                 WHERE c.visibility = 'PRIVATE'
                 """;
 

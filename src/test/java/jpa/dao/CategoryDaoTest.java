@@ -69,7 +69,8 @@ class CategoryDaoTest {
 
         assertNotNull(categories);
         assertEquals(2, categories.size());
-        assertEquals("backend", categories.get(0).getCode());
+        assertEquals(category2, categories.get(0));
+        assertEquals(category1, categories.get(1));
     }
 
 }

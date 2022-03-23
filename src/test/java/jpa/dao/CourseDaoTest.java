@@ -21,16 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CourseDaoTest {
 
-    private CategoryDao catDao;
-    private SubcategoryDao subDao;
     private CourseDao dao;
     private EntityManager em;
 
     @BeforeEach
     public void beforeEach() {
         this.em = JPAUtil.getEntityManager();
-        this.catDao = new CategoryDao(em);
-        this.subDao = new SubcategoryDao(em);
         this.dao = new CourseDao(em);
         em.getTransaction().begin();
     }
@@ -43,14 +39,23 @@ public class CourseDaoTest {
     @Test
     void listAllPublicCoursesShouldReturnAllPublicCourses() {
         Category backend = new CategoryBuilder()
-                .withName("Back-End").withCode("backend").withDescription("curso back-end").withActive(true)
-                .withOrderInSystem(4).withImageUrl("www.google.com.br").withColorCode("#9AEA20")
+                .withName("Back-End")
+                .withCode("backend")
+                .withDescription("curso back-end")
+                .withActive(true)
+                .withOrderInSystem(4)
+                .withImageUrl("www.google.com.br")
+                .withColorCode("#9AEA20")
                 .create();
         em.persist(backend);
 
         SubCategory java = new SubCategoryBuilder()
-                .withName("Java").withCode("java").withDescription("Projetos em java")
-                .withActive(true).withOrderInSystem(1).withCategory(backend)
+                .withName("Java")
+                .withCode("java")
+                .withDescription("Projetos em java")
+                .withActive(true)
+                .withOrderInSystem(1)
+                .withCategory(backend)
                 .create();
         em.persist(java);
 
@@ -66,15 +71,24 @@ public class CourseDaoTest {
                 .create();
 
         Course jpa = new CourseBuilder()
-                .withName("JPA").withCode("jpa").withEstimatedTimeInHours(5)
-                .withVisibility(Status.PUBLIC).withTargetAudience("Pessoas que gostam de Java")
-                .withTeacher("Cleb Paulo").withDevelopedSkills("Aprenda JPA").withSubCategory(java)
+                .withName("JPA").withCode("jpa")
+                .withEstimatedTimeInHours(5)
+                .withVisibility(Status.PUBLIC)
+                .withTargetAudience("Pessoas que gostam de Java")
+                .withTeacher("Cleb Paulo")
+                .withDevelopedSkills("Aprenda JPA")
+                .withSubCategory(java)
                 .create();
 
         Course python = new CourseBuilder()
-                .withName("Python").withCode("py").withEstimatedTimeInHours(5)
-                .withVisibility(Status.PRIVATE).withTargetAudience("Pessoas que gostam de Python")
-                .withTeacher("Cleb Paulo").withDevelopedSkills("Aprenda uma nova linguagem").withSubCategory(java)
+                .withName("Python")
+                .withCode("py")
+                .withEstimatedTimeInHours(5)
+                .withVisibility(Status.PRIVATE)
+                .withTargetAudience("Pessoas que gostam de Python")
+                .withTeacher("Cleb Paulo")
+                .withDevelopedSkills("Aprenda uma nova linguagem")
+                .withSubCategory(java)
                 .create();
 
         em.persist(javaSintax);
@@ -85,6 +99,7 @@ public class CourseDaoTest {
 
         assertNotNull(courseList);
         Assertions.assertEquals(2, courseList.size());
-        assertEquals("javasintax", courseList.get(0).getCode());
+        assertEquals(javaSintax, courseList.get(0));
+        assertEquals(jpa, courseList.get(1));
     }
 }

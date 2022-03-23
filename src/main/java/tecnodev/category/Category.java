@@ -8,7 +8,6 @@ import java.util.List;
 import static validator.Validator.*;
 
 @Entity
-@Table(name = "Category")
 public class Category {
 
     @Id
@@ -16,7 +15,6 @@ public class Category {
     private Long id;
     private String name;
     private String code;
-
     @Column(columnDefinition = "TEXT")
     private String description;
     @Column(columnDefinition = "TEXT", name = "study_guide")

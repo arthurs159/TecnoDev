@@ -43,7 +43,7 @@ public class SubcategoryDao {
 
     public List<String> listAllSubcategoryNameWithoutDescription() {
         String jpql = """
-                SELECT s.name FROM SubCategory s 
+                SELECT s.name FROM SubCategory s
                 WHERE s.description = ''
                 """;
 

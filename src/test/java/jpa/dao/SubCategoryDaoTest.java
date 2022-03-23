@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class SubCategoryDaoTest {
 
-    private CategoryDao catDao;
     private SubcategoryDao dao;
     private EntityManager em;
     private Category category;
@@ -25,7 +24,6 @@ public class SubCategoryDaoTest {
     @BeforeEach
     public void beforeEach() {
         this.em = JPAUtil.getEntityManager();
-        this.catDao = new CategoryDao(em);
         this.dao = new SubcategoryDao(em);
         em.getTransaction().begin();
 
@@ -83,7 +81,8 @@ public class SubCategoryDaoTest {
 
         assertNotNull(subCategoryList);
         assertEquals(2, subCategoryList.size());
-        assertEquals("java", subCategoryList.get(0).getCode());
+        assertEquals(java, subCategoryList.get(0));
+        assertEquals(javaScript, subCategoryList.get(1));
     }
 
     @Test
@@ -123,5 +122,7 @@ public class SubCategoryDaoTest {
 
         assertNotNull(nameList);
         assertEquals(2, nameList.size());
+        assertEquals(communication.getName(), nameList.get(0));
+        assertEquals(aws.getName(), nameList.get(1));
     }
 }

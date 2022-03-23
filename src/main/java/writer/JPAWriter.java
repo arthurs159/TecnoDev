@@ -177,6 +177,7 @@ public class JPAWriter {
                 </html>
                 """);
 
+        em.close();
         fileWriter.write(html.toString());
         fileWriter.flush();
         fileWriter.close();

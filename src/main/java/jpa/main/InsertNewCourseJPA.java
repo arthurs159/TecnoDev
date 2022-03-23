@@ -15,7 +15,10 @@ public class InsertNewCourseJPA {
         SubcategoryDao subcategoryDao = new SubcategoryDao(em);
         CourseDao courseDao = new CourseDao(em);
 
-        Course curso = new Course("Java Spring", "jaspring", 7, "professor",
+        Course curso = new Course("Java Spring",
+                "jaspring",
+                7,
+                "professor",
                 subcategoryDao.getSubcategoryByCode("java"));
 
         em.getTransaction().begin();
