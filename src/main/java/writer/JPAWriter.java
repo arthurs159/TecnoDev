@@ -104,7 +104,7 @@ public class JPAWriter {
                         <td> %d </td>
                     </tr>
                     """.formatted(subCategory.getId() ,subCategory.getName(), subCategory.getCode(), subCategory.getDescription(),
-                    subCategory.isActive(), subCategory.getOrderInSystem(), subCategory.getCategory().getId()));
+                    subCategory.isActive(), subCategory.getOrderInSystem(), subCategory.getCategoryId()));
         }
 
         html.append("""
@@ -147,7 +147,7 @@ public class JPAWriter {
                     </tr>
                     """.formatted(course.getId(), course.getName(), course.getCode(), course.getEstimatedTimeInHours(),
                     course.getVisibility(), course.getTargetAudience(), course.getTeacher(), course.getDescription(),
-                    course.getDevelopedSkills(), course.getSubCategory().getId()));
+                    course.getDevelopedSkills(), course.getSubcategoryId()));
         }
 
         List<String> names = subcategoryDao.listAllSubcategoryNameWithoutDescription();

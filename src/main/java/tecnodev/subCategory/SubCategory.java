@@ -81,6 +81,10 @@ public class SubCategory {
         return this.getCategory().getCode();
     }
 
+    public Long getCategoryId(){
+        return this.getCategory().getId();
+    }
+
     @Override
     public String toString() {
         return "SubCategory{" +

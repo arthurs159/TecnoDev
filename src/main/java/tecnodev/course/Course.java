@@ -109,6 +109,10 @@ public class Course {
         return this.getSubCategory().getCode();
     }
 
+    public Long getSubcategoryId(){
+        return this.getSubCategory().getId();
+    }
+
     @Override
     public String toString() {
         return "Course{" +
