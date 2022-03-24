@@ -2,18 +2,33 @@ package tecnodev.subCategory;
 
 import tecnodev.category.Category;
 
+import javax.persistence.*;
+
 import static validator.Validator.*;
 
+@Entity
+@Table(name = "Subcategory")
 public class SubCategory {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String code;
+    @Column(columnDefinition = "TEXT")
     private String description;
+    @Column(columnDefinition = "TEXT", name = "study_guide")
     private String studyGuide;
     private boolean active;
+    @Column(columnDefinition = "SMALLINT", name = "order_in_system")
     private Integer orderInSystem;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
+
+    @Deprecated
+    public SubCategory() {}
 
     public SubCategory(String name, String code, Category category) {
         isNotNullOrEmpty(name, "The name must not be empty or null");
@@ -65,6 +80,10 @@ public class SubCategory {
 
     public String getCategoryCode() {
         return this.getCategory().getCode();
+    }
+
+    public Long getCategoryId(){
+        return this.getCategory().getId();
     }
 
     @Override

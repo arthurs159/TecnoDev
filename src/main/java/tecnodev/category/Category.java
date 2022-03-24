@@ -2,21 +2,33 @@ package tecnodev.category;
 
 import tecnodev.course.Course;
 
+import javax.persistence.*;
 import java.util.List;
 
 import static validator.Validator.*;
 
+@Entity
 public class Category {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String code;
+    @Column(columnDefinition = "TEXT")
     private String description;
+    @Column(columnDefinition = "TEXT", name = "study_guide")
     private String studyGuide;
     private boolean active;
+    @Column(columnDefinition = "SMALLINT", name = "order_in_system")
     private Integer orderInSystem;
+    @Column(name = "image_url")
     private String imageUrl;
+    @Column(name = "color_code")
     private String colorCode;
+
+    @Deprecated
+    public Category() {}
 
     public Category(String name, String code) {
         isNotNullOrEmpty(name, "The name must not be empty or null");

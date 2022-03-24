@@ -49,7 +49,6 @@ FOREIGN KEY (`course_id`) REFERENCES Course(id));
 
 CREATE TABLE Activity
 (id BIGINT PRIMARY KEY AUTO_INCREMENT,
-activity_type VARCHAR(50),
 title TEXT,
 `code` VARCHAR(100) UNIQUE NOT NULL,
 `active` BOOLEAN,
@@ -62,12 +61,3 @@ statement TEXT NOT NULL,
 question_type ENUM('SINGLE_CHOICE', 'MULTIPLE_CHOICE', 'TRUE_FALSE'),
 section_id BIGINT NOT NULL,
 FOREIGN KEY (section_id) REFERENCES Section(id));
-
-CREATE TABLE Alternative
-(id BIGINT PRIMARY KEY AUTO_INCREMENT,
-alternative_text TEXT,
-order_in_system SMALLINT,
-correct BOOLEAN,
-justification TEXT,
-activity_id BIGINT NOT NULL,
-FOREIGN KEY (activity_id) REFERENCES Activity(id));
