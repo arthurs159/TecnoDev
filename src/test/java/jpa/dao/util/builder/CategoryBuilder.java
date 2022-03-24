@@ -12,14 +12,9 @@ public class CategoryBuilder {
     private String imageUrl;
     private String colorCode;
 
-    public CategoryBuilder withName(String name) {
+    public CategoryBuilder(String name, String code) {
         this.name = name;
-        return this;
-    }
-
-    public CategoryBuilder withCode(String code) {
         this.code = code;
-        return this;
     }
 
     public CategoryBuilder withDescription(String description) {
@@ -55,6 +50,39 @@ public class CategoryBuilder {
                 active,
                 imageUrl,
                 colorCode);
+    }
+
+    public static Category categoryFrontEnd() {
+            Category frontEndCategory = new CategoryBuilder("Front-end", "frontend")
+                .withDescription("Curso front-end")
+                .withActive(true)
+                .withOrderInSystem(5)
+                .withImageUrl("www.google.com.br")
+                .withColorCode("#9AEA20")
+                .create();
+        return frontEndCategory;
+    }
+
+    public static Category categoryBackEnd(){
+        Category backEndCategory = new CategoryBuilder("Back-End", "backend")
+                .withDescription("Curso back-end")
+                .withActive(true)
+                .withOrderInSystem(4)
+                .withImageUrl("www.google.com.br")
+                .withColorCode("#9AEA20")
+                .create();
+        return backEndCategory;
+    }
+
+    public static Category categoryDevops(){
+        Category devOpsCategory = new CategoryBuilder("DevOps", "devops")
+                .withDescription("Curso Devops")
+                .withActive(false)
+                .withOrderInSystem(5)
+                .withImageUrl("www.google.com.br")
+                .withColorCode("#9AEA20")
+                .create();
+        return devOpsCategory;
     }
 
 }

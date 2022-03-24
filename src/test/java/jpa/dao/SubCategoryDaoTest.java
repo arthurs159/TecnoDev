@@ -19,24 +19,15 @@ public class SubCategoryDaoTest {
 
     private SubcategoryDao dao;
     private EntityManager em;
-    private Category category;
+    private Category categoryBackEnd;
 
     @BeforeEach
     public void beforeEach() {
         this.em = JPAUtil.getEntityManager();
         this.dao = new SubcategoryDao(em);
         em.getTransaction().begin();
-
-        category = new CategoryBuilder()
-                .withName("Back-End")
-                .withCode("backend")
-                .withDescription("curso back-end")
-                .withActive(true)
-                .withOrderInSystem(4)
-                .withImageUrl("www.google.com.br")
-                .withColorCode("#9AEA20")
-                .create();
-        em.persist(category);
+        this.categoryBackEnd = CategoryBuilder.categoryBackEnd();
+        em.persist(this.categoryBackEnd);
     }
 
     @AfterEach
@@ -46,83 +37,37 @@ public class SubCategoryDaoTest {
 
     @Test
     void listAllActiveShouldReturnAllActiveSubcategoryInOrderFromDatabase() {
-        SubCategory javaScript = new SubCategoryBuilder()
-                .withName("JavaScript")
-                .withCode("javascript")
-                .withDescription("Projetos em JavaScript")
-                .withActive(true)
-                .withOrderInSystem(2)
-                .withCategory(category)
-                .create();
+        SubCategory subCategoryJava = SubCategoryBuilder.subCategoryJava(categoryBackEnd);
+        SubCategory subCategoryJs = SubCategoryBuilder.subCategoryJs(categoryBackEnd);
+        SubCategory subCategoryPython = SubCategoryBuilder.subCategoryPython(categoryBackEnd);
 
-        SubCategory java = new SubCategoryBuilder()
-                .withName("Java")
-                .withCode("java")
-                .withDescription("Projetos em java")
-                .withActive(true)
-                .withOrderInSystem(1)
-                .withCategory(category)
-                .create();
-
-        SubCategory python = new SubCategoryBuilder()
-                .withName("Python")
-                .withCode("python")
-                .withDescription("Projetos em Python")
-                .withActive(false)
-                .withOrderInSystem(3)
-                .withCategory(category)
-                .create();
-
-        em.persist(javaScript);
-        em.persist(python);
-        em.persist(java);
+        em.persist(subCategoryJs);
+        em.persist(subCategoryPython);
+        em.persist(subCategoryJava);
 
         List<SubCategory> subCategoryList = dao.listAllActive();
 
         assertNotNull(subCategoryList);
         assertEquals(2, subCategoryList.size());
-        assertEquals(java, subCategoryList.get(0));
-        assertEquals(javaScript, subCategoryList.get(1));
+        assertEquals(subCategoryJava, subCategoryList.get(0));
+        assertEquals(subCategoryJs, subCategoryList.get(1));
     }
 
     @Test
     void listAllSubcategoryNameWithoutDescriptionShouldReturnAllSubCategoryNameWithNoName() {
-        SubCategory mobile = new SubCategoryBuilder()
-                .withName("Mobile")
-                .withCode("mobile")
-                .withDescription("Conheça nossos cursos de Mobile")
-                .withActive(true)
-                .withOrderInSystem(1)
-                .withCategory(category)
-                .create();
+        SubCategory subCategoryCommunication = SubCategoryBuilder.subCategoryCommunication(categoryBackEnd);
+        SubCategory subCategoryJs = SubCategoryBuilder.subCategoryJs(categoryBackEnd);
+        SubCategory subCategoryMobile = SubCategoryBuilder.subCategoryMobile(categoryBackEnd);
 
-        SubCategory communication = new SubCategoryBuilder()
-                .withName("Comunicação Assertiva")
-                .withCode("communication")
-                .withDescription("")
-                .withActive(true)
-                .withOrderInSystem(2)
-                .withCategory(category)
-                .create();
-
-        SubCategory aws = new SubCategoryBuilder()
-                .withName("Amazon Web Service")
-                .withCode("aws")
-                .withDescription("")
-                .withActive(true)
-                .withOrderInSystem(3)
-                .withCategory(category)
-                .create();
-
-        em.persist(mobile);
-        em.persist(communication);
-        em.persist(aws);
+        em.persist(subCategoryMobile);
+        em.persist(subCategoryJs);
+        em.persist(subCategoryCommunication);
 
         List<String> nameList = dao.listAllSubcategoryNameWithoutDescription();
 
         assertNotNull(nameList);
         assertEquals(2, nameList.size());
-        assertEquals(communication.getName(), nameList.get(0));
-        assertEquals(aws.getName(), nameList.get(1));
+        assertEquals(subCategoryMobile.getName(), nameList.get(0));
+        assertEquals(subCategoryCommunication.getName(), nameList.get(1));
     }
 }

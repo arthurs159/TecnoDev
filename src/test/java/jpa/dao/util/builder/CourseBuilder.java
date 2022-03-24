@@ -16,19 +16,12 @@ public class CourseBuilder {
     private String developedSkills;
     private SubCategory subCategory;
 
-    public CourseBuilder withName(String name) {
+    public CourseBuilder(String name, String code, Integer estimatedTimeInHours, String teacher, SubCategory subCategory) {
         this.name = name;
-        return this;
-    }
-
-    public CourseBuilder withCode(String code) {
         this.code = code;
-        return this;
-    }
-
-    public CourseBuilder withEstimatedTimeInHours(Integer estimatedTimeInHours) {
         this.estimatedTimeInHours = estimatedTimeInHours;
-        return this;
+        this.teacher = teacher;
+        this.subCategory = subCategory;
     }
 
     public CourseBuilder withVisibility(Status visibility) {
@@ -41,11 +34,6 @@ public class CourseBuilder {
         return this;
     }
 
-    public CourseBuilder withTeacher(String teacher) {
-        this.teacher = teacher;
-        return this;
-    }
-
     public CourseBuilder withDescription(String description) {
         this.description = description;
         return this;
@@ -53,11 +41,6 @@ public class CourseBuilder {
 
     public CourseBuilder withDevelopedSkills(String developedSkills) {
         this.developedSkills = developedSkills;
-        return this;
-    }
-
-    public CourseBuilder withSubCategory(SubCategory subCategory) {
-        this.subCategory = subCategory;
         return this;
     }
 
@@ -72,6 +55,37 @@ public class CourseBuilder {
                 description,
                 developedSkills,
                 subCategory);
+    }
+
+    public static Course courseJava(SubCategory subCategory){
+        Course javaSintax = new CourseBuilder("Java e Sintaxe", "javasintax",
+                5,"Cleb Paulo", subCategory)
+                .withVisibility(Status.PUBLIC)
+                .withTargetAudience("Pessoas que gostam de Java")
+                .withDevelopedSkills("Aprenda a sintaxe de java")
+                .create();
+
+        return javaSintax;
+    }
+
+    public static Course courseJpa(SubCategory subCategory) {
+        Course jpa = new CourseBuilder("JPA", "jpa", 5,
+                "Cleb Paulo", subCategory)
+                .withVisibility(Status.PUBLIC)
+                .withTargetAudience("Pessoas que gostam de Java")
+                .withDevelopedSkills("Aprenda JPA")
+                .create();
+        return jpa;
+    }
+
+    public static Course coursePython(SubCategory subCategory) {
+        Course python = new CourseBuilder("Python", "py",
+                5, "Cleb Paulo", subCategory )
+                .withVisibility(Status.PRIVATE)
+                .withTargetAudience("Pessoas que gostam de Python")
+                .withDevelopedSkills("Aprenda uma nova linguagem")
+                .create();
+        return python;
     }
 
 }

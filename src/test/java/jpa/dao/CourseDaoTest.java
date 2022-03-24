@@ -23,12 +23,18 @@ public class CourseDaoTest {
 
     private CourseDao dao;
     private EntityManager em;
+    private Category category;
+    private SubCategory subCategory;
 
     @BeforeEach
     public void beforeEach() {
         this.em = JPAUtil.getEntityManager();
         this.dao = new CourseDao(em);
+        category = CategoryBuilder.categoryBackEnd();
+        subCategory = SubCategoryBuilder.subCategoryJava(category);
         em.getTransaction().begin();
+        em.persist(category);
+        em.persist(subCategory);
     }
 
     @AfterEach
@@ -38,68 +44,19 @@ public class CourseDaoTest {
 
     @Test
     void listAllPublicCoursesShouldReturnAllPublicCourses() {
-        Category backend = new CategoryBuilder()
-                .withName("Back-End")
-                .withCode("backend")
-                .withDescription("curso back-end")
-                .withActive(true)
-                .withOrderInSystem(4)
-                .withImageUrl("www.google.com.br")
-                .withColorCode("#9AEA20")
-                .create();
-        em.persist(backend);
+        Course courseJpa = CourseBuilder.courseJpa(subCategory);
+        Course courseJava = CourseBuilder.courseJava(subCategory);
+        Course coursePython = CourseBuilder.coursePython(subCategory);
 
-        SubCategory java = new SubCategoryBuilder()
-                .withName("Java")
-                .withCode("java")
-                .withDescription("Projetos em java")
-                .withActive(true)
-                .withOrderInSystem(1)
-                .withCategory(backend)
-                .create();
-        em.persist(java);
-
-        Course javaSintax = new CourseBuilder()
-                .withName("Java e Sintaxe")
-                .withCode("javasintax")
-                .withEstimatedTimeInHours(5)
-                .withVisibility(Status.PUBLIC)
-                .withTargetAudience("Pessoas que gostam de Java")
-                .withTeacher("Cleb Paulo")
-                .withDevelopedSkills("Aprenda a sintaxe de java")
-                .withSubCategory(java)
-                .create();
-
-        Course jpa = new CourseBuilder()
-                .withName("JPA").withCode("jpa")
-                .withEstimatedTimeInHours(5)
-                .withVisibility(Status.PUBLIC)
-                .withTargetAudience("Pessoas que gostam de Java")
-                .withTeacher("Cleb Paulo")
-                .withDevelopedSkills("Aprenda JPA")
-                .withSubCategory(java)
-                .create();
-
-        Course python = new CourseBuilder()
-                .withName("Python")
-                .withCode("py")
-                .withEstimatedTimeInHours(5)
-                .withVisibility(Status.PRIVATE)
-                .withTargetAudience("Pessoas que gostam de Python")
-                .withTeacher("Cleb Paulo")
-                .withDevelopedSkills("Aprenda uma nova linguagem")
-                .withSubCategory(java)
-                .create();
-
-        em.persist(javaSintax);
-        em.persist(jpa);
-        em.persist(python);
+        em.persist(courseJpa);
+        em.persist(courseJava);
+        em.persist(coursePython);
 
         List<Course> courseList = dao.listAllPublicCourses();
 
         assertNotNull(courseList);
         Assertions.assertEquals(2, courseList.size());
-        assertEquals(javaSintax, courseList.get(0));
-        assertEquals(jpa, courseList.get(1));
+        assertEquals(courseJpa, courseList.get(0));
+        assertEquals(courseJava, courseList.get(1));
     }
 }

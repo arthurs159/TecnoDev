@@ -32,45 +32,19 @@ class CategoryDaoTest {
 
     @Test
     void listAllActiveShouldReturnAllActiveCategoriesInOrderFromDatabase() {
-        Category frontEndCategory = new CategoryBuilder()
-                .withName("Front-End")
-                .withCode("frontend")
-                .withDescription("Curso front-end")
-                .withActive(true)
-                .withOrderInSystem(5)
-                .withImageUrl("www.google.com.br")
-                .withColorCode("#9AEA20")
-                .create();
+        Category categoryFrontEnd = CategoryBuilder.categoryFrontEnd();
+        Category categoryBackEnd = CategoryBuilder.categoryBackEnd();
+        Category categoryDevOps = CategoryBuilder.categoryDevops();
 
-        Category backEndCategory = new CategoryBuilder()
-                .withName("Back-End")
-                .withCode("backend")
-                .withDescription("Curso back-end")
-                .withActive(true)
-                .withOrderInSystem(4)
-                .withImageUrl("www.google.com.br")
-                .withColorCode("#9AEA20")
-                .create();
-
-        Category devOpsCategory = new CategoryBuilder()
-                .withName("DevOps")
-                .withCode("devops")
-                .withDescription("Curso Devops")
-                .withActive(false)
-                .withOrderInSystem(5)
-                .withImageUrl("www.google.com.br")
-                .withColorCode("#9AEA20")
-                .create();
-
-        em.persist(frontEndCategory);
-        em.persist(backEndCategory);
-        em.persist(devOpsCategory);
+        em.persist(categoryFrontEnd);
+        em.persist(categoryBackEnd);
+        em.persist(categoryDevOps);
         List<Category> categories = dao.listAllActive();
 
         assertNotNull(categories);
         assertEquals(2, categories.size());
-        assertEquals(backEndCategory, categories.get(0));
-        assertEquals(frontEndCategory, categories.get(1));
+        assertEquals(categoryBackEnd, categories.get(0));
+        assertEquals(categoryFrontEnd, categories.get(1));
     }
 
 }
