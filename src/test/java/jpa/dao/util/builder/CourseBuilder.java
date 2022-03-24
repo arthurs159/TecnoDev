@@ -1,8 +1,8 @@
 package jpa.dao.util.builder;
 
-import tecnodev.course.Course;
-import tecnodev.course.Status;
-import tecnodev.subCategory.SubCategory;
+import com.br.tecnodev.tecnodev.course.Course;
+import com.br.tecnodev.tecnodev.course.Status;
+import com.br.tecnodev.tecnodev.subCategory.SubCategory;
 
 public class CourseBuilder {
 

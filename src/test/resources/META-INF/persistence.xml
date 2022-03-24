@@ -5,9 +5,9 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
     <persistence-unit name="TecnoDev_test" transaction-type="RESOURCE_LOCAL">
-        <class>tecnodev.category.Category</class>
-        <class>tecnodev.subCategory.SubCategory</class>
-        <class>tecnodev.course.Course</class>
+        <class>com.br.tecnodev.tecnodev.category.Category</class>
+        <class>com.br.tecnodev.tecnodev.subCategory.SubCategory</class>
+        <class>com.br.tecnodev.tecnodev.course.Course</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/TecnoDev_test" />

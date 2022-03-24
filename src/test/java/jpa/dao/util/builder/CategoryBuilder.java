@@ -1,6 +1,6 @@
 package jpa.dao.util.builder;
 
-import tecnodev.category.Category;
+import com.br.tecnodev.tecnodev.category.Category;
 
 public class CategoryBuilder {
 
