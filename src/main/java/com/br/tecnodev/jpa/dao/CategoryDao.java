@@ -19,4 +19,11 @@ public class CategoryDao {
                 .getResultList();
     }
 
+    public List<Category> listAllCategories(){
+        String jpql = "SELECT c FROM Category c";
+
+        return em.createQuery(jpql, Category.class)
+                .getResultList();
+    }
+
 }
