@@ -14,7 +14,7 @@ public class CategoryDao {
     }
 
     public List<Category> listAllActive() {
-        String jpql = "SELECT c FROM Category c WHERE c.active = 1 ORDER BY c.name";
+        String jpql = "SELECT c FROM Category c WHERE c.active = 1 ORDER BY c.orderInSystem";
         return em.createQuery(jpql, Category.class)
                 .getResultList();
     }

@@ -46,7 +46,7 @@ public class CourseDao {
                 SELECT c FROM Course c
                 JOIN FETCH c.subCategory
                 WHERE
-                c.visibility = 1
+                c.visibility = 'PUBLIC'
                 """;
 
         return em.createQuery(jpql, Course.class)

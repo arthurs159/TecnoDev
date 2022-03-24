@@ -13,15 +13,9 @@ public class SubcategoryDao {
         this.em = em;
     }
 
-    public List<SubCategory> getSubcategory() {
-        String sql = "SELECT s FROM SubCategory s";
-        return em.createQuery(sql, SubCategory.class)
-                .getResultList();
-    }
-
     public SubCategory getSubcategoryByCode(String code) {
         String jpql = """
-                SELECT s FROM SubCategory s 
+                SELECT s FROM SubCategory s
                 WHERE s.code = :code
                 """;
 
@@ -34,7 +28,7 @@ public class SubcategoryDao {
         String jpql = """
                 SELECT s FROM SubCategory s
                 JOIN FETCH s.category
-                WHERE s.active = 1 ORDER BY s.name
+                WHERE s.active = 1 ORDER BY s.orderInSystem
                 """;
 
         return em.createQuery(jpql, SubCategory.class)

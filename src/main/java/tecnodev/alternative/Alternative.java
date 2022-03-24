@@ -25,6 +25,7 @@ public class Alternative {
     @JoinColumn(name = "activity_id")
     private Question question;
 
+    @Deprecated
     public Alternative() {}
 
     public Alternative(String alternativeText, boolean correct, Question question) {

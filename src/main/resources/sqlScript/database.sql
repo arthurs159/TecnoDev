@@ -59,7 +59,7 @@ url TEXT NOT NULL,
 estimated_time_in_minutes SMALLINT,
 transcription TEXT,
 statement TEXT NOT NULL,
-queston_type ENUM('SINGLE_CHOICE', 'MULTIPLE_CHOICE', 'TRUE_FALSE'),
+question_type ENUM('SINGLE_CHOICE', 'MULTIPLE_CHOICE', 'TRUE_FALSE'),
 section_id BIGINT NOT NULL,
 FOREIGN KEY (section_id) REFERENCES Section(id));
 

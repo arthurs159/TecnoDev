@@ -32,7 +32,7 @@ class CategoryDaoTest {
 
     @Test
     void listAllActiveShouldReturnAllActiveCategoriesInOrderFromDatabase() {
-        Category category1 = new CategoryBuilder()
+        Category frontEndCategory = new CategoryBuilder()
                 .withName("Front-End")
                 .withCode("frontend")
                 .withDescription("Curso front-end")
@@ -42,7 +42,7 @@ class CategoryDaoTest {
                 .withColorCode("#9AEA20")
                 .create();
 
-        Category category2 = new CategoryBuilder()
+        Category backEndCategory = new CategoryBuilder()
                 .withName("Back-End")
                 .withCode("backend")
                 .withDescription("Curso back-end")
@@ -52,7 +52,7 @@ class CategoryDaoTest {
                 .withColorCode("#9AEA20")
                 .create();
 
-        Category category3 = new CategoryBuilder()
+        Category devOpsCategory = new CategoryBuilder()
                 .withName("DevOps")
                 .withCode("devops")
                 .withDescription("Curso Devops")
@@ -62,15 +62,15 @@ class CategoryDaoTest {
                 .withColorCode("#9AEA20")
                 .create();
 
-        em.persist(category1);
-        em.persist(category2);
-        em.persist(category3);
+        em.persist(frontEndCategory);
+        em.persist(backEndCategory);
+        em.persist(devOpsCategory);
         List<Category> categories = dao.listAllActive();
 
         assertNotNull(categories);
         assertEquals(2, categories.size());
-        assertEquals(category2, categories.get(0));
-        assertEquals(category1, categories.get(1));
+        assertEquals(backEndCategory, categories.get(0));
+        assertEquals(frontEndCategory, categories.get(1));
     }
 
 }

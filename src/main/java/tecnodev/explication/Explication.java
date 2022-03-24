@@ -16,6 +16,7 @@ public class Explication extends Activity {
     @Column(columnDefinition = "TEXT")
     private String explication;
 
+    @Deprecated
     public Explication() {}
 
     public Explication(String title, String code, Section section, String explication) {

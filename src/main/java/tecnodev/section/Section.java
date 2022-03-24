@@ -7,7 +7,6 @@ import javax.persistence.*;
 import static validator.Validator.*;
 
 @Entity
-@Table(name = "Section")
 public class Section {
 
     @Id
@@ -24,6 +23,7 @@ public class Section {
     @JoinColumn(name = "course_id")
     private Course course;
 
+    @Deprecated
     public Section() {}
 
     public Section(String name, String code, Course course) {

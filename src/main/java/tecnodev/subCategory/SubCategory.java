@@ -27,6 +27,7 @@ public class SubCategory {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
+    @Deprecated
     public SubCategory() {}
 
     public SubCategory(String name, String code, Category category) {

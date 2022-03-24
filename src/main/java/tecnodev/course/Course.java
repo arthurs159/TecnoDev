@@ -34,6 +34,7 @@ public class Course {
     @ManyToOne(fetch = FetchType.LAZY)
     private SubCategory subCategory;
 
+    @Deprecated
     public Course() {}
 
     public Course(String name, String code, int estimatedTimeInHours, String teacher, SubCategory subCategory) {
