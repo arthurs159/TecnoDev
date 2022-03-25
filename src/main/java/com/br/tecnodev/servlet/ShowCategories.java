@@ -31,11 +31,10 @@ public class ShowCategories extends HttpServlet {
                     <style>
                     table, th, td {
                     border:1px solid black;
-                    border-collapse: collapse;
-                    }
+                    border-collapse: collapse;}
                     </style>
                     <head>
-                        <title>Cursos</title>
+                        <title>Categorias</title>
                     </head>
                     <body>
                         <h1>RELATÓRIO TECNODEV<br></h1>
@@ -68,6 +67,12 @@ public class ShowCategories extends HttpServlet {
                     """.formatted(category.getId(), category.getName(), category.getCode(), category.getDescription(),
                     category.isActive(), category.getOrderInSystem(), category.getImageUrl(), category.getColorCode()));
         }
+
+        html.append("""
+                </table>
+                </body>
+                </html>
+                """);
 
         em.close();
         out.println(html);
