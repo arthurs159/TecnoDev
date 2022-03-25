@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; ISO-8859-1"
          pageEncoding="iso-8859-1" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -29,21 +30,18 @@
         <th>CÓDIGO DA COR</th>
     </tr>
 
-    <%
-        List<Category> categoryList = (List<Category>) request.getAttribute("categories");
-        for (Category category : categoryList) {
-    %>
-    <tr>
-        <td><%= category.getId() %></td>
-        <td><%=category.getName()%></td>
-        <td><%=category.getCode()%></td>
-        <td><%=category.getDescription()%></td>
-        <td><%=category.isActive()%></td>
-        <td><%=category.getOrderInSystem()%></td>
-        <td><img src=<%=category.getImageUrl()%> alt="icone" width="150px"></td>
-        <td style="background-color: <%=category.getColorCode()%>"></td>
-    </tr>
-    <%}%>
+    <c:forEach items="${categories}" var="category">
+        <tr>
+            <td>${category.id}</td>
+            <td>${category.name}</td>
+            <td>${category.code}</td>
+            <td>${category.description}</td>
+            <td>${category.active}</td>
+            <td>${category.orderInSystem}</td>
+            <td><img src=${category.imageUrl} alt='icone' width="150px"> </td>
+            <td style="background-color: ${category.colorCode}"></td>
+        </tr>
+    </c:forEach>
 
 </table>
 </body>

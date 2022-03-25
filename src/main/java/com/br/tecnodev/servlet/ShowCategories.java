@@ -25,6 +25,7 @@ public class ShowCategories extends HttpServlet {
         List<Category> categoryList = categoryDao.listAllCategories();
 
         request.setAttribute("categories", categoryList);
+
         RequestDispatcher rd = request.getRequestDispatcher("/listCategories.jsp");
         rd.forward(request, response);
     }
