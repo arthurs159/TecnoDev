@@ -28,6 +28,7 @@
         <th>ORDEM</th>
         <th>URL DA IMAGEM</th>
         <th>CÓDIGO DA COR</th>
+        <th>EDITAR CATEGORIA</th>
     </tr>
 
     <c:forEach items="${categories}" var="category">
@@ -40,6 +41,7 @@
             <td>${category.orderInSystem}</td>
             <td><img src=${category.imageUrl} alt='icone' width="150px"> </td>
             <td style="background-color: ${category.colorCode}"></td>
+            <td><a href="/editCategory?id=${category.id}">EDITAR</a></td>
         </tr>
     </c:forEach>
 

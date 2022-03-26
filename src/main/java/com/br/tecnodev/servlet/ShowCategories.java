@@ -18,14 +18,12 @@ import java.util.List;
 public class ShowCategories extends HttpServlet {
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = JPAUtil.getEntityManager();
         CategoryDao categoryDao = new CategoryDao(em);
 
         List<Category> categoryList = categoryDao.listAllCategories();
-
         request.setAttribute("categories", categoryList);
-
         RequestDispatcher rd = request.getRequestDispatcher("/listCategories.jsp");
         rd.forward(request, response);
     }

@@ -79,6 +79,42 @@ public class Category {
         return orderInSystem;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStudyGuide(String studyGuide) {
+        this.studyGuide = studyGuide;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setOrderInSystem(Integer orderInSystem) {
+        this.orderInSystem = orderInSystem;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
+    }
+
     public static int numbersOfCourseFromCategory(List<Course> courses, String codeCategory) {
         return (int) courses.stream()
                 .filter(course -> course.getCategoryCode().equals(codeCategory)).count();
