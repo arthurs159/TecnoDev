@@ -4,8 +4,6 @@ import com.br.tecnodev.jpa.dao.CategoryDao;
 import com.br.tecnodev.jpa.util.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/updateCategory")
-public class UpdateCategory extends HttpServlet {
+public class UpdateCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

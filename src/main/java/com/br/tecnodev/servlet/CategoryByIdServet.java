@@ -12,7 +12,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet("/editCategory")
-public class GetCategoryById extends HttpServlet {
+public class CategoryByIdServet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
