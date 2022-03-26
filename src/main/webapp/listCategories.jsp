@@ -1,7 +1,4 @@
-<%@ page import="com.br.tecnodev.tecnodev.category.Category" %>
-<%@ page import="java.util.List" %>
-<%@ page language="java" contentType="text/html; ISO-8859-1"
-         pageEncoding="iso-8859-1" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -16,32 +13,37 @@
     <title>Categorias</title>
 </head>
 <body>
-<h1>RELATÓRIO TECNODEV<br></h1>
+<h1>RELATÃ“RIO TECNODEV<br></h1>
 <h2>Categorias Com Servlet</h2>
+<a href="/createCategory">
+<button type="button"> CRIAR NOVA CATEGORIA</button>
+</a>
 <table style="width:100%">
     <tr>
         <th>ID</th>
         <th>NOME</th>
-        <th>CÓDIGO</th>
-        <th>DESCRIÇÃO</th>
+        <th>CÃ“DIGO</th>
+        <th>DESCRIÃ‡ÃƒO</th>
+        <th>GUIA ESTUDO</th>
         <th>ATIVO</th>
         <th>ORDEM</th>
         <th>URL DA IMAGEM</th>
-        <th>CÓDIGO DA COR</th>
+        <th>CÃ“DIGO DA COR</th>
         <th>EDITAR CATEGORIA</th>
     </tr>
 
-    <c:forEach items="${categories}" var="category">
+    <c:forEach items="${categoriesDTOList}" var="categoryDto">
         <tr>
-            <td>${category.id}</td>
-            <td>${category.name}</td>
-            <td>${category.code}</td>
-            <td>${category.description}</td>
-            <td>${category.active}</td>
-            <td>${category.orderInSystem}</td>
-            <td><img src=${category.imageUrl} alt='icone' width="150px"> </td>
-            <td style="background-color: ${category.colorCode}"></td>
-            <td><a href="/editCategory?id=${category.id}">EDITAR</a></td>
+            <td>${categoryDto.id}</td>
+            <td>${categoryDto.name}</td>
+            <td>${categoryDto.code}</td>
+            <td>${categoryDto.description}</td>
+            <td>${categoryDto.studyGuide}</td>
+            <td>${categoryDto.active}</td>
+            <td>${categoryDto.orderInSystem}</td>
+            <td><img src=${categoryDto.imageUrl} alt='icone' width="150px"> </td>
+            <td style="background-color: ${categoryDto.colorCode}"></td>
+            <td><a href="/editCategory?id=${categoryDto.id}">EDITAR</a></td>
         </tr>
     </c:forEach>
 

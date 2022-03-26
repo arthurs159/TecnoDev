@@ -47,6 +47,11 @@ public class Category {
         this.colorCode = colorCode;
     }
 
+    public Category(String name, String code, Integer orderInSystem, String description, String studyGuide, boolean active, String imageUrl, String colorCode) {
+        this(name, code, orderInSystem, description, active, imageUrl, colorCode);
+        this.studyGuide = studyGuide;
+    }
+
     public Long getId() {
         return id;
     }
@@ -63,6 +68,10 @@ public class Category {
         return description;
     }
 
+    public String getStudyGuide() {
+        return studyGuide;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -77,42 +86,6 @@ public class Category {
 
     public Integer getOrderInSystem() {
         return orderInSystem;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setStudyGuide(String studyGuide) {
-        this.studyGuide = studyGuide;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public void setOrderInSystem(Integer orderInSystem) {
-        this.orderInSystem = orderInSystem;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
     }
 
     public static int numbersOfCourseFromCategory(List<Course> courses, String codeCategory) {

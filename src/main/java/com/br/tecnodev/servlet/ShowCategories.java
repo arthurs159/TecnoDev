@@ -3,6 +3,7 @@ package com.br.tecnodev.servlet;
 import com.br.tecnodev.jpa.dao.CategoryDao;
 import com.br.tecnodev.jpa.util.JPAUtil;
 import com.br.tecnodev.tecnodev.category.Category;
+import com.br.tecnodev.tecnodev.category.CategoryDTO;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -23,8 +24,12 @@ public class ShowCategories extends HttpServlet {
         CategoryDao categoryDao = new CategoryDao(em);
 
         List<Category> categoryList = categoryDao.listAllCategories();
-        request.setAttribute("categories", categoryList);
+        List<CategoryDTO> categoryDTOList = CategoryDTO.fromDto(categoryList);
+
+        request.setAttribute("categoriesDTOList", categoryDTOList);
+
         RequestDispatcher rd = request.getRequestDispatcher("/listCategories.jsp");
+
         rd.forward(request, response);
     }
 }

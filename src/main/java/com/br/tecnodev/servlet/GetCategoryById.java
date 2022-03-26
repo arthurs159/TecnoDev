@@ -3,6 +3,7 @@ package com.br.tecnodev.servlet;
 import com.br.tecnodev.jpa.dao.CategoryDao;
 import com.br.tecnodev.jpa.util.JPAUtil;
 import com.br.tecnodev.tecnodev.category.Category;
+import com.br.tecnodev.tecnodev.category.CategoryDTO;
 
 import javax.persistence.EntityManager;
 import javax.servlet.*;
@@ -22,8 +23,10 @@ public class GetCategoryById extends HttpServlet {
         Long id = Long.valueOf(paramId);
 
         Category category = categoryDao.getCategoryById(id);
+        CategoryDTO categoryDTO = CategoryDTO.fromDto(category);
 
-        request.setAttribute("category", category);
+        request.setAttribute("category", categoryDTO);
+
         RequestDispatcher rd = request.getRequestDispatcher("/editCategoryForm.jsp");
         rd.forward(request, response);
     }

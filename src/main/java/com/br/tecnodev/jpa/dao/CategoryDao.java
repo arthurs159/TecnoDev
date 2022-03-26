@@ -15,7 +15,7 @@ public class CategoryDao {
     }
 
     public List<Category> listAllActive() {
-        String jpql = "SELECT c FROM Category c WHERE c.active = 1 ORDER BY c.orderInSystem";
+        String jpql = "SELECT c FROM Category c WHERE c.active = true ORDER BY c.orderInSystem";
         return em.createQuery(jpql, Category.class)
                 .getResultList();
     }
@@ -35,10 +35,15 @@ public class CategoryDao {
                 .getSingleResult();
     }
 
-    public int updateCategoryById(Long id, String name, String code, String description, boolean active,
+    public void insertCategory(Category category) {
+        this.em.persist(category);
+        System.out.println("Generated id: " + category.getId());
+    }
+
+    public int updateCategoryById(Long id, String name, String code, String description, String studyGuide, boolean active,
                                   Integer orderInSystem, String imageUrl, String colorCode) {
         String jqpl = """
-                UPDATE Category c SET c.name = :name, c.code = :code, c.description = :description,
+                UPDATE Category c SET c.name = :name, c.code = :code, c.description = :description, c.studyGuide = :studyGuide,
                 c.active = :active, c.orderInSystem = :orderInSystem, c.imageUrl = :imageUrl, c.colorCode = :colorCode
                 WHERE c.id = :id
                 """;
@@ -48,6 +53,7 @@ public class CategoryDao {
                 .setParameter("name", name)
                 .setParameter("code", code)
                 .setParameter("description", description)
+                .setParameter("studyGuide", studyGuide)
                 .setParameter("active", active)
                 .setParameter("orderInSystem", orderInSystem)
                 .setParameter("imageUrl", imageUrl)
