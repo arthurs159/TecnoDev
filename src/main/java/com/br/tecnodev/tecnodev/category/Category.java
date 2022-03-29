@@ -52,6 +52,10 @@ public class Category {
         this.studyGuide = studyGuide;
     }
 
+    public void toggleActive(){
+        this.active = !isActive();
+    }
+
     public Long getId() {
         return id;
     }

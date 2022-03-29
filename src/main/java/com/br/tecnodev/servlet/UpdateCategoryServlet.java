@@ -2,6 +2,9 @@ package com.br.tecnodev.servlet;
 
 import com.br.tecnodev.jpa.dao.CategoryDao;
 import com.br.tecnodev.jpa.util.JPAUtil;
+import com.br.tecnodev.tecnodev.category.Category;
+import com.br.tecnodev.tecnodev.category.CategoryDTO;
+import com.br.tecnodev.tecnodev.category.NewCategoryForm;
 
 import javax.persistence.EntityManager;
 import javax.servlet.annotation.WebServlet;
@@ -31,11 +34,16 @@ public class UpdateCategoryServlet extends HttpServlet {
         String imageUrl = request.getParameter("imageUrl");
         String colorCode = request.getParameter("colorCode");
 
+        NewCategoryForm categoryForm = new NewCategoryForm(name, code, description, studyGuide, active, orderInSystem, imageUrl, colorCode);
+
+        Category category = categoryForm.toEntity();
         em.getTransaction().begin();
-        categoryDao.updateCategoryById(id, name, code, description, studyGuide, active, orderInSystem, imageUrl, colorCode);
+
+        categoryDao.updateCategoryById(id, category);
 
         response.sendRedirect("/categories");
         em.getTransaction().commit();
         em.close();
     }
+
 }
