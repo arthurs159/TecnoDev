@@ -1,6 +1,6 @@
 package tecnodev.course;
 
-import com.br.tecnodev.tecnodev.course.Course;
+import br.com.tecnodev.tecnodev.course.Course;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,8 +8,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import com.br.tecnodev.tecnodev.category.Category;
-import com.br.tecnodev.tecnodev.subCategory.SubCategory;
+import br.com.tecnodev.tecnodev.category.Category;
+import br.com.tecnodev.tecnodev.subCategory.SubCategory;
 
 import static org.junit.jupiter.api.Assertions.*;
 

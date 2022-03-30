@@ -1,12 +1,12 @@
 package jpa.dao;
 
-import com.br.tecnodev.jpa.dao.CategoryDao;
+import br.com.tecnodev.jpa.dao.CategoryDao;
 import jpa.dao.util.JPAUtil;
 import jpa.dao.util.builder.CategoryBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.br.tecnodev.tecnodev.category.Category;
+import br.com.tecnodev.tecnodev.category.Category;
 
 import javax.persistence.EntityManager;
 import java.util.List;

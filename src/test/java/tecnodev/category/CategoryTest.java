@@ -7,15 +7,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
-import com.br.tecnodev.tecnodev.category.Category;
-import com.br.tecnodev.tecnodev.course.Course;
-import com.br.tecnodev.tecnodev.subCategory.SubCategory;
+import br.com.tecnodev.tecnodev.category.Category;
+import br.com.tecnodev.tecnodev.course.Course;
+import br.com.tecnodev.tecnodev.subCategory.SubCategory;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static com.br.tecnodev.tecnodev.category.Category.numbersOfCourseFromCategory;
-import static com.br.tecnodev.tecnodev.category.Category.quantityHoursFromCategory;
+import static br.com.tecnodev.tecnodev.category.Category.numbersOfCourseFromCategory;
+import static br.com.tecnodev.tecnodev.category.Category.quantityHoursFromCategory;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CategoryTest {
