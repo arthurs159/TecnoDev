@@ -34,7 +34,14 @@ public class UpdateCategoryServlet extends HttpServlet {
         String imageUrl = request.getParameter("imageUrl");
         String colorCode = request.getParameter("colorCode");
 
-        NewCategoryForm categoryForm = new NewCategoryForm(name, code, description, studyGuide, active, orderInSystem, imageUrl, colorCode);
+        NewCategoryForm categoryForm = new NewCategoryForm(name,
+                code,
+                description,
+                studyGuide,
+                active,
+                orderInSystem,
+                imageUrl,
+                colorCode);
 
         Category category = categoryForm.toEntity();
         em.getTransaction().begin();

@@ -37,8 +37,11 @@
             <input type="text" class="form-control" name="studyGuide" >
         </div>
         <div class="form-group">
-            <label >Ativo:</label>
-            <input type="text" class="form-control" name="active" >
+            <label>Status da Categoria:</label>
+            <select name="active" class="custom-select mb-3">
+                <option value="true">ATIVO</option>
+                <option value="false">INATIVO</option>
+            </select>
         </div>
         <div class="form-group">
             <label >Ordem:</label>

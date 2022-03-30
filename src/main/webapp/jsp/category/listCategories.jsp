@@ -8,6 +8,28 @@
         border: 1px solid black;
         border-collapse: collapse;
     }
+
+    .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        border-radius: 20px;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50;
+    }
+
+    .button1:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
 </style>
 <head>
     <title>Categorias</title>
@@ -16,7 +38,7 @@
 <h1>RELATÓRIO TECNODEV<br></h1>
 <h2>Categorias Com Servlet</h2>
 <a href="/createCategory">
-    <button type="button"> CRIAR NOVA CATEGORIA</button>
+    <button class="button button1" type="button"> CRIAR NOVA CATEGORIA</button>
 </a>
 <table style="width:100%">
     <tr>
@@ -30,12 +52,12 @@
         <th>URL DA IMAGEM</th>
         <th>CÓDIGO DA COR</th>
         <th>EDITAR</th>
-        <th>DESATIVAR</th>
+        <th>ATIV/DESATIV</th>
     </tr>
 
     <c:forEach items="${categoriesDTOList}" var="categoryDto">
         <tr>
-            <td id="id">${categoryDto.id}</td>
+            <td>${categoryDto.id}</td>
             <td>${categoryDto.name}</td>
             <td>${categoryDto.code}</td>
             <td>${categoryDto.description}</td>
@@ -46,12 +68,12 @@
             <td style="background-color: ${categoryDto.colorCode}"></td>
             <td><a href="/editCategory?id=${categoryDto.id}">EDITAR</a></td>
             <td>
-                <button onclick="disableCategory(${categoryDto.id}, this)" id="desativar">DESATIVAR JS</button>
+                <button style="height:60px" onclick="disableCategory(${categoryDto.id}, this)" id="desativar">DESATIVAR / ATIVAR</button>
             </td>
         </tr>
     </c:forEach>
 
-    <script src="disableCategory.js"></script>
+    <script src="../../assets/js/category/disableCategory.js"></script>
 
 </table>
 </body>

@@ -38,10 +38,15 @@
             <label>Guia Estudo</label>
             <input type="text" class="form-control" name="studyGuide" value="${category.studyGuide}">
         </div>
+
         <div class="form-group">
-            <label>Ativo:</label>
-            <input type="text" class="form-control" name="active" value="${category.active}">
+            <label>Status da Categoria:</label>
+                <select name="active" class="custom-select mb-3">
+                    <option value="true" ${category.active == true ? "selected" : ""}>ATIVO</option>
+                    <option value="false" ${category.active == false ? "selected" : ""}>INATIVO</option>
+                </select>
         </div>
+
         <div class="form-group">
             <label>Ordem:</label>
             <input type="text" class="form-control" name="orderInSystem" value="${category.orderInSystem}">
@@ -54,7 +59,7 @@
             <label>Código da cor:</label>
             <input type="text" class="form-control" name="colorCode" value="${category.colorCode}">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 </div>
 

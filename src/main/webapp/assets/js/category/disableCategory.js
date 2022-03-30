@@ -1,7 +1,6 @@
-const active = document.querySelector(".active").textContent;
 
 function disableCategory(id, element) {
-    let url = "/changeStatus?id=" + id;
+    const url = "/changeStatus?id=" + id;
     const request = new XMLHttpRequest();
     request.open("POST", url);
 

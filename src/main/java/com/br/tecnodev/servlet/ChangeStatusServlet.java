@@ -25,7 +25,6 @@ public class ChangeStatusServlet extends HttpServlet {
         em.getTransaction().begin();
         categoryDao.update(category);
         em.getTransaction().commit();
-        response.setStatus(204);
         em.close();
     }
 

@@ -28,7 +28,7 @@ public class ListCategoriesServlet extends HttpServlet {
 
         request.setAttribute("categoriesDTOList", categoryDTOList);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/listCategories.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("jsp/category/listCategories.jsp");
 
         rd.forward(request, response);
     }

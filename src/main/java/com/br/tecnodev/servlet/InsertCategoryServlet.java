@@ -19,7 +19,7 @@ public class InsertCategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        RequestDispatcher rd = request.getRequestDispatcher("/insertNewCategory.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("jsp/category/insertNewCategory.jsp");
         rd.forward(request, response);
     }
 
@@ -42,7 +42,14 @@ public class InsertCategoryServlet extends HttpServlet {
 
         em.getTransaction().begin();
 
-        NewCategoryForm categoryForm = new NewCategoryForm(name, code, description, studyGuide, active, orderInSystem, imageUrl, colorCode);
+        NewCategoryForm categoryForm = new NewCategoryForm(name,
+                code,
+                description,
+                studyGuide,
+                active,
+                orderInSystem,
+                imageUrl,
+                colorCode);
 
         Category category = categoryForm.toEntity();
         categoryDao.insertCategory(category);

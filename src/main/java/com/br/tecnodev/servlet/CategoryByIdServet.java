@@ -27,7 +27,7 @@ public class CategoryByIdServet extends HttpServlet {
 
         request.setAttribute("category", categoryDTO);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/editCategoryForm.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("jsp/category/editCategoryForm.jsp");
         rd.forward(request, response);
     }
 
