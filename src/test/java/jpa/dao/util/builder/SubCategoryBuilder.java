@@ -1,7 +1,7 @@
 package jpa.dao.util.builder;
 
-import tecnodev.category.Category;
-import tecnodev.subCategory.SubCategory;
+import br.com.tecnodev.tecnodev.category.Category;
+import br.com.tecnodev.tecnodev.subCategory.SubCategory;
 
 public class SubCategoryBuilder {
 

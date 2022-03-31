@@ -1,5 +1,6 @@
 package jpa.dao;
 
+import br.com.tecnodev.jpa.dao.CourseDao;
 import jpa.dao.util.JPAUtil;
 import jpa.dao.util.builder.CategoryBuilder;
 import jpa.dao.util.builder.CourseBuilder;
@@ -8,10 +9,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tecnodev.category.Category;
-import tecnodev.course.Course;
-import tecnodev.course.Status;
-import tecnodev.subCategory.SubCategory;
+import br.com.tecnodev.tecnodev.category.Category;
+import br.com.tecnodev.tecnodev.course.Course;
+import br.com.tecnodev.tecnodev.subCategory.SubCategory;
 
 import javax.persistence.EntityManager;
 import java.util.List;
