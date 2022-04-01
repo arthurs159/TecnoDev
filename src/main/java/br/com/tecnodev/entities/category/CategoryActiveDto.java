@@ -3,6 +3,7 @@ package br.com.tecnodev.entities.category;
 import br.com.tecnodev.entities.course.CourseDto;
 import br.com.tecnodev.entities.subCategory.SubCategoryDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryActiveDto {
@@ -12,27 +13,29 @@ public class CategoryActiveDto {
     private Integer orderInSystem;
     private String colorCode;
     private String studyGuide;
-    private String description;
-    private Integer totalCourses;
+    private Long totalCourses;
 
-    private List<SubCategoryDto> subCategoryDto;
-    private List<CourseDto> courseDto;
+    private List<SubCategoryDto> subCategories;
+//    private List<CourseDto> courseDto;
 
-    public CategoryActiveDto(String name, String code, Integer orderInSystem, String colorCode, String studyGuide, String description, Integer totalCourses, List<SubCategoryDto> subCategoryDto, List<CourseDto> courseDto) {
+    public CategoryActiveDto(String name, String code, Integer orderInSystem, String colorCode, String studyGuide, Long totalCourses) {
         this.name = name;
         this.code = code;
         this.orderInSystem = orderInSystem;
         this.colorCode = colorCode;
         this.studyGuide = studyGuide;
-        this.description = description;
         this.totalCourses = totalCourses;
-        this.subCategoryDto = subCategoryDto;
-        this.courseDto = courseDto;
     }
 
-    public String getName() {
-        return name;
+    public CategoryActiveDto(CategoryProjection projection){
+        name = projection.getName();
+        code = projection.getCode();
+        orderInSystem = projection.getOrderInSystem();
+        colorCode = projection.getColorCode();
+        studyGuide = projection.getStudyGuide();
+        totalCourses = projection.getTotalCourses();
     }
+
 
     public String getCode() {
         return code;
@@ -50,19 +53,12 @@ public class CategoryActiveDto {
         return studyGuide;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public Integer getTotalCourses() {
+    public Long getTotalCourses() {
         return totalCourses;
     }
 
-    public List<SubCategoryDto> getSubCategoryDto() {
-        return subCategoryDto;
+    public String getName() {
+        return name;
     }
 
-    public List<CourseDto> getCourseDto() {
-        return courseDto;
-    }
 }

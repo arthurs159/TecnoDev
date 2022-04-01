@@ -1,8 +1,10 @@
 package br.com.tecnodev.entities.category;
 
 import br.com.tecnodev.entities.course.Course;
+import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static br.com.tecnodev.validator.Validator.*;
@@ -27,6 +29,9 @@ public class Category {
     @Column(name = "color_code")
     private String colorCode;
 
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<SubCategory> subCategories = new ArrayList<>();
+
     @Deprecated
     public Category() {}
 
@@ -50,6 +55,10 @@ public class Category {
     public Category(String name, String code, Integer orderInSystem, String description, String studyGuide, boolean active, String imageUrl, String colorCode) {
         this(name, code, orderInSystem, description, active, imageUrl, colorCode);
         this.studyGuide = studyGuide;
+    }
+
+    public void addSubcategory(SubCategory subCategory){
+        this.subCategories.add(subCategory);
     }
 
     public void toggleActive(){
@@ -92,28 +101,37 @@ public class Category {
         return orderInSystem;
     }
 
-    public static int numbersOfCourseFromCategory(List<Course> courses, String codeCategory) {
-        return (int) courses.stream()
-                .filter(course -> course.getCategoryCode().equals(codeCategory)).count();
+    public List<SubCategory> getSubCategories() {
+        return subCategories;
     }
 
-    public static int quantityHoursFromCategory(List<Course> courses, String categoryCode) {
-        return courses.stream()
-                .filter(course -> course.getCategoryCode().equals(categoryCode))
-                .mapToInt(Course::getEstimatedTimeInHours).sum();
-    }
+//    @Override
+//    public String toString() {
+//        return "Category{" +
+//                "name='" + name + '\'' +
+//                ", code='" + code + '\'' +
+//                ", description='" + description + '\'' +
+//                ", studyGuide='" + studyGuide + '\'' +
+//                ", active=" + active +
+//                ", orderInSystem=" + orderInSystem +
+//                ", imageUrl='" + imageUrl + '\'' +
+//                ", htmlCode='" + colorCode + '\'' +
+//                '}';
+//    }
 
     @Override
     public String toString() {
         return "Category{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
                 ", description='" + description + '\'' +
                 ", studyGuide='" + studyGuide + '\'' +
                 ", active=" + active +
                 ", orderInSystem=" + orderInSystem +
                 ", imageUrl='" + imageUrl + '\'' +
-                ", htmlCode='" + colorCode + '\'' +
+                ", colorCode='" + colorCode + '\'' +
+                ", subCategories=" + subCategories +
                 '}';
     }
 }

@@ -1,8 +1,12 @@
 package br.com.tecnodev.entities.subCategory;
 
 import br.com.tecnodev.entities.category.Category;
+import br.com.tecnodev.entities.course.Course;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static br.com.tecnodev.validator.Validator.*;
 
@@ -25,7 +29,11 @@ public class SubCategory {
     private Integer orderInSystem;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
+    private List<Course> courses = new ArrayList<>();
 
     @Deprecated
     public SubCategory() {}
@@ -37,6 +45,7 @@ public class SubCategory {
         this.name = name;
         this.code = code;
         this.category = category;
+        this.category.addSubcategory(this);
     }
 
     public SubCategory(String name, String code, Integer orderInSystem, String description, boolean active, Category category) {
@@ -84,6 +93,14 @@ public class SubCategory {
 
     public Long getCategoryId(){
         return this.getCategory().getId();
+    }
+
+    public String getStudyGuide() {
+        return studyGuide;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
     }
 
     @Override
