@@ -38,3 +38,11 @@ build/
 .mvn/
 mvnw
 mvnw.cmd
+
+# Files #
+out/
+.idea/
+*.iml
+target/
+HELP.md
+.mvn

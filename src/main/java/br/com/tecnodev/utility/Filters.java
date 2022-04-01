@@ -1,15 +1,15 @@
 package br.com.tecnodev.utility;
 
-import br.com.tecnodev.tecnodev.category.Category;
-import br.com.tecnodev.tecnodev.course.Course;
-import br.com.tecnodev.tecnodev.subCategory.SubCategory;
+import br.com.tecnodev.entities.category.Category;
+import br.com.tecnodev.entities.course.Course;
+import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.function.Predicate.not;
-import static br.com.tecnodev.tecnodev.course.Status.PRIVATE;
+import static br.com.tecnodev.entities.course.Status.PRIVATE;
 
 public class Filters {
 
