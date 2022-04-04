@@ -3,12 +3,11 @@ package br.com.tecnodev.controller;
 import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.category.CategoryToListDTO;
 import br.com.tecnodev.entities.category.NewCategoryForm;
+import br.com.tecnodev.entities.category.NewCategoryFormUpdate;
 import br.com.tecnodev.repository.CategoryRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -41,4 +40,20 @@ public class CategoryController {
         categoryRepository.save(dto.toEntity());
         return "redirect:/admin/categories";
     }
+
+    @GetMapping("{code}")
+    public String getCategoryByCode(@PathVariable String code, Model model) {
+        Category category = categoryRepository.findByCode(code);
+        model.addAttribute("category", category);
+        return "category/update";
+    }
+
+    @PostMapping("{code}")
+    public String updateCategoryById(String code, @Valid NewCategoryFormUpdate dto) {
+        Category category = dto.toEntity();
+        category.update(dto);
+        categoryRepository.save(category);
+        return "redirect:/admin/categories";
+    }
+
 }

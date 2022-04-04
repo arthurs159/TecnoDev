@@ -26,16 +26,18 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${category}" var="c">
+            <c:forEach items="${category}" var="cat">
                 <tr class="col">
-                    <td>${c.name}</td>
-                    <td>${c.code}</td>
-                    <td>${c.active}</td>
+                    <td>${cat.name}</td>
+                    <td>${cat.code}</td>
+                    <td>${cat.active}</td>
                     <td>
                         <button type="button" class="btn btn-link">Subcategorias</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-default">Editar</button>
+                        <a href="/admin/categories/${cat.code}">
+                            <button type="button" class="btn btn-default">Editar</button>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

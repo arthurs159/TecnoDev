@@ -29,9 +29,16 @@
         <label>Guia de Estudo</label>
         <input type="text" name="studyGuide" class="form-control" />
     </div>
-    <div class="form-group">
-        <label>Ativo</label>
-        <input type="text" name="active" class="form-control" />
+<%--    <div class="form-group">--%>
+<%--        <label>Ativo</label>--%>
+<%--        <input type="text" name="active" class="form-control" />--%>
+<%--    </div>--%>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" checked
+               name="active" >
+        <label class="form-check-label">
+            Ativo
+        </label>
     </div>
     <div class="form-group">
         <label>Ordem no Sistema</label>

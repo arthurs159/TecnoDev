@@ -4,8 +4,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class NewCategoryForm {
+public class NewCategoryFormUpdate {
 
+    private Long id;
     @NotEmpty @NotNull
     private String name;
     @NotEmpty @NotNull @Pattern(regexp = "[a-z0-9-]+", message = "The code must be lowercase letters or numbers and not be empty")
@@ -18,7 +19,11 @@ public class NewCategoryForm {
     @NotEmpty @NotNull @Pattern(regexp = "^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$", message = "The code must be lowercase letters or numbers and not be empty")
     private String colorCode;
 
-    public NewCategoryForm(String name, String code, String description, String studyGuide, boolean active, Integer orderInSystem, String imageUrl, String colorCode) {
+    public NewCategoryFormUpdate() {
+    }
+
+    public NewCategoryFormUpdate(Long id, String name, String code, String description, String studyGuide, boolean active, Integer orderInSystem, String imageUrl, String colorCode) {
+        this.id = id;
         this.name = name;
         this.code = code;
         this.description = description;
@@ -29,7 +34,8 @@ public class NewCategoryForm {
         this.colorCode = colorCode;
     }
 
-    public void updateCategory(Category category) {
+    public NewCategoryFormUpdate(Category category) {
+        this.id = category.getId();
         this.name = category.getName();
         this.code = category.getCode();
         this.description = category.getDescription();
@@ -72,7 +78,45 @@ public class NewCategoryForm {
         return colorCode;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStudyGuide(String studyGuide) {
+        this.studyGuide = studyGuide;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setOrderInSystem(Integer orderInSystem) {
+        this.orderInSystem = orderInSystem;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
+    }
+
     public Category toEntity() {
-        return new Category(name, code, orderInSystem, description, studyGuide, active, imageUrl, colorCode);
+        Category category = new Category(name, code, orderInSystem, description, studyGuide, active, imageUrl, colorCode);
+        category.setId(this.id);
+        return category;
     }
 }

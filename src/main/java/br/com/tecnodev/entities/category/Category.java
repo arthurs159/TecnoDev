@@ -61,6 +61,19 @@ public class Category {
         this.studyGuide = studyGuide;
     }
 
+    public void update(NewCategoryFormUpdate dto) {
+//        this.id = dto.getId();
+        this.name = dto.getName();
+        this.code = dto.getCode();
+        this.description = dto.getDescription();
+        this.studyGuide = dto.getStudyGuide();
+        this.active = dto.isActive();
+        this.orderInSystem = dto.getOrderInSystem();
+        this.imageUrl = dto.getImageUrl();
+        this.colorCode = dto.getColorCode();
+    }
+
+
     public void addSubcategory(SubCategory subCategory) {
         this.subCategories.add(subCategory);
     }
@@ -105,6 +118,10 @@ public class Category {
         return orderInSystem;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public List<SubCategory> getSubCategories() {
         return subCategories;
     }
@@ -117,19 +134,4 @@ public class Category {
         return getActiveSubcategories().stream().map(SubCategory::getCourses).flatMap(Collection::stream).count();
     }
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", studyGuide='" + studyGuide + '\'' +
-                ", active=" + active +
-                ", orderInSystem=" + orderInSystem +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", colorCode='" + colorCode + '\'' +
-                ", subCategories=" + subCategories +
-                '}';
-    }
 }
