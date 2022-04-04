@@ -3,10 +3,15 @@ package br.com.tecnodev.entities.course;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import java.util.List;
+import java.util.Objects;
 
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
+@XmlRootElement
 public class Course {
 
     private static final int MINIMUM_TIME = 1;
@@ -113,6 +118,8 @@ public class Course {
     public Long getSubcategoryId(){
         return this.getSubCategory().getId();
     }
+
+
 
     @Override
     public String toString() {

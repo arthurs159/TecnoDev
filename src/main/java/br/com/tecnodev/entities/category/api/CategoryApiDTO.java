@@ -15,6 +15,7 @@ public class CategoryApiDTO {
     private Integer orderInSystem;
     private String imageUrl;
     private String colorCode;
+    private Long totalCourse;
     private List<SubCategoryApiDTO> subCategories;
 
     public CategoryApiDTO() {
@@ -31,6 +32,7 @@ public class CategoryApiDTO {
         this.colorCode = category.getColorCode();
         this.subCategories = SubCategoryApiDTO.toDto(category.getSubCategories());
     }
+
 
     public String getName() {
         return name;
@@ -67,4 +69,5 @@ public class CategoryApiDTO {
     public List<SubCategoryApiDTO> getSubCategories() {
         return subCategories;
     }
+
 }

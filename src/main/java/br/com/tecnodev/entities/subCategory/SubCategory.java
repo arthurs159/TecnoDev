@@ -4,6 +4,7 @@ import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.course.Course;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
+@XmlRootElement
 @Table(name = "Subcategory")
 public class SubCategory {
 
@@ -102,6 +104,8 @@ public class SubCategory {
     public List<Course> getCourses() {
         return courses;
     }
+
+
 
     @Override
     public String toString() {

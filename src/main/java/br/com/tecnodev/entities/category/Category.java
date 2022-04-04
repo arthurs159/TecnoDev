@@ -1,15 +1,16 @@
 package br.com.tecnodev.entities.category;
 
-import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
+@XmlRootElement
 public class Category {
 
     @Id
@@ -33,7 +34,8 @@ public class Category {
     private List<SubCategory> subCategories = new ArrayList<>();
 
     @Deprecated
-    public Category() {}
+    public Category() {
+    }
 
     public Category(String name, String code) {
         isNotNullOrEmpty(name, "The name must not be empty or null");
@@ -57,11 +59,11 @@ public class Category {
         this.studyGuide = studyGuide;
     }
 
-    public void addSubcategory(SubCategory subCategory){
+    public void addSubcategory(SubCategory subCategory) {
         this.subCategories.add(subCategory);
     }
 
-    public void toggleActive(){
+    public void toggleActive() {
         this.active = !isActive();
     }
 
@@ -105,18 +107,14 @@ public class Category {
         return subCategories;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Category{" +
-//                "name='" + name + '\'' +
-//                ", code='" + code + '\'' +
-//                ", description='" + description + '\'' +
-//                ", studyGuide='" + studyGuide + '\'' +
-//                ", active=" + active +
-//                ", orderInSystem=" + orderInSystem +
-//                ", imageUrl='" + imageUrl + '\'' +
-//                ", htmlCode='" + colorCode + '\'' +
-//                '}';
+//    public static long numberOfCourses(List<SubCategory> listDto, String code){
+//        Long count = 0L;
+//        for (int i=0; i <= listDto.size(); i++){
+//            if(listDto.get(i).getCourses().get(i).getCategoryCode() == code){
+//                count++;
+//            }
+//        }
+//        return count;
 //    }
 
     @Override

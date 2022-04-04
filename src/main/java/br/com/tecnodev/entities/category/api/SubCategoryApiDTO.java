@@ -12,9 +12,6 @@ public class SubCategoryApiDTO {
     private String studyGuide;
     private List<CourseApiDTO> courses;
 
-    public SubCategoryApiDTO() {
-    }
-
     public SubCategoryApiDTO(SubCategory subCategory) {
         this.name = subCategory.getName();
         this.code = subCategory.getCode();
