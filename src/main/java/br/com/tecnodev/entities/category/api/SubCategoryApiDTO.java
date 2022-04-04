@@ -1,6 +1,5 @@
 package br.com.tecnodev.entities.category.api;
 
-import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import java.util.List;

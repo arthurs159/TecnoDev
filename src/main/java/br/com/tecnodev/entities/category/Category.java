@@ -1,10 +1,12 @@
 package br.com.tecnodev.entities.category;
 
+import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static br.com.tecnodev.validator.Validator.*;
@@ -107,15 +109,13 @@ public class Category {
         return subCategories;
     }
 
-//    public static long numberOfCourses(List<SubCategory> listDto, String code){
-//        Long count = 0L;
-//        for (int i=0; i <= listDto.size(); i++){
-//            if(listDto.get(i).getCourses().get(i).getCategoryCode() == code){
-//                count++;
-//            }
-//        }
-//        return count;
-//    }
+    public List<SubCategory> getActiveSubcategories(){
+        return subCategories.stream().filter(SubCategory::isActive).toList();
+    }
+
+    public Long getTotalCoursesFromCategory(){
+        return getActiveSubcategories().stream().map(SubCategory::getCourses).flatMap(Collection::stream).count();
+    }
 
     @Override
     public String toString() {

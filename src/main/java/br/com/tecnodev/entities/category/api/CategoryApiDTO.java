@@ -1,9 +1,11 @@
 package br.com.tecnodev.entities.category.api;
 
 import br.com.tecnodev.entities.category.Category;
+import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CategoryApiDTO {
 
@@ -30,9 +32,26 @@ public class CategoryApiDTO {
         this.orderInSystem = category.getOrderInSystem();
         this.imageUrl = category.getImageUrl();
         this.colorCode = category.getColorCode();
-        this.subCategories = SubCategoryApiDTO.toDto(category.getSubCategories());
+//        this.totalCourse = getTotalCourse();
+//        this.totalCourse = category.getTotalCoursesFromCategory();
+        this.subCategories = getSubCategories(category);
     }
 
+    private List<SubCategoryApiDTO> getSubCategories(Category category) {
+        return SubCategoryApiDTO.toDto(category.getSubCategories().stream()
+                .filter(SubCategory::isActive)
+                .toList());
+    }
+
+
+
+    public void setTotalCourse(Long totalCourse) {
+        this.totalCourse = totalCourse;
+    }
+
+    public Long getTotalCourse() {
+        return totalCourse;
+    }
 
     public String getName() {
         return name;
@@ -69,5 +88,6 @@ public class CategoryApiDTO {
     public List<SubCategoryApiDTO> getSubCategories() {
         return subCategories;
     }
+
 
 }

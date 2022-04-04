@@ -1,14 +1,21 @@
 package br.com.tecnodev.entities.category;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class NewCategoryForm {
 
+    @NotEmpty @NotNull
     private final String name;
+    @NotEmpty @NotNull @Pattern(regexp = "[a-z0-9-]+", message = "The code must be lowercase letters or numbers and not be empty")
     private final String code;
     private final String description;
     private final String studyGuide;
     private final boolean active;
     private final Integer orderInSystem;
     private final String imageUrl;
+    @NotEmpty @NotNull @Pattern(regexp = "^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$", message = "The code must be lowercase letters or numbers and not be empty")
     private final String colorCode;
 
     public NewCategoryForm(String name, String code, String description, String studyGuide, boolean active, Integer orderInSystem, String imageUrl, String colorCode) {
