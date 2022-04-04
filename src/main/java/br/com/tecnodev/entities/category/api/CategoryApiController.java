@@ -26,9 +26,6 @@ public class CategoryApiController {
     public ResponseEntity<List<CategoryApiDTO>> listAllActiveCategories(){
         List<Category> allByActiveTrue = categoryRepository.findAllByActiveTrue();
         List<CategoryApiDTO> categoryApiDTOS = allByActiveTrue.stream().map(CategoryApiDTO::new).toList();
-
-        categoryApiDTOS.forEach(c -> c.setTotalCourse(categoryRepository.countCoursesFromCategory(c.getCode())));
-
         return ResponseEntity.ok().body(categoryApiDTOS);
     }
 }
