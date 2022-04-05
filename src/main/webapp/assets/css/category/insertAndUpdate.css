@@ -1,0 +1,17 @@
+form div {
+    margin-top: 25px;
+}
+
+label p {
+    font-weight: bold;
+}
+
+.div-checkbox {
+    display: flex;
+    align-items: baseline;
+}
+
+.active-category {
+ padding: 0 10px 0 5px;
+    font-size: 18px;
+}

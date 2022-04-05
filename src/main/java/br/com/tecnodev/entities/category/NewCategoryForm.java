@@ -29,17 +29,6 @@ public class NewCategoryForm {
         this.colorCode = colorCode;
     }
 
-    public void updateCategory(Category category) {
-        this.name = category.getName();
-        this.code = category.getCode();
-        this.description = category.getDescription();
-        this.studyGuide = category.getStudyGuide();
-        this.active = category.isActive();
-        this.orderInSystem = category.getOrderInSystem();
-        this.imageUrl = category.getImageUrl();
-        this.colorCode = category.getColorCode();
-    }
-
     public String getName() {
         return name;
     }
@@ -70,6 +59,38 @@ public class NewCategoryForm {
 
     public String getColorCode() {
         return colorCode;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStudyGuide(String studyGuide) {
+        this.studyGuide = studyGuide;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setOrderInSystem(Integer orderInSystem) {
+        this.orderInSystem = orderInSystem;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
     }
 
     public Category toEntity() {

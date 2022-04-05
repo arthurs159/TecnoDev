@@ -34,18 +34,6 @@ public class NewCategoryFormUpdate {
         this.colorCode = colorCode;
     }
 
-    public NewCategoryFormUpdate(Category category) {
-        this.id = category.getId();
-        this.name = category.getName();
-        this.code = category.getCode();
-        this.description = category.getDescription();
-        this.studyGuide = category.getStudyGuide();
-        this.active = category.isActive();
-        this.orderInSystem = category.getOrderInSystem();
-        this.imageUrl = category.getImageUrl();
-        this.colorCode = category.getColorCode();
-    }
-
     public String getName() {
         return name;
     }

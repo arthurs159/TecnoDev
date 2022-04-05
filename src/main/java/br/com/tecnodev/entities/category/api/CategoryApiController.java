@@ -1,11 +1,9 @@
 package br.com.tecnodev.entities.category.api;
 
 import br.com.tecnodev.entities.category.Category;
-import br.com.tecnodev.entities.category.CategoryDTO;
 import br.com.tecnodev.repository.CategoryRepository;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +20,8 @@ public class CategoryApiController {
     }
 
     @GetMapping
-    @RequestMapping(value="/api/categories", produces = {"application/json"}, consumes = MediaType.ALL_VALUE)
-    public ResponseEntity<List<CategoryApiDTO>> listAllActiveCategories(){
+    @RequestMapping(value = "/api/categories", produces = {"application/json", "application/xml"}, consumes = MediaType.ALL_VALUE)
+    public ResponseEntity<List<CategoryApiDTO>> listAllActiveCategories() {
         List<Category> allByActiveTrue = categoryRepository.findAllByActiveTrue();
         List<CategoryApiDTO> categoryApiDTOS = allByActiveTrue.stream().map(CategoryApiDTO::new).toList();
         return ResponseEntity.ok().body(categoryApiDTOS);

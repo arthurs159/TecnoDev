@@ -1,6 +1,5 @@
 package br.com.tecnodev.entities.category;
 
-import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import javax.persistence.*;
@@ -62,7 +61,6 @@ public class Category {
     }
 
     public void update(NewCategoryFormUpdate dto) {
-//        this.id = dto.getId();
         this.name = dto.getName();
         this.code = dto.getCode();
         this.description = dto.getDescription();
@@ -72,7 +70,6 @@ public class Category {
         this.imageUrl = dto.getImageUrl();
         this.colorCode = dto.getColorCode();
     }
-
 
     public void addSubcategory(SubCategory subCategory) {
         this.subCategories.add(subCategory);
@@ -126,11 +123,11 @@ public class Category {
         return subCategories;
     }
 
-    public List<SubCategory> getActiveSubcategories(){
+    public List<SubCategory> getActiveSubcategories() {
         return subCategories.stream().filter(SubCategory::isActive).toList();
     }
 
-    public Long getTotalCoursesFromCategory(){
+    public Long getTotalCoursesFromCategory() {
         return getActiveSubcategories().stream().map(SubCategory::getCourses).flatMap(Collection::stream).count();
     }
 

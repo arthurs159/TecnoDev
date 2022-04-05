@@ -9,10 +9,10 @@
     <title>Lista de categorias</title>
 </head>
 
-<div class="container">
+<div style="padding: 0" class="container">
     <h1>Categorias</h1>
     <a href="/admin/categories/new">
-        <button type="button" class="btn btn-primary">Nova categoria</button>
+        <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Nova categoria</button>
     </a>
 </div>
 <div class="container">
@@ -32,7 +32,9 @@
                     <td>${cat.code}</td>
                     <td>${cat.active}</td>
                     <td>
-                        <button type="button" class="btn btn-link">Subcategorias</button>
+                        <a href="subcategories/${cat.code}">
+                            <button type="button" class="btn btn-link">Subcategorias</button>
+                        </a>
                     </td>
                     <td>
                         <a href="/admin/categories/${cat.code}">
