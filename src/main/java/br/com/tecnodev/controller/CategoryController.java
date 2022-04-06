@@ -32,7 +32,7 @@ public class CategoryController {
     public String listActiveCategories(Model model) {
         List<Category> categoryList = categoryRepository.findAllByOrderByOrderInSystem();
         List<CategoryToListDTO> categoryDTO = categoryList.stream().map(CategoryToListDTO::new).toList();
-        model.addAttribute("category", categoryDTO);
+        model.addAttribute("categories", categoryDTO);
         return "category/list";
     }
 
@@ -60,7 +60,11 @@ public class CategoryController {
     }
 
     @PostMapping("{code}")
-    public String updateCategoryByCode(String code, @Valid NewCategoryFormUpdate dto) {
+    public String updateCategoryByCode(@PathVariable String code, @Valid NewCategoryFormUpdate dto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return getCategoryByCode(code, model);
+        }
+
         Category category = categoryRepository.findByCode(code).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         category.update(dto);
         categoryRepository.save(category);

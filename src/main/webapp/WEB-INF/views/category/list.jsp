@@ -28,7 +28,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${category}" var="cat">
+            <c:forEach items="${categories}" var="cat">
                 <tr class="col">
                     <td>${cat.name}</td>
                     <td>${cat.code}</td>

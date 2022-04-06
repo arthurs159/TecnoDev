@@ -19,12 +19,14 @@
         <div class="form-group">
             <label>Nome</label>
             <input type="text" class="form-control" name="name" placeholder="Digite aqui o nome da categoria" value="${category.name}">
+            <form:errors path="newCategoryForm.name" cssClass="alert-danger"/>
         </div>
 
         <div class="form-group">
             <label>Código</label>
             <input type="text" class="form-control"
                    name="code" value="${category.code}" placeholder="por exemplo: desenvolvimento, mobile (não use letra maiúsculas, acentos ou caracteres especiais)"/>
+            <form:errors path="newCategoryForm.code" cssClass="alert-danger"/>
         </div>
 
         <div class="form-group ">
@@ -58,6 +60,7 @@
             <label>Cor</label>
             <input type="text" class="form-control" name="colorCode"
                    value="${category.colorCode}" placeholder="por exemplo: #fcc14a">
+            <form:errors path="newCategoryForm.code" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Descrição</label>

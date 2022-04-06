@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -18,10 +19,12 @@
         <div class="form-group">
             <label>Nome</label>
             <input type="text" class="form-control" name="name" value="${category.name}">
+            <form:errors path="newCategoryFormUpdate.name" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Código</label>
-            <input type="text" class="form-control" name="code" value="${category.code}" placeholder="por exemplo....">
+            <input type="text" class="form-control" name="code" value="${category.code}">
+            <form:errors path="newCategoryFormUpdate.code" cssClass="alert-danger" />
         </div>
 
         <div class="form-group ">
@@ -52,6 +55,7 @@
         <div class="form-group">
             <label>Cor</label>
             <input type="text" class="form-control" name="colorCode" value="${category.colorCode}">
+            <form:errors path="newCategoryFormUpdate.colorCode" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Descrição</label>

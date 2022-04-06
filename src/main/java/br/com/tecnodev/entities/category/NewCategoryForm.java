@@ -5,16 +5,17 @@ import javax.validation.constraints.Pattern;
 
 public class NewCategoryForm {
 
-    @NotEmpty
+    @NotEmpty(message = "O nome não deve ser vazio")
     private String name;
-    @NotEmpty @Pattern(regexp = "[a-z0-9-]+", message = "The code must be lowercase letters or numbers and not be empty")
+    @NotEmpty (message = "O código não deve ser vazio")
+    @Pattern(regexp = "[a-z0-9-]+", message = "O código deve ser em letra minúscula e/ou números")
     private String code;
     private String description;
     private String studyGuide;
     private boolean active;
     private Integer orderInSystem;
     private String imageUrl;
-    @Pattern(regexp = "^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$", message = "The code must be lowercase letters or numbers and not be empty")
+    @Pattern(regexp = "^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$", message = "A cor deve ser no padrão Hexadecimal")
     private String colorCode;
 
     public String getName() {
