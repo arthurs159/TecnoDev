@@ -7,29 +7,21 @@ import java.util.List;
 
 public class CategoryApiDTO {
 
-    private String name;
-    private String code;
-    private String description;
-    private String studyGuide;
-    private boolean active;
-    private Integer orderInSystem;
-    private String imageUrl;
-    private String colorCode;
-    private Long totalCourse;
-    private List<SubCategoryApiDTO> subCategories;
+    private final String name;
+    private final String code;
+    private final Integer orderInSystem;
+    private final String colorCode;
+    private final String studyGuide;
+    private final Long totalCourse;
+    private final List<SubCategoryApiDTO> subCategories;
 
-    public CategoryApiDTO() {
-    }
 
     public CategoryApiDTO(Category category) {
         this.name = category.getName();
         this.code = category.getCode();
-        this.description = category.getDescription();
-        this.studyGuide = category.getStudyGuide();
-        this.active = category.isActive();
         this.orderInSystem = category.getOrderInSystem();
-        this.imageUrl = category.getImageUrl();
         this.colorCode = category.getColorCode();
+        this.studyGuide = category.getStudyGuide();
         this.totalCourse = category.getTotalCoursesFromCategory();
         this.subCategories = getSubCategories(category);
     }
@@ -38,10 +30,6 @@ public class CategoryApiDTO {
         return SubCategoryApiDTO.toDto(category.getSubCategories().stream()
                 .filter(SubCategory::isActive)
                 .toList());
-    }
-
-    public void setTotalCourse(Long totalCourse) {
-        this.totalCourse = totalCourse;
     }
 
     public Long getTotalCourse() {
@@ -56,24 +44,12 @@ public class CategoryApiDTO {
         return code;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public String getStudyGuide() {
         return studyGuide;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
     public Integer getOrderInSystem() {
         return orderInSystem;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
     }
 
     public String getColorCode() {
@@ -83,6 +59,5 @@ public class CategoryApiDTO {
     public List<SubCategoryApiDTO> getSubCategories() {
         return subCategories;
     }
-
 
 }

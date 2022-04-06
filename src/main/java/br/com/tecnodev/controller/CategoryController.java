@@ -5,6 +5,7 @@ import br.com.tecnodev.entities.category.CategoryToListDTO;
 import br.com.tecnodev.entities.category.NewCategoryForm;
 import br.com.tecnodev.entities.category.NewCategoryFormUpdate;
 import br.com.tecnodev.repository.CategoryRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -34,15 +36,16 @@ public class CategoryController {
         return "category/list";
     }
 
-    @RequestMapping("/new")
-    public String showFormNewCategory() {
+    @GetMapping("/new")
+    public String showFormNewCategory(NewCategoryForm dto, Model model) {
+        model.addAttribute("category", dto);
         return "category/insert";
     }
 
     @PostMapping
-    public String insertCategory(@Valid NewCategoryForm dto, BindingResult result) {
+    public String insertCategory(@Valid NewCategoryForm dto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "category/insert";
+            return showFormNewCategory(dto, model);
         }
 
         categoryRepository.save(dto.toEntity());
@@ -51,14 +54,14 @@ public class CategoryController {
 
     @GetMapping("{code}")
     public String getCategoryByCode(@PathVariable String code, Model model) {
-        Category category = categoryRepository.findByCode(code);
+        Category category = categoryRepository.findByCode(code).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("category", category);
         return "category/update";
     }
 
     @PostMapping("{code}")
-    public String updateCategoryById(String code, @Valid NewCategoryFormUpdate dto) {
-        Category category = dto.toEntity();
+    public String updateCategoryByCode(String code, @Valid NewCategoryFormUpdate dto) {
+        Category category = categoryRepository.findByCode(code).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         category.update(dto);
         categoryRepository.save(category);
         return "redirect:/admin/categories";

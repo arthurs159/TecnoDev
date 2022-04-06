@@ -6,10 +6,10 @@ import java.util.List;
 
 public class SubCategoryApiDTO {
 
-    private String name;
-    private String code;
-    private String studyGuide;
-    private List<CourseApiDTO> courses;
+    private final String name;
+    private final String code;
+    private final String studyGuide;
+    private final List<CourseApiDTO> courses;
 
     public SubCategoryApiDTO(SubCategory subCategory) {
         this.name = subCategory.getName();

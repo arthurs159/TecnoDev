@@ -128,7 +128,10 @@ public class Category {
     }
 
     public Long getTotalCoursesFromCategory() {
-        return getActiveSubcategories().stream().map(SubCategory::getCourses).flatMap(Collection::stream).count();
+        return getActiveSubcategories().stream()
+                .map(SubCategory::getCourses)
+                .flatMap(Collection::stream)
+                .count();
     }
 
 }

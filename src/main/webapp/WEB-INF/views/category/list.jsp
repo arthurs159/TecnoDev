@@ -4,7 +4,7 @@
 <!DOCTYPE>
 <html>
 <head>
-    <link rel='stylesheet' href='/webjars/bootstrap/3.1.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7/css/bootstrap.min.css'>
     <meta content="text/html;charset=UTF-8">
     <title>Lista de categorias</title>
 </head>
@@ -23,6 +23,8 @@
                 <th>Nome</th>
                 <th>Código</th>
                 <th>Ativo</th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -31,16 +33,12 @@
                     <td>${cat.name}</td>
                     <td>${cat.code}</td>
                     <td>${cat.active}</td>
-                    <td>
-                        <a href="subcategories/${cat.code}">
+                    <td><a href="subcategories/${cat.code}">
                             <button type="button" class="btn btn-link">Subcategorias</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/admin/categories/${cat.code}">
+                    </a></td>
+                    <td><a href="/admin/categories/${cat.code}">
                             <button type="button" class="btn btn-default">Editar</button>
-                        </a>
-                    </td>
+                        </a></td>
                 </tr>
             </c:forEach>
             </tbody>

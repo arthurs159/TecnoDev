@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel='stylesheet' href='/webjars/bootstrap/3.1.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7/css/bootstrap.min.css'>
     <link rel="stylesheet" href="/assets/css/category/insertAndUpdate.css">
     <meta charset="UTF-8">
     <title>Editar Categoria</title>
@@ -27,7 +27,7 @@
         <div class="form-group ">
             <div class="mb-3 form-check div-checkbox">
                 <input type="checkbox" class="form-check-input" id="active"
-                       name="active"  ${category.isActive() ? 'checked' : ''}
+                       name="active"  ${category.isActive() ? 'checked' : ''}>
                 <label class="form-check-label" for="active" class="form-label">
                    <p class="active-category">Categoria Ativa? </p>
                 </label>

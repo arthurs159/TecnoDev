@@ -1,33 +1,21 @@
 package br.com.tecnodev.entities.category;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class NewCategoryForm {
 
-    @NotEmpty @NotNull
+    @NotEmpty
     private String name;
-    @NotEmpty @NotNull @Pattern(regexp = "[a-z0-9-]+", message = "The code must be lowercase letters or numbers and not be empty")
+    @NotEmpty @Pattern(regexp = "[a-z0-9-]+", message = "The code must be lowercase letters or numbers and not be empty")
     private String code;
     private String description;
     private String studyGuide;
     private boolean active;
     private Integer orderInSystem;
     private String imageUrl;
-    @NotEmpty @NotNull @Pattern(regexp = "^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$", message = "The code must be lowercase letters or numbers and not be empty")
+    @Pattern(regexp = "^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$", message = "The code must be lowercase letters or numbers and not be empty")
     private String colorCode;
-
-    public NewCategoryForm(String name, String code, String description, String studyGuide, boolean active, Integer orderInSystem, String imageUrl, String colorCode) {
-        this.name = name;
-        this.code = code;
-        this.description = description;
-        this.studyGuide = studyGuide;
-        this.active = active;
-        this.orderInSystem = orderInSystem;
-        this.imageUrl = imageUrl;
-        this.colorCode = colorCode;
-    }
 
     public String getName() {
         return name;
