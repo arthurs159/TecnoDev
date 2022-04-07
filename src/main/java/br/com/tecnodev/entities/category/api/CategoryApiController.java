@@ -19,8 +19,7 @@ public class CategoryApiController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping
-    @RequestMapping(value = "/api/categories", produces = {"application/json", "application/xml"}, consumes = MediaType.ALL_VALUE)
+    @GetMapping(value = "/api/categories", produces = {"application/json", "application/xml"}, consumes = MediaType.ALL_VALUE)
     public ResponseEntity<List<CategoryApiDTO>> listAllActiveCategories() {
         List<Category> allByActiveTrue = categoryRepository.findAllByActiveTrue();
         List<CategoryApiDTO> categoryApiDTOS = allByActiveTrue.stream().map(CategoryApiDTO::new).toList();

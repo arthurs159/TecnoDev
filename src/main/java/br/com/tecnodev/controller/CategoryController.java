@@ -12,14 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/categories")
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
@@ -28,7 +26,7 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping
+    @GetMapping("/admin/categories")
     public String listActiveCategories(Model model) {
         List<Category> categoryList = categoryRepository.findAllByOrderByOrderInSystem();
         List<CategoryToListDTO> categoryDTO = categoryList.stream().map(CategoryToListDTO::new).toList();
@@ -36,39 +34,38 @@ public class CategoryController {
         return "category/list";
     }
 
-    @GetMapping("/new")
-    public String showFormNewCategory(NewCategoryForm dto, Model model) {
-        model.addAttribute("category", dto);
+    @GetMapping("/admin/categories/new")
+    public String showFormNewCategory(NewCategoryForm NewCategoryFormDto, Model model) {
+        model.addAttribute("category", NewCategoryFormDto);
         return "category/insert";
     }
 
-    @PostMapping
-    public String insertCategory(@Valid NewCategoryForm dto, BindingResult result, Model model) {
+    @PostMapping("/admin/categories")
+    public String insertCategory(@Valid NewCategoryForm newCategoryFormDto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return showFormNewCategory(dto, model);
+            return showFormNewCategory(newCategoryFormDto, model);
         }
 
-        categoryRepository.save(dto.toEntity());
+        categoryRepository.save(newCategoryFormDto.toEntity());
         return "redirect:/admin/categories";
     }
 
-    @GetMapping("{code}")
+    @GetMapping("/admin/categories/{code}")
     public String getCategoryByCode(@PathVariable String code, Model model) {
         Category category = categoryRepository.findByCode(code).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("category", category);
         return "category/update";
     }
 
-    @PostMapping("{code}")
-    public String updateCategoryByCode(@PathVariable String code, @Valid NewCategoryFormUpdate dto, BindingResult result, Model model) {
+    @PostMapping("/admin/categories/{code}")
+    public String updateCategoryByCode(@PathVariable String code, @Valid NewCategoryFormUpdate NewCategoryFormUpdateDto, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return getCategoryByCode(code, model);
         }
 
         Category category = categoryRepository.findByCode(code).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        category.update(dto);
+        category.update(NewCategoryFormUpdateDto);
         categoryRepository.save(category);
         return "redirect:/admin/categories";
     }
-
 }

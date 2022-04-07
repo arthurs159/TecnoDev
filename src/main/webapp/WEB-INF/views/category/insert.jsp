@@ -45,27 +45,31 @@
             <label>Ordem da categoria</label>
             <input type="text" class="form-control" name="orderInSystem"
                    value="${category.orderInSystem}" placeholder="por exemplo: categoria de ordem 1 aparece antes da categoria de ordem 2">
+            <form:errors path="newCategoryForm.orderInSystem" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Guia de estudos</label>
             <textarea class="form-control" name="studyGuide" rows="6"
             placeholder="Um texto apontando para formações para ajudar pessoas perdidas">${category.studyGuide}</textarea>
+            <form:errors path="newCategoryForm.studyGuide" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Caminho do ícone</label>
             <input type="text" class="form-control" name="imageUrl"
                    value="${category.imageUrl}" placeholder="por exemplo: images/categorias/programação.svg">
+            <form:errors path="newCategoryForm.imageUrl" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Cor</label>
             <input type="text" class="form-control" name="colorCode"
                    value="${category.colorCode}" placeholder="por exemplo: #fcc14a">
-            <form:errors path="newCategoryForm.code" cssClass="alert-danger"/>
+            <form:errors path="newCategoryForm.colorCode" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Descrição</label>
             <input type="text" class="form-control" name="description"
                    value="${category.description}" placeholder="por exemplo: iOS, Android, PhoneGap e mais">
+            <form:errors path="newCategoryForm.description" cssClass="alert-danger"/>
         </div>
         <button type="submit" class="btn btn-info btn-lg">Enviar</button>
     </form>

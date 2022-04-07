@@ -1,7 +1,6 @@
 package br.com.tecnodev.entities.category.api;
 
 import br.com.tecnodev.entities.category.Category;
-import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ public class CategoryApiDTO {
     private final Long totalCourse;
     private final List<SubCategoryApiDTO> subCategories;
 
-
     public CategoryApiDTO(Category category) {
         this.name = category.getName();
         this.code = category.getCode();
@@ -23,13 +21,7 @@ public class CategoryApiDTO {
         this.colorCode = category.getColorCode();
         this.studyGuide = category.getStudyGuide();
         this.totalCourse = category.getTotalCoursesFromCategory();
-        this.subCategories = getSubCategories(category);
-    }
-
-    private List<SubCategoryApiDTO> getSubCategories(Category category) {
-        return SubCategoryApiDTO.toDto(category.getSubCategories().stream()
-                .filter(SubCategory::isActive)
-                .toList());
+        this.subCategories = SubCategoryApiDTO.toDto(category.getActiveSubcategories());
     }
 
     public Long getTotalCourse() {

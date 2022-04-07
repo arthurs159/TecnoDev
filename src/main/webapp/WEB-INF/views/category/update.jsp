@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -24,7 +24,7 @@
         <div class="form-group">
             <label>Código</label>
             <input type="text" class="form-control" name="code" value="${category.code}">
-            <form:errors path="newCategoryFormUpdate.code" cssClass="alert-danger" />
+            <form:errors path="newCategoryFormUpdate.code" cssClass="alert-danger"/>
         </div>
 
         <div class="form-group ">
@@ -32,7 +32,7 @@
                 <input type="checkbox" class="form-check-input" id="active"
                        name="active"  ${category.isActive() ? 'checked' : ''}>
                 <label class="form-check-label" for="active" class="form-label">
-                   <p class="active-category">Categoria Ativa? </p>
+                    <p class="active-category">Categoria Ativa? </p>
                 </label>
                 <p class="text-muted">
                     Mostre ou deixa de mostrar a categoria na listagem dos alunos, de formações, etc
@@ -43,14 +43,17 @@
             <label>Ordem da categoria</label>
             <input type="text" class="form-control" name="orderInSystem" value="${category.orderInSystem}"
                    placeholder="Enter email">
+            <form:errors path="newCategoryFormUpdate.orderInSystem" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Guia de estudos</label>
             <textarea class="form-control" name="studyGuide" rows="6">${category.studyGuide}</textarea>
+            <form:errors path="newCategoryFormUpdate.studyGuide" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Caminho do ícone</label>
             <input type="text" class="form-control" name="imageUrl" value="${category.imageUrl}">
+            <form:errors path="newCategoryFormUpdate.imageUrl" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Cor</label>
@@ -60,6 +63,7 @@
         <div class="form-group">
             <label>Descrição</label>
             <input type="text" class="form-control" name="description" value="${category.description}">
+            <form:errors path="newCategoryFormUpdate.description" cssClass="alert-danger"/>
         </div>
         <button type="submit" class="btn btn-info btn-lg">Enviar</button>
     </form>
