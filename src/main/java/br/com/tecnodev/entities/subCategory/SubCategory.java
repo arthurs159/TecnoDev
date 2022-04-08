@@ -57,6 +57,15 @@ public class SubCategory {
         this.active = active;
     }
 
+    public void update(NewSubCategoryFormUpdate dto) {
+        this.name = dto.getName();
+        this.code = dto.getCode();
+        this.active = dto.isActive();
+        this.orderInSystem = dto.getOrderInSystem();
+        this.studyGuide = dto.getStudyGuide();
+        this.description = dto.getDescription();
+    }
+
     public Long getId() {
         return id;
     }
@@ -101,11 +110,13 @@ public class SubCategory {
         return studyGuide;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public List<Course> getCourses() {
         return courses;
     }
-
-
 
     @Override
     public String toString() {

@@ -6,8 +6,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class NewSubCategoryForm {
+public class NewSubCategoryFormUpdate {
 
+    private Long id;
     @NotEmpty(message = "{form.error.name}")
     private String name;
     @NotEmpty(message = "{form.error.code}")
@@ -17,10 +18,8 @@ public class NewSubCategoryForm {
     private String studyGuide;
     private boolean active;
     private Integer orderInSystem;
-    @NotNull(message = "{form.error.category}")
-    private Long categoryId;
 
-    public NewSubCategoryForm() {
+    public NewSubCategoryFormUpdate() {
     }
 
     public String getName() {
@@ -47,13 +46,6 @@ public class NewSubCategoryForm {
         return orderInSystem;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -79,7 +71,17 @@ public class NewSubCategoryForm {
         this.orderInSystem = orderInSystem;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public SubCategory toEntity(Category category) {
-        return new SubCategory(name, code, orderInSystem, description, active, category);
+        SubCategory subcategory = new SubCategory(name, code, orderInSystem, description, active, category);
+        subcategory.setId(this.id);
+        return subcategory;
     }
 }
