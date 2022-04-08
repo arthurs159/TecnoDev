@@ -1,7 +1,9 @@
 package br.com.tecnodev.repository;
 
 import br.com.tecnodev.entities.category.Category;
+import br.com.tecnodev.entities.category.CategoryToListDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

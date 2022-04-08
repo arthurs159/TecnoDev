@@ -14,7 +14,7 @@
     <p><c:out value="${subcategories[0].categoryName}" default="categorie"/></p>
     <h1>Subcategorias</h1>
     <a href="/admin/subcategories/new">
-        <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Nova categoria</button>
+        <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Nova subcategoria</button>
     </a>
 </div>
 <div class="container">
