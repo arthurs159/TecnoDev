@@ -1,0 +1,14 @@
+.categories-container {
+    padding-left: 15px;
+    border: outset 4px #2c32ff;
+    background: #dad4ff;
+    margin-bottom: 15px;
+    border-radius: 15px;
+}
+
+.instructor-container {
+    padding-left: 15px;
+    border: outset 4px #2c32ff;
+    border-radius: 15px;
+    background: #dad4ff;
+}

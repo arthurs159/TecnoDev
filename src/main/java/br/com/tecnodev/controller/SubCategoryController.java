@@ -60,7 +60,7 @@ public class SubCategoryController {
     }
 
     @GetMapping("/admin/subcategories/{catCode}/{subCode}")
-    public String getSubcategoryUpdateForm(@PathVariable String catCode, @PathVariable String subCode, Model model) {
+    public String getSubcategoryUpdateForm(@PathVariable String catCode, @PathVariable String subCode, NewSubCategoryFormUpdate subCategoryFormUpdate, Model model) {
         SubCategory subCategory = subCategoryRepository.findByCode(subCode, catCode).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Category category = categoryRepository.findByCode(catCode).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));;
         model.addAttribute("category", category);
@@ -69,13 +69,13 @@ public class SubCategoryController {
     }
 
     @PostMapping("/admin/subcategories/{catCode}/{subCode}")
-    public String UpdateSubcategory(@PathVariable String catCode, @PathVariable String subCode, @Valid NewSubCategoryFormUpdate subCategoryForm, BindingResult result, Model model) {
+    public String UpdateSubcategory(@PathVariable String catCode, @PathVariable String subCode, @Valid NewSubCategoryFormUpdate subCategoryFormUpdate, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return getSubcategoryUpdateForm(catCode, subCode, model);
+            return getSubcategoryUpdateForm(catCode, subCode, subCategoryFormUpdate, model);
         }
 
         SubCategory subCategory = subCategoryRepository.findByCode(subCode, catCode).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        subCategory.update(subCategoryForm);
+        subCategory.update(subCategoryFormUpdate);
         subCategoryRepository.save(subCategory);
         return "redirect:/admin/subcategories/{catCode}";
     }
