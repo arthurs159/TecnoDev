@@ -11,11 +11,6 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
 
     List<SubCategory> findSubCategoriesByCategory_CodeOrderByOrderInSystem(String code);
 
-//    SELECT * FROM Subcategory s
-//    INNER JOIN Category c
-//    ON c.id = s.category_id
-//    WHERE s.code = 'java' and c.code = 'programacao'
-
     @Query("""
             SELECT s FROM SubCategory s
             INNER JOIN Category c

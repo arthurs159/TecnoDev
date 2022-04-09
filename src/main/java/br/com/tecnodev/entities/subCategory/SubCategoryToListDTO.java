@@ -5,6 +5,7 @@ public class SubCategoryToListDTO {
     private String name;
     private String code;
     private boolean active;
+
     private String categoryName;
     private String categoryCode;
 
@@ -12,7 +13,7 @@ public class SubCategoryToListDTO {
         this.name = subCategory.getName();
         this.code = subCategory.getCode();
         this.active = subCategory.isActive();
-        this.categoryName = subCategory.getCategory().getName();
+        this.categoryName = subCategory.getCategoryName();
         this.categoryCode = subCategory.getCategoryCode();
     }
 

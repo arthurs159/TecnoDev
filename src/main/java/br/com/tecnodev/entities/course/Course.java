@@ -119,6 +119,10 @@ public class Course {
         return this.getSubCategory().getId();
     }
 
+    public String getSubCategoryName(){
+        return this.getSubCategory().getName();
+    }
+
 
 
     @Override

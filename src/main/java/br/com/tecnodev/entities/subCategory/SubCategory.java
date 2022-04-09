@@ -118,6 +118,10 @@ public class SubCategory {
         return courses;
     }
 
+    public String getCategoryName(){
+        return this.getCategory().getName();
+    }
+
     @Override
     public String toString() {
         return "SubCategory{" +
