@@ -1,6 +1,7 @@
 package br.com.tecnodev.controller;
 
 import br.com.tecnodev.entities.category.Category;
+import br.com.tecnodev.entities.category.CategoryToListDTO;
 import br.com.tecnodev.entities.subCategory.NewSubCategoryForm;
 import br.com.tecnodev.entities.subCategory.NewSubCategoryFormUpdate;
 import br.com.tecnodev.entities.subCategory.SubCategory;
@@ -32,7 +33,7 @@ public class SubCategoryController {
 
     @GetMapping("/admin/subcategories/{code}")
     public String listSubcategories(@PathVariable String code, Model model) {
-        List<SubCategory> subCategoryList = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(code);
+        List<SubCategory> subCategoryList = subCategoryRepository.getSubcategoryOrdered(code);
         List<SubCategoryToListDTO> subcategoryDto = subCategoryList.stream().map(SubCategoryToListDTO::new).toList();
         model.addAttribute("subcategories", subcategoryDto);
         return "subcategory/list";
@@ -40,11 +41,9 @@ public class SubCategoryController {
 
     @GetMapping("/admin/subcategories/new")
     public String getSubcategoryForm(NewSubCategoryForm newSubCategoryForm, Model model) {
-        List<Category> categoryList = categoryRepository.findAll();
-//        List<CategoryToListDTO> categoriesDto = categoryList.stream().map(CategoryToListDTO::new).toList();
-        //TODO CHECAR SE PRECISA DO DTO
+        List<CategoryToListDTO> categoriesDto = categoryRepository.findAll().stream().map(CategoryToListDTO::new).toList(); // TODO ordenar
 
-        model.addAttribute("category", categoryList);
+        model.addAttribute("category", categoriesDto);
         model.addAttribute("subCategoryForm", newSubCategoryForm == null ? new NewSubCategoryForm() : newSubCategoryForm);
         return "subcategory/insert";
     }
@@ -61,8 +60,10 @@ public class SubCategoryController {
 
     @GetMapping("/admin/subcategories/{catCode}/{subCode}")
     public String getSubcategoryUpdateForm(@PathVariable String catCode, @PathVariable String subCode, NewSubCategoryFormUpdate subCategoryFormUpdate, Model model) {
-        SubCategory subCategory = subCategoryRepository.findByCode(subCode, catCode).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        Category category = categoryRepository.findByCode(catCode).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));;
+        SubCategory subCategory = subCategoryRepository.findByCode(subCode, catCode)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Category category = categoryRepository.findByCode(catCode)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         model.addAttribute("category", category);
         model.addAttribute("subcategory", subCategory);
         return "subcategory/update";
@@ -74,7 +75,9 @@ public class SubCategoryController {
             return getSubcategoryUpdateForm(catCode, subCode, subCategoryFormUpdate, model);
         }
 
-        SubCategory subCategory = subCategoryRepository.findByCode(subCode, catCode).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        SubCategory subCategory = subCategoryRepository.findByCode(subCode, catCode)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
         subCategory.update(subCategoryFormUpdate);
         subCategoryRepository.save(subCategory);
         return "redirect:/admin/subcategories/{catCode}";

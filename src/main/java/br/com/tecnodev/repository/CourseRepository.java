@@ -1,6 +1,7 @@
 package br.com.tecnodev.repository;
 
 import br.com.tecnodev.entities.course.Course;
+import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.projections.InstructorReportProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +30,9 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
             WHERE cat.code = :catCode AND sub.code = :SubCode
             ORDER BY c.name
             """)
-    Page<Course> getCourseBySubCategoryCodeAndCategoryCode(String SubCode, String catCode, Pageable pageable);
+    Page<Course> findAllByCourseBySubCategoryCodeAndCategoryCode(String SubCode, String catCode, Pageable pageable);
+
+
+    Page<Course> findAllBySubCategory(SubCategory subCategory, Pageable pageable);
 
 }

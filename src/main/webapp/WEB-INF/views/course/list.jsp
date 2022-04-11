@@ -11,7 +11,7 @@
 </head>
 
 <div style="padding: 0" class="container">
-    <h3><c:out value="${courses[0].subcategoryName}" default="subcategory"/></h3>
+    <h3>${subcategory.name}</h3>
     <h1>Cursos</h1>
     <a href="/admin/course/new">
         <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Novo curso</button>
@@ -41,6 +41,25 @@
             </c:forEach>
             </tbody>
         </table>
+
+        <nav>
+            <ul class="pagination pagination-lg">
+                <li class="${first == true ? "disabled" : ""}">
+                    <a href="?page=${pageNumber-1}" aria-label="Previous"><span class="disabled" aria-hidden="true">&laquo;</span></a>
+                </li>
+                    <c:forEach begin="1" end="${totalPages}" varStatus="index">
+                <li class="${index.index-1 == pageNumber ? "disabled" : ""}">
+                        <a href="?page=${index.index-1}"><span>${index.index}</span></a>
+                </li>
+                    </c:forEach>
+
+                <li class="${last == true ? "disabled" : ""}">
+                    <a href="?page=${pageNumber+1}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                </li>
+            </ul>
+        </nav>
+
+
     </div>
 </div>
 

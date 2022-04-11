@@ -11,6 +11,10 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
 
     List<SubCategory> findSubCategoriesByCategory_CodeOrderByOrderInSystem(String code);
 
+    default List<SubCategory> getSubcategoryOrdered(String code) {
+        return findSubCategoriesByCategory_CodeOrderByOrderInSystem(code);
+    }
+
     @Query("""
             SELECT s FROM SubCategory s
             INNER JOIN Category c
@@ -18,4 +22,6 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
             WHERE s.code = :subCode AND c.code = :catCode
             """)
     Optional<SubCategory> findByCode(String subCode, String catCode);
+
+    SubCategory findByCode(String code);
 }
