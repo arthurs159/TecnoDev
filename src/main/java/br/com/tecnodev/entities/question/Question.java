@@ -18,7 +18,8 @@ public class Question extends Activity {
     private QuestionType type = QuestionType.SINGLE_CHOICE;
 
     @Deprecated
-    public Question() {}
+    public Question() {
+    }
 
     public Question(String title, String code, Section section, String statement, QuestionType type) {
         super(title, code, section);

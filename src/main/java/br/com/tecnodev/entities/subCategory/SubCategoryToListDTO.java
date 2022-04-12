@@ -2,6 +2,7 @@ package br.com.tecnodev.entities.subCategory;
 
 public class SubCategoryToListDTO {
 
+    private Long id;
     private String name;
     private String code;
     private boolean active;
@@ -10,6 +11,7 @@ public class SubCategoryToListDTO {
     private String categoryCode;
 
     public SubCategoryToListDTO(SubCategory subCategory) {
+        this.id = subCategory.getId();
         this.name = subCategory.getName();
         this.code = subCategory.getCode();
         this.active = subCategory.isActive();
@@ -35,5 +37,9 @@ public class SubCategoryToListDTO {
 
     public String getCategoryCode() {
         return categoryCode;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

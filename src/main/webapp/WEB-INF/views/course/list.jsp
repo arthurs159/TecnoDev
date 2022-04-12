@@ -5,7 +5,6 @@
 <html>
 <head>
     <link rel='stylesheet' href='/webjars/bootstrap/3.3.7/css/bootstrap.min.css'>
-    <link rel='stylesheet' href="/assets/css/subcategory/listSubcategory.css">
     <meta content="text/html;charset=UTF-8">
     <title>Lista de categorias</title>
 </head>
@@ -45,16 +44,15 @@
         <nav>
             <ul class="pagination pagination-lg">
                 <li class="${first == true ? "disabled" : ""}">
-                    <a href="?page=${pageNumber-1}" aria-label="Previous"><span class="disabled" aria-hidden="true">&laquo;</span></a>
+                    <a href="?page=${pageNumber > 0 ? pageNumber-1 : pageNumber}" aria-label="Previous"><span class="disabled" aria-hidden="true">&laquo;</span></a>
                 </li>
-                    <c:forEach begin="1" end="${totalPages}" varStatus="index">
-                <li class="${index.index-1 == pageNumber ? "disabled" : ""}">
-                        <a href="?page=${index.index-1}"><span>${index.index}</span></a>
-                </li>
-                    </c:forEach>
-
+                <c:forEach begin="1" end="${totalPages}" varStatus="totalPages">
+                    <li class="${totalPages.index-1 == pageNumber ? "disabled" : ""}">
+                        <a href="?page=${totalPages.index-1}"><span>${totalPages.index}</span></a>
+                    </li>
+                </c:forEach>
                 <li class="${last == true ? "disabled" : ""}">
-                    <a href="?page=${pageNumber+1}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                    <a href="?page=${pageNumber < totalPages-1 ? pageNumber+1 : pageNumber}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
                 </li>
             </ul>
         </nav>

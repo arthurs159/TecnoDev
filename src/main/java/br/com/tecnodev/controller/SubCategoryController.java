@@ -1,7 +1,6 @@
 package br.com.tecnodev.controller;
 
 import br.com.tecnodev.entities.category.Category;
-import br.com.tecnodev.entities.category.CategoryToListDTO;
 import br.com.tecnodev.entities.subCategory.NewSubCategoryForm;
 import br.com.tecnodev.entities.subCategory.NewSubCategoryFormUpdate;
 import br.com.tecnodev.entities.subCategory.SubCategory;
@@ -15,9 +14,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -41,9 +42,12 @@ public class SubCategoryController {
 
     @GetMapping("/admin/subcategories/new")
     public String getSubcategoryForm(NewSubCategoryForm newSubCategoryForm, Model model) {
-        List<CategoryToListDTO> categoriesDto = categoryRepository.findAll().stream().map(CategoryToListDTO::new).toList(); // TODO ordenar
+        List<Category> categories = categoryRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Category::getName))
+                .toList();
 
-        model.addAttribute("category", categoriesDto);
+        model.addAttribute("category", categories);
         model.addAttribute("subCategoryForm", newSubCategoryForm == null ? new NewSubCategoryForm() : newSubCategoryForm);
         return "subcategory/insert";
     }
@@ -81,6 +85,16 @@ public class SubCategoryController {
         subCategory.update(subCategoryFormUpdate);
         subCategoryRepository.save(subCategory);
         return "redirect:/admin/subcategories/{catCode}";
+    }
+
+    @PostMapping("/changeStatus/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public void changeSubcategoryStatus(@PathVariable Long id) {
+        SubCategory subCategory = subCategoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        subCategory.toggleActive();
+        subCategoryRepository.save(subCategory);
     }
 
 }

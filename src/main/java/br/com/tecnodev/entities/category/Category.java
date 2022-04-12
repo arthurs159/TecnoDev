@@ -76,7 +76,7 @@ public class Category {
     }
 
     public void toggleActive() {
-        this.active = !isActive();
+        this.active = false;
     }
 
     public Long getId() {

@@ -35,9 +35,4 @@ public class ReportController {
         return "report/report";
     }
 
-//    @GetMapping("/report")
-//    public String resultList(){
-////        List<CategoryReportProjection> projection = categoryRepository.report();
-//        return showReportPage();
-//    }
 }

@@ -26,26 +26,39 @@
                 <th>Ativo</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${subcategories}" var="subcat">
-                <tr class="col">
+                <tr class="col" data-sub-id="${subcat.id}">
                     <td>${subcat.name}</td>
                     <td>${subcat.code}</td>
-                    <td>${subcat.active}</td>
-                    <td><a href="/admin/courses/${subcat.categoryCode}/${subcat.code}">
-                        <button type="button" class="btn btn-link">Cursos</button>
-                    </a></td>
-                    <td><a href="/admin/subcategories/${subcat.categoryCode}/${subcat.code}">
-                        <button type="button" class="btn btn-default">Editar</button>
-                    </a></td>
+                    <td class="ativo">${subcat.active}</td>
+                    <td>
+                        <a href="/admin/courses/${subcat.categoryCode}/${subcat.code}">
+                            <button type="button" class="btn btn-link">Cursos</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/admin/subcategories/${subcat.categoryCode}/${subcat.code}">
+                            <button type="button" class="btn btn-default">Editar</button>
+                        </a>
+                    </td>
+                    <c:if test="${subcat.active}">
+                        <td>
+                            <button type="button" class="btn btn-default deactivate-subcategory-button">
+                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Desativar
+                            </button>
+                        </td>
+                    </c:if>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
-
+<script src="../../../assets/js/jquery.js"></script>
+<script src="../../../assets/js/category/disableCategoryJQuery.js"></script>
 </body>
 </html>

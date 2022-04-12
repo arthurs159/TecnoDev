@@ -56,7 +56,6 @@ public class SubCategory {
         this.description = description;
         this.active = active;
     }
-
     public void update(NewSubCategoryFormUpdate dto) {
         this.name = dto.getName();
         this.code = dto.getCode();
@@ -122,6 +121,9 @@ public class SubCategory {
         return this.getCategory().getName();
     }
 
+    public void toggleActive() {
+        this.active = false;
+    }
     @Override
     public String toString() {
         return "SubCategory{" +

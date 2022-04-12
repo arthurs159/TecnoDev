@@ -25,26 +25,39 @@
                 <th>Ativo</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${categories}" var="cat">
-                <tr class="col">
+                <tr class="col" data-cat-id="${cat.id}">
                     <td>${cat.name}</td>
                     <td>${cat.code}</td>
-                    <td>${cat.active}</td>
-                    <td><a href="subcategories/${cat.code}">
+                    <td class="ativo">${cat.active}</td>
+                    <td>
+                        <a href="subcategories/${cat.code}">
                             <button type="button" class="btn btn-link">Subcategorias</button>
-                    </a></td>
-                    <td><a href="/admin/categories/${cat.code}">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/admin/categories/${cat.code}">
                             <button type="button" class="btn btn-default">Editar</button>
-                        </a></td>
+                        </a>
+                    </td>
+                    <c:if test="${cat.active}">
+                        <td>
+                            <button type="button" class="btn btn-default deactivate-category-button">
+                                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Desativar
+                            </button>
+                        </td>
+                    </c:if>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
 </div>
-
+<script src="../../../assets/js/jquery.js"></script>
+<script src="../../../assets/js/category/disableCategoryJQuery.js"></script>
 </body>
 </html>

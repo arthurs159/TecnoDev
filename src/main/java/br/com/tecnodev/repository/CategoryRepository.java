@@ -17,6 +17,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     List<Category> findAllByOrderByOrderInSystem();
 
+
     Optional<Category> findByCode(String code);
 
     @Query(nativeQuery = true, value = """

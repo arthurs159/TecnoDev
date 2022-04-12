@@ -28,7 +28,8 @@ public class CourseController {
 
     @GetMapping("/admin/courses/{catCode}/{subCode}")
     public String listCourses(@PathVariable String catCode,
-                              @PathVariable String subCode, @PageableDefault(size = 5) Pageable pageable, Model model) {
+                              @PathVariable String subCode,
+                              @PageableDefault(size = 5) Pageable pageable, Model model) {
 
         SubCategory subCategory = subCategoryRepository.findByCode(subCode);
 
