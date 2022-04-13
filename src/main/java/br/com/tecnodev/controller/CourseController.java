@@ -39,11 +39,6 @@ public class CourseController {
         model.addAttribute("courses", courses);
         model.addAttribute("subcategory", subCategory);
         model.addAttribute("categoryCode", catCode);
-//        model.addAttribute("totalPages", courseList.getTotalPages());
-//        model.addAttribute("first", courseList.isFirst());
-//        model.addAttribute("last", courseList.isLast());
-//        model.addAttribute("pageNumber", courseList.getNumber());
-
         return "course/list";
     }
 
