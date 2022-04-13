@@ -19,7 +19,6 @@ public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String code;
     @Column(columnDefinition = "TEXT")

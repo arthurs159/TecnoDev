@@ -10,7 +10,7 @@
 </head>
 
 <div style="padding: 0" class="container">
-    <h3><c:out value="${subcategories[0].categoryName}" default="categorie"/></h3>
+    <h3>${category.name}</h3>
     <h1>Subcategorias</h1>
     <a href="/admin/subcategories/new">
         <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Nova subcategoria</button>
@@ -34,14 +34,14 @@
                 <tr class="col" data-sub-id="${subcat.id}">
                     <td>${subcat.name}</td>
                     <td>${subcat.code}</td>
-                    <td class="ativo">${subcat.active}</td>
+                    <td class="ativo">${subcat.active == true ? "Ativa" : "Inativa"}</td>
                     <td>
-                        <a href="/admin/courses/${subcat.categoryCode}/${subcat.code}">
+                        <a href="/admin/courses/${category.code}/${subcat.code}">
                             <button type="button" class="btn btn-link">Cursos</button>
                         </a>
                     </td>
                     <td>
-                        <a href="/admin/subcategories/${subcat.categoryCode}/${subcat.code}">
+                        <a href="/admin/subcategories/${category.code}/${subcat.code}">
                             <button type="button" class="btn btn-default">Editar</button>
                         </a>
                     </td>

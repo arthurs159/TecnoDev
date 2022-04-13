@@ -4,16 +4,15 @@ import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.category.CategoryToListDTO;
 import br.com.tecnodev.entities.category.NewCategoryForm;
 import br.com.tecnodev.entities.category.NewCategoryFormUpdate;
-import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.repository.CategoryRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
@@ -72,12 +71,12 @@ public class CategoryController {
     }
 
     @PostMapping("/changeCategoryStatus/{id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public void changeCategoryStatus(@PathVariable Long id) {
+    public ResponseEntity<Void> changeCategoryStatus(@PathVariable Long id) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         category.toggleActive();
         categoryRepository.save(category);
+        return ResponseEntity.ok().build();
     }
 }

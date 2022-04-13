@@ -33,7 +33,7 @@
                 <tr class="col" data-cat-id="${cat.id}">
                     <td>${cat.name}</td>
                     <td>${cat.code}</td>
-                    <td class="ativo">${cat.active}</td>
+                    <td class="ativo">${cat.active == true ? 'Ativa' : 'Inativa'}</td>
                     <td>
                         <a href="subcategories/${cat.code}">
                             <button type="button" class="btn btn-link">Subcategorias</button>

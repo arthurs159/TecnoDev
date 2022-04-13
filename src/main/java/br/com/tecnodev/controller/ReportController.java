@@ -2,8 +2,6 @@ package br.com.tecnodev.controller;
 
 import br.com.tecnodev.projections.CategoryReportProjection;
 import br.com.tecnodev.projections.InstructorReportProjection;
-import br.com.tecnodev.projections.dtoProjection.CoursesInstructorDTO;
-import br.com.tecnodev.projections.dtoProjection.QuantityCoursesFromCategoryDTO;
 import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.repository.CourseRepository;
 import org.springframework.stereotype.Controller;
@@ -23,15 +21,18 @@ public class ReportController {
         this.courseRepository = courseRepository;
     }
 
-    @GetMapping("/admin/dashboard")
-    public String showReportPage(Model model){
-        List<CategoryReportProjection> categoryProjection = categoryRepository.report();
-        List<QuantityCoursesFromCategoryDTO> quantityCoursesDto = categoryProjection.stream().map(QuantityCoursesFromCategoryDTO::new).toList();
-        model.addAttribute("report", quantityCoursesDto);
+    @GetMapping("/admin")
+    public String getReportPage() {
+        return "redirect:/admin/dashboard";
+    }
 
+    @GetMapping("/admin/dashboard")
+    public String showReportPage(Model model) {
+        List<CategoryReportProjection> categoryProjection = categoryRepository.report();
         InstructorReportProjection instructorProjection = courseRepository.getInstructorWithMoreCourses();
-        CoursesInstructorDTO coursesInstructorDTO = new CoursesInstructorDTO(instructorProjection);
-        model.addAttribute("instructor", coursesInstructorDTO);
+
+        model.addAttribute("report", categoryProjection);
+        model.addAttribute("instructor", instructorProjection);
         return "report/report";
     }
 

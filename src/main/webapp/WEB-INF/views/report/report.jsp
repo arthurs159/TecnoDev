@@ -15,9 +15,9 @@
 </div>
 <div class="container">
     <div class="row">
-        <h3>Categorias e qtd de cursos</h3>
         <div class="categories-container">
         <table class="table">
+            <h3>Quantidade de cursos das categorias</h3>
             <thead>
             <tr>
                 <th scope="col">Categoria</th>

@@ -33,16 +33,16 @@ public class CourseController {
 
         SubCategory subCategory = subCategoryRepository.findByCode(subCode);
 
-        Page<Course> courseList = courseRepository.findAllBySubCategory(subCategory, pageable);
-        List<CourseToListDTO> courses = courseList.getContent().stream().map(CourseToListDTO::new).toList();
+        Page<CourseToListDTO> courses = courseRepository.findAllBySubCategory(subCategory, pageable)
+                .map(CourseToListDTO::new);
 
         model.addAttribute("courses", courses);
         model.addAttribute("subcategory", subCategory);
         model.addAttribute("categoryCode", catCode);
-        model.addAttribute("totalPages", courseList.getTotalPages());
-        model.addAttribute("first", courseList.isFirst());
-        model.addAttribute("last", courseList.isLast());
-        model.addAttribute("pageNumber", courseList.getNumber());
+//        model.addAttribute("totalPages", courseList.getTotalPages());
+//        model.addAttribute("first", courseList.isFirst());
+//        model.addAttribute("last", courseList.isLast());
+//        model.addAttribute("pageNumber", courseList.getNumber());
 
         return "course/list";
     }

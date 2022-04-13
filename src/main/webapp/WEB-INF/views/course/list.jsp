@@ -28,11 +28,11 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${courses}" var="course">
+            <c:forEach items="${courses.content}" var="course">
                 <tr class="col">
                     <td>${course.name}</td>
                     <td>${course.code}</td>
-                    <td>${course.visibility}</td>
+                    <td>${course.visibility == "PUBLIC" ? "PUBLICO" : "PRIVADO"}</td>
                     <td><a href="/admin/course/${course.code}">
                         <button type="button" class="btn btn-default">Editar</button>
                     </a></td>
@@ -43,21 +43,23 @@
 
         <nav>
             <ul class="pagination pagination-lg">
-                <li class="${first == true ? "disabled" : ""}">
-                    <a href="?page=${pageNumber > 0 ? pageNumber-1 : pageNumber}" aria-label="Previous"><span class="disabled" aria-hidden="true">&laquo;</span></a>
+                <li class="${courses.first == true ? "disabled" : ""}">
+                    <a href="?page=${courses.number > 0 ? courses.number-1 : courses.number}"
+                       aria-label="Previous"><span
+                            class="disabled" aria-hidden="true">&laquo;</span></a>
                 </li>
-                <c:forEach begin="1" end="${totalPages}" varStatus="totalPages">
-                    <li class="${totalPages.index-1 == pageNumber ? "disabled" : ""}">
-                        <a href="?page=${totalPages.index-1}"><span>${totalPages.index}</span></a>
+                <c:forEach begin="1" end="${courses.totalPages}" varStatus="page">
+                    <li class="${page.index-1 == courses.number ? "disabled" : ""}">
+                        <a href="?page=${page.index-1}"><span>${page.index}</span></a>
                     </li>
                 </c:forEach>
-                <li class="${last == true ? "disabled" : ""}">
-                    <a href="?page=${pageNumber < totalPages-1 ? pageNumber+1 : pageNumber}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                <li class="${courses.last == true ? "disabled" : ""}">
+                    <a href="?page=${courses.number < courses.totalPages-1 ? courses.number+1 : courses.number}"
+                       aria-label="Next"><span
+                            aria-hidden="true">&raquo;</span></a>
                 </li>
             </ul>
         </nav>
-
-
     </div>
 </div>
 

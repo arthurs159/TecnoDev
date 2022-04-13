@@ -2,6 +2,7 @@ package br.com.tecnodev.repository;
 
 import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.category.CategoryToListDTO;
+import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.projections.CategoryReportProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,7 +32,4 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
              ORDER BY COUNT(course.id) DESC;
             """)
     List<CategoryReportProjection> report();
-
-
-
 }
