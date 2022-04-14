@@ -12,7 +12,7 @@
 <div style="padding: 0" class="container">
     <h3>${subcategory.name}</h3>
     <h1>Cursos</h1>
-    <a href="/admin/course/new">
+    <a href="/admin/courses/new">
         <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Novo curso</button>
     </a>
 </div>
@@ -25,6 +25,8 @@
                 <th>Código</th>
                 <th>Status</th>
                 <th></th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -33,9 +35,11 @@
                     <td>${course.name}</td>
                     <td>${course.code}</td>
                     <td>${course.visibility == "PUBLIC" ? "PUBLICO" : "PRIVADO"}</td>
-                    <td><a href="/admin/course/${course.code}">
-                        <button type="button" class="btn btn-default">Editar</button>
-                    </a></td>
+                    <td>
+                        <a href="/admin/courses/${categoryCode}/${subcategory.code}/${course.code}">
+                            <button type="button" class="btn btn-default">Editar</button>
+                        </a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

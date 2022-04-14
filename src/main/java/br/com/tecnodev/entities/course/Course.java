@@ -1,12 +1,10 @@
 package br.com.tecnodev.entities.course;
 
+import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import java.util.List;
-import java.util.Objects;
 
 import static br.com.tecnodev.validator.Validator.*;
 
@@ -40,7 +38,8 @@ public class Course {
     private SubCategory subCategory;
 
     @Deprecated
-    public Course() {}
+    public Course() {
+    }
 
     public Course(String name, String code, int estimatedTimeInHours, String teacher, SubCategory subCategory) {
         isNotNullOrEmpty(name, "The name must not be empty or null!!!");
@@ -62,6 +61,18 @@ public class Course {
         this.targetAudience = targetAudience;
         this.description = description;
         this.developedSkills = developedSkills;
+    }
+
+    public void merge(NewCourseFormUpdate dto, SubCategory subcategory) {
+        this.name = dto.getName();
+        this.code = dto.getCode();
+        this.estimatedTimeInHours = dto.getEstimatedTimeInHours();
+        this.visibility = dto.getVisibility();
+        this.targetAudience = dto.getTargetAudience();
+        this.teacher = dto.getTeacher();
+        this.description = dto.getDescription();
+        this.developedSkills = dto.getDevelopedSkills();
+        this.subCategory = subcategory;
     }
 
     public Long getId() {
@@ -116,14 +127,13 @@ public class Course {
         return this.getSubCategory().getCode();
     }
 
-    public Long getSubcategoryId(){
+    public Long getSubcategoryId() {
         return this.getSubCategory().getId();
     }
 
-    public String getSubCategoryName(){
+    public String getSubCategoryName() {
         return this.getSubCategory().getName();
     }
-
 
 
     @Override
