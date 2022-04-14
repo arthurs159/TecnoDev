@@ -8,8 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
-
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query(nativeQuery = true, value = """
@@ -20,18 +18,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
             LIMIT 1;
             """)
     InstructorReportProjection getInstructorWithMoreCourses();
-
-    @Query("""
-            SELECT c FROM Course c
-            INNER JOIN SubCategory sub
-            ON sub.id = c.subCategory.id
-            INNER JOIN Category cat
-            ON cat.id = sub.category.id
-            WHERE cat.code = :catCode AND sub.code = :SubCode
-            ORDER BY c.name
-            """)
-    Page<Course> findAllByCourseBySubCategoryCodeAndCategoryCode(String SubCode, String catCode, Pageable pageable);
-
 
     Page<Course> findAllBySubCategory(SubCategory subCategory, Pageable pageable);
 

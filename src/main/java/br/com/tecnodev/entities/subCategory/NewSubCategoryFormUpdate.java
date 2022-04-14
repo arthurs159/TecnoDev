@@ -1,22 +1,21 @@
 package br.com.tecnodev.entities.subCategory;
 
-import br.com.tecnodev.entities.category.Category;
-
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 public class NewSubCategoryFormUpdate {
 
     private Long id;
-    @NotEmpty(message = "{form.error.name}")
+    @NotBlank(message = "{form.error.name}")
     private String name;
-    @NotEmpty(message = "{form.error.code}")
+    @NotBlank(message = "{form.error.code}")
     @Pattern(regexp = "[a-z0-9-]+", message = "{form.error.code.regex}")
     private String code;
     private String description;
     private String studyGuide;
     private boolean active;
     private Integer orderInSystem;
+    private Long categoryId;
 
     public NewSubCategoryFormUpdate() {
     }
@@ -44,7 +43,6 @@ public class NewSubCategoryFormUpdate {
     public Integer getOrderInSystem() {
         return orderInSystem;
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -78,9 +76,12 @@ public class NewSubCategoryFormUpdate {
         this.id = id;
     }
 
-    public SubCategory toEntity(Category category) {
-        SubCategory subcategory = new SubCategory(name, code, orderInSystem, description, active, category);
-        subcategory.setId(this.id);
-        return subcategory;
+    public Long getCategoryId() {
+        return categoryId;
     }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
 }

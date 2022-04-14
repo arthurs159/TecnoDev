@@ -1,14 +1,14 @@
 package br.com.tecnodev.entities.category;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 public class NewCategoryFormUpdate {
 
     private Long id;
-    @NotEmpty(message = "{form.error.name}")
+    @NotBlank(message = "{form.error.name}")
     private String name;
-    @NotEmpty(message = "{form.error.code}")
+    @NotBlank(message = "{form.error.code}")
     @Pattern(regexp = "[a-z0-9-]+", message = "{form.error.code.regex}")
     private String code;
     private String description;

@@ -56,34 +56,46 @@ public class SubCategoryController {
 
     @PostMapping("/admin/subcategories")
     public String insertSubcategory(@Valid NewSubCategoryForm newSubCategoryForm, BindingResult result, Model model) {
-        Category category = categoryRepository.findById(newSubCategoryForm.getCategoryId()).orElseThrow(RuntimeException::new);
         if (result.hasErrors()) {
             return getSubcategoryForm(newSubCategoryForm, model);
         }
+        Category category = categoryRepository.findById(newSubCategoryForm.getCategoryId()).orElseThrow(RuntimeException::new);
         subCategoryRepository.save(newSubCategoryForm.toEntity(category));
         return listSubcategories(category.getCode(), model);
     }
 
-    @GetMapping("/admin/subcategories/{catCode}/{subCode}")
-    public String getSubcategoryUpdateForm(@PathVariable String catCode, @PathVariable String subCode, NewSubCategoryFormUpdate subCategoryFormUpdate, Model model) {
-        SubCategory subCategory = subCategoryRepository.findByCode(subCode, catCode)
+    @GetMapping("/admin/subcategories/{categoryCode}/{subcategoryCode}")
+    public String getSubcategoryUpdateForm(@PathVariable String categoryCode, @PathVariable String subcategoryCode, NewSubCategoryFormUpdate subCategoryFormUpdate, Model model) {
+        SubCategory subCategory = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(subcategoryCode, categoryCode)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        List<Category> categories = categoryRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(Category::getName))
+                .toList();
+
         model.addAttribute("subcategory", subCategory);
+        model.addAttribute("category", categories);
+
         return "subcategory/update";
     }
 
-    @PostMapping("/admin/subcategories/{catCode}/{subCode}")
-    public String UpdateSubcategory(@PathVariable String catCode, @PathVariable String subCode, @Valid NewSubCategoryFormUpdate subCategoryFormUpdate, BindingResult result, Model model) {
+    @PostMapping("/admin/subcategories/{categoryCode}/{subcategoryCode}")
+    public String updateSubcategory(@PathVariable String categoryCode, @PathVariable String subcategoryCode, @Valid NewSubCategoryFormUpdate subCategoryFormUpdate, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return getSubcategoryUpdateForm(catCode, subCode, subCategoryFormUpdate, model);
+            return getSubcategoryUpdateForm(categoryCode, subcategoryCode, subCategoryFormUpdate, model);
         }
 
-        SubCategory subCategory = subCategoryRepository.findByCode(subCode, catCode)
+        SubCategory subCategory = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(subcategoryCode, categoryCode)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        subCategory.update(subCategoryFormUpdate);
+        Category category = categoryRepository.findById(subCategoryFormUpdate.getCategoryId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        subCategory.merge(subCategoryFormUpdate, category);
+
         subCategoryRepository.save(subCategory);
-        return "redirect:/admin/subcategories/{catCode}";
+        return "redirect:/admin/subcategories/" + category.getCode();
     }
 
     @PostMapping("/changeSubcategoryStatus/{id}")
@@ -91,7 +103,7 @@ public class SubCategoryController {
         SubCategory subCategory = subCategoryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        subCategory.toggleActive();
+        subCategory.disableActive();
         subCategoryRepository.save(subCategory);
         return ResponseEntity.ok().build();
     }

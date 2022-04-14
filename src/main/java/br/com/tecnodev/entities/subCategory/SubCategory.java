@@ -55,13 +55,14 @@ public class SubCategory {
         this.description = description;
         this.active = active;
     }
-    public void update(NewSubCategoryFormUpdate dto) {
+    public void merge(NewSubCategoryFormUpdate dto, Category category) {
         this.name = dto.getName();
         this.code = dto.getCode();
         this.active = dto.isActive();
         this.orderInSystem = dto.getOrderInSystem();
         this.studyGuide = dto.getStudyGuide();
         this.description = dto.getDescription();
+        this.category = category;
     }
 
     public Long getId() {
@@ -100,10 +101,6 @@ public class SubCategory {
         return this.getCategory().getCode();
     }
 
-    public Long getCategoryId(){
-        return this.getCategory().getId();
-    }
-
     public String getStudyGuide() {
         return studyGuide;
     }
@@ -120,7 +117,7 @@ public class SubCategory {
         return this.getCategory().getName();
     }
 
-    public void toggleActive() {
+    public void disableActive() {
         this.active = false;
     }
     @Override

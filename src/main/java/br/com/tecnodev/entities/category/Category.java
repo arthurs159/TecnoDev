@@ -75,7 +75,7 @@ public class Category {
         this.subCategories.add(subCategory);
     }
 
-    public void toggleActive() {
+    public void disableActive() {
         this.active = false;
     }
 

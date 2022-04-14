@@ -75,7 +75,7 @@ public class CategoryController {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        category.toggleActive();
+        category.disableActive();
         categoryRepository.save(category);
         return ResponseEntity.ok().build();
     }

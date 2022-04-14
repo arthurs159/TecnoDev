@@ -19,9 +19,9 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
             SELECT s FROM SubCategory s
             INNER JOIN Category c
             ON c.id = s.category.id
-            WHERE s.code = :subCode AND c.code = :catCode
+            WHERE s.code = :subcategoryCode AND c.code = :categoryCode
             """)
-    Optional<SubCategory> findByCode(String subCode, String catCode);
+    Optional<SubCategory> findSubcategoryByCategoryAndSubcategoryCode(String subcategoryCode, String categoryCode);
 
-    SubCategory findByCode(String code);
+    SubCategory findSubcategoryByCode(String code);
 }

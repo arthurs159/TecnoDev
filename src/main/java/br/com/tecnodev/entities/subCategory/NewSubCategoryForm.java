@@ -2,15 +2,15 @@ package br.com.tecnodev.entities.subCategory;
 
 import br.com.tecnodev.entities.category.Category;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class NewSubCategoryForm {
 
-    @NotEmpty(message = "{form.error.name}")
+    @NotBlank(message = "{form.error.name}")
     private String name;
-    @NotEmpty(message = "{form.error.code}")
+    @NotBlank(message = "{form.error.code}")
     @Pattern(regexp = "[a-z0-9-]+", message = "{form.error.code.regex}")
     private String code;
     private String description;

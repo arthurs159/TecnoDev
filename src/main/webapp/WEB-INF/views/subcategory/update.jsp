@@ -65,6 +65,15 @@
                    value="${subcategory.description}">
             <form:errors path="newSubCategoryFormUpdate.description" cssClass="alert-danger"/>
         </div>
+        <div class="form-group">
+            <label>Categoria</label>
+            <select name="categoryId" class="form-control">
+                <c:forEach items="${category}" var="cat">
+                    <option value="${cat.id}">${cat.name} </option>
+                </c:forEach>
+                <form:errors path="newSubCategoryForm.categoryId" cssClass="alert-danger"/>
+            </select>
+        </div>
         <button type="submit" class="btn btn-info btn-lg">Enviar</button>
     </form>
 </div>

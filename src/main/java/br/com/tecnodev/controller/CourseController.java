@@ -1,6 +1,5 @@
 package br.com.tecnodev.controller;
 
-import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.course.CourseToListDTO;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.repository.CourseRepository;
@@ -13,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
-
 @Controller
 public class CourseController {
 
@@ -26,19 +23,19 @@ public class CourseController {
         this.subCategoryRepository = subCategoryRepository;
     }
 
-    @GetMapping("/admin/courses/{catCode}/{subCode}")
-    public String listCourses(@PathVariable String catCode,
-                              @PathVariable String subCode,
+    @GetMapping("/admin/courses/{categoryCode}/{subcategoryCode}")
+    public String listCourses(@PathVariable String categoryCode,
+                              @PathVariable String subcategoryCode,
                               @PageableDefault(size = 5) Pageable pageable, Model model) {
 
-        SubCategory subCategory = subCategoryRepository.findByCode(subCode);
+        SubCategory subCategory = subCategoryRepository.findSubcategoryByCode(subcategoryCode);
 
         Page<CourseToListDTO> courses = courseRepository.findAllBySubCategory(subCategory, pageable)
                 .map(CourseToListDTO::new);
 
         model.addAttribute("courses", courses);
         model.addAttribute("subcategory", subCategory);
-        model.addAttribute("categoryCode", catCode);
+        model.addAttribute("categoryCode", categoryCode);
         return "course/list";
     }
 
