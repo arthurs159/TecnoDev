@@ -91,7 +91,7 @@ public class CourseController {
     @PostMapping("/admin/courses/{categoryCode}/{subcategoryCode}/{courseCode}")
     public String updateCourse(@PathVariable String categoryCode,
                                @PathVariable String subcategoryCode,
-                               @PathVariable String courseCode, NewCourseFormUpdate newCourseFormUpdate, BindingResult result, Model model){
+                               @PathVariable String courseCode, @Valid NewCourseFormUpdate newCourseFormUpdate, BindingResult result, Model model){
         if(result.hasErrors()){
             return getUpdateCourseForm(categoryCode, subcategoryCode, courseCode, newCourseFormUpdate, model);
         }

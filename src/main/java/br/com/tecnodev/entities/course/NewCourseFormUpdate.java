@@ -1,7 +1,5 @@
 package br.com.tecnodev.entities.course;
 
-import br.com.tecnodev.entities.subCategory.SubCategory;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
