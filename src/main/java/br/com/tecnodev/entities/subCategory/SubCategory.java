@@ -19,7 +19,6 @@ public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String code;
     @Column(columnDefinition = "TEXT")
@@ -55,6 +54,15 @@ public class SubCategory {
         this.orderInSystem = orderInSystem;
         this.description = description;
         this.active = active;
+    }
+    public void merge(NewSubCategoryFormUpdate dto, Category category) {
+        this.name = dto.getName();
+        this.code = dto.getCode();
+        this.active = dto.isActive();
+        this.orderInSystem = dto.getOrderInSystem();
+        this.studyGuide = dto.getStudyGuide();
+        this.description = dto.getDescription();
+        this.category = category;
     }
 
     public Long getId() {
@@ -93,20 +101,25 @@ public class SubCategory {
         return this.getCategory().getCode();
     }
 
-    public Long getCategoryId(){
-        return this.getCategory().getId();
-    }
-
     public String getStudyGuide() {
         return studyGuide;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<Course> getCourses() {
         return courses;
     }
 
+    public String getCategoryName(){
+        return this.getCategory().getName();
+    }
 
-
+    public void disableActive() {
+        this.active = false;
+    }
     @Override
     public String toString() {
         return "SubCategory{" +

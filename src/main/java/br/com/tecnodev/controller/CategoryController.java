@@ -6,6 +6,7 @@ import br.com.tecnodev.entities.category.NewCategoryForm;
 import br.com.tecnodev.entities.category.NewCategoryFormUpdate;
 import br.com.tecnodev.repository.CategoryRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,5 +68,15 @@ public class CategoryController {
         category.update(NewCategoryFormUpdateDto);
         categoryRepository.save(category);
         return "redirect:/admin/categories";
+    }
+
+    @PostMapping("/changeCategoryStatus/{id}")
+    public ResponseEntity<Void> changeCategoryStatus(@PathVariable Long id) {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        category.disableActive();
+        categoryRepository.save(category);
+        return ResponseEntity.ok().build();
     }
 }

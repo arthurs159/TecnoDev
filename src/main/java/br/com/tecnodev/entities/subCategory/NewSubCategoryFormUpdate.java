@@ -1,10 +1,11 @@
-package br.com.tecnodev.entities.category;
+package br.com.tecnodev.entities.subCategory;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-public class NewCategoryForm {
+public class NewSubCategoryFormUpdate {
 
+    private Long id;
     @NotBlank(message = "{form.error.name}")
     private String name;
     @NotBlank(message = "{form.error.code}")
@@ -14,9 +15,10 @@ public class NewCategoryForm {
     private String studyGuide;
     private boolean active;
     private Integer orderInSystem;
-    private String imageUrl;
-    @Pattern(regexp = "^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$", message = "{form.error.color.regex}")
-    private String colorCode;
+    private Long categoryId;
+
+    public NewSubCategoryFormUpdate() {
+    }
 
     public String getName() {
         return name;
@@ -40,14 +42,6 @@ public class NewCategoryForm {
 
     public Integer getOrderInSystem() {
         return orderInSystem;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public String getColorCode() {
-        return colorCode;
     }
 
     public void setName(String name) {
@@ -74,15 +68,20 @@ public class NewCategoryForm {
         this.orderInSystem = orderInSystem;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public Long getId() {
+        return id;
     }
 
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Category toEntity() {
-        return new Category(name, code, orderInSystem, description, studyGuide, active, imageUrl, colorCode);
+    public Long getCategoryId() {
+        return categoryId;
     }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
 }

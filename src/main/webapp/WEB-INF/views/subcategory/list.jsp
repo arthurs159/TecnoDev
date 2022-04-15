@@ -10,9 +10,10 @@
 </head>
 
 <div style="padding: 0" class="container">
-    <h1>Categorias</h1>
-    <a href="/admin/categories/new">
-        <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Nova categoria</button>
+    <h3>${category.name}</h3>
+    <h1>Subcategorias</h1>
+    <a href="/admin/subcategories/new">
+        <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Nova subcategoria</button>
     </a>
 </div>
 <div class="container">
@@ -29,24 +30,24 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${categories}" var="cat">
-                <tr class="col" data-cat-id="${cat.id}">
-                    <td>${cat.name}</td>
-                    <td>${cat.code}</td>
-                    <td class="ativo">${cat.active == true ? 'Ativa' : 'Inativa'}</td>
+            <c:forEach items="${subcategories}" var="subcat">
+                <tr class="col" data-sub-id="${subcat.id}">
+                    <td>${subcat.name}</td>
+                    <td>${subcat.code}</td>
+                    <td class="ativo">${subcat.active == true ? "Ativa" : "Inativa"}</td>
                     <td>
-                        <a href="subcategories/${cat.code}">
-                            <button type="button" class="btn btn-link">Subcategorias</button>
+                        <a href="/admin/courses/${category.code}/${subcat.code}">
+                            <button type="button" class="btn btn-link">Cursos</button>
                         </a>
                     </td>
                     <td>
-                        <a href="/admin/categories/${cat.code}">
+                        <a href="/admin/subcategories/${category.code}/${subcat.code}">
                             <button type="button" class="btn btn-default">Editar</button>
                         </a>
                     </td>
-                    <c:if test="${cat.active}">
+                    <c:if test="${subcat.active}">
                         <td>
-                            <button type="button" class="btn btn-default deactivate-category-button">
+                            <button type="button" class="btn btn-default deactivate-subcategory-button">
                                 <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Desativar
                             </button>
                         </td>

@@ -75,8 +75,8 @@ public class Category {
         this.subCategories.add(subCategory);
     }
 
-    public void toggleActive() {
-        this.active = !isActive();
+    public void disableActive() {
+        this.active = false;
     }
 
     public Long getId() {

@@ -55,6 +55,7 @@ public class Course {
         this.subCategory = subCategory;
     }
 
+
     public Course(String name, String code, Integer estimatedTimeInHours, Status visibility, String targetAudience, String teacher, String description, String developedSkills, SubCategory subCategory) {
         this(name, code, estimatedTimeInHours, teacher, subCategory);
         this.visibility = visibility;
@@ -117,6 +118,10 @@ public class Course {
 
     public Long getSubcategoryId(){
         return this.getSubCategory().getId();
+    }
+
+    public String getSubCategoryName(){
+        return this.getSubCategory().getName();
     }
 
 
