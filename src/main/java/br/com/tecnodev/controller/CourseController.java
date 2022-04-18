@@ -1,10 +1,9 @@
 package br.com.tecnodev.controller;
 
-import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.course.Course;
-import br.com.tecnodev.entities.course.CourseToListDTO;
-import br.com.tecnodev.entities.course.NewCourseForm;
-import br.com.tecnodev.entities.course.NewCourseFormUpdate;
+import br.com.tecnodev.entities.course.DTO.CourseToListDTO;
+import br.com.tecnodev.entities.course.DTO.NewCourseForm;
+import br.com.tecnodev.entities.course.DTO.NewCourseFormUpdate;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.repository.CourseRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;

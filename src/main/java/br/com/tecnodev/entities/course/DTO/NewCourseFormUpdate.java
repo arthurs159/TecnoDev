@@ -1,20 +1,17 @@
-package br.com.tecnodev.entities.course;
+package br.com.tecnodev.entities.course.DTO;
 
-import br.com.tecnodev.entities.subCategory.SubCategory;
+import br.com.tecnodev.entities.course.Status;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class NewCourseForm {
+public class NewCourseFormUpdate {
     @NotBlank(message = "{form.error.name}")
     private String name;
     @NotBlank(message = "{form.error.code}")
     @Pattern(regexp = "[a-z0-9-]+", message = "{form.error.code.regex}")
     private String code;
-
-    //todo COLOCAR O REGEX AQUi!!!!
-    //    @Pattern(regexp = "[/^([1]?[0-9]|20)$/]", message = "{form.error.estimatedTime.regex}")
     private Integer estimatedTimeInHours;
     private Status visibility;
     private String targetAudience;
@@ -23,11 +20,9 @@ public class NewCourseForm {
     private String description;
     private String developedSkills;
     @NotNull(message = "{form.error.subcategory}")
-    private SubCategory subCategory;
-
     private Long subcategoryId;
 
-    public NewCourseForm() {
+    public NewCourseFormUpdate() {
     }
 
     public String getName() {
@@ -94,14 +89,6 @@ public class NewCourseForm {
         this.developedSkills = developedSkills;
     }
 
-    public SubCategory getSubCategory() {
-        return subCategory;
-    }
-
-    public void setSubCategory(SubCategory subCategory) {
-        this.subCategory = subCategory;
-    }
-
     public Long getSubcategoryId() {
         return subcategoryId;
     }
@@ -110,7 +97,5 @@ public class NewCourseForm {
         this.subcategoryId = subcategoryId;
     }
 
-    public Course toEntity(SubCategory subCategory) {
-        return new Course(name, code, estimatedTimeInHours, visibility, targetAudience, teacher, description, developedSkills, subCategory);
-    }
+
 }

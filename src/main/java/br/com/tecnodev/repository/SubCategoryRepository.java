@@ -1,7 +1,6 @@
 package br.com.tecnodev.repository;
 
 import br.com.tecnodev.entities.subCategory.SubCategory;
-import br.com.tecnodev.projections.SubcategoryLoginProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -26,12 +25,13 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
 
     SubCategory findSubcategoryByCode(String code);
 
-//    @Query(nativeQuery = true, value = """
-//            SELECT sub.name, sub.order_in_system
-//                FROM Subcategory sub
-//                INNER JOIN Category cat
-//                    on sub.category_id = cat.id
-//            WHERE sub.active AND cat.code = :code;
-//            """)
-//    List<SubcategoryLoginProjection> teste(String code);
+    @Query("""
+            SELECT DISTINCT s FROM SubCategory s
+            INNER JOIN Category c
+            ON c.id = s.category.id
+            INNER JOIN Course course
+            ON s.id = course.subCategory.id
+            WHERE s.active = true AND c.code = :categoryCode
+            """)
+    List<SubCategory> findAllByActive(String categoryCode);
 }

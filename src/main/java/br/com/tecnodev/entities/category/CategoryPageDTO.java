@@ -17,7 +17,7 @@ public class CategoryPageDTO {
         this.code = category.getCode();
         this.orderInSystem = category.getOrderInSystem();
         this.imageUrl = category.getImageUrl();
-        this.subCategories = SubcategoryPageDTO.toDto(category.getActiveSubcategories());
+        this.subCategories = SubcategoryPageDTO.toDto(category.getSubCategories());
     }
 
     public String getName() {

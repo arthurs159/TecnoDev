@@ -1,6 +1,6 @@
 package br.com.tecnodev.entities.course;
 
-import br.com.tecnodev.entities.category.Category;
+import br.com.tecnodev.entities.course.DTO.NewCourseFormUpdate;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import javax.persistence.*;

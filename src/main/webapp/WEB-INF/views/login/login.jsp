@@ -215,7 +215,7 @@
             <ul class="categories">
                 <c:forEach items="${categories}" var="category">
                     <li class="category-card">
-                        <a href="" class="category-card__link" href="/${category.code}">
+                        <a class="category-card__link" href="/category/${category.code}">
                             <span class="category-card__icon">
                                 <img src="${category.imageUrl}">
                             </span>

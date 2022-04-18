@@ -28,6 +28,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/api/categories").permitAll()
+                .antMatchers(HttpMethod.GET, "/category/*").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll();
 

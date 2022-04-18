@@ -1,4 +1,7 @@
-package br.com.tecnodev.entities.course;
+package br.com.tecnodev.entities.course.DTO;
+
+import br.com.tecnodev.entities.course.Course;
+import br.com.tecnodev.entities.course.Status;
 
 public class CourseToListDTO {
 
