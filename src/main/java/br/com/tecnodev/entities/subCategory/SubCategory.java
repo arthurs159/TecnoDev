@@ -2,6 +2,7 @@ package br.com.tecnodev.entities.subCategory;
 
 import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.course.Course;
+import br.com.tecnodev.entities.subCategory.DTO.NewSubCategoryFormUpdate;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;

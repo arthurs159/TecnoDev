@@ -1,9 +1,9 @@
 package br.com.tecnodev.controller;
 
 import br.com.tecnodev.entities.category.Category;
-import br.com.tecnodev.entities.category.CategoryToListDTO;
-import br.com.tecnodev.entities.category.NewCategoryForm;
-import br.com.tecnodev.entities.category.NewCategoryFormUpdate;
+import br.com.tecnodev.entities.category.DTO.CategoryToListDTO;
+import br.com.tecnodev.entities.category.DTO.NewCategoryForm;
+import br.com.tecnodev.entities.category.DTO.NewCategoryFormUpdate;
 import br.com.tecnodev.repository.CategoryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

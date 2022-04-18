@@ -1,6 +1,7 @@
-package br.com.tecnodev.entities.subCategory;
+package br.com.tecnodev.entities.subCategory.DTO;
 
 import br.com.tecnodev.entities.category.Category;
+import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

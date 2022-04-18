@@ -1,4 +1,6 @@
-package br.com.tecnodev.entities.category;
+package br.com.tecnodev.entities.category.DTO;
+
+import br.com.tecnodev.entities.category.Category;
 
 public class CategoryToListDTO {
 
