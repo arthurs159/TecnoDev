@@ -32,16 +32,17 @@
         </div>
         <div class="form-group">
             <label>Tempo de Finalização</label>
-            <input type="text" class="form-control" name="estimatedTimeInHours"
+            <input type="number" class="form-control" name="estimatedTimeInHours"
                    placeholder="por exemplo: categoria de ordem 1 aparece antes da categoria de ordem 2"
-                   value="${course.estimatedTimeInHours}">
+                   value="${course.estimatedTimeInHours}" min="1" max="20"/>
             <form:errors path="newCourseForm.estimatedTimeInHours" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Visibilidade</label>
-            <textarea class="form-control" name="visibility" rows="6"
-                      placeholder="Um texto apontando para formações para ajudar pessoas perdidas">${course.visibility}</textarea>
-            <form:errors path="newCourseForm.visibility" cssClass="alert-danger"/>
+            <select class="form-control" name="visibility">
+                <option value="PUBLIC">PUBLICO</option>
+                <option value="PRIVATE">PRIVADO</option>
+            </select>
         </div>
         <div class="form-group">
             <label>Público Alvo</label>

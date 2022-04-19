@@ -29,6 +29,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/api/categories").permitAll()
                 .antMatchers(HttpMethod.GET, "/category/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/bGltcGEtby1jYWNoZS1kYS1hcGktYWU").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll();
 
@@ -37,6 +38,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/assets/**");
 
     }
 }

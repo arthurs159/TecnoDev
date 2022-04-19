@@ -1,7 +1,5 @@
 package br.com.tecnodev.entities.subCategory;
 
-import br.com.tecnodev.entities.category.api.SubCategoryApiDTO;
-
 import java.util.List;
 
 public class SubcategoryPageDTO {
