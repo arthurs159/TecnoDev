@@ -24,6 +24,7 @@ public class LoginController {
     public String getLoginPage(Model model) {
         List<CategoryPageDTO> categoriesDTO = categoryRepository.categoriesLoginInformations()
                 .stream().map(CategoryPageDTO::new).toList();
+
         model.addAttribute("categories", categoriesDTO);
         return "login/login";
     }

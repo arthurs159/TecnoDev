@@ -33,5 +33,5 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
             ON s.id = course.subCategory.id
             WHERE s.active = true AND c.code = :categoryCode
             """)
-    List<SubCategory> findAllByActive(String categoryCode);
+    List<SubCategory> findAllActiveSubcategoryWithCourses(String categoryCode);
 }
