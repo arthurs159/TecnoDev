@@ -33,17 +33,17 @@
         </ul>
     </div>
     <c:forEach items="${subcategory}" var="subcategory">
-    <div class="subcategory">
-        <h2 id="${subcategory.name}" class="subcategory__name">${subcategory.name}</h2>
-        <ul class="courses__list">
-            <c:forEach items="${subcategory.courses}" var="courses">
-            <li class="course-card">
-                <h3 class="course-card__name">${courses.name}</h3>
-                <p class="course-card__hours">${courses.estimatedTimeInHours}</p>
-            </li>
-            </c:forEach>
-        </ul>
-    </div>
+        <div class="subcategory">
+            <h2 id="${subcategory.name}" class="subcategory__name">${subcategory.name}</h2>
+            <ul class="courses__list">
+                <c:forEach items="${subcategory.courses}" var="courses">
+                    <li class="course-card">
+                        <h3 class="course-card__name">${courses.name}</h3>
+                        <p class="course-card__hours">${courses.estimatedTimeInHours}</p>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
     </c:forEach>
 </main>
 </body>

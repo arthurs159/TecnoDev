@@ -1,6 +1,9 @@
 package br.com.tecnodev.entities.category;
 
 import br.com.tecnodev.entities.category.api.SubCategoryApiDTO;
+import br.com.tecnodev.entities.course.Course;
+import br.com.tecnodev.entities.course.Status;
+import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.entities.subCategory.SubcategoryPageDTO;
 
 import java.util.List;
@@ -17,7 +20,15 @@ public class CategoryPageDTO {
         this.code = category.getCode();
         this.orderInSystem = category.getOrderInSystem();
         this.imageUrl = category.getImageUrl();
-        this.subCategories = SubcategoryPageDTO.toDto(category.getSubCategories());
+        this.subCategories = getSubCategories(category);
+    }
+
+    private List<SubcategoryPageDTO> getSubCategories(Category category) {
+        return SubcategoryPageDTO.toDto(category.getSubCategories().stream()
+                .filter(SubCategory::isActive)
+                .filter(sub -> sub.getCourses()
+                        .stream().anyMatch(course -> course.getVisibility().equals(Status.PUBLIC)))
+                .toList());
     }
 
     public String getName() {
