@@ -16,7 +16,7 @@ public class NewCourseForm {
     @Pattern(regexp = "[a-z0-9-]+", message = "{form.error.code.regex}")
     private String code;
     @NotNull(message = "{form.error.estimatedTime.empty}")
-    @Range(min=1,max=20, message = "{form.error.estimatedTime.regex}" )
+    @Range(min=1,max=20, message = "{form.error.estimatedTime.regex}")
     private Integer estimatedTimeInHours;
     private Status visibility;
     private String targetAudience;

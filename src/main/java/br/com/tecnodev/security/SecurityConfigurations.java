@@ -31,7 +31,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/category/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/bGltcGEtby1jYWNoZS1kYS1hcGktYWU").permitAll()
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll();
+                .and().formLogin().defaultSuccessUrl("/admin/categories").loginPage("/login").permitAll();
 
         http.csrf().disable();
     }

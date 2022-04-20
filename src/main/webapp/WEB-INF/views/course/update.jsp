@@ -40,7 +40,7 @@
             <label>Visibilidade</label>
             <select class="form-control" name="visibility">
                 <option value="PUBLIC">PUBLICO</option>
-                <option value="PRIVATE">PRIVADO</option>
+                <option value="PRIVATE" ${course.visibility == 'PRIVATE' ? 'selected' : ''}>PRIVADO</option>
             </select>
         </div>
         <div class="form-group">
@@ -72,7 +72,7 @@
             <label>Subcategorias</label>
             <select name="subcategoryId" class="form-control">
                 <c:forEach items="${subcategory}" var="sub">
-                    <option value="${sub.id}">${sub.name} </option>
+                    <option value="${sub.id}" ${course.subCategory.name == sub.name ? 'selected' : ''}>${sub.name} </option>
                 </c:forEach>
                 <form:errors path="newCourseFormUpdate.subcategoryId" cssClass="alert-danger"/>
             </select>

@@ -81,10 +81,11 @@ public class CourseController {
                 .stream()
                 .sorted(Comparator.comparing(SubCategory::getName))
                 .toList();
+
         model.addAttribute("course", course);
         model.addAttribute("subcategory", subcategories);
-        model.addAttribute("categoryCode", categoryCode);
-        model.addAttribute("subcategoryCode", subcategoryCode);
+        model.addAttribute("categoryCode", course.getCategoryCode());
+        model.addAttribute("subcategoryCode", course.getSubCategoryCode());
         return "course/update";
     }
     @PostMapping("/admin/courses/{categoryCode}/{subcategoryCode}/{courseCode}")

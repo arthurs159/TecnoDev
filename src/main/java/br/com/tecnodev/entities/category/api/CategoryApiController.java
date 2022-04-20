@@ -31,7 +31,7 @@ public class CategoryApiController {
 
     @GetMapping("/bGltcGEtby1jYWNoZS1kYS1hcGktYWU")
     @CacheEvict(value = "listAllCategories", allEntries = true)
-    public ResponseEntity cleaningApiCache(){
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Void> cleaningApiCache(){
+        return ResponseEntity.noContent().build();
     }
 }

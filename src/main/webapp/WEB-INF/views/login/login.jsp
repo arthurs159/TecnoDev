@@ -17,9 +17,9 @@
             <h1 class="login__title">Já estuda com a gente?</h1>
             <p class="login__subtitle">Faça seu login e boas aulas!</p>
             <form class="login__form" action="/login" method="POST">
-                <label for="login__email">E-mail</label>
+                <label for="login-email">E-mail</label>
                 <input type="email" name="username" id="login-email" autofocus>
-                <label for="login__password">Senha</label>
+                <label for="login-password">Senha</label>
                 <input type="password" name="password" id="login-password" autocomplete="off">
                 <button class="login__button" type="submit">Entrar</button>
             </form>

@@ -27,11 +27,10 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
 
     @Query("""
             SELECT DISTINCT s FROM SubCategory s
-            INNER JOIN Category c
-            ON c.id = s.category.id
-            INNER JOIN Course course
-            ON s.id = course.subCategory.id
-            WHERE s.active = true AND c.code = :categoryCode
+            JOIN FETCH s.courses c
+            WHERE c.visibility = 'PUBLIC'
+            AND s.active = true
+            AND s.category.code = :categoryCode
             """)
     List<SubCategory> findAllActiveSubcategoryWithCourses(String categoryCode);
 }
