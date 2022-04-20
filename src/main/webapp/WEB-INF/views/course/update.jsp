@@ -13,73 +13,77 @@
 
 <div class="container">
     <h1>Atualizar Curso</h1>
-    <form action="/admin/courses/${categoryCode}/${subcategoryCode}/${course.code}" method="post">
-        <input type="hidden" name="id"/>
+    <form:form action="/admin/courses/${categoryCode}/${subcategoryCode}/${course.code}"
+               modelAttribute="newCourseFormUpdate" method="post">
         <div class="form-group">
             <label>Nome</label>
-            <input type="text" class="form-control" name="name"
-                   value="${course.name}">
-            <form:errors path="newCourseFormUpdate.name" cssClass="alert-danger"/>
+            <form:input type="text" class="form-control"
+                        value="${course.name}" path="name"/>
+            <form:errors path="name" cssClass="alert-danger"/>
         </div>
 
         <div class="form-group">
             <label>Código</label>
-            <input type="text" class="form-control"
-                   name="code"
-                   value="${course.code}"/>
-            <form:errors path="newCourseFormUpdate.code" cssClass="alert-danger"/>
+            <form:input type="text" class="form-control"
+                        name="code"
+                        value="${course.code}" path="code"/>
+            <form:errors path="code" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Tempo de Finalização</label>
-            <input type="number" class="form-control" name="estimatedTimeInHours"
-                   placeholder="por exemplo: categoria de ordem 1 aparece antes da categoria de ordem 2"
-                   value="${course.estimatedTimeInHours}" min="1" max="20"/>
-            <form:errors path="newCourseForm.estimatedTimeInHours" cssClass="alert-danger"/>
+            <form:input type="number" class="form-control"
+                        placeholder="por exemplo: categoria de ordem 1 aparece antes da categoria de ordem 2"
+                        value="${course.estimatedTimeInHours}" min="1" max="20" path="estimatedTimeInHours"/>
+            <form:errors path="estimatedTimeInHours" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Visibilidade</label>
-            <select class="form-control" name="visibility">
-                <option value="PUBLIC">PUBLICO</option>
-                <option value="PRIVATE" ${course.visibility == 'PRIVATE' ? 'selected' : ''}>PRIVADO</option>
-            </select>
+            <form:select class="form-control" path="visibility">
+                <form:option value="PUBLIC"
+                             selected="${course.visibility == 'PUBLIC' ? 'true' : ''}">PUBLICO</form:option>
+                <form:option value="PRIVATE"
+                             selected="${course.visibility == 'PRIVATE' ? 'true' : ''}">PRIVADO</form:option>
+            </form:select>
         </div>
+
         <div class="form-group">
             <label>Público Alvo</label>
-            <input type="text" class="form-control" name="targetAudience"
-                   value="${course.targetAudience}">
-            <form:errors path="newCourseFormUpdate.targetAudience" cssClass="alert-danger"/>
+            <form:input type="text" class="form-control" name="targetAudience"
+                        value="${course.targetAudience}" path="targetAudience"/>
+            <form:errors path="targetAudience" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Instrutor</label>
-            <input type="text" class="form-control" name="teacher"
-                   value="${course.teacher}">
-            <form:errors path="newCourseFormUpdate.teacher" cssClass="alert-danger"/>
+            <form:input type="text" class="form-control" name="teacher"
+                        value="${course.teacher}" path="teacher"/>
+            <form:errors path="teacher" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Descrição</label>
-            <input type="text" class="form-control" name="description"
-                   value="${course.description}">
-            <form:errors path="newCourseFormUpdate.description" cssClass="alert-danger"/>
+            <form:input type="text" class="form-control" name="description"
+                        value="${course.description}" path="description"/>
+            <form:errors path="description" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Habilidades Desenvolvidas</label>
-            <input type="text" class="form-control" name="developedSkills"
-                   value="${course.developedSkills}">
-            <form:errors path="newCourseFormUpdate.developedSkills" cssClass="alert-danger"/>
+            <form:input type="text" class="form-control" name="developedSkills"
+                        value="${course.developedSkills}" path="developedSkills"/>
+            <form:errors path="developedSkills" cssClass="alert-danger"/>
         </div>
 
         <div class="form-group">
             <label>Subcategorias</label>
-            <select name="subcategoryId" class="form-control">
-                <c:forEach items="${subcategory}" var="sub">
-                    <option value="${sub.id}" ${course.subCategory.name == sub.name ? 'selected' : ''}>${sub.name} </option>
+            <form:select class="form-control" path="subcategoryId">
+                <c:forEach items="${subcategories}" var="subcategory">
+                    <form:option value="${subcategory.id}"
+                                 selected="${course.subCategory.name == subcategory.name ? 'selected' : ''}">${subcategory.name} </form:option>
                 </c:forEach>
-                <form:errors path="newCourseFormUpdate.subcategoryId" cssClass="alert-danger"/>
-            </select>
+                <form:errors path="subcategoryId" cssClass="alert-danger"/>
+            </form:select>
         </div>
 
         <button type="submit" class="btn btn-info btn-lg">Enviar</button>
-    </form>
+    </form:form>
 </div>
 
 </body>

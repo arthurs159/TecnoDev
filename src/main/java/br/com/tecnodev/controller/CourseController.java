@@ -83,7 +83,7 @@ public class CourseController {
                 .toList();
 
         model.addAttribute("course", course);
-        model.addAttribute("subcategory", subcategories);
+        model.addAttribute("subcategories", subcategories);
         model.addAttribute("categoryCode", course.getCategoryCode());
         model.addAttribute("subcategoryCode", course.getSubCategoryCode());
         return "course/update";

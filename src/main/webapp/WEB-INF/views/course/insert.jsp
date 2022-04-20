@@ -13,78 +13,78 @@
 
 <div class="container">
     <h1>Novo Curso</h1>
-    <form action="/admin/courses" method="post">
+    <form:form action="/admin/courses" method="post"
+               modelAttribute="newCourseForm">
         <input type="hidden" name="id"/>
         <div class="form-group">
             <label>Nome</label>
-            <input type="text" class="form-control" name="name" placeholder="Digite aqui o nome da subcategoria"
-                   value="${course.name}">
-            <form:errors path="newCourseForm.name" cssClass="alert-danger"/>
+            <form:input type="text" class="form-control" placeholder="Digite aqui o nome da subcategoria"
+                   value="${course.name}" path="name"/>
+            <form:errors path="name" cssClass="alert-danger"/>
         </div>
 
         <div class="form-group">
             <label>Código</label>
-            <input type="text" class="form-control"
-                   name="code"
+            <form:input type="text" class="form-control"
                    placeholder="por exemplo: java, python (não use letra maiúsculas, acentos ou caracteres especiais)"
-                   value="${course.code}"/>
-            <form:errors path="newCourseForm.code" cssClass="alert-danger"/>
+                   value="${course.code}" path="code"/>
+            <form:errors path="code" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Tempo de Finalização</label>
-            <input type="number" class="form-control" name="estimatedTimeInHours"
+            <form:input type="number" class="form-control"
                    placeholder="por exemplo: categoria de ordem 1 aparece antes da categoria de ordem 2"
-                   value="${course.estimatedTimeInHours}" min="1" max="20"/>
-            <form:errors path="newCourseForm.estimatedTimeInHours" cssClass="alert-danger"/>
+                   value="${course.estimatedTimeInHours}" min="1" max="20" path="estimatedTimeInHours"/>
+            <form:errors path="estimatedTimeInHours" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Visibilidade</label>
-            <select class="form-control" name="visibility">
-                <option value="PUBLIC">PUBLICO</option>
-                <option value="PRIVATE">PRIVADO</option>
-            </select>
+            <form:select class="form-control" path="visibility">
+                <form:option value="PUBLIC">PUBLICO</form:option>
+                <form:option value="PRIVATE">PRIVADO</form:option>
+            </form:select>
         </div>
         <div class="form-group">
             <label>Público Alvo</label>
-            <input type="text" class="form-control" name="targetAudience"
+            <form:input type="text" class="form-control" name="targetAudience"
                    placeholder="por exemplo: Laravel, CakePHP e CodeIgniter são frameworks que você vai treinar bastante aqui."
-                   value="${course.targetAudience}">
-            <form:errors path="newCourseForm.targetAudience" cssClass="alert-danger"/>
+                   value="${course.targetAudience}" path="targetAudience"/>
+            <form:errors path="targetAudience" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Instrutor</label>
-            <input type="text" class="form-control" name="teacher"
+            <form:input type="text" class="form-control"
                    placeholder="por exemplo: Laravel, CakePHP e CodeIgniter são frameworks que você vai treinar bastante aqui."
-                   value="${course.teacher}">
-            <form:errors path="newCourseForm.teacher" cssClass="alert-danger"/>
+                   value="${course.teacher}" path="teacher"/>
+            <form:errors path="teacher" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Descrição</label>
-            <input type="text" class="form-control" name="description"
+            <form:input type="text" class="form-control"
                    placeholder="por exemplo: Laravel, CakePHP e CodeIgniter são frameworks que você vai treinar bastante aqui."
-                   value="${course.description}">
-            <form:errors path="newCourseForm.description" cssClass="alert-danger"/>
+                   value="${course.description}" path="description"/>
+            <form:errors path="description" cssClass="alert-danger"/>
         </div>
         <div class="form-group">
             <label>Habilidades Desenvolvidas</label>
-            <input type="text" class="form-control" name="developedSkills"
+            <form:input type="text" class="form-control"
                    placeholder="por exemplo: Laravel, CakePHP e CodeIgniter são frameworks que você vai treinar bastante aqui."
-                   value="${course.developedSkills}">
-            <form:errors path="newCourseForm.developedSkills" cssClass="alert-danger"/>
+                   value="${course.developedSkills}" path="developedSkills"/>
+            <form:errors path="developedSkills" cssClass="alert-danger"/>
         </div>
 
         <div class="form-group">
             <label>Subcategorias</label>
-            <select name="subcategoryId" class="form-control">
+            <form:select class="form-control" path="subcategoryId">
                 <c:forEach items="${subcategory}" var="sub">
                     <option value="${sub.id}">${sub.name} </option>
                 </c:forEach>
-                <form:errors path="newCourseForm.subcategoryId" cssClass="alert-danger"/>
-            </select>
+                <form:errors path="subcategoryId" cssClass="alert-danger"/>
+            </form:select>
         </div>
 
         <button type="submit" class="btn btn-info btn-lg">Enviar</button>
-    </form>
+    </form:form>
 </div>
 
 </body>
