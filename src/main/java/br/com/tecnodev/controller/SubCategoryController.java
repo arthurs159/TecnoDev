@@ -1,10 +1,10 @@
 package br.com.tecnodev.controller;
 
 import br.com.tecnodev.entities.category.Category;
-import br.com.tecnodev.entities.subCategory.NewSubCategoryForm;
-import br.com.tecnodev.entities.subCategory.NewSubCategoryFormUpdate;
+import br.com.tecnodev.entities.subCategory.DTO.NewSubCategoryForm;
+import br.com.tecnodev.entities.subCategory.DTO.NewSubCategoryFormUpdate;
 import br.com.tecnodev.entities.subCategory.SubCategory;
-import br.com.tecnodev.entities.subCategory.SubCategoryToListDTO;
+import br.com.tecnodev.entities.subCategory.DTO.SubCategoryToListDTO;
 import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;
 import org.springframework.http.HttpStatus;

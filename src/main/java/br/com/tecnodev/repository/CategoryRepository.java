@@ -1,8 +1,6 @@
 package br.com.tecnodev.repository;
 
 import br.com.tecnodev.entities.category.Category;
-import br.com.tecnodev.entities.category.CategoryToListDTO;
-import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.projections.CategoryReportProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,4 +30,17 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
              ORDER BY COUNT(course.id) DESC;
             """)
     List<CategoryReportProjection> report();
+
+    @Query("""
+            SELECT DISTINCT c
+            FROM Category c
+            INNER JOIN SubCategory s
+            ON c.id = s.category.id
+            INNER JOIN Course course
+            ON course.id = course.subCategory.id
+            WHERE c.active = true AND s.active = true AND course.visibility = 'PUBLIC'
+            ORDER BY c.orderInSystem
+            """)
+    List<Category> getCategoriesWithSubcategoryActiveAndVisibleCourses();
+
 }

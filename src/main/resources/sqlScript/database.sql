@@ -71,3 +71,20 @@ correct BOOLEAN,
 justification TEXT,
 activity_id BIGINT NOT NULL,
 FOREIGN KEY (activity_id) REFERENCES Activity(id));
+
+CREATE TABLE User
+(id BIGINT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(50),
+email VARCHAR(100),
+password VARCHAR (50));
+
+CREATE TABLE Role
+(id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ name VARCHAR(50));
+
+CREATE TABLE User_role
+(user_id bigint,
+ role_id bigint)
+
+INSERT INTO User (name, email, password)
+VALUES ('Arthur', 'arthur@email.com', '$2a$10$vyVwTTcztUl8b1ty62LUce.e0YsyPufAwa0neAodqf5hmF5QfwMpe')

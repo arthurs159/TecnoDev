@@ -24,4 +24,13 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
     Optional<SubCategory> findSubcategoryByCategoryAndSubcategoryCode(String subcategoryCode, String categoryCode);
 
     SubCategory findSubcategoryByCode(String code);
+
+    @Query("""
+            SELECT DISTINCT s FROM SubCategory s
+            JOIN FETCH s.courses c
+            WHERE c.visibility = 'PUBLIC'
+            AND s.active = true
+            AND s.category.code = :categoryCode
+            """)
+    List<SubCategory> findAllActiveSubcategoryWithCourses(String categoryCode);
 }

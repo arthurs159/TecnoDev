@@ -1,5 +1,6 @@
 package br.com.tecnodev.entities.category;
 
+import br.com.tecnodev.entities.category.DTO.NewCategoryFormUpdate;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 
 import javax.persistence.*;
