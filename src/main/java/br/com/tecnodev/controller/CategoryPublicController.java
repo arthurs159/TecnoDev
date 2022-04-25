@@ -14,12 +14,12 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Controller
-public class PublicPageController {
+public class CategoryPublicController {
 
     private final CategoryRepository categoryRepository;
     private final SubCategoryRepository subCategoryRepository;
 
-    public PublicPageController(CategoryRepository categoryRepository, SubCategoryRepository subCategoryRepository) {
+    public CategoryPublicController(CategoryRepository categoryRepository, SubCategoryRepository subCategoryRepository) {
         this.categoryRepository = categoryRepository;
         this.subCategoryRepository = subCategoryRepository;
     }

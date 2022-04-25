@@ -1,5 +1,6 @@
 package br.com.tecnodev.entities.subCategory;
 
+import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.course.CoursePublicPageDTO;
 import br.com.tecnodev.entities.course.Status;
 
@@ -14,7 +15,7 @@ public class SubcategoryPublicPageDTO {
         this.name = subCategory.getName();
         this.orderInSystem = subCategory.getOrderInSystem();
         this.courses = CoursePublicPageDTO.toDTO(subCategory.getCourses()
-                .stream().filter(course -> course.getVisibility().equals(Status.PUBLIC)).toList());
+                .stream().filter(Course::isPublic).toList());
     }
 
     public String getName() {

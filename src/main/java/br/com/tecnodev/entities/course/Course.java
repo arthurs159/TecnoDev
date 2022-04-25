@@ -6,6 +6,8 @@ import br.com.tecnodev.entities.subCategory.SubCategory;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import java.util.List;
+
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
@@ -134,7 +136,10 @@ public class Course {
     public String getSubCategoryName() {
         return this.getSubCategory().getName();
     }
-
+    
+    public boolean isPublic(){
+        return this.getVisibility().equals(Status.PUBLIC);
+    }
 
     @Override
     public String toString() {

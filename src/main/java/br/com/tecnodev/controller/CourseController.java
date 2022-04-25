@@ -67,7 +67,7 @@ public class CourseController {
         if(result.hasErrors()){
             return getCourseForm(newCourseForm, model);
         }
-        SubCategory subcategory = subCategoryRepository.findById(newCourseForm.getSubcategoryId()).orElseThrow(RuntimeException::new);
+        SubCategory subcategory = subCategoryRepository.findById(newCourseForm.getSubcategoryId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         courseRepository.save(newCourseForm.toEntity(subcategory));
         return "redirect:/admin/courses/" + subcategory.getCategory().getCode() + "/" + subcategory.getCode() ;
     }

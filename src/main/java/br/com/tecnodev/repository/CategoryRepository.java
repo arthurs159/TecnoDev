@@ -1,7 +1,6 @@
 package br.com.tecnodev.repository;
 
 import br.com.tecnodev.entities.category.Category;
-import br.com.tecnodev.entities.category.CategoryPageDTO;
 import br.com.tecnodev.projections.CategoryReportProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -42,6 +41,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             WHERE c.active = true AND s.active = true AND course.visibility = 'PUBLIC'
             ORDER BY c.orderInSystem
             """)
-    List<Category> categoriesLoginInformations();
+    List<Category> getCategoriesWithSubcategoryActiveAndVisibleCourses();
 
 }
