@@ -29,7 +29,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
              GROUP BY cat.name
              ORDER BY COUNT(course.id) DESC;
             """)
-    List<CategoryReportProjection> report();
+    List<CategoryReportProjection> findCategoryAndNumberOfCourses();
 
     @Query("""
             SELECT DISTINCT c
