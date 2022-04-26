@@ -16,7 +16,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     List<Category> findAllByOrderByOrderInSystem();
 
-
     Optional<Category> findByCode(String code);
 
     @Query(nativeQuery = true, value = """
@@ -42,5 +41,27 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             ORDER BY c.orderInSystem
             """)
     List<Category> getCategoriesWithSubcategoryActiveAndVisibleCourses();
+
+    @Query("""
+            SELECT DISTINCT c
+            FROM Category c
+            JOIN FETCH c.subCategories s
+            JOIN s.courses co
+            WHERE c.active = true
+            AND s.active = true
+            AND co.visibility = 'PUBLIC'
+            ORDER BY c.orderInSystem, s.orderInSystem
+            """)
+    List<Category> getCategoriesWithS();
+
+
+//    SELECT DISTINCT *
+//    FROM Category c
+//    JOIN FETCH c.subCategories s
+//    JOIN s.courses co
+//    WHERE c.active = true
+//    AND s.active = true
+//    AND co.visibility = 'PUBLIC'
+//    ORDER BY c.orderInSystem, s.orderInSystem
 
 }

@@ -1,7 +1,5 @@
 package br.com.tecnodev.entities.category;
 
-import br.com.tecnodev.entities.category.api.SubCategoryApiDTO;
-import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.course.Status;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.entities.subCategory.SubcategoryPageDTO;
@@ -15,12 +13,20 @@ public class CategoryPageDTO {
     private final String imageUrl;
     private final List<SubcategoryPageDTO> subCategories;
 
+//    public CategoryPageDTO(Category category) {
+//        this.name = category.getName();
+//        this.code = category.getCode();
+//        this.orderInSystem = category.getOrderInSystem();
+//        this.imageUrl = category.getImageUrl();
+//        this.subCategories = getSubCategories(category);
+//    }
+
     public CategoryPageDTO(Category category) {
         this.name = category.getName();
         this.code = category.getCode();
         this.orderInSystem = category.getOrderInSystem();
         this.imageUrl = category.getImageUrl();
-        this.subCategories = getSubCategories(category);
+        this.subCategories = category.getSubCategories().stream().map(SubcategoryPageDTO::new).toList();
     }
 
     private List<SubcategoryPageDTO> getSubCategories(Category category) {
