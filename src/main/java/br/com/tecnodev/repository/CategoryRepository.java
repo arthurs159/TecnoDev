@@ -33,18 +33,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Query("""
             SELECT DISTINCT c
             FROM Category c
-            INNER JOIN SubCategory s
-            ON c.id = s.category.id
-            INNER JOIN Course course
-            ON course.id = course.subCategory.id
-            WHERE c.active = true AND s.active = true AND course.visibility = 'PUBLIC'
-            ORDER BY c.orderInSystem
-            """)
-    List<Category> getCategoriesWithSubcategoryActiveAndVisibleCourses();
-
-    @Query("""
-            SELECT DISTINCT c
-            FROM Category c
             JOIN FETCH c.subCategories s
             JOIN s.courses co
             WHERE c.active = true
@@ -52,16 +40,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             AND co.visibility = 'PUBLIC'
             ORDER BY c.orderInSystem, s.orderInSystem
             """)
-    List<Category> getCategoriesWithS();
-
-
-//    SELECT DISTINCT *
-//    FROM Category c
-//    JOIN FETCH c.subCategories s
-//    JOIN s.courses co
-//    WHERE c.active = true
-//    AND s.active = true
-//    AND co.visibility = 'PUBLIC'
-//    ORDER BY c.orderInSystem, s.orderInSystem
-
+    List<Category> getCategoriesWithActiveSubcategoryAndPublicCourses();
 }

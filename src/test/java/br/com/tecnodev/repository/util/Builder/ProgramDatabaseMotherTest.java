@@ -19,9 +19,6 @@ public class ProgramDatabaseMotherTest {
         this.categoryRepository = categoryRepository;
         this.subCategoryRepository = subCategoryRepository;
         this.courseRepository = courseRepository;
-//        this.courseRepository.deleteAll();
-//        this.subCategoryRepository.deleteAll();
-//        this.categoryRepository.deleteAll();
     }
 
     public void create() {
@@ -39,7 +36,8 @@ public class ProgramDatabaseMotherTest {
         Course courseJava = CourseBuilder.courseJava(subcategoryJava);
         Course courseJpa = CourseBuilder.courseJpa(subcategoryJava);
         Course coursePython = CourseBuilder.coursePython(subCategoryPython);
-        courseRepository.saveAll(Arrays.asList(courseJava, courseJpa, coursePython));
+        Course courseAngular = CourseBuilder.courseAngular(subcategoryJavaScript);
+        courseRepository.saveAll(Arrays.asList(courseJava, courseJpa, coursePython, courseAngular));
     }
 
 }

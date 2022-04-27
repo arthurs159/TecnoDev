@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> {
 
-    List<SubCategory> findSubCategoriesByCategory_CodeOrderByOrderInSystem(String code);
+    Optional<List<SubCategory>> findSubCategoriesByCategory_CodeOrderByOrderInSystem(String code);
 
-    default List<SubCategory> getSubcategoryByCategoryCodeOrdered(String code) {
+    default Optional<List<SubCategory>> getSubcategoryByCategoryCodeOrdered(String code) {
         return findSubCategoriesByCategory_CodeOrderByOrderInSystem(code);
     }
 
@@ -23,7 +23,7 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
             """)
     Optional<SubCategory> findSubcategoryByCategoryAndSubcategoryCode(String subcategoryCode, String categoryCode);
 
-    SubCategory findSubcategoryByCode(String code);
+    Optional<SubCategory> findSubcategoryByCode(String code);
 
     @Query("""
             SELECT DISTINCT s FROM SubCategory s
@@ -32,5 +32,5 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
             AND s.active = true
             AND s.category.code = :categoryCode
             """)
-    List<SubCategory> findAllActiveSubcategoryWithCourses(String categoryCode);
+    Optional<List<SubCategory>> findAllActiveSubcategoryWithCoursesByCategoryCode(String categoryCode);
 }

@@ -72,7 +72,7 @@ public class SubcategoryBuilder {
         SubCategory mobile = new SubcategoryBuilder("Mobile", "mobile", category)
                 .withDescription("")
                 .withActive(true)
-                .withOrderInSystem(1)
+                .withOrderInSystem(4)
                 .create();
 
         return mobile;

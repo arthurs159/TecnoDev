@@ -86,4 +86,14 @@ public class CourseBuilder {
                 .create();
         return python;
     }
+
+    public static Course courseAngular(SubCategory subCategory) {
+        Course angular = new CourseBuilder("Angular", "angular",
+                5, "Paulo Silva", subCategory)
+                .withVisibility(Status.PUBLIC)
+                .withTargetAudience("Pessoas que gostam de Angular")
+                .withDevelopedSkills("Aprenda o framework do momento")
+                .create();
+        return angular;
+    }
 }

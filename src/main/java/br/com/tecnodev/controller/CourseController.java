@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CourseController {
@@ -39,7 +40,8 @@ public class CourseController {
                               @PathVariable String subcategoryCode,
                               @PageableDefault(size = 5) Pageable pageable, Model model) {
 
-        SubCategory subCategory = subCategoryRepository.findSubcategoryByCode(subcategoryCode);
+        SubCategory subCategory = subCategoryRepository.findSubcategoryByCode(subcategoryCode)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         Page<CourseToListDTO> courses = courseRepository.findAllBySubCategory(subCategory, pageable)
                 .map(CourseToListDTO::new);

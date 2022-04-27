@@ -35,7 +35,8 @@ public class SubCategoryController {
     @GetMapping("/admin/subcategories/{code}")
     public String listSubcategories(@PathVariable String code, Model model) {
         Category category = categoryRepository.findByCode(code).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        List<SubCategory> subCategoryList = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(code);
+        List<SubCategory> subCategoryList = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(code)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));;
         List<SubCategoryToListDTO> subcategoryDto = subCategoryList.stream().map(SubCategoryToListDTO::new).toList();
         model.addAttribute("category", category);
         model.addAttribute("subcategories", subcategoryDto);
@@ -59,7 +60,8 @@ public class SubCategoryController {
         if (result.hasErrors()) {
             return getSubcategoryForm(newSubCategoryForm, model);
         }
-        Category category = categoryRepository.findById(newSubCategoryForm.getCategoryId()).orElseThrow(RuntimeException::new);
+        Category category = categoryRepository.findById(newSubCategoryForm.getCategoryId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         subCategoryRepository.save(newSubCategoryForm.toEntity(category));
         return listSubcategories(category.getCode(), model);
     }
