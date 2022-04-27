@@ -3,8 +3,8 @@ package br.com.tecnodev.controller;
 import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.subCategory.DTO.NewSubCategoryForm;
 import br.com.tecnodev.entities.subCategory.DTO.NewSubCategoryFormUpdate;
-import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.entities.subCategory.DTO.SubCategoryToListDTO;
+import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;
 import org.springframework.http.HttpStatus;
@@ -35,8 +35,7 @@ public class SubCategoryController {
     @GetMapping("/admin/subcategories/{code}")
     public String listSubcategories(@PathVariable String code, Model model) {
         Category category = categoryRepository.findByCode(code).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        List<SubCategory> subCategoryList = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(code)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));;
+        List<SubCategory> subCategoryList = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(code);
         List<SubCategoryToListDTO> subcategoryDto = subCategoryList.stream().map(SubCategoryToListDTO::new).toList();
         model.addAttribute("category", category);
         model.addAttribute("subcategories", subcategoryDto);

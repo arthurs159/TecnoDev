@@ -29,7 +29,7 @@ public class CategoryPublicController {
         CategoryPageDTO categoryPageDTO = new CategoryPageDTO(categoryRepository.findByCode(categoryCode)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
 
-        List<SubcategoryPublicPageDTO> subcategoryPublicPageDTO = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCode).get()
+        List<SubcategoryPublicPageDTO> subcategoryPublicPageDTO = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCode)
                 .stream().map(SubcategoryPublicPageDTO::new).toList();
 
         model.addAttribute("category", categoryPageDTO);

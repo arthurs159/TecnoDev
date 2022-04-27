@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> {
 
-    Optional<List<SubCategory>> findSubCategoriesByCategory_CodeOrderByOrderInSystem(String code);
+    List<SubCategory> findSubCategoriesByCategory_CodeOrderByOrderInSystem(String code);
 
-    default Optional<List<SubCategory>> getSubcategoryByCategoryCodeOrdered(String code) {
+    default List<SubCategory> getSubcategoryByCategoryCodeOrdered(String code) {
         return findSubCategoriesByCategory_CodeOrderByOrderInSystem(code);
     }
 
@@ -32,5 +32,5 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
             AND s.active = true
             AND s.category.code = :categoryCode
             """)
-    Optional<List<SubCategory>> findAllActiveSubcategoryWithCoursesByCategoryCode(String categoryCode);
+    List<SubCategory> findAllActiveSubcategoryWithCoursesByCategoryCode(String categoryCode);
 }

@@ -2,7 +2,7 @@ package br.com.tecnodev.repository;
 
 import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.projections.CategoryReportProjection;
-import br.com.tecnodev.repository.util.Builder.ProgramDatabaseMotherTest;
+import br.com.tecnodev.repository.util.ProgramDatabaseMotherTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +59,14 @@ public class CategoryRepositoryTest {
 
         assertTrue(category.isPresent());
         assertEquals(code, category.get().getCode());
+    }
+
+    @Test
+    public void findByCode__Should_Return_Empty_True_When_Code_Not_Exists() {
+        String nonExistingCode = "nonExistingCode";
+        Optional<Category> category = categoryRepository.findByCode(nonExistingCode);
+
+        assertTrue(category.isEmpty());
     }
 
     @Test

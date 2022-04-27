@@ -1,4 +1,4 @@
-package br.com.tecnodev.repository.util.Builder;
+package br.com.tecnodev.repository.util;
 
 import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.course.Course;
@@ -6,6 +6,9 @@ import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.repository.CourseRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;
+import br.com.tecnodev.repository.util.Builder.CategoryBuilder;
+import br.com.tecnodev.repository.util.Builder.CourseBuilder;
+import br.com.tecnodev.repository.util.Builder.SubcategoryBuilder;
 
 import java.util.Arrays;
 
@@ -22,7 +25,7 @@ public class ProgramDatabaseMotherTest {
     }
 
     public void create() {
-        Category backEnd =  CategoryBuilder.categoryBackEnd();
+        Category backEnd = CategoryBuilder.categoryBackEnd();
         Category frontEnd = CategoryBuilder.categoryFrontEnd();
         Category devops = CategoryBuilder.categoryDevops();
         categoryRepository.saveAll(Arrays.asList(backEnd, frontEnd, devops));

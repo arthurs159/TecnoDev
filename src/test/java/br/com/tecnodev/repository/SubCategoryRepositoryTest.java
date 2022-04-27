@@ -1,7 +1,7 @@
 package br.com.tecnodev.repository;
 
 import br.com.tecnodev.entities.subCategory.SubCategory;
-import br.com.tecnodev.repository.util.Builder.ProgramDatabaseMotherTest;
+import br.com.tecnodev.repository.util.ProgramDatabaseMotherTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,20 +39,19 @@ class SubCategoryRepositoryTest {
     @Test
     void getSubcategoryByCategoryCodeOrdered() {
         String categoryCode = "backend";
-        Optional<List<SubCategory>> subcategoryByCategoryCodeOrdered = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(categoryCode);
+        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(categoryCode);
 
-        assertTrue(subcategoryByCategoryCodeOrdered.isPresent());
-        assertEquals("java", subcategoryByCategoryCodeOrdered.get().get(0).getCode());
-        assertEquals("python", subcategoryByCategoryCodeOrdered.get().get(1).getCode());
-        assertEquals("mobile", subcategoryByCategoryCodeOrdered.get().get(2).getCode());
+        assertEquals("java", subcategoryByCategoryCodeOrdered.get(0).getCode());
+        assertEquals("python", subcategoryByCategoryCodeOrdered.get(1).getCode());
+        assertEquals("mobile", subcategoryByCategoryCodeOrdered.get(2).getCode());
     }
 
     @Test
     void getSubcategoryByCategoryCodeOrdered_Should_Return_IsEmpty_True_When_Code_Not_Exists() {
         String nonExistingCode = "nonExistingCode";
-        Optional<List<SubCategory>> subcategoryByCategoryCodeOrdered = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(nonExistingCode);
+        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(nonExistingCode);
 
-        assertTrue(subcategoryByCategoryCodeOrdered.get().isEmpty());
+        assertTrue(subcategoryByCategoryCodeOrdered.isEmpty());
     }
 
     @Test
@@ -110,18 +109,20 @@ class SubCategoryRepositoryTest {
     void findAllActiveSubcategoryWithCourses() {
         String categoryCodeBack = "backend";
         String categoryCodeFront = "frontend";
-        Optional<List<SubCategory>> activeSubcategoryWithCoursesByBackCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeBack);
-        Optional<List<SubCategory>> activeSubcategoryWithCoursesByFrontCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeFront);
+        List<SubCategory> activeSubcategoryWithCoursesByBackCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeBack);
+        List<SubCategory> activeSubcategoryWithCoursesByFrontCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeFront);
 
-        assertTrue(activeSubcategoryWithCoursesByBackCategory.isPresent());
-        assertTrue(activeSubcategoryWithCoursesByFrontCategory.isPresent());
+        assertFalse(activeSubcategoryWithCoursesByBackCategory.isEmpty());
+        assertFalse(activeSubcategoryWithCoursesByFrontCategory.isEmpty());
+        assertEquals("java", activeSubcategoryWithCoursesByBackCategory.get(0).getCode());
+        assertEquals("javascript", activeSubcategoryWithCoursesByFrontCategory.get(0).getCode());
     }
 
     @Test
     void findAllActiveSubcategoryWithCourses__Should_Return_IsEmpty_True_When_Category_Not_Have_Subcategory_With_Courses() {
         String categoryCodeMobile = "mobile";
-        Optional<List<SubCategory>> activeSubcategoryWithCoursesByFrontCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeMobile);
+        List<SubCategory> activeSubcategoryWithCoursesByFrontCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeMobile);
 
-        assertTrue(activeSubcategoryWithCoursesByFrontCategory.get().isEmpty());
+        assertTrue(activeSubcategoryWithCoursesByFrontCategory.isEmpty());
     }
 }

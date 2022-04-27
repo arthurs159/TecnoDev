@@ -78,7 +78,9 @@ public class CourseController {
     public String getUpdateCourseForm(@PathVariable String categoryCode,
                                       @PathVariable String subcategoryCode,
                                       @PathVariable String courseCode, NewCourseFormUpdate newCourseFormUpdate, Model model){
-        Course course = courseRepository.findByCode(courseCode);
+        Course course = courseRepository.findByCode(courseCode)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
         List<SubCategory> subcategories = subCategoryRepository.findAll()
                 .stream()
                 .sorted(Comparator.comparing(SubCategory::getName))
@@ -98,7 +100,9 @@ public class CourseController {
             return getUpdateCourseForm(categoryCode, subcategoryCode, courseCode, newCourseFormUpdate, model);
         }
 
-        Course course = courseRepository.findByCode(courseCode);
+        Course course = courseRepository.findByCode(courseCode)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
         SubCategory subcategory = subCategoryRepository.findById(newCourseFormUpdate.getSubcategoryId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
