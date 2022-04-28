@@ -41,16 +41,16 @@ public class SubcategoryBuilder {
                 category);
     }
 
-    public static SubCategory subCategoryJs(Category category) {
-        SubCategory javaScript = new SubcategoryBuilder("JavaScript", "javascript", category)
+    public static SubCategory subCategoryJs(Category category, String name, String code, boolean active) {
+        SubCategory javaScript = new SubcategoryBuilder(name, code, category)
                 .withDescription("Projetos em JavaScript")
-                .withActive(true)
+                .withActive(active)
                 .withOrderInSystem(2)
                 .create();
         return javaScript;
     }
 
-    public static SubCategory subCategoryJava(Category category) {
+    public static SubCategory subCategoryJava(Category category, String name, String code, boolean active) {
         SubCategory java = new SubcategoryBuilder("Java", "java", category)
                 .withDescription("Projetos em java")
                 .withActive(true)
@@ -59,7 +59,7 @@ public class SubcategoryBuilder {
         return java;
     }
 
-    public static SubCategory subCategoryPython(Category category) {
+    public static SubCategory subCategoryPython(Category category, String name, String code, boolean active) {
         SubCategory python = new SubcategoryBuilder("Python", "python", category)
                 .withDescription("Projetos em Python")
                 .withActive(false)
@@ -68,8 +68,8 @@ public class SubcategoryBuilder {
         return python;
     }
 
-    public static SubCategory subCategoryMobile(Category category) {
-        SubCategory mobile = new SubcategoryBuilder("Mobile", "mobile", category)
+    public static SubCategory subCategoryMobile(Category category, String name, String code, boolean active) {
+        SubCategory mobile = new SubcategoryBuilder(name, code, category)
                 .withDescription("")
                 .withActive(true)
                 .withOrderInSystem(4)
@@ -78,13 +78,4 @@ public class SubcategoryBuilder {
         return mobile;
     }
 
-    public static SubCategory subCategoryCommunication(Category category) {
-        SubCategory communication = new SubcategoryBuilder("Comunicação", "communication", category)
-                .withDescription("")
-                .withActive(true)
-                .withOrderInSystem(1)
-                .create();
-
-        return communication;
-    }
 }

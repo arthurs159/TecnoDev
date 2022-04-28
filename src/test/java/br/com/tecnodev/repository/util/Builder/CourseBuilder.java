@@ -56,10 +56,10 @@ public class CourseBuilder {
                 subCategory);
     }
 
-    public static Course courseJava(SubCategory subCategory) {
-        Course javaSintax = new CourseBuilder("Java e Sintaxe", "javasintax",
-                5, "Cleb Paulo", subCategory)
-                .withVisibility(Status.PUBLIC)
+    public static Course courseJava(SubCategory subCategory, String name, String code, String teacher, Status status) {
+        Course javaSintax = new CourseBuilder(name, code,
+                5, teacher, subCategory)
+                .withVisibility(status)
                 .withTargetAudience("Pessoas que gostam de Java")
                 .withDevelopedSkills("Aprenda a sintaxe de java")
                 .create();
@@ -67,30 +67,30 @@ public class CourseBuilder {
         return javaSintax;
     }
 
-    public static Course courseJpa(SubCategory subCategory) {
-        Course jpa = new CourseBuilder("JPA", "jpa", 5,
-                "Cleb Paulo", subCategory)
-                .withVisibility(Status.PUBLIC)
+    public static Course courseJpa(SubCategory subCategory, String name, String code, String teacher, Status status) {
+        Course jpa = new CourseBuilder(name, code, 5,
+                teacher, subCategory)
+                .withVisibility(status)
                 .withTargetAudience("Pessoas que gostam de Java")
                 .withDevelopedSkills("Aprenda JPA")
                 .create();
         return jpa;
     }
 
-    public static Course coursePython(SubCategory subCategory) {
-        Course python = new CourseBuilder("Python", "py",
-                5, "Cleb Paulo", subCategory)
-                .withVisibility(Status.PRIVATE)
+    public static Course coursePython(SubCategory subCategory, String name, String code, String teacher, Status status) {
+        Course python = new CourseBuilder(name, code,
+                5, teacher, subCategory)
+                .withVisibility(status)
                 .withTargetAudience("Pessoas que gostam de Python")
                 .withDevelopedSkills("Aprenda uma nova linguagem")
                 .create();
         return python;
     }
 
-    public static Course courseAngular(SubCategory subCategory) {
-        Course angular = new CourseBuilder("Angular", "angular",
-                5, "Paulo Silva", subCategory)
-                .withVisibility(Status.PUBLIC)
+    public static Course courseAngular(SubCategory subCategory, String name, String code, String teacher, Status status) {
+        Course angular = new CourseBuilder(name, code,
+                5, teacher, subCategory)
+                .withVisibility(status)
                 .withTargetAudience("Pessoas que gostam de Angular")
                 .withDevelopedSkills("Aprenda o framework do momento")
                 .create();

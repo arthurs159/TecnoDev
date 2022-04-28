@@ -25,22 +25,22 @@ public class ProgramDatabaseMotherTest {
     }
 
     public void create() {
-        Category backEnd = CategoryBuilder.categoryBackEnd();
-        Category frontEnd = CategoryBuilder.categoryFrontEnd();
-        Category devops = CategoryBuilder.categoryDevops();
-        categoryRepository.saveAll(Arrays.asList(backEnd, frontEnd, devops));
+//        Category backEnd = CategoryBuilder.categoryBackEnd();
+//        Category frontEnd = CategoryBuilder.categoryFrontEnd();
+//        Category devops = CategoryBuilder.categoryDevops();
+//        categoryRepository.saveAll(Arrays.asList(backEnd, frontEnd, devops));
 
-        SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd);
-        SubCategory subcategoryJavaScript = SubcategoryBuilder.subCategoryJs(frontEnd);
-        SubCategory subCategoryMobile = SubcategoryBuilder.subCategoryMobile(backEnd);
-        SubCategory subCategoryPython = SubcategoryBuilder.subCategoryPython(backEnd);
-        subCategoryRepository.saveAll(Arrays.asList(subcategoryJava, subcategoryJavaScript, subCategoryMobile, subCategoryPython));
-
-        Course courseJava = CourseBuilder.courseJava(subcategoryJava);
-        Course courseJpa = CourseBuilder.courseJpa(subcategoryJava);
-        Course coursePython = CourseBuilder.coursePython(subCategoryPython);
-        Course courseAngular = CourseBuilder.courseAngular(subcategoryJavaScript);
-        courseRepository.saveAll(Arrays.asList(courseJava, courseJpa, coursePython, courseAngular));
+//        SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd);
+//        SubCategory subcategoryJavaScript = SubcategoryBuilder.subCategoryJs(frontEnd);
+//        SubCategory subCategoryMobile = SubcategoryBuilder.subCategoryMobile(backEnd);
+//        SubCategory subCategoryPython = SubcategoryBuilder.subCategoryPython(backEnd);
+//        subCategoryRepository.saveAll(Arrays.asList(subcategoryJava, subcategoryJavaScript, subCategoryMobile, subCategoryPython));
+//
+//        Course courseJava = CourseBuilder.courseJava(subcategoryJava);
+//        Course courseJpa = CourseBuilder.courseJpa(subcategoryJava);
+//        Course coursePython = CourseBuilder.coursePython(subCategoryPython);
+//        Course courseAngular = CourseBuilder.courseAngular(subcategoryJavaScript);
+//        courseRepository.saveAll(Arrays.asList(courseJava, courseJpa, coursePython, courseAngular));
     }
 
 }

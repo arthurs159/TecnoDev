@@ -51,10 +51,10 @@ public class CategoryBuilder {
                     colorCode);
         }
 
-        public static Category categoryFrontEnd() {
-            Category frontEndCategory = new CategoryBuilder("Front-end", "frontend")
+        public static Category categoryFrontEnd(String name, String code, boolean active) {
+            Category frontEndCategory = new CategoryBuilder(name, code)
                     .withDescription("Curso front-end")
-                    .withActive(true)
+                    .withActive(active)
                     .withOrderInSystem(2)
                     .withImageUrl("www.google.com.br")
                     .withColorCode("#9AEA20")
@@ -62,10 +62,10 @@ public class CategoryBuilder {
             return frontEndCategory;
         }
 
-        public static Category categoryBackEnd(){
-            Category backEndCategory = new CategoryBuilder("Back-End", "backend")
+        public static Category categoryBackEnd(String name, String code, boolean active){
+            Category backEndCategory = new CategoryBuilder(name, code)
                     .withDescription("Curso back-end")
-                    .withActive(true)
+                    .withActive(active)
                     .withOrderInSystem(3)
                     .withImageUrl("www.google.com.br")
                     .withColorCode("#9AEA20")
@@ -73,10 +73,10 @@ public class CategoryBuilder {
             return backEndCategory;
         }
 
-        public static Category categoryDevops(){
-            Category devOpsCategory = new CategoryBuilder("DevOps", "devops")
+        public static Category categoryDevops(String name, String code, boolean active){
+            Category devOpsCategory = new CategoryBuilder(name, code)
                     .withDescription("Curso Devops")
-                    .withActive(false)
+                    .withActive(active)
                     .withOrderInSystem(1)
                     .withImageUrl("www.google.com.br")
                     .withColorCode("#9AEA20")

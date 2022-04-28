@@ -32,24 +32,30 @@ class SubCategoryRepositoryTest {
         programDatabaseMotherTest.create();
     }
 
-//    @Test
-//    void findSubCategoriesByCategory_CodeOrderByOrderInSystem() {
-//    } TODO ESTÁ SENDO TESTADO A BAIXO!! (CHECAR)
-
     @Test
-    void getSubcategoryByCategoryCodeOrdered() {
+    void findSubCategoriesByCategory_CodeOrderByOrderInSystem() {
         String categoryCode = "backend";
-        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(categoryCode);
+        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(categoryCode);
 
         assertEquals("java", subcategoryByCategoryCodeOrdered.get(0).getCode());
         assertEquals("python", subcategoryByCategoryCodeOrdered.get(1).getCode());
         assertEquals("mobile", subcategoryByCategoryCodeOrdered.get(2).getCode());
     }
 
+//    @Test
+//    void getSubcategoryByCategoryCodeOrdered() {
+//        String categoryCode = "backend";
+//        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(categoryCode);
+//
+//        assertEquals("java", subcategoryByCategoryCodeOrdered.get(0).getCode());
+//        assertEquals("python", subcategoryByCategoryCodeOrdered.get(1).getCode());
+//        assertEquals("mobile", subcategoryByCategoryCodeOrdered.get(2).getCode());
+//    }
+
     @Test
     void getSubcategoryByCategoryCodeOrdered_Should_Return_IsEmpty_True_When_Code_Not_Exists() {
         String nonExistingCode = "nonExistingCode";
-        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(nonExistingCode);
+        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(nonExistingCode);
 
         assertTrue(subcategoryByCategoryCodeOrdered.isEmpty());
     }

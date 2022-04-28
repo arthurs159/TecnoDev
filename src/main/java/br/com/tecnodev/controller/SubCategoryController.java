@@ -35,7 +35,7 @@ public class SubCategoryController {
     @GetMapping("/admin/subcategories/{code}")
     public String listSubcategories(@PathVariable String code, Model model) {
         Category category = categoryRepository.findByCode(code).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        List<SubCategory> subCategoryList = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(code);
+        List<SubCategory> subCategoryList = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(code);
         List<SubCategoryToListDTO> subcategoryDto = subCategoryList.stream().map(SubCategoryToListDTO::new).toList();
         model.addAttribute("category", category);
         model.addAttribute("subcategories", subcategoryDto);
