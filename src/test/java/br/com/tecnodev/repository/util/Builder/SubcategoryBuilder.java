@@ -41,6 +41,7 @@ public class SubcategoryBuilder {
                 category);
     }
 
+
     public static SubCategory subCategoryJs(Category category, String name, String code, boolean active) {
         SubCategory javaScript = new SubcategoryBuilder(name, code, category)
                 .withDescription("Projetos em JavaScript")

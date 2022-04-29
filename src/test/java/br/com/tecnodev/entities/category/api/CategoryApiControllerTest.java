@@ -1,11 +1,15 @@
 package br.com.tecnodev.entities.category.api;
 
+import br.com.tecnodev.entities.category.Category;
+import br.com.tecnodev.entities.course.Course;
+import br.com.tecnodev.entities.course.Status;
+import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.repository.CourseRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;
-import br.com.tecnodev.repository.util.ProgramDatabaseMotherTest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import br.com.tecnodev.repository.util.Builder.CategoryBuilder;
+import br.com.tecnodev.repository.util.Builder.CourseBuilder;
+import br.com.tecnodev.repository.util.Builder.SubcategoryBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -17,6 +21,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,25 +41,28 @@ public class CategoryApiControllerTest {
     @Autowired
     private CourseRepository courseRepository;
 
-    @BeforeEach
-    public void init() {
-        ProgramDatabaseMotherTest programDatabaseMotherTest = new ProgramDatabaseMotherTest(categoryRepository, subCategoryRepository, courseRepository);
-        programDatabaseMotherTest.create();
-    }
-
-    @AfterEach
-    public void delete() {
-        courseRepository.deleteAll();
-        subCategoryRepository.deleteAll();
-        categoryRepository.deleteAll();
-    }
+//    @AfterEach
+//    public void delete() {
+//        courseRepository.deleteAll();
+//        subCategoryRepository.deleteAll();
+//        categoryRepository.deleteAll();
+//    }
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-//    @Transactional
+    @Transactional
     void listAllActiveCategories__Should_Return_Content() throws Exception {
+        Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
+        categoryRepository.save(backEnd);
+        SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", true);
+        subCategoryRepository.save(subcategoryJava);
+        Course courseJava = CourseBuilder.courseJava(subcategoryJava, "Java e Sintaxe", "javasintaxe", "Cleb Paulo", Status.PUBLIC);
+        Course courseJpa = CourseBuilder.courseJpa(subcategoryJava, "JPA", "jpa", "Cleb Paulo", Status.PUBLIC);
+
+        subcategoryJava.setCourses(List.of(courseJava, courseJpa));
+        courseRepository.saveAll(Arrays.asList(courseJava, courseJpa));
 
         ResultActions result =
                 mockMvc.perform(get("/api/categories")

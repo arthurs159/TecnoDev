@@ -8,8 +8,6 @@ import br.com.tecnodev.projections.CategoryReportProjection;
 import br.com.tecnodev.repository.util.Builder.CategoryBuilder;
 import br.com.tecnodev.repository.util.Builder.CourseBuilder;
 import br.com.tecnodev.repository.util.Builder.SubcategoryBuilder;
-import br.com.tecnodev.repository.util.ProgramDatabaseMotherTest;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -34,12 +32,6 @@ public class CategoryRepositoryTest {
     @Autowired
     private CourseRepository courseRepository;
 
-//    @BeforeEach
-//    public void init() {
-//        ProgramDatabaseMotherTest programDatabaseMotherTest = new ProgramDatabaseMotherTest(categoryRepository, subCategoryRepository, courseRepository);
-//        programDatabaseMotherTest.create();
-//    }
-
     @Test
     public void findAllByActiveTrue() {
         Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
@@ -47,11 +39,11 @@ public class CategoryRepositoryTest {
         Category devops = CategoryBuilder.categoryDevops("Dev-Ops", "devops", false);
         categoryRepository.saveAll(Arrays.asList(backEnd, frontEnd, devops));
 
-        List<Category> allByActiveTrue = categoryRepository.findAllByActiveTrue();
+        List<Category> activeCategories = categoryRepository.findAllByActiveTrue();
 
-        assertEquals(2, allByActiveTrue.size());
-        assertEquals("backend", allByActiveTrue.get(0).getCode());
-        assertEquals("frontend", allByActiveTrue.get(1).getCode());
+        assertEquals(2, activeCategories.size());
+        assertEquals("backend", activeCategories.get(0).getCode());
+        assertEquals("frontend", activeCategories.get(1).getCode());
     }
 
     @Test
@@ -59,10 +51,10 @@ public class CategoryRepositoryTest {
         Category devops = CategoryBuilder.categoryDevops("Dev-Ops", "devops", false);
         categoryRepository.save(devops);
 
-        List<Category> allByActiveTrue = categoryRepository.findAllByActiveTrue();
+        List<Category> activeCategories = categoryRepository.findAllByActiveTrue();
 
-        assertEquals(0, allByActiveTrue.size());
-        assertTrue(allByActiveTrue.isEmpty());
+        assertEquals(0, activeCategories.size());
+        assertTrue(activeCategories.isEmpty());
     }
 
     @Test
@@ -76,16 +68,19 @@ public class CategoryRepositoryTest {
 
         assertNotNull(allByOrderByOrderInSystem);
         assertEquals("devops", allByOrderByOrderInSystem.get(0).getCode());
+        assertEquals(1, allByOrderByOrderInSystem.get(0).getOrderInSystem());
         assertEquals("frontend", allByOrderByOrderInSystem.get(1).getCode());
+        assertEquals(2, allByOrderByOrderInSystem.get(1).getOrderInSystem());
         assertEquals("backend", allByOrderByOrderInSystem.get(2).getCode());
+        assertEquals(3, allByOrderByOrderInSystem.get(2).getOrderInSystem());
     }
 
     @Test
     public void findAllByOrderByOrderInSystem__Should_Return_An_Empty_List_When_There_Is_No_Category() {
-        List<Category> allByOrderByOrderInSystem = categoryRepository.findAllByOrderByOrderInSystem();
+        List<Category> categories = categoryRepository.findAllByOrderByOrderInSystem();
 
-        assertEquals(0, allByOrderByOrderInSystem.size());
-        assertTrue(allByOrderByOrderInSystem.isEmpty());
+        assertEquals(0, categories.size());
+        assertTrue(categories.isEmpty());
     }
 
     @Test
@@ -139,8 +134,7 @@ public class CategoryRepositoryTest {
     public void getCategoriesWithSubcategoryActiveAndVisibleCourses() {
         Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
         Category frontEnd = CategoryBuilder.categoryFrontEnd("Front-End", "frontend", true);
-        Category devops = CategoryBuilder.categoryDevops("DevOps", "devops", false);
-        categoryRepository.saveAll(Arrays.asList(backEnd, frontEnd, devops));
+        categoryRepository.saveAll(Arrays.asList(backEnd, frontEnd));
         SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", true);
         SubCategory subcategoryJavaScript = SubcategoryBuilder.subCategoryJs(frontEnd, "JavaScript", "javascript", true);
         SubCategory subCategoryMobile = SubcategoryBuilder.subCategoryMobile(backEnd, "Mobile", "mobile", true);
@@ -169,11 +163,29 @@ public class CategoryRepositoryTest {
     @Test
     public void getCategoriesWithSubcategoryActiveAndVisibleCourses__Should_Return_An_Empty_Array_When_There_Is_Category_With_Inactive_Subcategory_And_Private_Course() {
         Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
+        categoryRepository.save(backEnd);
         SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", false);
+        subCategoryRepository.save(subcategoryJava);
         Course courseJava = CourseBuilder.courseJava(subcategoryJava, "Java e Sintaxe", "javasintaxe", "Cleb Paulo", Status.PRIVATE);
+        courseRepository.save(courseJava);
 
         List<Category> categoriesVisibleSubAndCourse = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
         assertEquals(0, categoriesVisibleSubAndCourse.size());
         assertTrue(categoriesVisibleSubAndCourse.isEmpty());
     }
+
+    @Test
+    public void getCategoriesWithSubcategoryActiveAndVisibleCourses__Should_Return_An_Empty_Array_When_There_Is_Category_With_Active_Subcategory_And_Private_Course() {
+        Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
+        categoryRepository.save(backEnd);
+        SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", true);
+        subCategoryRepository.save(subcategoryJava);
+        Course courseJava = CourseBuilder.courseJava(subcategoryJava, "Java e Sintaxe", "javasintaxe", "Cleb Paulo", Status.PRIVATE);
+        courseRepository.save(courseJava);
+
+        List<Category> categoriesVisibleSubAndCourse = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
+        assertEquals(0, categoriesVisibleSubAndCourse.size());
+        assertTrue(categoriesVisibleSubAndCourse.isEmpty());
+    }
+
 }

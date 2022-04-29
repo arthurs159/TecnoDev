@@ -51,10 +51,10 @@ public class UserBuilder {
         );
     }
 
-    public static User user(List<Role> roles) {
+    public static User user(List<Role> roles, String name, String email) {
         User user = new UserBuilder()
-                .withName("lucio")
-                .withEmail("lucio@email.com")
+                .withName(name)
+                .withEmail(email)
                 .withPassword("123456")
                 .withRole(roles)
                 .create();

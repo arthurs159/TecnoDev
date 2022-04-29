@@ -16,9 +16,9 @@ public class UserFactory {
         this.userRepository = userRepository;
     }
 
-    public void createUser() {
-        List<Role> adminRole = List.of(RoleBuilder.adminRole());
-        User user = UserBuilder.user(adminRole);
-        userRepository.save(user);
-    }
+//    public void createUser() {
+//        List<Role> adminRole = List.of(RoleBuilder.adminRole());
+//        User user = UserBuilder.user(adminRole);
+//        userRepository.save(user);
+//    }
 }

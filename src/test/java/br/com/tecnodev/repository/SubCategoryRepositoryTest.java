@@ -1,14 +1,19 @@
 package br.com.tecnodev.repository;
 
+import br.com.tecnodev.entities.category.Category;
+import br.com.tecnodev.entities.course.Course;
+import br.com.tecnodev.entities.course.Status;
 import br.com.tecnodev.entities.subCategory.SubCategory;
-import br.com.tecnodev.repository.util.ProgramDatabaseMotherTest;
-import org.junit.jupiter.api.BeforeEach;
+import br.com.tecnodev.repository.util.Builder.CategoryBuilder;
+import br.com.tecnodev.repository.util.Builder.CourseBuilder;
+import br.com.tecnodev.repository.util.Builder.SubcategoryBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,14 +31,15 @@ class SubCategoryRepositoryTest {
     @Autowired
     private CourseRepository courseRepository;
 
-    @BeforeEach
-    public void init() {
-        ProgramDatabaseMotherTest programDatabaseMotherTest = new ProgramDatabaseMotherTest(categoryRepository, subCategoryRepository, courseRepository);
-        programDatabaseMotherTest.create();
-    }
-
     @Test
     void findSubCategoriesByCategory_CodeOrderByOrderInSystem() {
+        Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
+        SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", true);
+        SubCategory subCategoryPython = SubcategoryBuilder.subCategoryPython(backEnd, "Python", "python", false);
+        SubCategory subCategoryMobile = SubcategoryBuilder.subCategoryMobile(backEnd, "Mobile", "mobile", true);
+        categoryRepository.save(backEnd);
+        subCategoryRepository.saveAll(Arrays.asList(subcategoryJava, subCategoryMobile, subCategoryPython));
+
         String categoryCode = "backend";
         List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(categoryCode);
 
@@ -41,16 +47,6 @@ class SubCategoryRepositoryTest {
         assertEquals("python", subcategoryByCategoryCodeOrdered.get(1).getCode());
         assertEquals("mobile", subcategoryByCategoryCodeOrdered.get(2).getCode());
     }
-
-//    @Test
-//    void getSubcategoryByCategoryCodeOrdered() {
-//        String categoryCode = "backend";
-//        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.getSubcategoryByCategoryCodeOrdered(categoryCode);
-//
-//        assertEquals("java", subcategoryByCategoryCodeOrdered.get(0).getCode());
-//        assertEquals("python", subcategoryByCategoryCodeOrdered.get(1).getCode());
-//        assertEquals("mobile", subcategoryByCategoryCodeOrdered.get(2).getCode());
-//    }
 
     @Test
     void getSubcategoryByCategoryCodeOrdered_Should_Return_IsEmpty_True_When_Code_Not_Exists() {
@@ -62,18 +58,24 @@ class SubCategoryRepositoryTest {
 
     @Test
     void findSubcategoryByCategoryAndSubcategoryCode() {
+        Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
+        SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", true);
+        SubCategory subCategoryPython = SubcategoryBuilder.subCategoryPython(backEnd, "Python", "python", false);
+        categoryRepository.save(backEnd);
+        subCategoryRepository.saveAll(Arrays.asList(subcategoryJava, subCategoryPython));
+
         String categoryCode = "backend";
         String subcategoryCodePy = "python";
         String subcategoryCodeJava = "java";
 
-        Optional<SubCategory> subcategoryByCategoryAndSubcategoryCodePy = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(subcategoryCodePy, categoryCode);
-        Optional<SubCategory> subcategoryByCategoryAndSubcategoryCodeJava = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(subcategoryCodeJava, categoryCode);
+        Optional<SubCategory> possibleSubcategoryPython = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(subcategoryCodePy, categoryCode);
+        Optional<SubCategory> possibleSubcategoryJava = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(subcategoryCodeJava, categoryCode);
 
-        assertTrue(subcategoryByCategoryAndSubcategoryCodePy.isPresent());
-        assertEquals(subcategoryCodePy, subcategoryByCategoryAndSubcategoryCodePy.get().getCode());
+        assertTrue(possibleSubcategoryPython.isPresent());
+        assertEquals(subcategoryCodePy, possibleSubcategoryPython.get().getCode());
 
-        assertTrue(subcategoryByCategoryAndSubcategoryCodeJava.isPresent());
-        assertEquals(subcategoryCodeJava, subcategoryByCategoryAndSubcategoryCodeJava.get().getCode());
+        assertTrue(possibleSubcategoryJava.isPresent());
+        assertEquals(subcategoryCodeJava, possibleSubcategoryJava.get().getCode());
     }
 
     @Test
@@ -88,19 +90,21 @@ class SubCategoryRepositoryTest {
 
     @Test
     void findSubcategoryByCode() {
-        String java = "java";
-        String python = "python";
-        String js = "javascript";
-        Optional<SubCategory> subcategoryByCodeJava = subCategoryRepository.findSubcategoryByCode(java);
-        Optional<SubCategory> subcategoryByCodePython = subCategoryRepository.findSubcategoryByCode(python);
-        Optional<SubCategory> subcategoryByCodeJs = subCategoryRepository.findSubcategoryByCode(js);
+        Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
+        SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", true);
+        SubCategory subCategoryPython = SubcategoryBuilder.subCategoryPython(backEnd, "Python", "python", false);
+        categoryRepository.save(backEnd);
+        subCategoryRepository.saveAll(Arrays.asList(subcategoryJava, subCategoryPython));
+
+        String javaCode = "java";
+        String pythonCode = "python";
+        Optional<SubCategory> subcategoryByCodeJava = subCategoryRepository.findSubcategoryByCode(javaCode);
+        Optional<SubCategory> subcategoryByCodePython = subCategoryRepository.findSubcategoryByCode(pythonCode);
 
         assertTrue(subcategoryByCodeJava.isPresent());
         assertTrue(subcategoryByCodePython.isPresent());
-        assertTrue(subcategoryByCodeJs.isPresent());
-        assertEquals(java, subcategoryByCodeJava.get().getCode());
-        assertEquals(python, subcategoryByCodePython.get().getCode());
-        assertEquals(js, subcategoryByCodeJs.get().getCode());
+        assertEquals(javaCode, subcategoryByCodeJava.get().getCode());
+        assertEquals(pythonCode, subcategoryByCodePython.get().getCode());
     }
 
     @Test
@@ -113,6 +117,18 @@ class SubCategoryRepositoryTest {
 
     @Test
     void findAllActiveSubcategoryWithCourses() {
+        Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
+        Category frontEnd = CategoryBuilder.categoryFrontEnd("Front-End", "frontend", true);
+        categoryRepository.saveAll(Arrays.asList(backEnd, frontEnd));
+        SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", true);
+        SubCategory subcategoryJavaScript = SubcategoryBuilder.subCategoryJs(frontEnd, "JavaScript", "javascript", true);
+        SubCategory subCategoryMobile = SubcategoryBuilder.subCategoryMobile(backEnd, "Mobile", "mobile", true);
+        subCategoryRepository.saveAll(Arrays.asList(subcategoryJava, subcategoryJavaScript, subCategoryMobile));
+        Course courseJava = CourseBuilder.courseJava(subcategoryJava, "Java e Sintaxe", "javasintaxe", "Cleb Paulo", Status.PUBLIC);
+        Course courseJpa = CourseBuilder.courseJpa(subcategoryJava, "JPA", "jpa", "Cleb Paulo", Status.PUBLIC);
+        Course courseAngular = CourseBuilder.courseAngular(subcategoryJavaScript, "Angular", "angular", "Paulo Silva", Status.PUBLIC);
+        courseRepository.saveAll(Arrays.asList(courseJava, courseJpa, courseAngular));
+
         String categoryCodeBack = "backend";
         String categoryCodeFront = "frontend";
         List<SubCategory> activeSubcategoryWithCoursesByBackCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeBack);
@@ -126,7 +142,12 @@ class SubCategoryRepositoryTest {
 
     @Test
     void findAllActiveSubcategoryWithCourses__Should_Return_IsEmpty_True_When_Category_Not_Have_Subcategory_With_Courses() {
-        String categoryCodeMobile = "mobile";
+        Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
+        categoryRepository.save(backEnd);
+        SubCategory subCategoryPython = SubcategoryBuilder.subCategoryPython(backEnd, "Python", "python", false);
+        subCategoryRepository.save(subCategoryPython);
+
+        String categoryCodeMobile = "backend";
         List<SubCategory> activeSubcategoryWithCoursesByFrontCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeMobile);
 
         assertTrue(activeSubcategoryWithCoursesByFrontCategory.isEmpty());
