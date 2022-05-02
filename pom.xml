@@ -89,6 +89,7 @@
     </dependencies>
 
     <build>
+        <finalName>TecnoDev</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
