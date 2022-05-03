@@ -64,15 +64,15 @@ public class CategoryRepositoryTest {
         Category devops = CategoryBuilder.categoryDevops("Dev-Ops", "devops", false);
         categoryRepository.saveAll(Arrays.asList(backEnd, frontEnd, devops));
 
-        List<Category> allByOrderByOrderInSystem = categoryRepository.findAllByOrderByOrderInSystem();
+        List<Category> allSubcategoryOrderedByOrderInSystem = categoryRepository.findAllByOrderByOrderInSystem();
 
-        assertNotNull(allByOrderByOrderInSystem);
-        assertEquals("devops", allByOrderByOrderInSystem.get(0).getCode());
-        assertEquals(1, allByOrderByOrderInSystem.get(0).getOrderInSystem());
-        assertEquals("frontend", allByOrderByOrderInSystem.get(1).getCode());
-        assertEquals(2, allByOrderByOrderInSystem.get(1).getOrderInSystem());
-        assertEquals("backend", allByOrderByOrderInSystem.get(2).getCode());
-        assertEquals(3, allByOrderByOrderInSystem.get(2).getOrderInSystem());
+        assertNotNull(allSubcategoryOrderedByOrderInSystem);
+        assertEquals("devops", allSubcategoryOrderedByOrderInSystem.get(0).getCode());
+        assertEquals(1, allSubcategoryOrderedByOrderInSystem.get(0).getOrderInSystem());
+        assertEquals("frontend", allSubcategoryOrderedByOrderInSystem.get(1).getCode());
+        assertEquals(2, allSubcategoryOrderedByOrderInSystem.get(1).getOrderInSystem());
+        assertEquals("backend", allSubcategoryOrderedByOrderInSystem.get(2).getCode());
+        assertEquals(3, allSubcategoryOrderedByOrderInSystem.get(2).getOrderInSystem());
     }
 
     @Test
@@ -120,14 +120,14 @@ public class CategoryRepositoryTest {
         Course courseAngular = CourseBuilder.courseAngular(subcategoryJavaScript, "Angular", "angular", "Paulo Silva", Status.PUBLIC);
         courseRepository.saveAll(Arrays.asList(courseJava, courseJpa, coursePython, courseAngular));
 
-        List<CategoryReportProjection> categoryAndNumberOfCourses = categoryRepository.findCategoryAndNumberOfCourses();
+        List<CategoryReportProjection> categoriesAndNumberOfCourses = categoryRepository.findCategoryAndNumberOfCourses();
 
-        assertEquals("Back-End", categoryAndNumberOfCourses.get(0).getCategoryName());
-        assertEquals(3, categoryAndNumberOfCourses.get(0).getQuantityCoursesFromCategory());
-        assertEquals("Front-End", categoryAndNumberOfCourses.get(1).getCategoryName());
-        assertEquals(1, categoryAndNumberOfCourses.get(1).getQuantityCoursesFromCategory());
-        assertEquals("DevOps", categoryAndNumberOfCourses.get(2).getCategoryName());
-        assertEquals(0, categoryAndNumberOfCourses.get(2).getQuantityCoursesFromCategory());
+        assertEquals("Back-End", categoriesAndNumberOfCourses.get(0).getCategoryName());
+        assertEquals(3, categoriesAndNumberOfCourses.get(0).getQuantityCoursesFromCategory());
+        assertEquals("Front-End", categoriesAndNumberOfCourses.get(1).getCategoryName());
+        assertEquals(1, categoriesAndNumberOfCourses.get(1).getQuantityCoursesFromCategory());
+        assertEquals("DevOps", categoriesAndNumberOfCourses.get(2).getCategoryName());
+        assertEquals(0, categoriesAndNumberOfCourses.get(2).getQuantityCoursesFromCategory());
     }
 
     @Test
@@ -146,18 +146,18 @@ public class CategoryRepositoryTest {
         Course courseAngular = CourseBuilder.courseAngular(subcategoryJavaScript, "Angular", "angular", "Paulo Silva", Status.PUBLIC);
         courseRepository.saveAll(Arrays.asList(courseJava, courseJpa, coursePython, courseAngular));
 
-        List<Category> categoriesVisibleSubAndCourse = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
+        List<Category> categoriesWithActiveSubcategoryAndPublicCourses = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
 
-        assertEquals("frontend", categoriesVisibleSubAndCourse.get(0).getCode());
-        assertEquals("backend", categoriesVisibleSubAndCourse.get(1).getCode());
+        assertEquals("frontend", categoriesWithActiveSubcategoryAndPublicCourses.get(0).getCode());
+        assertEquals("backend", categoriesWithActiveSubcategoryAndPublicCourses.get(1).getCode());
     }
 
     @Test
     public void getCategoriesWithSubcategoryActiveAndVisibleCourses__Should_Return_An_Empty_Array_When_There_Is_No_Category() {
-        List<Category> categoriesVisibleSubAndCourse = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
+        List<Category> categoriesWithActiveSubcategoryAndPublicCourses = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
 
-        assertEquals(0, categoriesVisibleSubAndCourse.size());
-        assertTrue(categoriesVisibleSubAndCourse.isEmpty());
+        assertEquals(0, categoriesWithActiveSubcategoryAndPublicCourses.size());
+        assertTrue(categoriesWithActiveSubcategoryAndPublicCourses.isEmpty());
     }
 
     @Test
@@ -169,9 +169,9 @@ public class CategoryRepositoryTest {
         Course courseJava = CourseBuilder.courseJava(subcategoryJava, "Java e Sintaxe", "javasintaxe", "Cleb Paulo", Status.PRIVATE);
         courseRepository.save(courseJava);
 
-        List<Category> categoriesVisibleSubAndCourse = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
-        assertEquals(0, categoriesVisibleSubAndCourse.size());
-        assertTrue(categoriesVisibleSubAndCourse.isEmpty());
+        List<Category> categoriesWithActiveSubcategoryAndPublicCourses = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
+        assertEquals(0, categoriesWithActiveSubcategoryAndPublicCourses.size());
+        assertTrue(categoriesWithActiveSubcategoryAndPublicCourses.isEmpty());
     }
 
     @Test
@@ -183,9 +183,9 @@ public class CategoryRepositoryTest {
         Course courseJava = CourseBuilder.courseJava(subcategoryJava, "Java e Sintaxe", "javasintaxe", "Cleb Paulo", Status.PRIVATE);
         courseRepository.save(courseJava);
 
-        List<Category> categoriesVisibleSubAndCourse = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
-        assertEquals(0, categoriesVisibleSubAndCourse.size());
-        assertTrue(categoriesVisibleSubAndCourse.isEmpty());
+        List<Category> categoriesWithActiveSubcategoryAndPublicCourses = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
+        assertEquals(0, categoriesWithActiveSubcategoryAndPublicCourses.size());
+        assertTrue(categoriesWithActiveSubcategoryAndPublicCourses.isEmpty());
     }
 
 }

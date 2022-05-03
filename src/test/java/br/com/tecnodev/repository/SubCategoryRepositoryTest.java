@@ -41,19 +41,19 @@ class SubCategoryRepositoryTest {
         subCategoryRepository.saveAll(Arrays.asList(subcategoryJava, subCategoryMobile, subCategoryPython));
 
         String categoryCode = "backend";
-        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(categoryCode);
+        List<SubCategory> subcategoriesByCategoryCodeOrdered = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(categoryCode);
 
-        assertEquals("java", subcategoryByCategoryCodeOrdered.get(0).getCode());
-        assertEquals("python", subcategoryByCategoryCodeOrdered.get(1).getCode());
-        assertEquals("mobile", subcategoryByCategoryCodeOrdered.get(2).getCode());
+        assertEquals("java", subcategoriesByCategoryCodeOrdered.get(0).getCode());
+        assertEquals("python", subcategoriesByCategoryCodeOrdered.get(1).getCode());
+        assertEquals("mobile", subcategoriesByCategoryCodeOrdered.get(2).getCode());
     }
 
     @Test
     void getSubcategoryByCategoryCodeOrdered_Should_Return_IsEmpty_True_When_Code_Not_Exists() {
         String nonExistingCode = "nonExistingCode";
-        List<SubCategory> subcategoryByCategoryCodeOrdered = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(nonExistingCode);
+        List<SubCategory> subcategoriesByCategoryCodeOrdered = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(nonExistingCode);
 
-        assertTrue(subcategoryByCategoryCodeOrdered.isEmpty());
+        assertTrue(subcategoriesByCategoryCodeOrdered.isEmpty());
     }
 
     @Test
@@ -131,13 +131,13 @@ class SubCategoryRepositoryTest {
 
         String categoryCodeBack = "backend";
         String categoryCodeFront = "frontend";
-        List<SubCategory> activeSubcategoryWithCoursesByBackCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeBack);
-        List<SubCategory> activeSubcategoryWithCoursesByFrontCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeFront);
+        List<SubCategory> activeSubcategoriesWithCoursesByBackCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeBack);
+        List<SubCategory> activeSubcategoriesWithCoursesByFrontCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeFront);
 
-        assertFalse(activeSubcategoryWithCoursesByBackCategory.isEmpty());
-        assertFalse(activeSubcategoryWithCoursesByFrontCategory.isEmpty());
-        assertEquals("java", activeSubcategoryWithCoursesByBackCategory.get(0).getCode());
-        assertEquals("javascript", activeSubcategoryWithCoursesByFrontCategory.get(0).getCode());
+        assertFalse(activeSubcategoriesWithCoursesByBackCategory.isEmpty());
+        assertFalse(activeSubcategoriesWithCoursesByFrontCategory.isEmpty());
+        assertEquals("java", activeSubcategoriesWithCoursesByBackCategory.get(0).getCode());
+        assertEquals("javascript", activeSubcategoriesWithCoursesByFrontCategory.get(0).getCode());
     }
 
     @Test
@@ -148,8 +148,8 @@ class SubCategoryRepositoryTest {
         subCategoryRepository.save(subCategoryPython);
 
         String categoryCodeMobile = "backend";
-        List<SubCategory> activeSubcategoryWithCoursesByFrontCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeMobile);
+        List<SubCategory> activeSubcategoriesWithCoursesByFrontCategory = subCategoryRepository.findAllActiveSubcategoryWithCoursesByCategoryCode(categoryCodeMobile);
 
-        assertTrue(activeSubcategoryWithCoursesByFrontCategory.isEmpty());
+        assertTrue(activeSubcategoriesWithCoursesByFrontCategory.isEmpty());
     }
 }

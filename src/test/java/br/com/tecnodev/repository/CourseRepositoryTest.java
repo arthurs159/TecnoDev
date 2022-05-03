@@ -73,11 +73,11 @@ class CourseRepositoryTest {
 
         Optional<SubCategory> subcategoryByCode = subCategoryRepository.findSubcategoryByCode(subcategoryCode);
 
-        Page<Course> allBySubCategoryPaged = courseRepository.findAllBySubCategory(subcategoryByCode.get(), pageable);
+        Page<Course> allCoursesBySubCategoryPaged = courseRepository.findAllBySubCategory(subcategoryByCode.get(), pageable);
 
-        assertEquals(2, allBySubCategoryPaged.getTotalElements());
-        assertEquals("javasintaxe", allBySubCategoryPaged.getContent().get(0).getCode());
-        assertEquals("jpa", allBySubCategoryPaged.getContent().get(1).getCode());
+        assertEquals(2, allCoursesBySubCategoryPaged.getTotalElements());
+        assertEquals("javasintaxe", allCoursesBySubCategoryPaged.getContent().get(0).getCode());
+        assertEquals("jpa", allCoursesBySubCategoryPaged.getContent().get(1).getCode());
     }
 
     @Test
