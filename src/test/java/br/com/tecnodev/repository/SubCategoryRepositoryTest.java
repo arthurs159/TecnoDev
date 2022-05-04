@@ -41,19 +41,14 @@ class SubCategoryRepositoryTest {
         subCategoryRepository.saveAll(Arrays.asList(subcategoryJava, subCategoryMobile, subCategoryPython));
 
         String categoryCode = "backend";
+        String nonExistingCode = "nonExistingCode";
         List<SubCategory> subcategoriesByCategoryCodeOrdered = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(categoryCode);
+        List<SubCategory> subcategoriesByCategoryCodeOrderedWithNonExistingCode = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(nonExistingCode);
 
         assertEquals("java", subcategoriesByCategoryCodeOrdered.get(0).getCode());
         assertEquals("python", subcategoriesByCategoryCodeOrdered.get(1).getCode());
         assertEquals("mobile", subcategoriesByCategoryCodeOrdered.get(2).getCode());
-    }
-
-    @Test
-    void getSubcategoryByCategoryCodeOrdered_Should_Return_IsEmpty_True_When_Code_Not_Exists() {
-        String nonExistingCode = "nonExistingCode";
-        List<SubCategory> subcategoriesByCategoryCodeOrdered = subCategoryRepository.findSubCategoriesByCategory_CodeOrderByOrderInSystem(nonExistingCode);
-
-        assertTrue(subcategoriesByCategoryCodeOrdered.isEmpty());
+        assertTrue(subcategoriesByCategoryCodeOrderedWithNonExistingCode.isEmpty());
     }
 
     @Test
@@ -67,25 +62,19 @@ class SubCategoryRepositoryTest {
         String categoryCode = "backend";
         String subcategoryCodePy = "python";
         String subcategoryCodeJava = "java";
+        String subcategoryNonExistingCode = "nonExistingSubcategoryCode";
 
         Optional<SubCategory> possibleSubcategoryPython = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(subcategoryCodePy, categoryCode);
         Optional<SubCategory> possibleSubcategoryJava = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(subcategoryCodeJava, categoryCode);
+        Optional<SubCategory> possibleSubcategoryWithNonExistingCode = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(subcategoryNonExistingCode, categoryCode);
 
         assertTrue(possibleSubcategoryPython.isPresent());
         assertEquals(subcategoryCodePy, possibleSubcategoryPython.get().getCode());
 
         assertTrue(possibleSubcategoryJava.isPresent());
         assertEquals(subcategoryCodeJava, possibleSubcategoryJava.get().getCode());
-    }
 
-    @Test
-    void findSubcategoryByCategoryAndSubcategoryCode__Should_Return_IsEmpty_True_When_CategoryCode_and_Subcategory_Not_Exists() {
-        String nonExistingCategoryCode = "nonExistingCategoryCode";
-        String nonExistingSubcategoryCode = "nonExistingSubcategoryCode";
-
-        Optional<SubCategory> subcategoryByCategoryAndSubcategoryCodePy = subCategoryRepository.findSubcategoryByCategoryAndSubcategoryCode(nonExistingCategoryCode, nonExistingSubcategoryCode);
-
-        assertTrue(subcategoryByCategoryAndSubcategoryCodePy.isEmpty());
+        assertTrue(possibleSubcategoryWithNonExistingCode.isEmpty());
     }
 
     @Test
@@ -98,6 +87,9 @@ class SubCategoryRepositoryTest {
 
         String javaCode = "java";
         String pythonCode = "python";
+        String nonExistingCode = "nonExistingCode";
+
+        Optional<SubCategory> subcategoryByNonExistingCode = subCategoryRepository.findSubcategoryByCode(nonExistingCode);
         Optional<SubCategory> subcategoryByCodeJava = subCategoryRepository.findSubcategoryByCode(javaCode);
         Optional<SubCategory> subcategoryByCodePython = subCategoryRepository.findSubcategoryByCode(pythonCode);
 
@@ -105,14 +97,7 @@ class SubCategoryRepositoryTest {
         assertTrue(subcategoryByCodePython.isPresent());
         assertEquals(javaCode, subcategoryByCodeJava.get().getCode());
         assertEquals(pythonCode, subcategoryByCodePython.get().getCode());
-    }
-
-    @Test
-    void findSubcategoryByCode__Should_return_false_when_code_not_exists() {
-        String nonExistingCode = "nonExistingCode";
-        Optional<SubCategory> subcategoryByCodeJava = subCategoryRepository.findSubcategoryByCode(nonExistingCode);
-
-        assertFalse(subcategoryByCodeJava.isPresent());
+        assertFalse(subcategoryByNonExistingCode.isPresent());
     }
 
     @Test

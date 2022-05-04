@@ -69,7 +69,7 @@ class CourseRepositoryTest {
         courseRepository.saveAll(Arrays.asList(courseJava, courseJpa, coursePython));
 
         String subcategoryCode = "java";
-        PageRequest pageable = PageRequest.of(0, 5);
+        PageRequest pageable = PageRequest.of(0, 1);
 
         Optional<SubCategory> subcategoryByCode = subCategoryRepository.findSubcategoryByCode(subcategoryCode);
 
@@ -77,7 +77,11 @@ class CourseRepositoryTest {
 
         assertEquals(2, allCoursesBySubCategoryPaged.getTotalElements());
         assertEquals("javasintaxe", allCoursesBySubCategoryPaged.getContent().get(0).getCode());
-        assertEquals("jpa", allCoursesBySubCategoryPaged.getContent().get(1).getCode());
+        assertEquals(2, allCoursesBySubCategoryPaged.getTotalPages());
+
+        PageRequest pageable2 = PageRequest.of(1, 1);
+        Page<Course> allCoursesBySubCategoryPaged2 = courseRepository.findAllBySubCategory(subcategoryByCode.get(), pageable2);
+        assertEquals("jpa", allCoursesBySubCategoryPaged2.getContent().get(0).getCode());
     }
 
     @Test
@@ -88,9 +92,11 @@ class CourseRepositoryTest {
         subCategoryRepository.save(subCategoryMobile);
 
         String subcategoryCode = "mobile";
+        PageRequest pageable = PageRequest.of(0, 5);
+
         Optional<SubCategory> subcategoryByCode = subCategoryRepository.findSubcategoryByCode(subcategoryCode);
 
-        Page<Course> allBySubCategoryPaged = courseRepository.findAllBySubCategory(subcategoryByCode.get(), Pageable.unpaged());
+        Page<Course> allBySubCategoryPaged = courseRepository.findAllBySubCategory(subcategoryByCode.get(), pageable);
 
         assertEquals(0, allBySubCategoryPaged.getTotalElements());
         assertTrue(allBySubCategoryPaged.isEmpty());
@@ -106,17 +112,12 @@ class CourseRepositoryTest {
         courseRepository.save(courseJava);
 
         String courseCode = "javasintaxe";
+        String nonExistingCode = "nonExistingCode";
         Optional<Course> course = courseRepository.findByCode(courseCode);
+        Optional<Course> courseWithNonExistingCode = courseRepository.findByCode(nonExistingCode);
 
         assertTrue(course.isPresent());
         assertEquals(courseCode, course.get().getCode());
-    }
-
-    @Test
-    void findByCode__Should_Return_Nothing_When_Use_NonExisting_Code() {
-        String nonExistingCode = "nonExistingCode";
-        Optional<Course> course = courseRepository.findByCode(nonExistingCode);
-
-        assertTrue(course.isEmpty());
+        assertTrue(courseWithNonExistingCode.isEmpty());
     }
 }

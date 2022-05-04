@@ -61,9 +61,9 @@ public class SubcategoryBuilder {
     }
 
     public static SubCategory subCategoryPython(Category category, String name, String code, boolean active) {
-        SubCategory python = new SubcategoryBuilder("Python", "python", category)
+        SubCategory python = new SubcategoryBuilder(name, code, category)
                 .withDescription("Projetos em Python")
-                .withActive(false)
+                .withActive(active)
                 .withOrderInSystem(3)
                 .create();
         return python;

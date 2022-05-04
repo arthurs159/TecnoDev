@@ -89,18 +89,14 @@ public class CategoryRepositoryTest {
         categoryRepository.save(backEnd);
 
         String code = "backend";
+        String nonExistingCode = "nonExistingCode";
         Optional<Category> category = categoryRepository.findByCode(code);
+        Optional<Category> categoryWithNonExistingCode = categoryRepository.findByCode(nonExistingCode);
 
         assertTrue(category.isPresent());
         assertEquals(code, category.get().getCode());
-    }
 
-    @Test
-    public void findByCode__Should_Return_Empty_True_When_Code_Not_Exists() {
-        String nonExistingCode = "nonExistingCode";
-        Optional<Category> category = categoryRepository.findByCode(nonExistingCode);
-
-        assertTrue(category.isEmpty());
+        assertTrue(categoryWithNonExistingCode.isEmpty());
     }
 
     @Test
@@ -161,27 +157,15 @@ public class CategoryRepositoryTest {
     }
 
     @Test
-    public void getCategoriesWithSubcategoryActiveAndVisibleCourses__Should_Return_An_Empty_Array_When_There_Is_Category_With_Inactive_Subcategory_And_Private_Course() {
+    public void getCategoriesWithSubcategoryActiveAndVisibleCourses__Should_Return_An_Empty_Array_When_There_Is_Category_With_Inactive_Or_Active_Subcategory_And_Private_Course() {
         Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
         categoryRepository.save(backEnd);
         SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", false);
-        subCategoryRepository.save(subcategoryJava);
+        SubCategory subcategoryPythonActive = SubcategoryBuilder.subCategoryPython(backEnd, "Python", "python", true);
+        subCategoryRepository.saveAll(Arrays.asList(subcategoryJava, subcategoryPythonActive));
         Course courseJava = CourseBuilder.courseJava(subcategoryJava, "Java e Sintaxe", "javasintaxe", "Cleb Paulo", Status.PRIVATE);
-        courseRepository.save(courseJava);
-
-        List<Category> categoriesWithActiveSubcategoryAndPublicCourses = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
-        assertEquals(0, categoriesWithActiveSubcategoryAndPublicCourses.size());
-        assertTrue(categoriesWithActiveSubcategoryAndPublicCourses.isEmpty());
-    }
-
-    @Test
-    public void getCategoriesWithSubcategoryActiveAndVisibleCourses__Should_Return_An_Empty_Array_When_There_Is_Category_With_Active_Subcategory_And_Private_Course() {
-        Category backEnd = CategoryBuilder.categoryBackEnd("Back-End", "backend", true);
-        categoryRepository.save(backEnd);
-        SubCategory subcategoryJava = SubcategoryBuilder.subCategoryJava(backEnd, "Java", "java", true);
-        subCategoryRepository.save(subcategoryJava);
-        Course courseJava = CourseBuilder.courseJava(subcategoryJava, "Java e Sintaxe", "javasintaxe", "Cleb Paulo", Status.PRIVATE);
-        courseRepository.save(courseJava);
+        Course coursePython = CourseBuilder.coursePython(subcategoryPythonActive, "Python e IA", "py", "Cleb Paulo", Status.PRIVATE);
+        courseRepository.saveAll(Arrays.asList(courseJava, coursePython));
 
         List<Category> categoriesWithActiveSubcategoryAndPublicCourses = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses();
         assertEquals(0, categoriesWithActiveSubcategoryAndPublicCourses.size());
