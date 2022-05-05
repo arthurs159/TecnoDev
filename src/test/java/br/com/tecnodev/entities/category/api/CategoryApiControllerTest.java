@@ -41,13 +41,6 @@ public class CategoryApiControllerTest {
     @Autowired
     private CourseRepository courseRepository;
 
-//    @AfterEach
-//    public void delete() {
-//        courseRepository.deleteAll();
-//        subCategoryRepository.deleteAll();
-//        categoryRepository.deleteAll();
-//    }
-
     @Autowired
     private MockMvc mockMvc;
 
