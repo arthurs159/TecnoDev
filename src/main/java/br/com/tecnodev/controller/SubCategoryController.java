@@ -7,12 +7,16 @@ import br.com.tecnodev.entities.subCategory.DTO.SubCategoryToListDTO;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;
+import br.com.tecnodev.validator.NewSubCategoryFormUpdateValidator;
+import br.com.tecnodev.validator.NewSubCategoryFormValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,10 +30,24 @@ public class SubCategoryController {
 
     private final SubCategoryRepository subCategoryRepository;
     private final CategoryRepository categoryRepository;
+    private final NewSubCategoryFormValidator newSubCategoryFormValidator;
+    private final NewSubCategoryFormUpdateValidator newSubCategoryFormUpdateValidator;
 
-    public SubCategoryController(SubCategoryRepository subCategoryRepository, CategoryRepository categoryRepository) {
+    public SubCategoryController(SubCategoryRepository subCategoryRepository, CategoryRepository categoryRepository, NewSubCategoryFormValidator newSubCategoryFormValidator, NewSubCategoryFormUpdateValidator newSubCategoryFormUpdateValidator) {
         this.subCategoryRepository = subCategoryRepository;
         this.categoryRepository = categoryRepository;
+        this.newSubCategoryFormValidator = newSubCategoryFormValidator;
+        this.newSubCategoryFormUpdateValidator = newSubCategoryFormUpdateValidator;
+    }
+
+    @InitBinder("newSubCategoryForm")
+    void initBinderNewSubCategoryForm(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(newSubCategoryFormValidator);
+    }
+
+    @InitBinder("newSubCategoryFormUpdate")
+    void initBinderNewSubCategoryFormUpdate(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(newSubCategoryFormUpdateValidator);
     }
 
     @GetMapping("/admin/subcategories/{code}")

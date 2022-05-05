@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class NewCourseFormUpdate {
+    private Long id;
     @NotBlank(message = "{form.error.name}")
     private String name;
     @NotBlank(message = "{form.error.code}")
@@ -50,6 +51,14 @@ public class NewCourseFormUpdate {
 
     public void setEstimatedTimeInHours(Integer estimatedTimeInHours) {
         this.estimatedTimeInHours = estimatedTimeInHours;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Status getVisibility() {
@@ -99,6 +108,5 @@ public class NewCourseFormUpdate {
     public void setSubcategoryId(Long subcategoryId) {
         this.subcategoryId = subcategoryId;
     }
-
 
 }

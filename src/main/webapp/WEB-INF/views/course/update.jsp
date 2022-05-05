@@ -15,6 +15,7 @@
     <h1>Atualizar Curso</h1>
     <form:form action="/admin/courses/${categoryCode}/${subcategoryCode}/${course.code}"
                modelAttribute="newCourseFormUpdate" method="post">
+        <input type="hidden" name="id" value="${course.id}">
         <div class="form-group">
             <label>Nome</label>
             <form:input type="text" class="form-control"
