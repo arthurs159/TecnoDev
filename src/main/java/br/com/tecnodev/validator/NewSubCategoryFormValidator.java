@@ -27,7 +27,7 @@ public class NewSubCategoryFormValidator implements Validator {
             errors.rejectValue("name", "form.error.same.name");
         }
 
-        if (subCategoryRepository.existsByCode(form.getName())) {
+        if (subCategoryRepository.existsByCode(form.getCode())) {
             errors.rejectValue("code", "form.error.same.code");
         }
     }

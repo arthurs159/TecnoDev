@@ -6,8 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.validation.Errors;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class NewCourseFormValidatorTest {
 
@@ -19,6 +18,8 @@ class NewCourseFormValidatorTest {
     @BeforeEach
     void setUp() {
         repository = mock(CourseRepository.class);
+        when(repository.existsByName("JQuery")).thenReturn(true);
+        when(repository.existsByCode("jquery")).thenReturn(true);
         validator = new NewCourseFormValidator(repository);
         errors = mock(Errors.class);
         form = new NewCourseForm();
@@ -26,34 +27,32 @@ class NewCourseFormValidatorTest {
 
     @Test
     void when_name_exists_should_return_an_error() {
-        when(repository.existsByName("JQuery")).thenReturn(true);
         form.setName("JQuery");
-
         validator.validate(form, errors);
+
+        verify(errors).rejectValue("name", "form.error.same.name");
     }
 
     @Test
     void when_code_exists_should_return_an_error() {
-        when(repository.existsByCode("jquery")).thenReturn(true);
         form.setCode("jquery");
-
         validator.validate(form, errors);
+
+        verify(errors).rejectValue("code", "form.error.same.code");
     }
 
     @Test
     void when_name_do_not_exists_should_not_return_an_error() {
-        when(repository.existsByName(".NET para web")).thenReturn(false);
-        form.setName(".NET para web");
-
         validator.validate(form, errors);
+
+        verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
     @Test
     void when_code_do_not_exists_should_not_return_an_error() {
-        when(repository.existsByCode("dotnet-para-web")).thenReturn(false);
-        form.setName("dotnet-para-web");
-
         validator.validate(form, errors);
+
+        verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
 

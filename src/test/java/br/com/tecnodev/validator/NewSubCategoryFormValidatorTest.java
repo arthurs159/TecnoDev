@@ -6,8 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.validation.Errors;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class NewSubCategoryFormValidatorTest {
 
@@ -19,6 +18,8 @@ class NewSubCategoryFormValidatorTest {
     @BeforeEach
     void setUp() {
         repository = mock(SubCategoryRepository.class);
+        when(repository.existsByName("Java")).thenReturn(true);
+        when(repository.existsByCode("java")).thenReturn(true);
         validator = new NewSubCategoryFormValidator(repository);
         errors = mock(Errors.class);
         form = new NewSubCategoryForm();
@@ -26,33 +27,31 @@ class NewSubCategoryFormValidatorTest {
 
     @Test
     void when_name_exists_should_return_an_error() {
-        when(repository.existsByName("Java")).thenReturn(true);
         form.setName("Java");
-
         validator.validate(form, errors);
+
+        verify(errors).rejectValue("name", "form.error.same.name");
     }
 
     @Test
     void when_code_exists_should_return_an_error() {
-        when(repository.existsByCode("java")).thenReturn(true);
         form.setCode("java");
-
         validator.validate(form, errors);
+
+        verify(errors).rejectValue("code", "form.error.same.code");
     }
 
     @Test
     void when_name_do_not_exists_should_not_return_an_error() {
-        when(repository.existsByName("Programação orientada a objetos")).thenReturn(false);
-        form.setName("Programação orientada a objetos");
-
         validator.validate(form, errors);
+
+        verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
     @Test
     void when_code_do_not_exists_should_not_return_an_error() {
-        when(repository.existsByCode("prog-orientada")).thenReturn(false);
-        form.setName("prog-orientada");
-
         validator.validate(form, errors);
+
+        verify(errors, never()).rejectValue(anyString(), anyString());
     }
 }

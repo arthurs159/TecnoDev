@@ -6,8 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.validation.Errors;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class NewCategoryFormValidatorTest {
 
@@ -16,10 +15,11 @@ class NewCategoryFormValidatorTest {
     private Errors errors;
     private NewCategoryForm form;
 
-
     @BeforeEach
     void setUp() {
         repository = mock(CategoryRepository.class);
+        when(repository.existsByName("Programação")).thenReturn(true);
+        when(repository.existsByCode("programacao")).thenReturn(true);
         validator = new NewCategoryFormValidator(repository);
         errors = mock(Errors.class);
         form = new NewCategoryForm();
@@ -27,34 +27,29 @@ class NewCategoryFormValidatorTest {
 
     @Test
     void when_name_exists_should_return_an_error() {
-        when(repository.existsByName("Programação")).thenReturn(true);
         form.setName("Programação");
-
         validator.validate(form, errors);
+        verify(errors).rejectValue("name", "form.error.same.name");
+//        verifyNoMoreInteractions(errors);
     }
 
     @Test
     void when_code_exists_should_return_an_error() {
-        when(repository.existsByCode("programacao")).thenReturn(true);
         form.setCode("programacao");
-
         validator.validate(form, errors);
+        verify(errors).rejectValue("code", "form.error.same.code");
     }
 
     @Test
     void when_name_do_not_exists_should_not_return_an_error() {
-        when(repository.existsByName("UI/UX")).thenReturn(false);
-        form.setName("UI/UX");
-
         validator.validate(form, errors);
+        verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
     @Test
     void when_code_do_not_exists_should_not_return_an_error() {
-        when(repository.existsByCode("ui-ux")).thenReturn(false);
-        form.setName("ui-ux");
-
         validator.validate(form, errors);
+        verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
 }

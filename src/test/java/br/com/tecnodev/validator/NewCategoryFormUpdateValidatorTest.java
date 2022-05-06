@@ -27,7 +27,6 @@ class NewCategoryFormUpdateValidatorTest {
     void should_not_have_error_when_name_exists_and_id_is_the_same() {
         formUpdate.setId(1L);
         formUpdate.setName("Programação");
-
         validator.validate(formUpdate, errors);
 
         verify(errors, never()).rejectValue(anyString(), anyString());
@@ -37,7 +36,6 @@ class NewCategoryFormUpdateValidatorTest {
     void should_not_have_error_when_code_exists_and_id_is_the_same() {
         formUpdate.setId(1L);
         formUpdate.setCode("programacao");
-
         validator.validate(formUpdate, errors);
 
         verify(errors, never()).rejectValue(anyString(), anyString());
@@ -48,7 +46,6 @@ class NewCategoryFormUpdateValidatorTest {
         when(repository.existsByNameAndIdNot(eq("Programação"), not(eq(1L)))).thenReturn(true);
         formUpdate.setId(15L);
         formUpdate.setName("Programação");
-
         validator.validate(formUpdate, errors);
 
         verify(errors).rejectValue("name", "form.error.same.name");
@@ -59,7 +56,6 @@ class NewCategoryFormUpdateValidatorTest {
         when(repository.existsByCodeAndIdNot(eq("programacao"), not(eq(1L)))).thenReturn(true);
         formUpdate.setId(15L);
         formUpdate.setCode("programacao");
-
         validator.validate(formUpdate, errors);
 
         verify(errors).rejectValue("code", "form.error.same.code");
@@ -70,8 +66,8 @@ class NewCategoryFormUpdateValidatorTest {
         when(repository.existsByNameAndIdNot(eq("Programação"), not(eq(1L)))).thenReturn(true);
         formUpdate.setId(1L);
         formUpdate.setName("Programação");
-
         validator.validate(formUpdate, errors);
+
         verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
@@ -80,8 +76,8 @@ class NewCategoryFormUpdateValidatorTest {
         when(repository.existsByCodeAndIdNot(eq("programacao"), not(eq(1L)))).thenReturn(true);
         formUpdate.setId(1L);
         formUpdate.setName("programacao");
-
         validator.validate(formUpdate, errors);
+
         verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
@@ -90,8 +86,8 @@ class NewCategoryFormUpdateValidatorTest {
         when(repository.existsByNameAndIdNot(eq("Programação"), not(eq(1L)))).thenReturn(true);
         formUpdate.setId(15L);
         formUpdate.setName("DevOps");
-
         validator.validate(formUpdate, errors);
+
         verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
@@ -100,8 +96,8 @@ class NewCategoryFormUpdateValidatorTest {
         when(repository.existsByCodeAndIdNot(eq("programacao"), not(eq(1L)))).thenReturn(true);
         formUpdate.setId(15L);
         formUpdate.setName("devops");
-
         validator.validate(formUpdate, errors);
+
         verify(errors, never()).rejectValue(anyString(), anyString());
     }
 }
