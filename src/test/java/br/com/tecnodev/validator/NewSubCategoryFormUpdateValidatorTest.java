@@ -1,6 +1,5 @@
 package br.com.tecnodev.validator;
 
-import br.com.tecnodev.entities.category.DTO.NewCategoryFormUpdate;
 import br.com.tecnodev.entities.subCategory.DTO.NewSubCategoryFormUpdate;
 import br.com.tecnodev.repository.SubCategoryRepository;
 import org.junit.jupiter.api.BeforeEach;

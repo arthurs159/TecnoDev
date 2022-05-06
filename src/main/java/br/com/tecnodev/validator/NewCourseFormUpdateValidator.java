@@ -26,5 +26,9 @@ public class NewCourseFormUpdateValidator implements Validator {
         if (courseRepository.existsByNameAndIdNot(form.getName(), form.getId())) {
             errors.rejectValue("name", "form.error.same.name");
         }
+
+        if (courseRepository.existsByCodeAndIdNot(form.getCode(), form.getId())) {
+            errors.rejectValue("code", "form.error.same.code");
+        }
     }
 }
