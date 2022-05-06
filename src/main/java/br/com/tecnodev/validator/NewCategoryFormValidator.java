@@ -26,5 +26,9 @@ public class NewCategoryFormValidator implements Validator {
         if(categoryRepository.existsByName(form.getName())) {
             errors.rejectValue("name", "form.error.same.name");
         }
+
+        if(categoryRepository.existsByCode(form.getCode())) {
+            errors.rejectValue("code", "form.error.same.code");
+        }
     }
 }

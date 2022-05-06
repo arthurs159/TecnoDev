@@ -69,7 +69,8 @@
             <label>Categoria</label>
             <select name="categoryId" class="form-control">
                 <c:forEach items="${category}" var="cat">
-                    <option value="${cat.id}">${cat.name} </option>
+                    <option value="${cat.id}"
+                            selected="${subcategory.category.name == cat.name ? 'selected' : ''}">${cat.name} </option>
                 </c:forEach>
                 <form:errors path="newSubCategoryForm.categoryId" cssClass="alert-danger"/>
             </select>
