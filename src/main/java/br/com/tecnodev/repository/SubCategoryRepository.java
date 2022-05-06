@@ -33,4 +33,8 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
     boolean existsByName(String name);
 
     boolean existsByNameAndIdNot(String name, Long id);
+
+    boolean existsByCode(String name);
+
+    boolean existsByCodeAndIdNot(String name, Long id);
 }
