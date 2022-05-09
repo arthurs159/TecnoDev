@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
 
-<templates:admin-template title="Categorias">
+<templates:admin-list-template title="Categorias">
     <h1>Categorias</h1>
     <a href="/admin/categories/new">
         <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Nova categoria</button>
@@ -47,4 +47,4 @@
             </tbody>
         </table>
     </div>
-</templates:admin-template>
+</templates:admin-list-template>

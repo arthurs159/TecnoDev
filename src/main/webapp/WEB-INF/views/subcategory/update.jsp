@@ -1,19 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7/css/bootstrap.min.css'>
-    <link rel="stylesheet" href="/assets/css/category/insertAndUpdate.css">
-    <meta charset="UTF-8">
-    <title>Editar Subcategoria</title>
-</head>
-<body>
-
-<div class="container">
-    <h1>Nova subcategoria</h1>
+<templates:admin-insert-update-template title="Editar Subcategoria">
+    <h1>Editar subcategoria</h1>
     <form action="/admin/subcategories/${subcategory.categoryCode}/${subcategory.code}" method="post">
         <input type="hidden" name="id" value="${subcategory.id}"/>
 
@@ -77,8 +68,4 @@
         </div>
         <button type="submit" class="btn btn-info btn-lg">Enviar</button>
     </form>
-</div>
-
-</body>
-</html>
-
+</templates:admin-insert-update-template>

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
 
-<templates:admin-template title="Cursos">
+<templates:admin-list-template title="Cursos">
     <h3>${subcategory.name}</h3>
     <h1>Cursos</h1>
     <a href="/admin/courses/new">
@@ -54,4 +54,4 @@
             </li>
         </ul>
     </nav>
-</templates:admin-template>
+</templates:admin-list-template>

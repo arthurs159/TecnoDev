@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
 
-<templates:admin-template title="Subcategorias">
+<templates:admin-list-template title="Subcategorias">
     <h3>${category.name}</h3>
     <h1>Subcategorias</h1>
     <a href="/admin/subcategories/new">
@@ -46,4 +46,4 @@
         </c:forEach>
         </tbody>
     </table>
-</templates:admin-template>
+</templates:admin-list-template>
