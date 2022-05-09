@@ -4,7 +4,7 @@ $(".deactivate-category-button").click(function (){
     const id = $(tr).data('catId');
     $.post("/changeCategoryStatus/" + id, function (){
         const active = tr.querySelector(".ativo");
-        active.innerHTML = "false";
+        active.innerHTML = "Inativa";
         button.remove();
     });
 });
@@ -15,7 +15,7 @@ $(".deactivate-subcategory-button").click(function (){
     const id = $(tr).data('subId');
     $.post("/changeSubcategoryStatus/" + id, function (){
         const active = tr.querySelector(".ativo");
-        active.innerHTML = "false";
+        active.innerHTML = "Inativa";
         button.remove();
     });
 });
