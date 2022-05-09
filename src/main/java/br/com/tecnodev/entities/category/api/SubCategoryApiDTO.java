@@ -1,9 +1,15 @@
 package br.com.tecnodev.entities.category.api;
 
 import br.com.tecnodev.entities.subCategory.SubCategory;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.List;
-
+@Builder
+@Data
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class SubCategoryApiDTO {
 
     private final String name;

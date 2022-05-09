@@ -1,12 +1,14 @@
 package br.com.tecnodev.entities.alternative;
 
 import br.com.tecnodev.entities.question.Question;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
+@NoArgsConstructor
 public class Alternative {
 
     @Id
@@ -25,25 +27,11 @@ public class Alternative {
     @JoinColumn(name = "activity_id")
     private Question question;
 
-    @Deprecated
-    public Alternative() {}
-
     public Alternative(String alternativeText, boolean correct, Question question) {
         isNotNullOrEmpty(alternativeText, "The text must not be empty or null");
         isNotNull(question, "Question should not be null");
         this.alternativeText = alternativeText;
         this.correct = correct;
         this.question = question;
-    }
-
-    @Override
-    public String toString() {
-        return "Alternative{" +
-                "text='" + alternativeText + '\'' +
-                ", orderInSystem=" + orderInSystem +
-                ", indicative=" + correct +
-                ", justification='" + justification + '\'' +
-                ", question=" + question +
-                '}';
     }
 }

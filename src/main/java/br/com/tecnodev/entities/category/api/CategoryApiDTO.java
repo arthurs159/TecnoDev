@@ -1,9 +1,13 @@
 package br.com.tecnodev.entities.category.api;
 
 import br.com.tecnodev.entities.category.Category;
+import lombok.*;
 
 import java.util.List;
 
+@Builder
+@Data
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class CategoryApiDTO {
 
     private final String name;
@@ -23,33 +27,4 @@ public class CategoryApiDTO {
         this.totalCourse = category.getTotalCoursesFromCategory();
         this.subCategories = SubCategoryApiDTO.toDto(category.getActiveSubcategories());
     }
-
-    public Long getTotalCourse() {
-        return totalCourse;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getStudyGuide() {
-        return studyGuide;
-    }
-
-    public Integer getOrderInSystem() {
-        return orderInSystem;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public List<SubCategoryApiDTO> getSubCategories() {
-        return subCategories;
-    }
-
 }

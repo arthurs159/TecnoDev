@@ -1,9 +1,16 @@
 package br.com.tecnodev.entities.category.api;
 
 import br.com.tecnodev.entities.course.Course;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.List;
 
+@Builder
+@Data
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class CourseApiDTO {
 
     private final String name;
@@ -16,22 +23,6 @@ public class CourseApiDTO {
         this.code = course.getCode();
         this.estimatedTimeInHours = course.getEstimatedTimeInHours();
         this.developedSkills = course.getDevelopedSkills();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public Integer getEstimatedTimeInHours() {
-        return estimatedTimeInHours;
-    }
-
-    public String getDevelopedSkills() {
-        return developedSkills;
     }
 
     public static List<CourseApiDTO> toDTO(List<Course> courses) {

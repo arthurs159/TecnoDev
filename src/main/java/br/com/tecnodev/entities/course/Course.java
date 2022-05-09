@@ -2,6 +2,8 @@ package br.com.tecnodev.entities.course;
 
 import br.com.tecnodev.entities.course.DTO.NewCourseFormUpdate;
 import br.com.tecnodev.entities.subCategory.SubCategory;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,8 +14,9 @@ import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
 @XmlRootElement
+@Data
+@NoArgsConstructor
 public class Course {
-
     private static final int MINIMUM_TIME = 1;
     private static final int MAXIMUM_TIME = 20;
 
@@ -38,10 +41,6 @@ public class Course {
 
     @ManyToOne
     private SubCategory subCategory;
-
-    @Deprecated
-    public Course() {
-    }
 
     public Course(String name, String code, int estimatedTimeInHours, String teacher, SubCategory subCategory) {
         isNotNullOrEmpty(name, "The name must not be empty or null!!!");
@@ -77,52 +76,8 @@ public class Course {
         this.subCategory = subcategory;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public SubCategory getSubCategory() {
-        return subCategory;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Integer getEstimatedTimeInHours() {
-        return estimatedTimeInHours;
-    }
-
     public String getCategoryCode() {
         return this.getSubCategory().getCategoryCode();
-    }
-
-    public Status getVisibility() {
-        return visibility;
-    }
-
-    public String getTeacher() {
-        return teacher;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getTargetAudience() {
-        return targetAudience;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getDevelopedSkills() {
-        return developedSkills;
     }
 
     public String getSubCategoryCode() {
@@ -139,21 +94,6 @@ public class Course {
     
     public boolean isPublic(){
         return this.getVisibility().equals(Status.PUBLIC);
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", hours=" + estimatedTimeInHours +
-                ", isVisible=" + visibility +
-                ", targetAudience='" + targetAudience + '\'' +
-                ", teacher='" + teacher + '\'' +
-                ", description='" + description + '\'' +
-                ", developedAbility='" + developedSkills + '\'' +
-                ", subCategory=" + subCategory +
-                '}';
     }
 
 }

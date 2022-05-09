@@ -1,5 +1,10 @@
 package br.com.tecnodev.entities.course;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class CoursePageDTO {
 
     private final String name;
@@ -8,13 +13,5 @@ public class CoursePageDTO {
     public CoursePageDTO(Course course) {
         this.name = course.getName();
         this.estimatedTimeInHours = course.getEstimatedTimeInHours();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Integer getEstimatedTimeInHours() {
-        return estimatedTimeInHours;
     }
 }

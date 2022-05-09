@@ -1,12 +1,14 @@
 package br.com.tecnodev.entities.section;
 
 import br.com.tecnodev.entities.course.Course;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
+@NoArgsConstructor
 public class Section {
 
     @Id
@@ -23,9 +25,6 @@ public class Section {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @Deprecated
-    public Section() {}
-
     public Section(String name, String code, Course course) {
         isNotNullOrEmpty(name, "The name must not be empty or null");
         regexValidatorAndNotEmpty(code, "The code must be lowercase letters or numbers and not be empty");
@@ -33,17 +32,5 @@ public class Section {
         this.name = name;
         this.code = code;
         this.course = course;
-    }
-
-    @Override
-    public String toString() {
-        return "Section{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", orderInSystem='" + orderInSystem + '\'' +
-                ", active=" + active +
-                ", isATest=" + exam +
-                ", course=" + course +
-                '}';
     }
 }

@@ -1,12 +1,14 @@
 package br.com.tecnodev.entities.activity;
 
 import br.com.tecnodev.entities.section.Section;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="activity_type",
         discriminatorType = DiscriminatorType.STRING)
@@ -26,9 +28,6 @@ public abstract class Activity {
     @JoinColumn(name = "section_id")
     private Section section;
 
-    @Deprecated
-    public Activity() {}
-
     public Activity(String title, String code, Section section) {
         isNotEmpty(title, "The title must not be empty!");
         regexValidatorAndNotEmpty(code, "The code must be lowercase letters or numbers and not be empty");
@@ -36,16 +35,5 @@ public abstract class Activity {
         this.title = title;
         this.code = code;
         this.section = section;
-    }
-
-    @Override
-    public String toString() {
-        return "Activity{" +
-                "title='" + title + '\'' +
-                ", code='" + code + '\'' +
-                ", active=" + active +
-                ", orderInSystem=" + orderInSystem +
-                ", section=" + section +
-                '}';
     }
 }
