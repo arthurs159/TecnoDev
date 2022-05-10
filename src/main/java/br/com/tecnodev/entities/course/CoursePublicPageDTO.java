@@ -1,11 +1,10 @@
 package br.com.tecnodev.entities.course;
 
-import lombok.*;
+import lombok.Getter;
 
 import java.util.List;
 
 @Getter
-@Setter
 public class CoursePublicPageDTO {
 
     private String name;

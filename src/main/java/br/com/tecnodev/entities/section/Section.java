@@ -8,7 +8,6 @@ import javax.persistence.*;
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
-@NoArgsConstructor
 public class Section {
 
     @Id
@@ -24,6 +23,8 @@ public class Section {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;
+
+    public Section() {}
 
     public Section(String name, String code, Course course) {
         isNotNullOrEmpty(name, "The name must not be empty or null");

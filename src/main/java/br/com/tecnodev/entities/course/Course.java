@@ -3,6 +3,7 @@ package br.com.tecnodev.entities.course;
 import br.com.tecnodev.entities.course.DTO.NewCourseFormUpdate;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -14,8 +15,7 @@ import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
 @XmlRootElement
-@Data
-@NoArgsConstructor
+@Getter
 public class Course {
     private static final int MINIMUM_TIME = 1;
     private static final int MAXIMUM_TIME = 20;
@@ -41,6 +41,8 @@ public class Course {
 
     @ManyToOne
     private SubCategory subCategory;
+
+    public Course() {}
 
     public Course(String name, String code, int estimatedTimeInHours, String teacher, SubCategory subCategory) {
         isNotNullOrEmpty(name, "The name must not be empty or null!!!");

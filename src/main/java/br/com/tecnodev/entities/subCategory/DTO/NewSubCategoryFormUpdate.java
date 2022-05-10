@@ -4,10 +4,8 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-@Builder
-@Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
-@NoArgsConstructor
+@Getter
+@Setter
 public class NewSubCategoryFormUpdate {
 
     private Long id;
@@ -21,4 +19,6 @@ public class NewSubCategoryFormUpdate {
     private boolean active;
     private Integer orderInSystem;
     private Long categoryId;
+
+    public NewSubCategoryFormUpdate() {}
 }

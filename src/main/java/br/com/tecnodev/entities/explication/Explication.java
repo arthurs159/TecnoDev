@@ -11,12 +11,13 @@ import javax.persistence.Entity;
 import static br.com.tecnodev.validator.Validator.isNotNullOrEmpty;
 
 @Entity
-@NoArgsConstructor
 @DiscriminatorValue("Explication")
 public class Explication extends Activity {
 
     @Column(columnDefinition = "TEXT")
     private String explication;
+
+    public Explication() {}
 
     public Explication(String title, String code, Section section, String explication) {
         super(title, code, section);

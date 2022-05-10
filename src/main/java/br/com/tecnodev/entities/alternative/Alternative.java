@@ -8,7 +8,6 @@ import javax.persistence.*;
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
-@NoArgsConstructor
 public class Alternative {
 
     @Id
@@ -26,6 +25,8 @@ public class Alternative {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_id")
     private Question question;
+
+    public Alternative() {}
 
     public Alternative(String alternativeText, boolean correct, Question question) {
         isNotNullOrEmpty(alternativeText, "The text must not be empty or null");

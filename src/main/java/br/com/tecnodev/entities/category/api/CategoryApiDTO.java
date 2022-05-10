@@ -5,9 +5,7 @@ import lombok.*;
 
 import java.util.List;
 
-@Builder
-@Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@Getter
 public class CategoryApiDTO {
 
     private final String name;

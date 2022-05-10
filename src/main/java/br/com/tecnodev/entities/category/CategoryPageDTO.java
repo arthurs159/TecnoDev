@@ -1,14 +1,11 @@
 package br.com.tecnodev.entities.category;
 
-import br.com.tecnodev.entities.course.Status;
-import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.entities.subCategory.SubcategoryPageDTO;
-import lombok.*;
+import lombok.Getter;
 
 import java.util.List;
 
 @Getter
-@Setter
 public class CategoryPageDTO {
     private String name;
     private String code;

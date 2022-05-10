@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import static br.com.tecnodev.validator.Validator.isNotNullOrEmpty;
 
 @Entity
-@NoArgsConstructor
 @DiscriminatorValue("Video")
 public class Video extends Activity {
 
@@ -21,6 +20,8 @@ public class Video extends Activity {
     private int estimatedTimeInMinutes;
     @Column(columnDefinition = "TEXT")
     private String transcription;
+
+    public Video() {}
 
     public Video(String title, String code, Section section, String url) {
         super(title, code, section);

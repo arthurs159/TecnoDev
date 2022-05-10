@@ -7,10 +7,8 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-@Builder
-@Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
-@NoArgsConstructor
+@Getter
+@Setter
 public class NewSubCategoryForm {
 
     @NotBlank(message = "{form.error.name}")
@@ -24,6 +22,8 @@ public class NewSubCategoryForm {
     private Integer orderInSystem;
     @NotNull(message = "{form.error.category}")
     private Long categoryId;
+
+    public NewSubCategoryForm() {}
 
     public SubCategory toEntity(Category category) {
         return new SubCategory(name, code, orderInSystem, description, active, category);

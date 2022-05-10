@@ -1,12 +1,16 @@
 package br.com.tecnodev.entities.course.DTO;
 
 import br.com.tecnodev.entities.course.Status;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@Getter
+@Setter
 public class NewCourseFormUpdate {
     private Long id;
     @NotBlank(message = "{form.error.name}")
@@ -15,7 +19,7 @@ public class NewCourseFormUpdate {
     @Pattern(regexp = "[a-z0-9-]+", message = "{form.error.code.regex}")
     private String code;
     @NotNull(message = "{form.error.estimatedTime.empty}")
-    @Range(min=1,max=20, message = "{form.error.estimatedTime.regex}" )
+    @Range(min = 1, max = 20, message = "{form.error.estimatedTime.regex}")
     private Integer estimatedTimeInHours;
     private Status visibility;
     private String targetAudience;
@@ -26,87 +30,6 @@ public class NewCourseFormUpdate {
     @NotNull(message = "{form.error.subcategory}")
     private Long subcategoryId;
 
-    public NewCourseFormUpdate() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Integer getEstimatedTimeInHours() {
-        return estimatedTimeInHours;
-    }
-
-    public void setEstimatedTimeInHours(Integer estimatedTimeInHours) {
-        this.estimatedTimeInHours = estimatedTimeInHours;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Status getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(Status visibility) {
-        this.visibility = visibility;
-    }
-
-    public String getTargetAudience() {
-        return targetAudience;
-    }
-
-    public void setTargetAudience(String targetAudience) {
-        this.targetAudience = targetAudience;
-    }
-
-    public String getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDevelopedSkills() {
-        return developedSkills;
-    }
-
-    public void setDevelopedSkills(String developedSkills) {
-        this.developedSkills = developedSkills;
-    }
-
-    public Long getSubcategoryId() {
-        return subcategoryId;
-    }
-
-    public void setSubcategoryId(Long subcategoryId) {
-        this.subcategoryId = subcategoryId;
-    }
+    public NewCourseFormUpdate() {}
 
 }

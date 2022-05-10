@@ -14,12 +14,13 @@ import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
 @XmlRootElement
-@Data       //TODO COLOCAR SÓ OS GETTERS? A aplicação usa setter do ID
+@Getter
 @NoArgsConstructor
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter
     private Long id;
     private String name;
     private String code;

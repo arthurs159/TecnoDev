@@ -3,9 +3,8 @@ package br.com.tecnodev.entities.subCategory.DTO;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 import lombok.*;
 
-@Builder
-@Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@Getter
+@Setter
 public class SubCategoryToListDTO {
 
     private Long id;

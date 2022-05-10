@@ -4,7 +4,9 @@ import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.subCategory.DTO.NewSubCategoryFormUpdate;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,8 +18,7 @@ import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
 @XmlRootElement
-@Data
-@NoArgsConstructor
+@Getter
 @Table(name = "Subcategory")
 public class SubCategory {
 
@@ -39,7 +40,10 @@ public class SubCategory {
     private Category category;
 
     @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
+    @Setter
     private List<Course> courses = new ArrayList<>();
+
+    public SubCategory() {}
 
     public SubCategory(String name, String code, Category category) {
         isNotNullOrEmpty(name, "The name must not be empty or null");

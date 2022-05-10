@@ -1,16 +1,11 @@
 package br.com.tecnodev.entities.category.api;
 
 import br.com.tecnodev.entities.course.Course;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
-@Builder
-@Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@Getter
 public class CourseApiDTO {
 
     private final String name;

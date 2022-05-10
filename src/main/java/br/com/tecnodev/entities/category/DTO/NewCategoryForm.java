@@ -5,10 +5,9 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-@Builder
-@Data
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
-@NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
 public class NewCategoryForm {
 
     @NotBlank(message = "{form.error.name}")
@@ -23,6 +22,8 @@ public class NewCategoryForm {
     private String imageUrl;
     @Pattern(regexp = "^#([a-fA-F0-9]){3}(([a-fA-F0-9]){3})?$", message = "{form.error.color.regex}")
     private String colorCode;
+
+    public NewCategoryForm() {}
 
     public Category toEntity() {
         return new Category(name, code, orderInSystem, description, studyGuide, active, imageUrl, colorCode);

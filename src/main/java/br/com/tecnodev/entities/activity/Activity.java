@@ -8,7 +8,6 @@ import javax.persistence.*;
 import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
-@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="activity_type",
         discriminatorType = DiscriminatorType.STRING)
@@ -27,6 +26,8 @@ public abstract class Activity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id")
     private Section section;
+
+    public Activity() {}
 
     public Activity(String title, String code, Section section) {
         isNotEmpty(title, "The title must not be empty!");

@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +24,8 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
+
+    public User() {}
 
     public User(String name, String email, String password, List<Role> roles) {
         this.name = name;

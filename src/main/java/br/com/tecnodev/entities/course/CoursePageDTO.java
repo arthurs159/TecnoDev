@@ -1,10 +1,8 @@
 package br.com.tecnodev.entities.course;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class CoursePageDTO {
 
     private final String name;

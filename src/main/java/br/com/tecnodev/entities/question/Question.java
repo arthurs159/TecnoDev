@@ -9,7 +9,6 @@ import javax.persistence.*;
 import static br.com.tecnodev.validator.Validator.isNotNullOrEmpty;
 
 @Entity
-@NoArgsConstructor
 @DiscriminatorValue("Question")
 public class Question extends Activity {
 
@@ -18,6 +17,8 @@ public class Question extends Activity {
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "ENUM", name = "question_type")
     private QuestionType type = QuestionType.SINGLE_CHOICE;
+
+    public Question() {}
 
     public Question(String title, String code, Section section, String statement, QuestionType type) {
         super(title, code, section);
