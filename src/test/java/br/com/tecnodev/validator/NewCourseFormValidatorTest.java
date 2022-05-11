@@ -43,6 +43,7 @@ class NewCourseFormValidatorTest {
 
     @Test
     void when_name_do_not_exists_should_not_return_an_error() {
+        form.setCode("Nuvem");
         validator.validate(form, errors);
 
         verify(errors, never()).rejectValue(anyString(), anyString());
@@ -50,6 +51,7 @@ class NewCourseFormValidatorTest {
 
     @Test
     void when_code_do_not_exists_should_not_return_an_error() {
+        form.setCode("nuvem");
         validator.validate(form, errors);
 
         verify(errors, never()).rejectValue(anyString(), anyString());

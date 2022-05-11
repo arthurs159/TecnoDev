@@ -5,6 +5,7 @@
 <html>
 <head>
     <link rel='stylesheet' href='/webjars/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="/assets/css/category/list.css">
     <meta content="text/html;charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
@@ -14,7 +15,5 @@
 <div class="container">
     <jsp:doBody />
 </div>
-<script src="../../../assets/js/jquery.js"></script>
-<script src="../../../assets/js/category/disableCategoryJQuery.js"></script>
 </body>
 </html>

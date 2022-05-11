@@ -15,7 +15,6 @@ import static br.com.tecnodev.validator.Validator.*;
 @Entity
 @XmlRootElement
 @Getter
-@NoArgsConstructor
 public class Category {
 
     @Id
@@ -38,6 +37,8 @@ public class Category {
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<SubCategory> subCategories = new ArrayList<>();
+
+    public Category() {}
 
     public Category(String name, String code) {
         isNotNullOrEmpty(name, "The name must not be empty or null");

@@ -7,6 +7,7 @@ import br.com.tecnodev.entities.category.DTO.NewCategoryFormUpdate;
 import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.validator.NewCategoryFormUpdateValidator;
 import br.com.tecnodev.validator.NewCategoryFormValidator;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,17 +24,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
     private final NewCategoryFormValidator newCategoryFormValidator;
     private final NewCategoryFormUpdateValidator newCategoryFormUpdateValidator;
-
-    public CategoryController(CategoryRepository categoryRepository, NewCategoryFormValidator newCategoryFormValidator, NewCategoryFormUpdateValidator newCategoryFormUpdateValidator) {
-        this.categoryRepository = categoryRepository;
-        this.newCategoryFormValidator = newCategoryFormValidator;
-        this.newCategoryFormUpdateValidator = newCategoryFormUpdateValidator;
-    }
 
     @InitBinder("newCategoryForm")
     void initBinderNewCategoryForm(WebDataBinder webDataBinder) {

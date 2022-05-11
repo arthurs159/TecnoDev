@@ -30,7 +30,6 @@ class NewCategoryFormValidatorTest {
         form.setName("Programação");
         validator.validate(form, errors);
         verify(errors).rejectValue("name", "form.error.same.name");
-//        verifyNoMoreInteractions(errors);
     }
 
     @Test
@@ -42,12 +41,14 @@ class NewCategoryFormValidatorTest {
 
     @Test
     void when_name_do_not_exists_should_not_return_an_error() {
+        form.setName("Devops");
         validator.validate(form, errors);
         verify(errors, never()).rejectValue(anyString(), anyString());
     }
 
     @Test
     void when_code_do_not_exists_should_not_return_an_error() {
+        form.setCode("devops");
         validator.validate(form, errors);
         verify(errors, never()).rejectValue(anyString(), anyString());
     }

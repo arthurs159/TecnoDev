@@ -5,7 +5,7 @@
 <templates:admin-list-template title="Categorias">
     <h1>Categorias</h1>
     <a href="/admin/categories/new">
-        <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Nova categoria</button>
+        <button type="button" class="btn btn-primary btn-lg button">Nova categoria</button>
     </a>
     <div class="table-responsive">
         <table class="table table-bordered ">
@@ -47,4 +47,6 @@
             </tbody>
         </table>
     </div>
+    <script src="../../../assets/js/jquery.js"></script>
+    <script src="../../../assets/js/category/disableCategoryJQuery.js"></script>
 </templates:admin-list-template>

@@ -9,6 +9,7 @@ import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;
 import br.com.tecnodev.validator.NewSubCategoryFormUpdateValidator;
 import br.com.tecnodev.validator.NewSubCategoryFormValidator;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,19 +27,13 @@ import java.util.Comparator;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class SubCategoryController {
 
     private final SubCategoryRepository subCategoryRepository;
     private final CategoryRepository categoryRepository;
     private final NewSubCategoryFormValidator newSubCategoryFormValidator;
     private final NewSubCategoryFormUpdateValidator newSubCategoryFormUpdateValidator;
-
-    public SubCategoryController(SubCategoryRepository subCategoryRepository, CategoryRepository categoryRepository, NewSubCategoryFormValidator newSubCategoryFormValidator, NewSubCategoryFormUpdateValidator newSubCategoryFormUpdateValidator) {
-        this.subCategoryRepository = subCategoryRepository;
-        this.categoryRepository = categoryRepository;
-        this.newSubCategoryFormValidator = newSubCategoryFormValidator;
-        this.newSubCategoryFormUpdateValidator = newSubCategoryFormUpdateValidator;
-    }
 
     @InitBinder("newSubCategoryForm")
     void initBinderNewSubCategoryForm(WebDataBinder webDataBinder) {

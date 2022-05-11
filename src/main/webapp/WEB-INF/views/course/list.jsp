@@ -6,7 +6,7 @@
     <h3>${subcategory.name}</h3>
     <h1>Cursos</h1>
     <a href="/admin/courses/new">
-        <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Novo curso</button>
+        <button type="button" class="btn btn-primary btn-lg button">Novo curso</button>
     </a>
     <table class="table table-bordered ">
         <thead>

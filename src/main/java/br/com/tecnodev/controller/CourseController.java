@@ -9,6 +9,7 @@ import br.com.tecnodev.repository.CourseRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;
 import br.com.tecnodev.validator.NewCourseFormUpdateValidator;
 import br.com.tecnodev.validator.NewCourseFormValidator;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -28,19 +29,13 @@ import java.util.Comparator;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class CourseController {
 
     private final CourseRepository courseRepository;
     private final SubCategoryRepository subCategoryRepository;
     private final NewCourseFormValidator newCourseFormValidator;
     private final NewCourseFormUpdateValidator newCourseFormUpdateValidator;
-
-    public CourseController(CourseRepository courseRepository, SubCategoryRepository subCategoryRepository, NewCourseFormValidator newCourseFormValidator, NewCourseFormUpdateValidator newCourseFormUpdateValidator) {
-        this.courseRepository = courseRepository;
-        this.subCategoryRepository = subCategoryRepository;
-        this.newCourseFormValidator = newCourseFormValidator;
-        this.newCourseFormUpdateValidator = newCourseFormUpdateValidator;
-    }
 
     @InitBinder("newCourseForm")
     void initBinderNewCategoryForm(WebDataBinder webDataBinder) {
