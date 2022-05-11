@@ -121,6 +121,11 @@ public class SubCategory {
     public void disableActive() {
         this.active = false;
     }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
     @Override
     public String toString() {
         return "SubCategory{" +

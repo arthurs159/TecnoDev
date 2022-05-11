@@ -28,7 +28,7 @@ public class ReportController {
 
     @GetMapping("/admin/dashboard")
     public String showCategoriesNumberOfCoursesAndInstructorWithMoreCoursesReportPage(Model model) {
-        List<CategoryReportProjection> categoryProjection = categoryRepository.report();
+        List<CategoryReportProjection> categoryProjection = categoryRepository.findCategoryAndNumberOfCourses();
         InstructorReportProjection instructorProjection = courseRepository.getInstructorWithMoreCourses();
 
         model.addAttribute("report", categoryProjection);

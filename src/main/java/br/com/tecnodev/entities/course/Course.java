@@ -36,7 +36,7 @@ public class Course {
     @Column(name = "developed_skills", columnDefinition = "TEXT")
     private String developedSkills;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private SubCategory subCategory;
 
     @Deprecated

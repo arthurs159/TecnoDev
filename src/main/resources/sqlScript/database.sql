@@ -85,6 +85,3 @@ CREATE TABLE Role
 CREATE TABLE User_role
 (user_id bigint,
  role_id bigint)
-
-INSERT INTO User (name, email, password)
-VALUES ('Arthur', 'arthur@email.com', '$2a$10$vyVwTTcztUl8b1ty62LUce.e0YsyPufAwa0neAodqf5hmF5QfwMpe')

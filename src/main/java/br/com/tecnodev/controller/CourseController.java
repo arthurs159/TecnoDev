@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CourseController {
@@ -39,7 +40,8 @@ public class CourseController {
                               @PathVariable String subcategoryCode,
                               @PageableDefault(size = 5) Pageable pageable, Model model) {
 
-        SubCategory subCategory = subCategoryRepository.findSubcategoryByCode(subcategoryCode);
+        SubCategory subCategory = subCategoryRepository.findSubcategoryByCode(subcategoryCode)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         Page<CourseToListDTO> courses = courseRepository.findAllBySubCategory(subCategory, pageable)
                 .map(CourseToListDTO::new);
@@ -76,7 +78,9 @@ public class CourseController {
     public String getUpdateCourseForm(@PathVariable String categoryCode,
                                       @PathVariable String subcategoryCode,
                                       @PathVariable String courseCode, NewCourseFormUpdate newCourseFormUpdate, Model model){
-        Course course = courseRepository.findByCode(courseCode);
+        Course course = courseRepository.findByCode(courseCode)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
         List<SubCategory> subcategories = subCategoryRepository.findAll()
                 .stream()
                 .sorted(Comparator.comparing(SubCategory::getName))
@@ -96,7 +100,9 @@ public class CourseController {
             return getUpdateCourseForm(categoryCode, subcategoryCode, courseCode, newCourseFormUpdate, model);
         }
 
-        Course course = courseRepository.findByCode(courseCode);
+        Course course = courseRepository.findByCode(courseCode)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
         SubCategory subcategory = subCategoryRepository.findById(newCourseFormUpdate.getSubcategoryId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 

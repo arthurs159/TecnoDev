@@ -28,8 +28,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/api/categories").permitAll()
-                .antMatchers(HttpMethod.GET, "/category/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/bGltcGEtby1jYWNoZS1kYS1hcGktYWU").permitAll()
+                .antMatchers("/admin/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().defaultSuccessUrl("/admin/categories").loginPage("/login").permitAll();
 

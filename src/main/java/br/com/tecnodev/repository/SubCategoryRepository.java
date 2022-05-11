@@ -11,10 +11,6 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
 
     List<SubCategory> findSubCategoriesByCategory_CodeOrderByOrderInSystem(String code);
 
-    default List<SubCategory> getSubcategoryByCategoryCodeOrdered(String code) {
-        return findSubCategoriesByCategory_CodeOrderByOrderInSystem(code);
-    }
-
     @Query("""
             SELECT s FROM SubCategory s
             INNER JOIN Category c
@@ -23,7 +19,7 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
             """)
     Optional<SubCategory> findSubcategoryByCategoryAndSubcategoryCode(String subcategoryCode, String categoryCode);
 
-    SubCategory findSubcategoryByCode(String code);
+    Optional<SubCategory> findSubcategoryByCode(String code);
 
     @Query("""
             SELECT DISTINCT s FROM SubCategory s
@@ -32,5 +28,5 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
             AND s.active = true
             AND s.category.code = :categoryCode
             """)
-    List<SubCategory> findAllActiveSubcategoryWithCourses(String categoryCode);
+    List<SubCategory> findAllActiveSubcategoryWithCoursesByCategoryCode(String categoryCode);
 }

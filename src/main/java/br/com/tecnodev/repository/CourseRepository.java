@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
+
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query(nativeQuery = true, value = """
@@ -21,6 +23,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     Page<Course> findAllBySubCategory(SubCategory subCategory, Pageable pageable);
 
-    Course findByCode(String courseCode);
+    Optional<Course> findByCode(String courseCode);
 
 }

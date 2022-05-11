@@ -22,10 +22,10 @@ public class LoginController {
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-        List<CategoryPageDTO> categoriesDTO = categoryRepository.getCategoriesWithSubcategoryActiveAndVisibleCourses()
+        List<CategoryPageDTO> categoryPageDTO = categoryRepository.getCategoriesWithActiveSubcategoryAndPublicCourses()
                 .stream().map(CategoryPageDTO::new).toList();
 
-        model.addAttribute("categories", categoriesDTO);
+        model.addAttribute("categories", categoryPageDTO);
         return "login/login";
     }
 
