@@ -43,7 +43,7 @@ class NewCourseFormValidatorTest {
 
     @Test
     void when_name_do_not_exists_should_not_return_an_error() {
-        form.setCode("Nuvem");
+        form.setName("Nuvem");
         validator.validate(form, errors);
 
         verify(errors, never()).rejectValue(anyString(), anyString());

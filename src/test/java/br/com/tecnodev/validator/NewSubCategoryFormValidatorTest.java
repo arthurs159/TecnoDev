@@ -43,7 +43,7 @@ class NewSubCategoryFormValidatorTest {
 
     @Test
     void when_name_do_not_exists_should_not_return_an_error() {
-        form.setCode("goLang");
+        form.setName("goLang");
         validator.validate(form, errors);
 
         verify(errors, never()).rejectValue(anyString(), anyString());
