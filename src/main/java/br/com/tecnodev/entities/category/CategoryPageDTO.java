@@ -7,11 +7,11 @@ import java.util.List;
 
 @Getter
 public class CategoryPageDTO {
-    private String name;
-    private String code;
-    private Integer orderInSystem;
-    private String imageUrl;
-    private List<SubcategoryPageDTO> subCategories;
+    private final String name;
+    private final String code;
+    private final Integer orderInSystem;
+    private final String imageUrl;
+    private final List<SubcategoryPageDTO> subCategories;
 
     public CategoryPageDTO(Category category) {
         this.name = category.getName();
