@@ -7,6 +7,9 @@ import br.com.tecnodev.entities.course.DTO.NewCourseFormUpdate;
 import br.com.tecnodev.entities.subCategory.SubCategory;
 import br.com.tecnodev.repository.CourseRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;
+import br.com.tecnodev.validator.NewCourseFormUpdateValidator;
+import br.com.tecnodev.validator.NewCourseFormValidator;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -14,7 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,17 +27,24 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
+@AllArgsConstructor
 public class CourseController {
 
     private final CourseRepository courseRepository;
     private final SubCategoryRepository subCategoryRepository;
+    private final NewCourseFormValidator newCourseFormValidator;
+    private final NewCourseFormUpdateValidator newCourseFormUpdateValidator;
 
-    public CourseController(CourseRepository courseRepository, SubCategoryRepository subCategoryRepository) {
-        this.courseRepository = courseRepository;
-        this.subCategoryRepository = subCategoryRepository;
+    @InitBinder("newCourseForm")
+    void initBinderNewCategoryForm(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(newCourseFormValidator);
+    }
+
+    @InitBinder("newCourseFormUpdate")
+    void initBinderNewCategoryFormUpdate(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(newCourseFormUpdateValidator);
     }
 
     @GetMapping("/admin/courses/{categoryCode}/{subcategoryCode}")

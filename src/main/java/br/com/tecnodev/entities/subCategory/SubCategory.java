@@ -3,6 +3,10 @@ package br.com.tecnodev.entities.subCategory;
 import br.com.tecnodev.entities.category.Category;
 import br.com.tecnodev.entities.course.Course;
 import br.com.tecnodev.entities.subCategory.DTO.NewSubCategoryFormUpdate;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,6 +18,7 @@ import static br.com.tecnodev.validator.Validator.*;
 
 @Entity
 @XmlRootElement
+@Getter
 @Table(name = "Subcategory")
 public class SubCategory {
 
@@ -35,9 +40,9 @@ public class SubCategory {
     private Category category;
 
     @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
+    @Setter
     private List<Course> courses = new ArrayList<>();
 
-    @Deprecated
     public SubCategory() {}
 
     public SubCategory(String name, String code, Category category) {
@@ -66,77 +71,15 @@ public class SubCategory {
         this.category = category;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public boolean hasDescription() {
         return description != null && !description.isBlank();
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public Integer getOrderInSystem() {
-        return orderInSystem;
-    }
-
     public String getCategoryCode() {
-        return this.getCategory().getCode();
-    }
-
-    public String getStudyGuide() {
-        return studyGuide;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public String getCategoryName(){
-        return this.getCategory().getName();
+        return category.getCode();
     }
 
     public void disableActive() {
         this.active = false;
     }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
-    @Override
-    public String toString() {
-        return "SubCategory{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", description='" + description + '\'' +
-                ", studyGuide='" + studyGuide + '\'' +
-                ", active=" + active +
-                ", orderInSystem='" + orderInSystem + '\'' +
-                ", category=" + category +
-                '}';
-    }
-
 }

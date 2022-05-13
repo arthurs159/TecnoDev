@@ -1,7 +1,10 @@
 package br.com.tecnodev.entities.subCategory.DTO;
 
 import br.com.tecnodev.entities.subCategory.SubCategory;
+import lombok.*;
 
+@Getter
+@Setter
 public class SubCategoryToListDTO {
 
     private Long id;
@@ -14,21 +17,5 @@ public class SubCategoryToListDTO {
         this.name = subCategory.getName();
         this.code = subCategory.getCode();
         this.active = subCategory.isActive();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

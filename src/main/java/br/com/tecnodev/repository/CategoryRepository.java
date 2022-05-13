@@ -41,4 +41,12 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             ORDER BY c.orderInSystem, s.orderInSystem
             """)
     List<Category> getCategoriesWithActiveSubcategoryAndPublicCourses();
+
+    boolean existsByName(String name);
+
+    boolean existsByNameAndIdNot(String name, Long id);
+
+    boolean existsByCode(String code);
+
+    boolean existsByCodeAndIdNot(String code, Long id);
 }

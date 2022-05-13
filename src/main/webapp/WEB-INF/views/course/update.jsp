@@ -1,20 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7/css/bootstrap.min.css'>
-    <meta charset="UTF-8">
-    <title>Atualizar Curso</title>
-</head>
-<body>
-
-<div class="container">
+<templates:admin-insert-update-template title="Editar Subcategoria">
     <h1>Atualizar Curso</h1>
     <form:form action="/admin/courses/${categoryCode}/${subcategoryCode}/${course.code}"
                modelAttribute="newCourseFormUpdate" method="post">
+        <input type="hidden" name="id" value="${course.id}">
         <div class="form-group">
             <label>Nome</label>
             <form:input type="text" class="form-control"
@@ -84,8 +77,4 @@
 
         <button type="submit" class="btn btn-info btn-lg">Enviar</button>
     </form:form>
-</div>
-
-</body>
-</html>
-
+</templates:admin-insert-update-template>

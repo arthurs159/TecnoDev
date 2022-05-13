@@ -1,6 +1,7 @@
 package br.com.tecnodev.entities.section;
 
 import br.com.tecnodev.entities.course.Course;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -23,7 +24,6 @@ public class Section {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @Deprecated
     public Section() {}
 
     public Section(String name, String code, Course course) {
@@ -33,17 +33,5 @@ public class Section {
         this.name = name;
         this.code = code;
         this.course = course;
-    }
-
-    @Override
-    public String toString() {
-        return "Section{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", orderInSystem='" + orderInSystem + '\'' +
-                ", active=" + active +
-                ", isATest=" + exam +
-                ", course=" + course +
-                '}';
     }
 }

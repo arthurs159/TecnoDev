@@ -1,9 +1,10 @@
 package br.com.tecnodev.entities.category.api;
 
 import br.com.tecnodev.entities.subCategory.SubCategory;
+import lombok.*;
 
 import java.util.List;
-
+@Getter
 public class SubCategoryApiDTO {
 
     private final String name;

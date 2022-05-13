@@ -1,7 +1,10 @@
 package br.com.tecnodev.entities.category.DTO;
 
 import br.com.tecnodev.entities.category.Category;
+import lombok.*;
 
+@Getter
+@AllArgsConstructor
 public class CategoryToListDTO {
 
     private final Long id;
@@ -15,21 +18,4 @@ public class CategoryToListDTO {
         this.code = category.getCode();
         this.active = category.isActive();
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
 }

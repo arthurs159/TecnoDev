@@ -1,7 +1,10 @@
 package br.com.tecnodev.entities.course;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class CoursePublicPageDTO {
 
     private String name;
@@ -10,14 +13,6 @@ public class CoursePublicPageDTO {
     public CoursePublicPageDTO(Course course) {
         this.name = course.getName();
         this.estimatedTimeInHours = course.getEstimatedTimeInHours();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Integer getEstimatedTimeInHours() {
-        return estimatedTimeInHours;
     }
 
     public static List<CoursePublicPageDTO> toDTO(List<Course> courses) {

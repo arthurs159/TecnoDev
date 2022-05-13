@@ -4,6 +4,7 @@ import br.com.tecnodev.projections.CategoryReportProjection;
 import br.com.tecnodev.projections.InstructorReportProjection;
 import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.repository.CourseRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class ReportController {
 
     private final CategoryRepository categoryRepository;
     private final CourseRepository courseRepository;
-
-    public ReportController(CategoryRepository categoryRepository, CourseRepository courseRepository) {
-        this.categoryRepository = categoryRepository;
-        this.courseRepository = courseRepository;
-    }
 
     @GetMapping("/admin")
     public String getReportPage() {

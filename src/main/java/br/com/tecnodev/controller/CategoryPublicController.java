@@ -4,6 +4,7 @@ import br.com.tecnodev.entities.category.CategoryPageDTO;
 import br.com.tecnodev.entities.subCategory.SubcategoryPublicPageDTO;
 import br.com.tecnodev.repository.CategoryRepository;
 import br.com.tecnodev.repository.SubCategoryRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,15 +15,11 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class CategoryPublicController {
 
     private final CategoryRepository categoryRepository;
     private final SubCategoryRepository subCategoryRepository;
-
-    public CategoryPublicController(CategoryRepository categoryRepository, SubCategoryRepository subCategoryRepository) {
-        this.categoryRepository = categoryRepository;
-        this.subCategoryRepository = subCategoryRepository;
-    }
 
     @GetMapping("/category/{categoryCode}")
     public String loadCategoryPublicPage(@PathVariable String categoryCode, Model model) {

@@ -1,23 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
 
-<!DOCTYPE>
-<html>
-<head>
-    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7/css/bootstrap.min.css'>
-    <meta content="text/html;charset=UTF-8">
-    <title>Lista de categorias</title>
-</head>
-
-<div style="padding: 0" class="container">
+<templates:admin-list-template title="Subcategorias">
     <h3>${category.name}</h3>
     <h1>Subcategorias</h1>
     <a href="/admin/subcategories/new">
-        <button style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-lg">Nova subcategoria</button>
+        <button type="button" class="btn btn-primary btn-lg button">Nova subcategoria</button>
     </a>
-</div>
-<div class="container">
-    <div class="row">
+    <div class="table-responsive">
         <table class="table table-bordered ">
             <thead>
             <tr class="col">
@@ -57,8 +48,6 @@
             </tbody>
         </table>
     </div>
-</div>
-<script src="../../../assets/js/jquery.js"></script>
-<script src="../../../assets/js/category/disableCategoryJQuery.js"></script>
-</body>
-</html>
+    <script src="../../../assets/js/jquery.js"></script>
+    <script src="../../../assets/js/category/disableCategoryJQuery.js"></script>
+</templates:admin-list-template>

@@ -1,6 +1,7 @@
 package br.com.tecnodev.entities.user;
 
 import br.com.tecnodev.entities.role.Role;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -24,8 +25,7 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
-    public User() {
-    }
+    public User() {}
 
     public User(String name, String email, String password, List<Role> roles) {
         this.name = name;

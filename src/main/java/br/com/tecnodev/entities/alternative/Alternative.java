@@ -1,6 +1,7 @@
 package br.com.tecnodev.entities.alternative;
 
 import br.com.tecnodev.entities.question.Question;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -25,7 +26,6 @@ public class Alternative {
     @JoinColumn(name = "activity_id")
     private Question question;
 
-    @Deprecated
     public Alternative() {}
 
     public Alternative(String alternativeText, boolean correct, Question question) {
@@ -34,16 +34,5 @@ public class Alternative {
         this.alternativeText = alternativeText;
         this.correct = correct;
         this.question = question;
-    }
-
-    @Override
-    public String toString() {
-        return "Alternative{" +
-                "text='" + alternativeText + '\'' +
-                ", orderInSystem=" + orderInSystem +
-                ", indicative=" + correct +
-                ", justification='" + justification + '\'' +
-                ", question=" + question +
-                '}';
     }
 }

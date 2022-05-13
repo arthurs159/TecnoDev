@@ -29,4 +29,12 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> 
             AND s.category.code = :categoryCode
             """)
     List<SubCategory> findAllActiveSubcategoryWithCoursesByCategoryCode(String categoryCode);
+
+    boolean existsByName(String name);
+
+    boolean existsByNameAndIdNot(String name, Long id);
+
+    boolean existsByCode(String name);
+
+    boolean existsByCodeAndIdNot(String name, Long id);
 }
